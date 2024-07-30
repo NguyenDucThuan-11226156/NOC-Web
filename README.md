@@ -1,6 +1,6 @@
 Backend
 B1: npm i 
-B2: cai dat env
+B2: tao file .env (contact t de lay thong tin file env)
 B3: npm start
 
 FrontEnd
