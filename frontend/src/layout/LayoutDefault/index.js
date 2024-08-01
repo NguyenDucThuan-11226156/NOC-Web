@@ -4,7 +4,9 @@ function LayoutDefault() {
     return (
         <>
             <Layout >
-                <Header >Header</Header>
+                <Header className="layout-default__header">
+                    <div className="layout-default__logo"></div>
+                </Header>
                 <Content >Content</Content>
                 <Footer >Footer</Footer>
             </Layout>
