@@ -1,16 +1,18 @@
 import { Layout } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
+import HeaderDefault from "./HeaderDefault";
+import { Outlet } from "react-router-dom";
 function LayoutDefault() {
-    return (
-        <>
-            <Layout >
-                <Header className="layout-default__header">
-                    <div className="layout-default__logo"></div>
-                </Header>
-                <Content >Content</Content>
-                <Footer >Footer</Footer>
-            </Layout>
-        </>
-    )
+  return (
+    <>
+      <Layout>
+        <HeaderDefault />
+        <Content>
+          <Outlet />
+        </Content>
+        <Footer>Footer</Footer>
+      </Layout>
+    </>
+  );
 }
 export default LayoutDefault;

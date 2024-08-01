@@ -1,0 +1,83 @@
+/* Css Header */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --background-color: #CDE1FF;
+  --color-text: #000000;
+  --color-active: #DB2828;
+  --font: "Montserrat", sans-serif;
+}
+
+.layout-default__header {
+  background-color: var(--background-color);
+  padding: 40px 10px;
+  margin: 8px 6px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-family: var(--font);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 99%;
+  z-index: 999;
+  position: sticky;
+}
+
+.layout-default__logo {
+  display: flex;
+}
+
+.layout-default__logo--tt, .layout-default__logo--noc, .layout-default__logo--ndm {
+  background-color: #fff;
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.layout-default__menu {
+  max-width: 760px;
+}
+
+.layout-default__menu--active {
+  border-bottom: 1px solid var(--color-active);
+  color: var(--color-active) !important;
+}
+
+.layout-default__menu ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin: 0 30px;
+}
+
+.layout-default__menu ul li {
+  list-style: none;
+  padding: 10px;
+}
+
+.layout-default__menu ul li a {
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24.38px;
+  letter-spacing: .25px;
+}
+
+.layout-default__loginMenu span {
+  color: #000000;
+}
+
+.layout-default__loginMenu button {
+  border: none;
+  background-color: var(--background-color);
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: none;
+}
