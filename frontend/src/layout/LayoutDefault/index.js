@@ -2,6 +2,7 @@ import { Layout } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import HeaderDefault from "./HeaderDefault";
 import { Outlet } from "react-router-dom";
+import FooterDefault from "./FooterDefault";
 function LayoutDefault() {
   return (
     <>
@@ -10,7 +11,7 @@ function LayoutDefault() {
         <Content>
           <Outlet />
         </Content>
-        <Footer>Footer</Footer>
+        <FooterDefault />
       </Layout>
     </>
   );
