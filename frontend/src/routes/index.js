@@ -1,7 +1,7 @@
 
 import LayoutDefault from "../layout/LayoutDefault";
 import Home from "../pages/Home";
-import About from "../pages/Cart";
+import About from "../pages/About";
 import Info from "../pages/Info";
 
 
