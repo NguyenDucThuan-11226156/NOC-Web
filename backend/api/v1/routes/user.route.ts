@@ -4,7 +4,7 @@ import * as controller from "../controllers/user.controller";
 // import * as authMiddleware from "../middlewares/auth.middleware";
 
 const router: Router = Router();
-
+// fetch("localhost:8000/api/v1/users/register")
 router.post("/register", controller.register);
 
 // router.post("/login", controller.login);

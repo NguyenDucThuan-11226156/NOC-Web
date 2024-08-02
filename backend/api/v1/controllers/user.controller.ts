@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import md5 from "md5";
 import User from "../models/user.model";
 import { generateRandomString } from "../../../helpers/generate.helper";
-
 // [POST] /api/v1/users/register
 export const register = async (req: Request, res: Response) => {
   const emailExist = await User.findOne({
