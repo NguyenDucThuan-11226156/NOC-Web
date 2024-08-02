@@ -3,6 +3,7 @@ import { Content } from "antd/es/layout/layout";
 import HeaderDefault from "./HeaderDefault";
 import { Outlet } from "react-router-dom";
 import FooterDefault from "./FooterDefault";
+import './LayoutDefault.css'
 function LayoutDefault() {
   return (
     <>

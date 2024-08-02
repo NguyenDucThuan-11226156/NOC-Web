@@ -58,16 +58,16 @@ function HeaderDefault() {
 
   return (
     <>
-      <Row>
-        <Header className="layout-default__header">
-          <Col xl={4}>
+      <Header className="layout-default__header">
+          <Row gutter={[20, 20]} align='middle' justify='space-between'>
+          <Col xl={6}>
             <div className="layout-default__logo">
               <div className="layout-default__logo--tt">Logo TT</div>
               <div className="layout-default__logo--noc">Logo NOC</div>
               <div className="layout-default__logo--ndm">Logo NDM</div>
             </div>
           </Col>
-          <Col xl={15}>
+          <Col xl={14}>
             <div className="layout-default__menu">
               <ul>
                 <li>
@@ -93,7 +93,7 @@ function HeaderDefault() {
               </ul>
             </div>
           </Col>
-          <Col xl={5}>
+          <Col xl={1}>
             <div className="layout-default__loginMenu">
               {user ? (
                 <div className="user-info">
@@ -122,8 +122,8 @@ function HeaderDefault() {
               <ForgotPassword open={forgotPasswordOpen} onCancel={toggleForgotPasswordModal} />
             </div>
           </Col>
+          </Row>
         </Header>
-      </Row>
     </>
   );
 }

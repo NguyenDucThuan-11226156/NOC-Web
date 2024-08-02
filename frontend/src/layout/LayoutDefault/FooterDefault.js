@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import { Footer } from "antd/es/layout/layout";
+import './LayoutDefault.css'
 
 function FooterDefault() {
   return (
