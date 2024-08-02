@@ -1,0 +1,53 @@
+.modal-forgotPW .ant-modal-content{
+  font-family: var(--font-login);
+  min-width: 550px;
+  min-height: 500px;
+  border-radius: 20px;
+}
+
+.modal-forgotPW .ant-modal-title {
+  text-align: center;
+  font-size: 30px !important;
+  color: var(--color-active);
+  font-weight: 800;
+  margin: 25px 13px 5px 17px;
+}
+
+.modal-forgotPW p {
+  text-align: center;
+  font-size: 14px;
+  margin: 10px;
+  padding-left: 10px;
+  letter-spacing: .65px;
+}
+
+.form-forgotPW {
+  padding: 10px 40px;
+  margin-left: 8px;
+}
+
+.form-forgotPW .ant-input {
+  border-radius: 0;
+  min-height: 30px;
+  border: 1px solid #000;
+}
+
+.form-forgotPW-check {
+  margin-top: -20px;
+}
+
+.form-forgotPW-btn {
+  width: 93px;
+  height: 54px;
+  border-radius: 45px;
+  font-size: 17px;
+  background-color: var(--background-color);
+  color: #000;
+  font-weight: 700;
+}
+
+.form-forgotPW-checkBtn {
+  padding: 0;
+  color: #000;
+  font-weight: 700;
+}

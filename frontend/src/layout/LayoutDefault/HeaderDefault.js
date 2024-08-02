@@ -103,7 +103,7 @@ function HeaderDefault() {
               ) : (
                 <>
                   <Button type="text" onClick={toggleSignUpModal} ghost={true}>
-                    Đăng kí
+                    Đăng ký
                   </Button>
                   <span>|</span>
                   <Button type="text" onClick={toggleLoginModal} ghost={true}>

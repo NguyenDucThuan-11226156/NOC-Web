@@ -1,0 +1,68 @@
+.modal-signUp .ant-modal-content{
+  font-family: var(--font-login);
+  min-width: 550px;
+  min-height: 600px;
+  border-radius: 20px;
+}
+
+
+.modal-signUp .ant-modal-title {
+  text-align: center;
+  font-size: 30px !important;
+  color: var(--color-active);
+  font-weight: 800;
+  margin: 13px;
+  padding-left: 5px;
+}
+
+.form-signUp {
+  padding: 10px 40px;
+  margin-left: 10px;
+}
+
+.form-signUp-item .ant-form-item-required {
+  font-size: 14px;
+}
+
+.form-signUp-item .ant-input, .form-signUp-item .ant-input-affix-wrapper{
+  border-radius: 0;
+  min-height: 30px;
+  border: 1px solid #000;
+}
+
+.form-signUp-button {
+  background-color: var(--background-color);
+  color: #000;
+  width: 168px;
+  height: 47px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.form-signUp-request ul {
+  margin: 5px;
+  padding: 10px;
+}
+
+.form-signUp-request li {
+  font-size: 12px;
+  padding: 1px;
+}
+
+.form-signUp-goLogin {
+  text-align: center;
+  width: 310px;
+  margin-left: 40px;
+}
+
+.form-goLogin {
+  padding: 0;
+  color: var(--color-active);
+}
+
+
+
+
