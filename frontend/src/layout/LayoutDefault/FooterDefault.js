@@ -4,7 +4,7 @@ import { Footer } from "antd/es/layout/layout";
 function FooterDefault() {
   return (
     <>
-      <Footer className="layout-default__footer">
+      <Footer className="layout-default__footer"  id="footer">
         <div className="layout-default__footerContainer">
           <Row>
             <Col xl={9}>

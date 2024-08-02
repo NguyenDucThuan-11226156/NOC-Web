@@ -3,6 +3,7 @@ import LayoutDefault from "../layout/LayoutDefault";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Info from "../pages/Info";
+import InfoUser from "../pages/InfoUser";
 
 
 export const routes = [
@@ -21,6 +22,10 @@ export const routes = [
             {
                 path: "info",
                 element: <Info />
+            },
+            {
+                path: "infoUser",
+                element: <InfoUser />
             }
         ]
     }
