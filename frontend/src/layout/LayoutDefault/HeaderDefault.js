@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from "react-router-hash-link";
 import "./LayoutDefault.css";
 import { Row, Col, Button, Avatar } from "antd";
 import { Header } from "antd/es/layout/layout";
@@ -71,22 +71,38 @@ function HeaderDefault() {
             <div className="layout-default__menu">
               <ul>
                 <li>
-                  <NavLink to="/" className={navLinkActive("/")} onClick={() => handleLinkClick("/")}>
+                  <NavLink
+                    to="/"
+                    className={navLinkActive("/")}
+                    onClick={() => handleLinkClick("/")}
+                  >
                     Trang chủ
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/about" className={navLinkActive("/about")} onClick={() => handleLinkClick("/about")}>
+                  <NavLink
+                    to="/about"
+                    className={navLinkActive("/about")}
+                    onClick={() => handleLinkClick("/about")}
+                  >
                     Giới thiệu
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/info" className={navLinkActive("/info")} onClick={() => handleLinkClick("/info")}>
+                  <NavLink
+                    to="/info"
+                    className={navLinkActive("/info")}
+                    onClick={() => handleLinkClick("/info")}
+                  >
                     Thông tin
                   </NavLink>
                 </li>
                 <li>
-                  <HashLink to="/#footer" className={navLinkActive("/#footer")} onClick={() => handleLinkClick("/")}>
+                  <HashLink
+                    to="/#footer"
+                    className={navLinkActive("/#footer")}
+                    onClick={() => handleLinkClick("/")}
+                  >
                     Liên hệ
                   </HashLink>
                 </li>
@@ -111,15 +127,22 @@ function HeaderDefault() {
                   </Button>
                 </>
               )}
-              <SignUp open={signUpOpen} toggleLoginModal={toggleLoginModal} onCancel={toggleSignUpModal} />
-              <Login 
-                open={loginOpen} 
-                onLoginSuccess={handleLoginSuccess} // Pass the login success handler
-                toggleSignUpModal={toggleSignUpModal} 
-                toggleForgotPasswordModal={toggleForgotPasswordModal} 
-                onCancel={toggleLoginModal} 
+              <SignUp
+                open={signUpOpen}
+                toggleLoginModal={toggleLoginModal}
+                onCancel={toggleSignUpModal}
               />
-              <ForgotPassword open={forgotPasswordOpen} onCancel={toggleForgotPasswordModal} />
+              <Login
+                open={loginOpen}
+                onLoginSuccess={handleLoginSuccess} // Pass the login success handler
+                toggleSignUpModal={toggleSignUpModal}
+                toggleForgotPasswordModal={toggleForgotPasswordModal}
+                onCancel={toggleLoginModal}
+              />
+              <ForgotPassword
+                open={forgotPasswordOpen}
+                onCancel={toggleForgotPasswordModal}
+              />
             </div>
           </Col>
         </Header>

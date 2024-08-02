@@ -1,43 +1,62 @@
 import { Button, Form, Input, Modal } from "antd";
+import { post } from "../../utils/request";
 
 function SignUp({ open, toggleLoginModal, onCancel }) {
-
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const onFinish = async (values) => {
+    console.log("Success:", values);
+    await post("/api/v1/users/register", {
+      email: values.email,
+      password: values.password,
+    }).then((response) => {
+      // receive message then display to the screen
+      // save token into the cookies
+      const token = response.token;
+      // setcookie with expire 1d
+      // after that, all apis need token to HTTP.
+    });
   };
-
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
-
   const validatePassword = (_, value) => {
     if (!value) {
-      return Promise.reject(new Error('Please input your password!'));
+      return Promise.reject(new Error("Please input your password!"));
     }
     if (value.length < 8 || value.length > 20) {
-      return Promise.reject(new Error('Password must be between 8 and 20 characters!'));
+      return Promise.reject(
+        new Error("Password must be between 8 and 20 characters!")
+      );
     }
     if (!/[A-Z]/.test(value)) {
-      return Promise.reject(new Error('Password must contain at least one uppercase letter!'));
+      return Promise.reject(
+        new Error("Password must contain at least one uppercase letter!")
+      );
     }
     if (!/[a-z]/.test(value)) {
-      return Promise.reject(new Error('Password must contain at least one lowercase letter!'));
+      return Promise.reject(
+        new Error("Password must contain at least one lowercase letter!")
+      );
     }
     if (!/[0-9]/.test(value)) {
-      return Promise.reject(new Error('Password must contain at least one number!'));
+      return Promise.reject(
+        new Error("Password must contain at least one number!")
+      );
     }
     if (!/[!@#$%^&*]/.test(value)) {
-      return Promise.reject(new Error('Password must contain at least one special character!'));
+      return Promise.reject(
+        new Error("Password must contain at least one special character!")
+      );
     }
     return Promise.resolve();
   };
-
   const validateConfirmPassword = ({ getFieldValue }) => ({
     validator(_, value) {
-      if (!value || getFieldValue('password') === value) {
+      if (!value || getFieldValue("password") === value) {
         return Promise.resolve();
       }
-      return Promise.reject(new Error('The two passwords that you entered do not match!'));
+      return Promise.reject(
+        new Error("The two passwords that you entered do not match!")
+      );
     },
   });
 
@@ -68,12 +87,12 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
           name="email"
           rules={[
             {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
+              type: "email",
+              message: "The input is not valid E-mail!",
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: "Please input your E-mail!",
             },
           ]}
         >
@@ -89,7 +108,6 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
               validator: validatePassword,
             },
           ]}
-          
         >
           <Input.Password />
         </Form.Item>
@@ -97,11 +115,11 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         <Form.Item
           label="Xác nhận lại mật khẩu"
           name="confirmPassword"
-          dependencies={['password']}
+          dependencies={["password"]}
           rules={[
             {
               required: true,
-              message: 'Please confirm your password!',
+              message: "Please confirm your password!",
             },
             validateConfirmPassword,
           ]}
@@ -121,7 +139,12 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         </Form.Item>
 
         <Form.Item>
-          <div>Đã có tài khoản? <Button type="link" onClick={toggleLoginModal}>Đăng nhập</Button></div>
+          <div>
+            Đã có tài khoản?{" "}
+            <Button type="link" onClick={toggleLoginModal}>
+              Đăng nhập
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </Modal>
