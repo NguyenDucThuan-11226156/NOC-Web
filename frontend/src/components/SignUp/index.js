@@ -1,11 +1,21 @@
 import { Button, Form, Input, Modal } from "antd";
 import "./SignUp.css";
+import { post } from "../../utils/request";
 
 function SignUp({ open, toggleLoginModal, onCancel }) {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Success:", values);
+    await post("/api/v1/users/register", {
+      email: values.email,
+      password: values.password,
+    }).then((response) => {
+      // receive message then display to the screen
+      // save token into the cookies
+      const token = response.token;
+      // setcookie with expire 1d
+      // after that, all apis need token to HTTP.
+    });
   };
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -156,7 +166,11 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         <Form.Item>
           <div className="form-signUp-goLogin">
             Đã có tài khoản? Quý khách muốn{" "}
-            <Button type="link" onClick={toggleLoginModal} className="form-goLogin">
+            <Button
+              type="link"
+              onClick={toggleLoginModal}
+              className="form-goLogin"
+            >
               Đăng nhập?
             </Button>
           </div>
