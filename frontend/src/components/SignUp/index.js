@@ -1,5 +1,6 @@
 import { Button, Form, Input, Modal } from "antd";
 import { post } from "../../utils/request";
+import './SignUp.css'
 
 function SignUp({ open, toggleLoginModal, onCancel }) {
   const onFinish = async (values) => {
@@ -66,6 +67,8 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
       open={open}
       onCancel={onCancel}
       footer={null}
+      className="modal-signUp"
+      centered
     >
       <Form
         name="register"
@@ -73,7 +76,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
           span: 8,
         }}
         wrapperCol={{
-          span: 16,
+          span: 24,
         }}
         initialValues={{
           remember: true,
@@ -81,10 +84,13 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        layout="vertical"
+        className="form-signUp"
       >
         <Form.Item
           label="Email"
           name="email"
+          className="form-signUp-item"
           rules={[
             {
               type: "email",
@@ -102,6 +108,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         <Form.Item
           label="Mật Khẩu"
           name="password"
+          className="form-signUp-item"
           rules={[
             {
               required: true,
@@ -115,6 +122,10 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         <Form.Item
           label="Xác nhận lại mật khẩu"
           name="confirmPassword"
+          className="form-signUp-item"
+          labelCol={{
+            span: 10,
+          }}
           dependencies={["password"]}
           rules={[
             {
@@ -127,21 +138,29 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
           <Input.Password />
         </Form.Item>
 
+        <Form.Item className="form-signUp-request">
+          <ul>
+            <li>Mật khẩu từ 8 đến 20 kí tự</li>
+            <li>Bao gồm chữ số, chữ viết hoa, chữ viết thường</li>
+            <li>Bao gồm ít nhất một kí tự đặc biệt @!#$%</li>
+          </ul>
+        </Form.Item>
+
         <Form.Item
           wrapperCol={{
-            offset: 8,
-            span: 16,
+            offset: 6,
+            span: 17,
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Đăng kí
+          <Button type="primary" htmlType="submit" className="form-signUp-button">
+          Đăng ký tài khoản
           </Button>
         </Form.Item>
 
         <Form.Item>
-          <div>
-            Đã có tài khoản?{" "}
-            <Button type="link" onClick={toggleLoginModal}>
+          <div className="form-signUp-goLogin">
+            Đã có tài khoản? Quý khách muốn{" "}
+            <Button type="link" onClick={toggleLoginModal} className="form-goLogin">
               Đăng nhập
             </Button>
           </div>
