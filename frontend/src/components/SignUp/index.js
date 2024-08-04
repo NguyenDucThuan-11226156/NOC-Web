@@ -152,7 +152,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
             span: 17,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="form-signUp-button">
             Đăng kí
           </Button>
         </Form.Item>
