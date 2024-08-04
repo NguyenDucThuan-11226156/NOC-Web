@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  --background-color: #CDE1FF;
+  --background-color: rgba(205, 225, 255, 1);
   --color-text: #000000;
   --color-active: #DB2828;
   --font: "Montserrat", sans-serif;
@@ -16,7 +16,6 @@
   align-items: center;
   /* justify-content: space-between; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  font-family: var(--font);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   width: 100%;
@@ -54,7 +53,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  margin: 0 30px;
+  margin: 0 35px;
 }
 
 .layout-default__menu ul li {
@@ -67,7 +66,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 24.38px;
-  letter-spacing: .25px;
+  font-family: var(--font);
 }
 
 .layout-default__loginMenu span {
@@ -80,6 +79,7 @@
   font-size: 18px;
   font-weight: 700;
   box-shadow: none;
+  font-family: var(--font);
 }
 
 /* End Css Header */
@@ -90,6 +90,10 @@
   background-color: var(--background-color);
   font-family: var(--font);
   padding: 15px 10px;
+}
+
+.layout-default__footerCol {
+  font-family: var(--font);
 }
 
 .layout-default__logoFooter {
@@ -128,7 +132,7 @@
 
 .layout-default__office, .layout-default__fanpage, .layout-default__email {
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .layout-default__hotline {
@@ -146,7 +150,7 @@
 
 .layout-default__about--title {
   font-size: 16px;
-  max-width: 100px;
+  max-width: 120px;
   padding: 10px 0;
   position: relative;
   
@@ -170,7 +174,7 @@
 
 .layout-default__about--list ul li {
   list-style: none;
-  padding: 5px 3px;
+  padding: 7px 3px;
   font-size: 14px;
 }
 

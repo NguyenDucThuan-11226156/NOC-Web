@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Quicksand:wght@300..700&display=swap');
+
+:root {
+  --font-mentor-title: "Bevan", serif;
+  --font-mentor--introduction: "Quicksand", sans-serif;
+}
+
+.mentorCol {
+  width: 637px;
+  height: 282px;
+  margin: 0;
+}
+
+.mentorCard {
+  width: 637px;
+  height: 282px;
+  margin: 10px;
+  border: 0.5px solid rgba(0, 0, 0, 1);
+  border-radius: 0;
+}
+
+.mentorCard .ant-card-body {
+  padding: 0;
+}
+
+.mentorCard-image {
+  width: 282px;
+  height: 282px;
+  border-right: 0.1px solid rgba(0, 0, 0, 1);
+}
+
+.mentorCard-content {
+  position: relative;
+  margin: 2px 0 0 15px;
+}
+
+.mentorCard-content h3 {
+  margin: 5px 0;
+  font-size: 20px;
+  color: var(--color-title);
+  font-family: var(--font-mentor-title);
+}
+
+.mentorCard-content-logo {
+  width: 44px;
+  height: 45px;
+  background-color: #ddd;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mentorCard-content-menteeCount {
+  font-size: 10px;
+  font-weight: 400;
+  font-family: var(--font);
+  margin-top: 0;
+}
+
+.mentorCard-content-introduction {
+  font-family: var(--font-mentor--introduction);
+  margin: 7px 0;
+  color: var(--color-title);
+  font-size: 14px;
+}
+
+.mentorCard-content-rate {
+  width: 324px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+.mentorCard-content-rateCount {
+  text-align: center;
+  font-size: 12px;
+  margin: 6px 0;
+  color: var(--color-active);
+}
+
+.mentorCard-content-Btn {
+  border: 2px solid rgba(58, 96, 171, 1);
+  background-color: var(--background-color);
+  border-radius: 0;
+  margin-right: 5px;
+  font-family: var(--font);
+  font-weight: 700;
+}

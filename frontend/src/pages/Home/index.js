@@ -9,7 +9,7 @@ const { Content } = Layout;
 function Home() {
     const [mentors, setMentors] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize] = useState(20);
+    const [pageSize] = useState(8);
 
     useEffect(() => {
         // Simulate fetching data from API
