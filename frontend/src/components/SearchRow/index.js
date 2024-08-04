@@ -26,7 +26,7 @@ function SearchRow({ onSearch }) {
     };
 
     return (
-        <Row className='searchRow' gutter={[16, 16]} justify="space-between" >
+        <Row className='searchRow' gutter={[16, 16]} justify="space-between" align='center'>
             <Col span={24}>
                 <Search className='searchBar'
                     placeholder="Nhập từ khóa..."
