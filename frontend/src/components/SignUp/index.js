@@ -88,7 +88,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
         className="form-signUp"
       >
         <Form.Item
-          label="Email"
+          label="Địa chỉ email"
           name="email"
           className="form-signUp-item"
           rules={[
@@ -102,7 +102,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="Nhập email"/>
         </Form.Item>
 
         <Form.Item
@@ -116,7 +116,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Nhập mật khẩu"/>
         </Form.Item>
 
         <Form.Item
@@ -124,7 +124,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
           name="confirmPassword"
           className="form-signUp-item"
           labelCol={{
-            span: 10,
+            span: 12,
           }}
           dependencies={["password"]}
           rules={[
@@ -135,7 +135,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
             validateConfirmPassword,
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Xác nhận mật khẩu"/>
         </Form.Item>
 
         <Form.Item className="form-signUp-request">
@@ -152,7 +152,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
             span: 17,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="form-signUp-button">
             Đăng kí
           </Button>
         </Form.Item>

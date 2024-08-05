@@ -7,7 +7,7 @@ function FooterDefault() {
       <Footer className="layout-default__footer"  id="footer">
         <div className="layout-default__footerContainer">
           <Row>
-            <Col xl={9}>
+            <Col xl={9} className="layout-default__footerCol">
               <div className="layout-default__logoFooter">
                 <div className="layout-default__logoFooter--tt">Logo TT</div>
                 <div className="layout-default__logoFooter--noc">Logo NOC</div>
@@ -44,7 +44,7 @@ function FooterDefault() {
                 </div>
               </div>
             </Col>
-            <Col xl={4}>
+            <Col xl={4} className="layout-default__footerCol">
               <div className="layout-default__about">
                 <div className="layout-default__about--title"><strong>Về chúng tôi</strong></div>
                 <div className="layout-default__about--list">

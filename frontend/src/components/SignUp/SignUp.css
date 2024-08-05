@@ -1,7 +1,10 @@
+.modal-signUp {
+  width: 630px;
+  height: 624px;
+}
+
 .modal-signUp .ant-modal-content{
   font-family: var(--font-login);
-  min-width: 550px;
-  min-height: 600px;
   border-radius: 20px;
 }
 
@@ -55,7 +58,7 @@
 .form-signUp-goLogin {
   text-align: center;
   width: 310px;
-  margin-left: 40px;
+  margin-left: 30px;
 }
 
 .form-goLogin {

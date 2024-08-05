@@ -6,9 +6,9 @@ import MentorItem from './MentorItem';
 
 function Mentor({ mentors }) {
     return (
-        <Row gutter={[16, 16]} justify="center">
+        <Row gutter={[20, 16]} justify="center">
             {mentors.map((mentor) => (
-                <Col span={8} key={mentor.id}>
+                <Col xxl = {12} key={mentor.id} className='mentorCol'>
                     <MentorItem mentor={mentor} />
                 </Col>
             ))}

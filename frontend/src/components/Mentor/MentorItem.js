@@ -1,27 +1,31 @@
 import React from 'react';
 import { Card, Rate, Button, Row, Col } from 'antd';
+import './Mentor.css'
 
 function MentorItem({ mentor }) {
     return (
-        <Card bordered={false} style={{ width: 300 }}>
+        <Card bordered className='mentorCard'>
             <Row>
-                <Col span={8}>
+                <Col span={10} className='mentorCard-image'>
                     <img
                         src={mentor.avatar} // Assuming avatar URL is stored in mentor.avatar
                         alt="Avatar"
-                        style={{ width: '100%', height: 'auto', borderRadius: '50%' }}
+                        style={{ width: '100%', height: 'auto'}}
                     />
                 </Col>
-                <Col span={16}>
+                <Col span={13} className='mentorCard-content'>
                     <h3>{mentor.name}</h3>
-                    <p>Mentee: {mentor.menteeCount}</p>
-                    <p>Mục giới thiệu 1: {mentor.introduction1}</p>
-                    <p>Mục giới thiệu 2: {mentor.introduction2}</p>
-                    <Rate disabled defaultValue={mentor.rate} />
-                    <p>({mentor.numberRate} đánh giá) ({mentor.rate}/5)</p>
-                    <Button type="primary" style={{ marginRight: 8 }}>Apply now</Button>
-                    <Button type="default" style={{ marginRight: 8 }}>View more</Button>
-                    <Button type="default">Save</Button>
+                    <div className='mentorCard-content-logo'>
+                        Logo công ty
+                    </div>
+                    <p className='mentorCard-content-menteeCount'>Mentee: {mentor.menteeCount}</p>
+                    <p className='mentorCard-content-introduction'>Mục giới thiệu 1: {mentor.introduction1}</p>
+                    <p className='mentorCard-content-introduction'>Mục giới thiệu 2: {mentor.introduction2}</p>
+                    <Rate className='mentorCard-content-rate' disabled defaultValue={mentor.rate} />
+                    <p className='mentorCard-content-rateCount'>({mentor.numberRate} đánh giá) ({mentor.rate}/5)</p>
+                    <Button className='mentorCard-content-Btn' >Apply now</Button>
+                    <Button className='mentorCard-content-Btn' >View more</Button>
+                    <Button className='mentorCard-content-Btn' >Save</Button>
                 </Col>
             </Row>
         </Card>

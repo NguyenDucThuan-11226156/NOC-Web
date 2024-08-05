@@ -28,7 +28,13 @@ function Login({
   };
 
   return (
-    <Modal open={open} onCancel={onCancel} footer={null} className="form-login" centered>
+    <Modal
+      open={open}
+      onCancel={onCancel}
+      footer={null}
+      className="form-login"
+      centered
+    >
       <h2 className="login-mainTitle">NEU DAILY MENTORING</h2>
       <h2 className="login-subTitle">Đăng nhập</h2>
       <Form
@@ -37,7 +43,7 @@ function Login({
           span: 6,
         }}
         wrapperCol={{
-          span: 22,
+          span: 23,
         }}
         initialValues={{
           remember: true,
@@ -48,7 +54,7 @@ function Login({
         layout="vertical"
       >
         <Form.Item
-          label="Username"
+          label="Email"
           name="username"
           className="form-item"
           rules={[
@@ -58,11 +64,11 @@ function Login({
             },
           ]}
         >
-          <Input className="form-input" />
+          <Input className="form-input" placeholder="abcxyz@gmail.com"/>
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Mật khẩu"
           name="password"
           className="form-item"
           rules={[
@@ -72,7 +78,7 @@ function Login({
             },
           ]}
         >
-          <Input.Password className="form-input" />
+          <Input.Password className="form-input" placeholder="Nhập tối thiểu 8 kí tự"/>
         </Form.Item>
 
         <div className="form-grpRememberForgot">

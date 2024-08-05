@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col, Input, Select } from 'antd';
+import './Search.css'
 
 const { Search } = Input;
 const { Option } = Select;
@@ -25,9 +26,9 @@ function SearchRow({ onSearch }) {
     };
 
     return (
-        <Row gutter={[16, 16]} justify="center" style={{ margin: '20px 0' }}>
-            <Col span={8}>
-                <Search
+        <Row className='searchRow' gutter={[16, 16]} justify="space-between" align='center'>
+            <Col span={24}>
+                <Search className='searchBar'
                     placeholder="Nhập từ khóa..."
                     enterButton="Tìm kiếm"
                     size="large"
@@ -35,8 +36,9 @@ function SearchRow({ onSearch }) {
                     onChange={(e) => handleChange('keyword', e.target.value)}
                 />
             </Col>
-            <Col span={3}>
+            <Col span={4}>
                 <Select
+                    className='searchBar-select'
                     placeholder="Doanh nghiệp/Tổ chức"
                     size="large"
                     style={{ width: '100%' }}
@@ -46,19 +48,21 @@ function SearchRow({ onSearch }) {
                     <Option value="org2">Org2</Option>
                 </Select>
             </Col>
-            <Col span={3}>
+            <Col span={4}>
                 <Select
+                    className='searchBar-select'
                     placeholder="Chuyên môn"
                     size="large"
                     style={{ width: '100%' }}
                     onChange={(value) => handleChange('specialization', value)}
                 >
-                    <Option value="spec1">Spec1</Option>
+                    <Option className='searchBar-option' value="spec1">Spec1</Option>
                     <Option value="spec2">Spec2</Option>
                 </Select>
             </Col>
-            <Col span={3}>
+            <Col span={4}>
                 <Select
+                    className='searchBar-select'
                     placeholder="Học vấn"
                     size="large"
                     style={{ width: '100%' }}
@@ -68,8 +72,9 @@ function SearchRow({ onSearch }) {
                     <Option value="edu2">Edu2</Option>
                 </Select>
             </Col>
-            <Col span={3}>
+            <Col span={4}>
                 <Select
+                    className='searchBar-select'
                     placeholder="Ngành học"
                     size="large"
                     style={{ width: '100%' }}
@@ -79,8 +84,9 @@ function SearchRow({ onSearch }) {
                     <Option value="ind2">Ind2</Option>
                 </Select>
             </Col>
-            <Col span={3}>
+            <Col span={4}>
                 <Select
+                    className='searchBar-select'
                     placeholder="Khác"
                     size="large"
                     style={{ width: '100%' }}
