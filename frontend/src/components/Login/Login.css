@@ -1,44 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
-  --color-title: #447acc;
+  --color-title: rgba(68, 122, 204, 1);
   --font-login: "Inter", sans-serif;
 }
 
 .form-login .ant-modal-content {
-  padding: 10px !important;
+  padding: 20px !important;
   font-family: var(--font-login);
-  min-width: 550px;
-  min-height: 600px;
+  border-radius: 30px;
+  border: 1px solid #000 !important;
 }
 
 .form-login {
-  min-width: 550px;
-  min-height: 600px;
-  border-radius: 30px;
-  border: 1px solid #000 !important;
-  overflow: hidden;
+  width: 580px !important;
+  height: 686px;
 }
 
 .login-mainTitle {
   text-align: center;
   color: var(--color-title);
   font-size: 30px;
-  padding: 40px 40px 0 40px;
+  padding: 20px 40px 0 50px;
   max-width: 535px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-weight: 700;
   letter-spacing: 0.01px;
-  margin: 20px 0 40px 12px;
+  margin: 20px 0 30px 10px;
 }
 
 .login-subTitle {
   text-align: center;
-  font-size: 35px;
+  font-size: 40px;
   font-weight: 800;
   padding: 0;
-  margin: 0;
-  margin-right: 5px;
+  margin: 0 0 20px 0 ;
 }
 
 .form-remember span {
@@ -46,12 +42,12 @@
 }
 
 .form-item {
-  margin: 2px 0 0 40px;
+  margin: 2px 0 0 50px;
 }
 
 .form-remember {
   width: 200px;
-  margin: 2px 0 0 40px;
+  margin: 2px 0 0 55px;
 }
 
 .form-item label {
@@ -59,18 +55,20 @@
   padding: 0;
 }
 
-.ant-form-item-required::before {
+.form-item .ant-form-item-required::before {
   display: none !important;
 }
 
 .form-input {
   border: 1px solid #000;
   border-radius: 0;
+  width: 444px;
+  height: 35px;
 }
 
 .form-forgotPassword {
   font-size: 10px;
-  margin-left: 30px;
+  margin-right: 20px;
   color: #000;
 }
 
@@ -82,12 +80,13 @@
   color: #000;
   font-weight: 700;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-left: 10px;
 }
 
 .form-goRegister {
   text-align: center;
   font-size: 14px;
-  padding-left: 65px;
+  padding-left: 75px;
   width: 397px;
   height: 17px;
 }

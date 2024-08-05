@@ -1,6 +1,6 @@
 .searchRow {
   background: var(--background-color);
-  margin: 10px 80px !important;
+  margin: 40px 75px 80px 75px !important;
   border: 0.2px solid rgba(0, 0, 0, 1);
   border-radius: 7px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -22,7 +22,7 @@
 }
 
 .searchBar-select .ant-select-selector {
-  border-radius: 1px !important;
+  border-radius: 3px !important;
 }
 
 .searchBar-select .ant-select-selection-placeholder {

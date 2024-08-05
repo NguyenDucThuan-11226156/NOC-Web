@@ -3,6 +3,8 @@
 :root {
   --font-mentor-title: "Bevan", serif;
   --font-mentor--introduction: "Quicksand", sans-serif;
+  --color-mentor-title: rgba(54, 103, 172, 1);
+  --color-mentor-border: rgba(58, 96, 171, 1);
 }
 
 .mentorCol {
@@ -12,7 +14,7 @@
 .mentorCard {
   width: 637px;
   height: 282px;
-  margin: 10px 35px;
+  margin: 5px 0;
   border: 0.5px solid rgba(0, 0, 0, 1);
   border-radius: 0;
 }
@@ -62,7 +64,7 @@
 .mentorCard-content-introduction {
   font-family: var(--font-mentor--introduction);
   margin: 7px 0;
-  color: var(--color-title);
+  color: var(--color-mentor-title);
   font-size: 14px;
 }
 
@@ -85,10 +87,16 @@
 }
 
 .mentorCard-content-Btn {
-  border: 2px solid rgba(58, 96, 171, 1);
-  background-color: var(--background-color);
+  border: 2px solid var(--color-mentor-border);
+  background: #fff;
+   color:var(--color-mentor-title);
   border-radius: 0;
   margin-right: 5px;
   font-family: var(--font);
   font-weight: 700;
+}
+
+.mentorCard-content-Btn:hover {
+  background-color: var(--background-color) !important;
+  color: #000 !important;
 }

@@ -24,8 +24,8 @@ function MentorItem({ mentor }) {
                     <Rate className='mentorCard-content-rate' disabled defaultValue={mentor.rate} />
                     <p className='mentorCard-content-rateCount'>({mentor.numberRate} đánh giá) ({mentor.rate}/5)</p>
                     <Button className='mentorCard-content-Btn' >Apply now</Button>
-                    <Button className='mentorCard-content-Btn' style={{background: '#fff', color:'rgba(54, 103, 172, 1)'}}>View more</Button>
-                    <Button className='mentorCard-content-Btn' style={{background: '#fff', color:'rgba(54, 103, 172, 1)'}}>Save</Button>
+                    <Button className='mentorCard-content-Btn' >View more</Button>
+                    <Button className='mentorCard-content-Btn' >Save</Button>
                 </Col>
             </Row>
         </Card>

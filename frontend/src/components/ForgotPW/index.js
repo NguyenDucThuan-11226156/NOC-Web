@@ -38,8 +38,9 @@ function ForgotPassword({ open, onCancel }) {
       >
         <p>Vui lòng nhập email để lấy mã xác nhận</p>
         <Form.Item
-          label="Email"
+          label="Địa chỉ email khôi phục"
           name="email"
+          className="form-forgotPW-email"
           rules={[
             {
               type: 'email',
@@ -51,11 +52,11 @@ function ForgotPassword({ open, onCancel }) {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="abcxyz@gmail.com"/>
         </Form.Item>
 
         <Form.Item label="Mã OTP" name="OTP" rules={[]}>
-          <Input />
+          <Input placeholder="Nhập mã OTP"/>
         </Form.Item>
         <Form.Item>
           <div className="form-forgotPW-check">

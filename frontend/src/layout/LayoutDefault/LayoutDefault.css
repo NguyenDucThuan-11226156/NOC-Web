@@ -11,14 +11,14 @@
 .layout-default__header {
   background-color: var(--background-color);
   padding: 40px 10px;
-  margin: 8px 6px;
+  margin: 6px 0 0 4px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  width: 100%;
+  width: 1432px;
+  height: 84px;
   z-index: 999;
   position: sticky;
 }
@@ -111,7 +111,6 @@
   margin-right: 20px;
   font-size: 10px;
   font-weight: 400;
-
 }
 
 .layout-default__footerContainer {

@@ -23,13 +23,13 @@ function Banner() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '183px',
-        width: '1450px', 
+        width: '1380px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         color: 'white',
-        margin: '20px 0 20px 35px',
+        margin: '40px 33px',
         textAlign: 'center',
         boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
     };
@@ -40,7 +40,7 @@ function Banner() {
 
             <div style={bannerStyle}>
                 <h1 className="bannerStyle-title">NEU DAILY MENTORING</h1>
-                <p>Thông tin của dự án (Có thể là một châm ngôn giống VINFAST: Việt Nam - Phong cách - An toàn - Thông minh)</p>
+                <p className="bannerStyle-desc">Thông tin của dự án (Có thể là một châm ngôn giống VINFAST: Việt Nam - Phong cách - An toàn - Thông minh)</p>
             </div>
         </>
     )
