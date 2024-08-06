@@ -4,6 +4,8 @@ import SearchRow from "../../components/SearchRow";
 import Mentor from "../../components/Mentor";
 import { Layout, Pagination } from "antd";
 import mockMentors from "../../mockMentors";
+import { postMentorList } from "../../services/mentorsServices";
+import { limit } from "../../constant";
 import { post } from "../../utils/request";
 const { Content } = Layout;
 
@@ -14,13 +16,6 @@ function Home() {
 
   useEffect(() => {
     // Simulate fetching data from API
-    post("/api/v1/mentors/list", {
-      limit: 20,
-      page: 2,
-    }).then((res) => {
-      console.log(res);
-    });
-
     setMentors(mockMentors);
   }, []);
 
