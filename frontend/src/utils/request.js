@@ -6,7 +6,7 @@ export const get = async (path) => {
   return result;
 };
 
-export const post = async (path, options) => {
+export const post = async (path, options = {}) => {
   const respone = await fetch(API_DOMAIN + path, {
     method: "POST",
     headers: {
