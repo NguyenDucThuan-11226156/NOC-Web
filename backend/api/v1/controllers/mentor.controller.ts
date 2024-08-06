@@ -34,6 +34,6 @@ export const listMentors = async (req: Request, res: Response) => {
   const listMentor = await Mentors.find().limit(limitNumber).skip(skipNumber);
   res.json({
     code: 200,
-    user: listMentor,
+    mentors: listMentor,
   });
 };
