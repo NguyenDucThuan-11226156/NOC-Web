@@ -20,8 +20,8 @@ function Home() {
     };
     const fetchApi = async () => {
       const result = await postMentorList(offset);
-      console.log(result);
-      console.log(offset);
+    //   console.log(result);
+    //   console.log(offset);
       setMentors(result);
     };
     fetchApi();

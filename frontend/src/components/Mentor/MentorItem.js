@@ -16,7 +16,7 @@ function MentorItem({ mentor }) {
                 <Col span={13} className='mentorCard-content'>
                     <h3>{mentor.name}</h3>
                     <div className='mentorCard-content-logo'>
-                        Logo công ty
+                        <img src={mentor.companyLogo} alt='Company logo'/>
                     </div>
                     <p className='mentorCard-content-menteeCount'>Mentee: {mentor.menteeCount}</p>
                     <p className='mentorCard-content-introduction'>Mục giới thiệu 1: {mentor.introduction1}</p>
