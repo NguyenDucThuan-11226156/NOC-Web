@@ -1,20 +1,32 @@
-import React, { useState, useEffect } from "react";
-import Banner from "../../components/Banner";
-import SearchRow from "../../components/SearchRow";
-import Mentor from "../../components/Mentor";
-import { Layout, Pagination } from "antd";
-import mockMentors from "../../mockMentors";
+import React, { useState, useEffect } from 'react';
+import Banner from '../../components/Banner';
+import SearchRow from '../../components/SearchRow';
+import Mentor from '../../components/Mentor';
+import { Layout, Pagination } from 'antd';
+import mockMentors from '../../mockMentors'; 
+import { postMentorList } from '../../services/mentorsServices';
+import { limit } from '../../constant';
 const { Content } = Layout;
 
 function Home() {
-  const [mentors, setMentors] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(8);
-
-  useEffect(() => {
-    // Simulate fetching data from API
-    setMentors(mockMentors);
-  }, []);
+    const [mentors, setMentors] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(20);
+    
+    useEffect(() => {
+        const offset = {
+            limit: limit,
+            page: currentPage
+        };
+        const fetchApi = async () => {
+            const result = await postMentorList(offset);
+            console.log(result);
+            console.log(offset);
+            
+            setMentors(result);
+        }
+        fetchApi();
+    }, [currentPage]);
 
   const handleSearch = (filters) => {
     // For now, we'll just filter the mock data locally
