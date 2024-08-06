@@ -3,11 +3,20 @@ import mongoose from "mongoose";
 const mentorSchema = new mongoose.Schema(
   {
     name: String,
-    introduction: String,
-    field: String,
-    experience: String,
+    avatar: String,
+    menteeCount: Number,
+    introduction1: String,
+    introduction2: String,
     rate: Number,
     numberRate: Number,
+    keyword: String,
+    organization: String,
+    specialization: String,
+    education: String,
+    industry: String,
+    other: String,
+    field: String,
+    experience: String,
     review: [
       {
         userId: String,
