@@ -148,7 +148,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
 
         <Form.Item
           wrapperCol={{
-            offset: 6,
+            offset: 3,
             span: 17,
           }}
         >
