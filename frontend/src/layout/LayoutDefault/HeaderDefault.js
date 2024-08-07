@@ -73,27 +73,43 @@ function HeaderDefault() {
     navigate("/");
   };
 
-  const handleMyMentor = () => {
+  const handleMyMentor = () => {};
 
-  }
-  
   const handleSupport = () => {
     // navigate("/support");
-  }
+  };
 
   const menu = (
-    <Menu>
-      <Menu.Item key="0">
-        <Link to="/profile">Trang cá nhân</Link>
+    <Menu className="user-dropdown">
+      <Menu.Item key="0" className="user-dropdown-item">
+        <Link to="/profile">
+          <div className="dropdownItem-list">
+            <div className="dropdownItem-logo">svg</div>
+            <span>Trang cá nhân</span>
+          </div>
+        </Link>
       </Menu.Item>
-      <Menu.Item key="1" onClick={handleMyMentor}>
-        <Link to="/profile">Mentor của tôi</Link>
+      <Menu.Item key="1" onClick={handleMyMentor} className="user-dropdown-item">
+        <Link to="/profile">
+          <div className="dropdownItem-list">
+            <div className="dropdownItem-logo">svg</div>
+            <span>Mentor của tôi</span>
+          </div>
+        </Link>
       </Menu.Item>
-      <Menu.Item key="2" onClick={handleSupport}>
-        <Link to="/profile">Trợ giúp</Link>
+      <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
+        <Link to="/profile">
+          <div className="dropdownItem-list">
+            <div className="dropdownItem-logo">svg</div>
+            <span>Trợ giúp</span>
+          </div>
+        </Link>
       </Menu.Item>
-      <Menu.Item key="3" onClick={handleLogout}>
-        Logout
+      <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
+        <div className="dropdownItem-list">
+          <div className="dropdownItem-logo">svg</div>
+          <span>Đăng xuất</span>
+        </div>
       </Menu.Item>
     </Menu>
   );
@@ -154,8 +170,15 @@ function HeaderDefault() {
           <Col xl={5}>
             <div className="layout-default__loginMenu">
               {user ? (
-                <Dropdown overlay={menu} trigger={['click']}>
-                  <div className="user-info" onClick={e => e.preventDefault()}>
+                <Dropdown
+                  overlay={menu}
+                  placement="bottomLeft"
+                  trigger={["click"]}
+                >
+                  <div
+                    className="user-info"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Avatar src={user.avatar} />
                     <Link to={"infoUser"}>{user.name}</Link>
                   </div>

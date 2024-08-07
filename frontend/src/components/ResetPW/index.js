@@ -89,6 +89,14 @@ function ResetPW({ isVisible, onCancel, token, onSuccess }) {
           />
         </Form.Item>
 
+        <Form.Item className="resetPW-request">
+          <ul>
+            <li>Mật khẩu từ 8 đến 20 kí tự</li>
+            <li>Bao gồm chữ số, chữ viết hoa, chữ viết thường</li>
+            <li>Bao gồm ít nhất một kí tự đặc biệt @!#$%</li>
+          </ul>
+        </Form.Item>
+
         <Form.Item>
           <Button type="primary" htmlType="submit" className="resetPW-btn">
             Lưu mật khẩu

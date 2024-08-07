@@ -6,6 +6,7 @@
   --color-text: #000000;
   --color-active: rgba(219, 40, 40, 1);
   --font: "Montserrat", sans-serif;
+  --dropdown-color: rgba(143, 184, 244, 1);
 }
 
 .layout-default__header {
@@ -91,6 +92,8 @@
   font-family: var(--font);
 }
 
+/* css user info */
+
 .layout-default__loginMenu .user-info {
   display: flex;
   align-items: center;
@@ -111,6 +114,53 @@
   font-weight: 700;
   color: #000;
 }
+
+/* End css user dropdown */
+
+/* css user dropdown */
+.user-dropdown {
+  background-color: var(--dropdown-color) !important;
+  padding: 10px !important;
+  height: 239px;
+}
+
+.user-dropdown-item {
+  width: 233px;
+  height: 47px;
+  background-color: #fff;
+  padding: 3px !important;
+  margin-bottom: 8px !important;
+  border-radius: 2px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.user-dropdown-item:hover {
+  background-color: var(--background-color);
+}
+
+.dropdownItem-list {
+  display: flex;
+  align-items: center;
+} 
+
+.dropdownItem-logo {
+  width: 33px;
+  height: 33px;
+  border: 0.5px solid rgba(0, 0, 0, 1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.dropdownItem-list span {
+  margin-left: 20px;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 15px;
+}
+/* End css user dropdown */
 
 /* End Css Header */
 

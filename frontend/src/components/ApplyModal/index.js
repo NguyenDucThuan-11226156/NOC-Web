@@ -31,7 +31,7 @@ function ApplyModal({ open, onCancel }) {
       >
         <h2 className="apply-form-title">Đơn đăng ký trở thành Mentee</h2>
         <Form form={form} layout="vertical" onFinish={onFinish}>
-          <Row gutter={[20, 10]} justify={"space-around"}>
+          <Row gutter={[25, 10]} justify={"space-around"}>
             <Col>
               <Form.Item
                 name="fullName"
@@ -169,6 +169,7 @@ function ApplyModal({ open, onCancel }) {
         onCancel={handleSuccessModalOk}
         centered
         footer={null}
+        className="applyModal-success"
       >
         <h2>Apply thành công</h2>
         <p>Ban tổ chức sẽ liên hệ với bạn trong thời gian sớm nhất !</p>
