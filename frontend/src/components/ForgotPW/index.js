@@ -1,48 +1,59 @@
 import { Button, Form, Input, Modal, notification } from "antd";
 import { useState } from "react";
 import axios from "axios";
-import ResetPW from "../ResetPW";  // Import ResetPW component
+import ResetPW from "../ResetPW"; // Import ResetPW component
 import "./ForgotPW.css";
-
+import { useCookies } from "react-cookie";
 function ForgotPassword({ open, onCancel }) {
   const [isOtpModalVisible, setIsOtpModalVisible] = useState(false);
-  const [isResetPasswordModalVisible, setIsResetPasswordModalVisible] = useState(false);
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
-  const [token, setToken] = useState('');
-
+  const [isResetPasswordModalVisible, setIsResetPasswordModalVisible] =
+    useState(false);
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [token, setToken] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+    doNotParse: true,
+  });
   const handleForgotPassword = async (values) => {
     try {
       await axios.post("http://localhost:8000/api/v1/users/password/forgot", {
         email: values.email,
       });
       notification.success({
-        message: 'Gửi mã OTP thành công!',
-        description: 'Vui lòng kiểm tra email của bạn.',
+        message: "Gửi mã OTP thành công!",
+        description: "Vui lòng kiểm tra email của bạn.",
       });
       setEmail(values.email);
       setIsOtpModalVisible(true);
     } catch (error) {
       notification.error({
-        message: 'Gửi mã OTP thất bại!',
-        description: error.response?.data?.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.',
+        message: "Gửi mã OTP thất bại!",
+        description:
+          error.response?.data?.message ||
+          "Đã xảy ra lỗi. Vui lòng thử lại sau.",
       });
     }
   };
 
   const handleVerifyOtp = async (values) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/users/password/otp", {
-        email: email,
-        otp: values.otp,
-      });
-      setToken(res.data.token);
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/users/password/otp",
+        {
+          email: email,
+          otp: values.otp,
+        }
+      );
+      // setToken(res.data.token);
+      setCookie("token", res.data.token);
       setIsOtpModalVisible(false);
       setIsResetPasswordModalVisible(true);
     } catch (error) {
       notification.error({
-        message: 'Xác nhận OTP thất bại!',
-        description: error.response?.data?.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.',
+        message: "Xác nhận OTP thất bại!",
+        description:
+          error.response?.data?.message ||
+          "Đã xảy ra lỗi. Vui lòng thử lại sau.",
       });
     }
   };
@@ -68,7 +79,9 @@ function ForgotPassword({ open, onCancel }) {
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}
           onFinish={handleForgotPassword}
-          onFinishFailed={() => notification.error({ message: 'Vui lòng kiểm tra lại thông tin' })}
+          onFinishFailed={() =>
+            notification.error({ message: "Vui lòng kiểm tra lại thông tin" })
+          }
           autoComplete="off"
           layout="vertical"
           className="form-forgotPW"
@@ -79,15 +92,19 @@ function ForgotPassword({ open, onCancel }) {
             name="email"
             className="form-forgotPW-email"
             rules={[
-              { type: 'email', message: 'The input is not valid E-mail!' },
-              { required: true, message: 'Please input your E-mail!' },
+              { type: "email", message: "The input is not valid E-mail!" },
+              { required: true, message: "Please input your E-mail!" },
             ]}
           >
-            <Input placeholder="abcxyz@gmail.com"/>
+            <Input placeholder="abcxyz@gmail.com" />
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
-            <Button type="primary" htmlType="submit" className="form-forgotPW-btn">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="form-forgotPW-btn"
+            >
               Xác nhận
             </Button>
           </Form.Item>
@@ -110,9 +127,9 @@ function ForgotPassword({ open, onCancel }) {
           <Form.Item
             label="Mã OTP"
             name="otp"
-            rules={[{ required: true, message: 'Please input your OTP!' }]}
+            rules={[{ required: true, message: "Please input your OTP!" }]}
           >
-            <Input placeholder="Nhập mã OTP"/>
+            <Input placeholder="Nhập mã OTP" />
           </Form.Item>
 
           <Form.Item>

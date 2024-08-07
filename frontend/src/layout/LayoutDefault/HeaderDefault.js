@@ -22,6 +22,14 @@ function HeaderDefault() {
   useEffect(() => {
     // Update active link based on the current location path
     setActiveLink(location.pathname);
+    if (cookies.token) {
+      const userInfo = {
+        name: cookies.name,
+        avatar: cookies.avatar,
+      };
+      // onLoginSuccess(userInfo);
+      setIsAuthenticated(true);
+    }
   }, [location]);
 
   const toggleLoginModal = () => {

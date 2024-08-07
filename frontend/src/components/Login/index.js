@@ -22,7 +22,7 @@ function Login({
         name: cookies.name,
         avatar: cookies.avatar,
       };
-      onLoginSuccess(userInfo);
+      // onLoginSuccess(userInfo);
       setIsAuthenticated(true);
     }
   }, [cookies, onLoginSuccess]);
