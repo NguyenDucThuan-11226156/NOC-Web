@@ -18,11 +18,6 @@ function Login({
 
   useEffect(() => {
     if (cookies.token) {
-      const userInfo = {
-        name: cookies.name,
-        avatar: cookies.avatar,
-      };
-      // onLoginSuccess(userInfo);
       setIsAuthenticated(true);
     }
   }, [cookies, onLoginSuccess]);

@@ -7,14 +7,16 @@ import { useState, useEffect } from "react";
 import SignUp from "../../components/SignUp";
 import Login from "../../components/Login";
 import ForgotPassword from "../../components/ForgotPW";
-
+import { useCookies } from "react-cookie";
 function HeaderDefault() {
   // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+    doNotParse: true,
+  });
   const [user, setUser] = useState(null); // Add user state
 
   const location = useLocation();
@@ -27,8 +29,7 @@ function HeaderDefault() {
         name: cookies.name,
         avatar: cookies.avatar,
       };
-      // onLoginSuccess(userInfo);
-      setIsAuthenticated(true);
+      setUser(userInfo);
     }
   }, [location]);
 
