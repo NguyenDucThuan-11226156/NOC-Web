@@ -23,7 +23,6 @@ function Banner() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '183px',
-        width: '1380px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

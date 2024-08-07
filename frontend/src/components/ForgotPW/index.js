@@ -69,7 +69,7 @@ function ForgotPassword({ open, onCancel }) {
 
         <Form.Item
           wrapperCol={{
-            offset: 19,
+            offset: 4,
             span: 16,
           }}
         >

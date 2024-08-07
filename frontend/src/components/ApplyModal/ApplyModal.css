@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+:root {
+  --font-apply-form: "Nunito Sans", sans-serif;
+}
+
+.apply-form {
+  width: 1072px !important;
+  height: 994px !important;
+}
+
+.apply-form-title {
+  width: 414.56px;
+  height: 63.54px;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 308px;
+  border-radius: 10px;
+  font-family: var(--font-apply-form);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.apply-form-item {
+  width: 460px;
+}
+
+.apply-form-item input, .apply-form-introduction textarea, .apply-form-field .ant-select-outlined, .apply-form-issueDescription textarea {
+  border: 1px solid #000;
+  border-radius: 1px;
+}
+
+.apply-form-introduction textarea {
+  width: 998px !important;
+  height: 56px;
+  margin-left: 15px;
+}
+
+.apply-form-introduction .ant-form-item-label, .apply-form-field .ant-form-item-label, .apply-form-issueDescription .ant-form-item-label, .apply-form-cv .ant-form-item-label, .ant-form-item-control-input-content {
+  display: flex;
+  justify-content: center;
+}
+
+.apply-form-introduction label, .apply-form-item label, .apply-form-field label, .apply-form-issueDescription label, .apply-form-cv label, .apply-form-btn  {
+  font-family: var(--font-apply-form);
+  font-weight: 800;
+  font-size: 20px !important;
+}
+
+.apply-form-field .ant-select-outlined {
+  width: 990px !important;
+  height: 42px !important;
+  margin-left: 18px;
+}
+
+.apply-form-issueDescription textarea{
+  width: 990px;
+  height: 61px;
+  margin-left: 18px;
+
+}
+
+.apply-form-cv .ant-form-item-label {
+  margin-bottom: 20px !important;
+}
+
+.apply-form-cv .ant-form-item-control-input-content {
+  margin-right: 20px;
+}
+
+.apply-form-cv button {
+  width: 258px;
+  height: 47px;
+  border: 1px solid #000;
+  border-radius: 1px;
+}
+
+.apply-form-cv button span {
+  font-size: 16px;
+  font-family: var(--font-apply-form);
+
+}
+
+.apply-form p {
+  max-width: 790px;
+  margin: 30px 130px;
+  height: 38px;
+  font-family: var(--font-apply-form);
+}
+
+.apply-form-btn {
+  width: 280px;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-radius: 20px;
+  background-color: var(--background-color);
+  color: #000;
+}

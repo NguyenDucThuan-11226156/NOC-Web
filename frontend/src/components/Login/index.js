@@ -49,7 +49,7 @@ function Login({
           span: 6,
         }}
         wrapperCol={{
-          span: 23,
+          span: 22,
         }}
         initialValues={{
           remember: true,
@@ -116,7 +116,7 @@ function Login({
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
+            offset: 4,
             span: 16,
           }}
         >
