@@ -56,13 +56,12 @@ export const login = async (req: Request, res: Response) => {
     });
     return;
   }
-
   const token = user.token;
-
   res.json({
     code: 200,
     message: "Đăng nhập thành công!",
     token: token,
+    user: user,
   });
 };
 
