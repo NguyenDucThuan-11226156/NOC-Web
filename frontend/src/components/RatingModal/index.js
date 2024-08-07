@@ -5,14 +5,16 @@ import "./RatingModal.css";
 const RatingModal = ({ visible, onClose }) => {
   return (
     <Modal
-      title="RATE NEU DAILY MENTORING"
+      title="RATE"
       visible={visible}
       onCancel={onClose}
       footer={null}
       centered
+      className="rating-modal"
     >
+      <p className="rating-subtitle">NEU DAILY MENTORING</p>
       <div className="rating-content">
-        <Rate allowHalf defaultValue={5} />
+        <Rate allowHalf defaultValue={5} className="rating-star"/>
         <div className="rating-score">(5/5)</div>
         <button className="rating-submit-btn" onClick={onClose}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="send-icon">

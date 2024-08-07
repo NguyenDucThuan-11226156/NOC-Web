@@ -4,7 +4,7 @@
 :root {
   --background-color: rgba(205, 225, 255, 1);
   --color-text: #000000;
-  --color-active: #DB2828;
+  --color-active: rgba(219, 40, 40, 1);
   --font: "Montserrat", sans-serif;
 }
 
@@ -18,7 +18,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  width: 100%;
+  width: 99%;
   z-index: 999;
   position: sticky;
 }
