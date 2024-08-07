@@ -7,14 +7,16 @@ import { useState, useEffect } from "react";
 import SignUp from "../../components/SignUp";
 import Login from "../../components/Login";
 import ForgotPassword from "../../components/ForgotPW";
-
+import { useCookies } from "react-cookie";
 function HeaderDefault() {
   // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+    doNotParse: true,
+  });
   const [user, setUser] = useState(null); // Add user state
 
   const location = useLocation();
@@ -22,6 +24,13 @@ function HeaderDefault() {
   useEffect(() => {
     // Update active link based on the current location path
     setActiveLink(location.pathname);
+    if (cookies.token) {
+      const userInfo = {
+        name: cookies.name,
+        avatar: cookies.avatar,
+      };
+      setUser(userInfo);
+    }
   }, [location]);
 
   const toggleLoginModal = () => {

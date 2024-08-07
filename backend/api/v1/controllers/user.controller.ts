@@ -92,7 +92,7 @@ export const forgotPasswordPost = async (req: Request, res: Response) => {
   const objectForgotPassword = {
     email: email,
     otp: otp,
-    expiresAt: Date.now() + 5,
+    expiresAt: Date.now() + 1,
   };
 
   const record = new ForgotPassword(objectForgotPassword);
@@ -100,9 +100,13 @@ export const forgotPasswordPost = async (req: Request, res: Response) => {
 
   // Việc 2: Gửi mã OTP qua email
   const subject = `Mã OTP lấy lại lại mật khẩu`;
-  const content = `Mã OTP của bạn là <b>${otp}</b>. Vui lòng không chia sẻ với bất cứ ai.`;
+  const content = `Mã OTP của bạn là <b>${otp}</b>. Vui lòng không chia sẻ với bất cứ ai. Mã OTP sẽ hết hạn trong 1 phút, nếu quá một phút vui lòng điền lại email !`;
 
   sendMail(email, subject, content);
+  res.json({
+    code: 200,
+    message: "Đã gửi OTP",
+  });
 };
 // [POST] api/v1/users/password/otp
 export const otpPasswordPost = async (req: Request, res: Response) => {
@@ -133,7 +137,6 @@ export const otpPasswordPost = async (req: Request, res: Response) => {
 export const resetPasswordPost = async (req: Request, res: Response) => {
   const password = req.body.password;
   const tokenUser: string = req.headers.authorization.split(" ")[1];
-
   try {
     await User.updateOne(
       {

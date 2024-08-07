@@ -18,11 +18,6 @@ function Login({
 
   useEffect(() => {
     if (cookies.token) {
-      const userInfo = {
-        name: cookies.name,
-        avatar: cookies.avatar,
-      };
-      onLoginSuccess(userInfo);
       setIsAuthenticated(true);
     }
   }, [cookies, onLoginSuccess]);
@@ -51,20 +46,22 @@ function Login({
 
       notification.success({
         message: res.message,
-        description: '',
+        description: "",
       });
     } catch (error) {
       notification.error({
-        message: 'Đăng nhập thất bại',
-        description: error.response?.data?.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.',
+        message: "Đăng nhập thất bại",
+        description:
+          error.response?.data?.message ||
+          "Đã xảy ra lỗi. Vui lòng thử lại sau.",
       });
     }
   };
 
   const onFinishFailed = (errorInfo) => {
     notification.error({
-      message: 'Đăng nhập thất bại',
-      description: 'Vui lòng kiểm tra lại thông tin đăng nhập của bạn.',
+      message: "Đăng nhập thất bại",
+      description: "Vui lòng kiểm tra lại thông tin đăng nhập của bạn.",
     });
     console.log("Failed:", errorInfo);
   };
