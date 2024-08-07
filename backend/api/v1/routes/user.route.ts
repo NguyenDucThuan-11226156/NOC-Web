@@ -10,7 +10,6 @@ router.post("/login", controller.login);
 router.post("/password/forgot", controller.forgotPasswordPost);
 router.post("/password/otp", controller.otpPasswordPost);
 router.post("/password/reset", controller.resetPasswordPost);
-
 // router.get("/detail", authMiddleware.requireAuth, controller.detail);
 
 export const userRoutes: Router = router;
