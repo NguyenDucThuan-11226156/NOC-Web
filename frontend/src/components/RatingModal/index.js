@@ -10,6 +10,7 @@ const RatingModal = ({ visible, onClose }) => {
       onCancel={onClose}
       footer={null}
       centered
+      className="rating-modal"
     >
       <div className="rating-content">
         <Rate allowHalf defaultValue={5} />
