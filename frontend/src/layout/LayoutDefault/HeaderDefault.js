@@ -62,7 +62,6 @@ function HeaderDefault() {
         <Header className="layout-default__header">
           <Col xl={4}>
             <div className="layout-default__logo">
-              <div className="layout-default__logo--neu">Logo NEU</div>
               <div className="layout-default__logo--tt">Logo TT</div>
               <div className="layout-default__logo--noc">Logo NOC</div>
               <div className="layout-default__logo--ndm">Logo NDM</div>
