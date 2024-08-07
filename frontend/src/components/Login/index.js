@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import "./Login.css";
 import { post } from "../../utils/request";
 import { useCookies } from "react-cookie";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Login({
   open,
@@ -15,6 +15,17 @@ function Login({
     doNotParse: true,
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (cookies.token) {
+      const userInfo = {
+        name: cookies.name,
+        avatar: cookies.avatar,
+      };
+      onLoginSuccess(userInfo);
+      setIsAuthenticated(true);
+    }
+  }, [cookies, onLoginSuccess]);
 
   const onFinish = async (values) => {
     let userInfo = {};
