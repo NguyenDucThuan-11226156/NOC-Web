@@ -1,8 +1,9 @@
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import "./Login.css";
 import { post } from "../../utils/request";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
+
 function Login({
   open,
   toggleSignUpModal,
@@ -14,12 +15,14 @@ function Login({
     doNotParse: true,
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const onFinish = async (values) => {
     let userInfo = {};
-    await post("/api/v1/users/login", {
-      email: values.username,
-      password: values.password,
-    }).then((res) => {
+    try {
+      const res = await post("/api/v1/users/login", {
+        email: values.username,
+        password: values.password,
+      });
       setCookie("token", res.token);
       setCookie("name", res.user.name);
       setCookie(
@@ -33,11 +36,25 @@ function Login({
       };
 
       setIsAuthenticated(true);
-    });
-    onLoginSuccess(userInfo);
+      onLoginSuccess(userInfo);
+
+      notification.success({
+        message: res.message,
+        description: '',
+      });
+    } catch (error) {
+      notification.error({
+        message: 'Đăng nhập thất bại',
+        description: error.response?.data?.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.',
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
+    notification.error({
+      message: 'Đăng nhập thất bại',
+      description: 'Vui lòng kiểm tra lại thông tin đăng nhập của bạn.',
+    });
     console.log("Failed:", errorInfo);
   };
 
@@ -121,6 +138,7 @@ function Login({
             </div>
           </Form.Item>
         </div>
+
         <Form.Item
           wrapperCol={{
             offset: 8,
