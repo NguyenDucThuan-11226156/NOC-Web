@@ -16,7 +16,6 @@ function Login({
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const onFinish = async (values) => {
     let userInfo = {};
-    try {
       const res = await post("/api/v1/users/login", {
         email: values.username,
         password: values.password,
@@ -34,8 +33,8 @@ function Login({
       };
 
       setIsAuthenticated(true);
-    });
     onLoginSuccess(userInfo);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -45,7 +44,6 @@ function Login({
     });
     console.log("Failed:", errorInfo);
   };
-
   return (
     <Modal
       open={open}
