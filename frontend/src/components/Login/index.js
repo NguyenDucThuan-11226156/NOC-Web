@@ -1,8 +1,8 @@
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import "./Login.css";
 import { post } from "../../utils/request";
 import { useCookies } from "react-cookie";
-import { useState } from "react";
+
 function Login({
   open,
   toggleSignUpModal,
@@ -13,31 +13,39 @@ function Login({
   const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const onFinish = async (values) => {
     let userInfo = {};
-    await post("/api/v1/users/login", {
-      email: values.username,
-      password: values.password,
-    }).then((res) => {
+    try {
+      const res = await post("/api/v1/users/login", {
+        email: values.username,
+        password: values.password,
+      });
       setCookie("token", res.token);
-      setCookie("name", res.user.name);
-      setCookie(
-        "avatar",
-        "https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/394293600_1122885558682437_641231820292856308_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEYt56-h2imKpVOkMMGEQ7PBzVn1Z34OIEHNWfVnfg4gRj3xIt8QEwhRE3zwVCTbR_qT7kzVnjBDdKFRUqD8HB0&_nc_ohc=gbA-Xu774aUQ7kNvgHTQPgh&_nc_ht=scontent-hkg4-1.xx&oh=00_AYCtKpHSRqtP4ZRE5gorltREd5jp1uEcSfUCjPV9Q6yL4Q&oe=66B275C3"
-      );
       userInfo = {
         name: res.user.name,
         avatar:
           "https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/394293600_1122885558682437_641231820292856308_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEYt56-h2imKpVOkMMGEQ7PBzVn1Z34OIEHNWfVnfg4gRj3xIt8QEwhRE3zwVCTbR_qT7kzVnjBDdKFRUqD8HB0&_nc_ohc=gbA-Xu774aUQ7kNvgHTQPgh&_nc_ht=scontent-hkg4-1.xx&oh=00_AYCtKpHSRqtP4ZRE5gorltREd5jp1uEcSfUCjPV9Q6yL4Q&oe=66B275C3",
       };
+      onLoginSuccess(userInfo);
 
-      setIsAuthenticated(true);
-    });
-    onLoginSuccess(userInfo);
+      notification.success({
+        message: res.message,
+        description: '',
+      });
+    } catch (error) {
+      notification.error({
+        message: 'Đăng nhập thất bại',
+        description: error.response?.data?.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.',
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
+    notification.error({
+      message: 'Đăng nhập thất bại',
+      description: 'Vui lòng kiểm tra lại thông tin đăng nhập của bạn.',
+    });
     console.log("Failed:", errorInfo);
   };
 
@@ -121,6 +129,7 @@ function Login({
             </div>
           </Form.Item>
         </div>
+
         <Form.Item
           wrapperCol={{
             offset: 8,
