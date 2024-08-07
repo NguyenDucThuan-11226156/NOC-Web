@@ -33,7 +33,6 @@ function Login({
       };
 
       setIsAuthenticated(true);
-    onLoginSuccess(userInfo);
     }
   };
 
