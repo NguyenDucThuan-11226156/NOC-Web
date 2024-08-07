@@ -7,7 +7,8 @@ import { useState, useEffect } from "react";
 import SignUp from "../../components/SignUp";
 import Login from "../../components/Login";
 import ForgotPassword from "../../components/ForgotPW";
-
+import { useCookies } from "react-cookie";
+import { post } from "../../utils/request";
 function HeaderDefault() {
   // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
@@ -16,12 +17,21 @@ function HeaderDefault() {
   const [activeLink, setActiveLink] = useState("/");
 
   const [user, setUser] = useState(null); // Add user state
-
   const location = useLocation();
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+    doNotParse: true,
+  });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     // Update active link based on the current location path
     setActiveLink(location.pathname);
+    console.log(cookies);
+    const userInfo = {
+      name: cookies.name,
+      avatar: cookies.avatar,
+    };
+    setUser(userInfo);
   }, [location]);
 
   const toggleLoginModal = () => {
@@ -46,6 +56,7 @@ function HeaderDefault() {
   const handleLoginSuccess = (userInfo) => {
     setUser(userInfo); // Set the user information
     setLoginOpen(false); // Close the login modal
+    setIsAuthenticated(true);
   };
 
   const handleLinkClick = (path) => {
