@@ -1,0 +1,52 @@
+.resetPW-modal .ant-modal-title {
+  text-align: center;
+  font-family: var(--font-login);
+  font-size: 30px;
+  color: var(--color-active);
+  margin-left: 15px;
+}
+
+.resetPW-subtitle-1 {
+  font-size: 22px;
+  font-family: var(--font-login);
+}
+
+.resetPW-subtitle-1,
+.resetPW-subtitle-2 {
+  margin: 5px;
+}
+
+.resetPW-subtitle-2 {
+  font-family: var(--font-login);
+  margin-bottom: 20px;
+}
+
+.resetPW-input {
+  height: 40px;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 1px;
+}
+
+.resetPW-password .ant-form-item-required,
+.resetPW-confirmPassword .ant-form-item-required {
+  font-family: var(--font-login);
+}
+
+.resetPW-request ul {
+  margin: 5px 190px 5px 0;
+  padding: 0px;
+}
+
+.resetPW-request li {
+  font-size: 12px;
+  padding: 1px;
+}
+
+.resetPW-btn {
+  background-color: var(--background-color);
+  width: 156.78px;
+  height: 47px;
+  color: var(--color-text);
+  font-family: var(--font-login);
+  border-radius: 30px;
+}

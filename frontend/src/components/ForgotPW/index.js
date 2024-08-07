@@ -117,23 +117,25 @@ function ForgotPassword({ open, onCancel }) {
         onCancel={() => setIsOtpModalVisible(false)}
         footer={null}
         centered
+        className="otp-modal"
       >
         <Form
           name="otpVerification"
           onFinish={handleVerifyOtp}
           autoComplete="off"
           layout="vertical"
+          className="otp-form"
         >
           <Form.Item
             label="Mã OTP"
             name="otp"
             rules={[{ required: true, message: "Please input your OTP!" }]}
           >
-            <Input placeholder="Nhập mã OTP" />
+            <Input placeholder="Nhập mã OTP" className="otp-input"/>
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" className="otp-btn">
               Xác nhận OTP
             </Button>
           </Form.Item>
