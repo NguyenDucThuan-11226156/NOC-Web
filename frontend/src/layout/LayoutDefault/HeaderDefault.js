@@ -1,13 +1,14 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import "./LayoutDefault.css";
-import { Row, Col, Button, Avatar } from "antd";
+import { Row, Col, Button, Avatar, Dropdown, Menu } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { useState, useEffect } from "react";
 import SignUp from "../../components/SignUp";
 import Login from "../../components/Login";
 import ForgotPassword from "../../components/ForgotPW";
 import { useCookies } from "react-cookie";
+
 function HeaderDefault() {
   // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
@@ -17,12 +18,11 @@ function HeaderDefault() {
   const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
-  const [user, setUser] = useState(null); // Add user state
-
+  const [user, setUser] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Update active link based on the current location path
     setActiveLink(location.pathname);
     if (cookies.token) {
       const userInfo = {
@@ -31,7 +31,7 @@ function HeaderDefault() {
       };
       setUser(userInfo);
     }
-  }, [location]);
+  }, [location, cookies]);
 
   const toggleLoginModal = () => {
     setLoginOpen(!loginOpen);
@@ -51,10 +51,9 @@ function HeaderDefault() {
     if (signUpOpen) setSignUpOpen(false);
   };
 
-  // Function to handle successful login
   const handleLoginSuccess = (userInfo) => {
-    setUser(userInfo); // Set the user information
-    setLoginOpen(false); // Close the login modal
+    setUser(userInfo);
+    setLoginOpen(false);
   };
 
   const handleLinkClick = (path) => {
@@ -64,6 +63,56 @@ function HeaderDefault() {
   const navLinkActive = (path) => {
     return activeLink === path ? "layout-default__menu--active" : "";
   };
+
+  //Logout
+  const handleLogout = () => {
+    removeCookie("token");
+    removeCookie("name");
+    removeCookie("avatar");
+    setUser(null);
+    navigate("/");
+  };
+
+  const handleMyMentor = () => {};
+
+  const handleSupport = () => {
+    // navigate("/support");
+  };
+
+  const menu = (
+    <Menu className="user-dropdown">
+      <Menu.Item key="0" className="user-dropdown-item">
+        <Link to="/profile">
+          <div className="dropdownItem-list">
+            <div className="dropdownItem-logo">svg</div>
+            <span>Trang cá nhân</span>
+          </div>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="1" onClick={handleMyMentor} className="user-dropdown-item">
+        <Link to="/profile">
+          <div className="dropdownItem-list">
+            <div className="dropdownItem-logo">svg</div>
+            <span>Mentor của tôi</span>
+          </div>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
+        <Link to="/profile">
+          <div className="dropdownItem-list">
+            <div className="dropdownItem-logo">svg</div>
+            <span>Trợ giúp</span>
+          </div>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
+        <div className="dropdownItem-list">
+          <div className="dropdownItem-logo">svg</div>
+          <span>Đăng xuất</span>
+        </div>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <>
@@ -121,10 +170,19 @@ function HeaderDefault() {
           <Col xl={5}>
             <div className="layout-default__loginMenu">
               {user ? (
-                <div className="user-info">
-                  <Avatar src={user.avatar} />
-                  <Link to={"infoUser"}>{user.name}</Link>
-                </div>
+                <Dropdown
+                  overlay={menu}
+                  placement="bottomLeft"
+                  trigger={["click"]}
+                >
+                  <div
+                    className="user-info"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <Avatar src={user.avatar} />
+                    <Link to={"infoUser"}>{user.name}</Link>
+                  </div>
+                </Dropdown>
               ) : (
                 <>
                   <Button type="text" onClick={toggleSignUpModal} ghost={true}>
@@ -143,7 +201,7 @@ function HeaderDefault() {
               />
               <Login
                 open={loginOpen}
-                onLoginSuccess={handleLoginSuccess} // Pass the login success handler
+                onLoginSuccess={handleLoginSuccess}
                 toggleSignUpModal={toggleSignUpModal}
                 toggleForgotPasswordModal={toggleForgotPasswordModal}
                 onCancel={toggleLoginModal}

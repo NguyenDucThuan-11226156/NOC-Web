@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import { Card, Rate, Button, Row, Col } from 'antd';
+import { Card, Rate, Button, Row, Col, notification } from 'antd';
+import { useCookies } from 'react-cookie';
 import './Mentor.css';
-import ApplyModal from '../ApplyModal'// Adjust the import path if necessary
+import ApplyModal from '../ApplyModal'; // Adjust the import path if necessary
 
 function MentorItem({ mentor }) {
   const [applyStatus, setApplyStatus] = useState(false);
+  const [cookies] = useCookies(['token']);
 
   const handleApply = () => {
+    if (!cookies.token) {
+      notification.error({
+        message: 'Yêu cầu đăng nhập',
+        description: 'Bạn cần đăng nhập để có thể apply.',
+      });
+      return;
+    }
     setApplyStatus(!applyStatus);
   };
 

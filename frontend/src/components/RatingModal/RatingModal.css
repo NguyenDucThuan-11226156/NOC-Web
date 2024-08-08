@@ -1,22 +1,68 @@
+<<<<<<< HEAD
+=======
+.rating-modal {
+  width: 787px !important;
+  border: 0.5px solid rgba(0, 0, 0, 1);
+  border-radius: 7px;
+}
+
+.rating-modal .ant-modal-title {
+  height: 60px;
+  text-align: center;
+  font-family: var(--font-mentor-title);
+  font-size: 45px;
+  font-weight: 400;
+  color: var(--color-mentor-border);
+  margin-left: 6px;
+}
+
+.rating-subtitle {
+  font-family: var(--font-mentor-title);
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 20px 10px;
+}
+
+>>>>>>> main
 .rating-content {
   text-align: center;
 }
 
+.rating-star {
+  background-color: var(--background-color);
+  width: 613px;
+  height: 74px;
+  margin: 10px 0 20px 15px;
+}
+
+.rating-star li {
+  padding-top: 20px;
+  margin: 0 15px;
+}
+
+.rating-star li span {
+  font-size: 40px;
+}
+
 .rating-score {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 18px;
-  color: #555;
+  color: var(--color-active);
+  margin-left: 10px;
 }
 
 .rating-submit-btn {
   background: none;
   border: none;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .rating-submit-btn .send-icon {
-  width: 24px;
-  height: 24px;
-  color: #1890ff;
+  width: 48px;
+  height: 48px;
+  color: var(--color-text);
+  transform: rotate(-45deg);
+  margin-left: 670px;
 }
