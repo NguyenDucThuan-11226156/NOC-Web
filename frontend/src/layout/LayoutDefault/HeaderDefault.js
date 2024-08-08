@@ -70,7 +70,7 @@ function HeaderDefault() {
     removeCookie("name");
     removeCookie("avatar");
     setUser(null);
-    window.href("/");
+    window.location.href = "/";
     // navigate("/");
   };
 

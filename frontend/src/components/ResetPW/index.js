@@ -1,5 +1,4 @@
 import { Button, Form, Input, Modal, notification } from "antd";
-// import { useState } from "react";
 import axios from "axios";
 import "./ResetPW.css";
 
@@ -31,6 +30,49 @@ function ResetPW({ isVisible, onCancel, token, onSuccess }) {
     }
   };
 
+  const validatePassword = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error("Please input your password!"));
+    }
+    if (value.length < 8 || value.length > 20) {
+      return Promise.reject(
+        new Error("Password must be between 8 and 20 characters!")
+      );
+    }
+    if (!/[A-Z]/.test(value)) {
+      return Promise.reject(
+        new Error("Password must contain at least one uppercase letter!")
+      );
+    }
+    if (!/[a-z]/.test(value)) {
+      return Promise.reject(
+        new Error("Password must contain at least one lowercase letter!")
+      );
+    }
+    if (!/[0-9]/.test(value)) {
+      return Promise.reject(
+        new Error("Password must contain at least one number!")
+      );
+    }
+    if (!/[!@#$%^&*]/.test(value)) {
+      return Promise.reject(
+        new Error("Password must contain at least one special character!")
+      );
+    }
+    return Promise.resolve();
+  };
+
+  const validateConfirmPassword = ({ getFieldValue }) => ({
+    validator(_, value) {
+      if (!value || getFieldValue("password") === value) {
+        return Promise.resolve();
+      }
+      return Promise.reject(
+        new Error("The two passwords that you entered do not match!")
+      );
+    },
+  });
+
   return (
     <Modal
       title="Đổi mật khẩu"
@@ -54,7 +96,7 @@ function ResetPW({ isVisible, onCancel, token, onSuccess }) {
           label="Tạo mật khẩu mới"
           name="password"
           rules={[
-            { required: true, message: "Please input your new password!" },
+            { required: true, validator: validatePassword },
           ]}
           className="resetPW-password"
         >
@@ -70,16 +112,7 @@ function ResetPW({ isVisible, onCancel, token, onSuccess }) {
           dependencies={["password"]}
           rules={[
             { required: true, message: "Please confirm your new password!" },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("The two passwords do not match!")
-                );
-              },
-            }),
+            validateConfirmPassword,
           ]}
           className="resetPW-confirmPassword"
         >
