@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 :root {
   --font-apply-form: "Nunito Sans", sans-serif;
-  --font-apply-form-italic: "Mulish", sans-serif;
 }
 
 .apply-form {
@@ -17,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 306px;
+  margin: 20px 308px;
   border-radius: 10px;
   font-family: var(--font-apply-form);
   font-size: 24px;
@@ -98,28 +97,4 @@
   border-radius: 20px;
   background-color: var(--background-color);
   color: #000;
-  margin-right: 20px;
-}
-
-.applyModal-success {
-  width: 728px;
-  height: 254px;
-}
-
-.applyModal-success h2 {
-  text-align: center;
-  font-size: 30px;
-  font-family: var(--font-mentor-title);
-  color: var(--color-mentor-border);
-  margin: 10px 0px;
-  margin-left: 20px;
-  padding: 5px;
-}
-
-.applyModal-success p {
-  font-style: italic;
-  font-family: var(--font-apply-form-italic);
-  font-size: 18px;
-  text-align: center;
-  margin: 10px 0;
 }

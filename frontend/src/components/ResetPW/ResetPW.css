@@ -32,16 +32,6 @@
   font-family: var(--font-login);
 }
 
-.resetPW-request ul {
-  margin: 5px 190px 5px 0;
-  padding: 0px;
-}
-
-.resetPW-request li {
-  font-size: 12px;
-  padding: 1px;
-}
-
 .resetPW-btn {
   background-color: var(--background-color);
   width: 156.78px;
