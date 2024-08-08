@@ -70,7 +70,8 @@ function HeaderDefault() {
     removeCookie("name");
     removeCookie("avatar");
     setUser(null);
-    navigate("/");
+    window.location.href = ("/");
+    // navigate("/");
   };
 
   const handleMyMentor = () => {};
