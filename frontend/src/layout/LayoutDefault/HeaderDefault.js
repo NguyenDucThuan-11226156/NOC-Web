@@ -70,7 +70,8 @@ function HeaderDefault() {
     removeCookie("name");
     removeCookie("avatar");
     setUser(null);
-    navigate("/");
+    window.location.href = "/";
+    // navigate("/");
   };
 
   const handleMyMentor = () => {};
@@ -89,7 +90,11 @@ function HeaderDefault() {
           </div>
         </Link>
       </Menu.Item>
-      <Menu.Item key="1" onClick={handleMyMentor} className="user-dropdown-item">
+      <Menu.Item
+        key="1"
+        onClick={handleMyMentor}
+        className="user-dropdown-item"
+      >
         <Link to="/profile">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">svg</div>

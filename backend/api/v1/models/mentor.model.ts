@@ -15,6 +15,7 @@ const mentorSchema = new mongoose.Schema(
     education: String,
     industry: String,
     other: String,
+    companyLogo: String,
     field: String,
     experience: String,
     review: [
