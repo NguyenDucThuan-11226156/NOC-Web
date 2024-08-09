@@ -53,13 +53,13 @@ export const listMentors = async (req: Request, res: Response) => {
       specialization: listAllSpecialization,
     });
   } catch (error) {
-    console.log(error);
     res.json({
       code: 400,
+      message: error,
     });
   }
 };
-// [POST] /api/v1/filter
+// [POST] /api/v1/mentors/filter
 export const filterMentors = async (req: Request, res: Response) => {
   try {
     const name = req.body.keyword || null;

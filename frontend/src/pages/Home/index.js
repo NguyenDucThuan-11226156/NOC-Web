@@ -6,6 +6,7 @@ import { Layout, Pagination } from "antd";
 import mockMentors from "../../mockMentors";
 import { postMentorList } from "../../services/mentorsServices";
 import { limit } from "../../constant";
+import { post } from "../../utils/request";
 const { Content } = Layout;
 
 function Home() {
@@ -24,8 +25,6 @@ function Home() {
     };
     const fetchApi = async () => {
       const result = await postMentorList(offset);
-      //   console.log(offset);
-      console.log(result);
       setMentors(result.mentors);
       setDomains(result.domains);
       setEnterprises(result.enterprises);
@@ -37,22 +36,16 @@ function Home() {
   }, [currentPage]);
 
   const handleSearch = (filters) => {
-    // For now, we'll just filter the mock data locally
-    const filteredMentors = mockMentors.filter((mentor) => {
-      return (
-        (filters.keyword ? mentor.name.includes(filters.keyword) : true) &&
-        (filters.organization
-          ? mentor.organization === filters.organization
-          : true) &&
-        (filters.specialization
-          ? mentor.specialization === filters.specialization
-          : true) &&
-        (filters.education ? mentor.education === filters.education : true) &&
-        (filters.industry ? mentor.industry === filters.industry : true) &&
-        (filters.other ? mentor.other === filters.other : true)
-      );
+    post("/api/v1/mentors/filter", {
+      keyword: filters.keyword,
+      organization: filters.organization,
+      specialization: filters.specialization,
+      education: filters.education,
+      domain: filters.industry,
+    }).then((res) => {
+      setMentors(res.mentors);
+      setTotal(res.mentors.length);
     });
-    setMentors(filteredMentors);
   };
 
   const handlePageChange = (page) => {
