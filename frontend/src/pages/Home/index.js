@@ -9,10 +9,14 @@ import { limit } from "../../constant";
 const { Content } = Layout;
 
 function Home() {
+  const [total, setTotal] = useState(0);
   const [mentors, setMentors] = useState([]);
+  const [domains, setDomains] = useState([]);
+  const [enterprises, setEnterprises] = useState([]);
+  const [specialization, setSpecialization] = useState([]);
+  const [studies, setStudies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(20);
-
   useEffect(() => {
     const offset = {
       limit: limit,
@@ -20,9 +24,14 @@ function Home() {
     };
     const fetchApi = async () => {
       const result = await postMentorList(offset);
-    //   console.log(result);
-    //   console.log(offset);
-      setMentors(result);
+      //   console.log(offset);
+      console.log(result);
+      setMentors(result.mentors);
+      setDomains(result.domains);
+      setEnterprises(result.enterprises);
+      setSpecialization(result.specialization);
+      setStudies(result.studies);
+      setTotal(result.total);
     };
     fetchApi();
   }, [currentPage]);
@@ -59,12 +68,18 @@ function Home() {
     <Layout>
       <Content>
         <Banner />
-        <SearchRow onSearch={handleSearch} />
+        <SearchRow
+          onSearch={handleSearch}
+          domains={domains}
+          enterprises={enterprises}
+          specialization={specialization}
+          studies={studies}
+        />
         <Mentor mentors={currentMentors} />
         <Pagination
           current={currentPage}
           pageSize={pageSize}
-          total={mentors.length}
+          total={total}
           onChange={handlePageChange}
           style={{ textAlign: "center", marginTop: "20px" }}
         />
