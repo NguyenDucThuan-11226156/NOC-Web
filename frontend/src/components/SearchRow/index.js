@@ -30,16 +30,16 @@ function SearchRow({
     console.log(filters);
   };
 
-  const specializationMenu = (
-    <Menu onClick={({ key }) => handleChange("specialization", key)}>
-      <Menu.SubMenu key="spec1" title="Hướng nghiệp">
-        <Menu.Item key="spec1-sub1">Option 1</Menu.Item>
-        <Menu.Item key="spec1-sub2">Option 2</Menu.Item>
-      </Menu.SubMenu>
-      <Menu.Item key="spec2">Kĩ năng mềm</Menu.Item>
-      <Menu.Item key="spec3">Công tác Đoàn Hội/CLB</Menu.Item>
-    </Menu>
-  );
+  // const specializationMenu = (
+  //   <Menu onClick={({ key }) => handleChange("specialization", key)}>
+  //     <Menu.SubMenu key="spec1" title="Hướng nghiệp">
+  //       <Menu.Item key="spec1-sub1">Option 1</Menu.Item>
+  //       <Menu.Item key="spec1-sub2">Option 2</Menu.Item>
+  //     </Menu.SubMenu>
+  //     <Menu.Item key="spec2">Kĩ năng mềm</Menu.Item>
+  //     <Menu.Item key="spec3">Công tác Đoàn Hội/CLB</Menu.Item>
+  //   </Menu>
+  // );
 
   return (
     <Row
