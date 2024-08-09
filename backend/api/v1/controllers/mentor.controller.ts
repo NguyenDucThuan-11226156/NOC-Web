@@ -106,3 +106,77 @@ export const filterMentors = async (req: Request, res: Response) => {
     });
   }
 };
+// [POST] /api/v1/mentors/create
+export const createMentor = async (req: Request, res: Response) => {
+  try {
+    const mentor = new Mentors({
+      name: req.body.name,
+      avatar: req.body.avatar,
+      introduction1: req.body.introduction1,
+      introduction2: req.body.introduction2,
+      organization: req.body.organization,
+      specialization: req.body.specialization,
+      education: req.body.education,
+      industry: req.body.industry,
+    });
+    const data = await mentor.save();
+    res.json({
+      code: 200,
+      data: data,
+      message: "Tạo mentor thành công !",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: error,
+    });
+  }
+};
+// [DELETE] /api/v1/mentors/delete/:id
+export const deleteMentor = async (req: Request, res: Response) => {
+  try {
+    const idMentor = req.params.id;
+    await Mentors.deleteOne({
+      _id: idMentor,
+    });
+    res.json({
+      code: 200,
+      message: "Xóa mentor thành công !",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: error,
+    });
+  }
+};
+// [POST] /api/v1/mentors/update/:id
+export const updateMentor = async (req: Request, res: Response) => {
+  try {
+    const idMentor = req.params.id;
+    await Mentors.updateOne(
+      {
+        _id: idMentor,
+      },
+      {
+        name: req.body.name,
+        avatar: req.body.avatar,
+        introduction1: req.body.introduction1,
+        introduction2: req.body.introduction2,
+        organization: req.body.organization,
+        specialization: req.body.specialization,
+        education: req.body.education,
+        industry: req.body.industry,
+      }
+    );
+    res.json({
+      code: 200,
+      message: "Cập nhật mentor thành công !",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: error,
+    });
+  }
+};
