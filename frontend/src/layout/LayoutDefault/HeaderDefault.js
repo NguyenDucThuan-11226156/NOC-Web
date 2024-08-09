@@ -83,7 +83,7 @@ function HeaderDefault() {
   const menu = (
     <Menu className="user-dropdown">
       <Menu.Item key="0" className="user-dropdown-item">
-        <Link to="/profile">
+        <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">svg</div>
             <span>Trang cá nhân</span>
@@ -95,7 +95,7 @@ function HeaderDefault() {
         onClick={handleMyMentor}
         className="user-dropdown-item"
       >
-        <Link to="/profile">
+        <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">svg</div>
             <span>Mentor của tôi</span>
@@ -103,7 +103,7 @@ function HeaderDefault() {
         </Link>
       </Menu.Item>
       <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
-        <Link to="/profile">
+        <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">svg</div>
             <span>Trợ giúp</span>

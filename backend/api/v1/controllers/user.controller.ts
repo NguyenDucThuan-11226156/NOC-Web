@@ -65,14 +65,14 @@ export const login = async (req: Request, res: Response) => {
   });
 };
 
-// // [POST] /api/v1/users/detail
-// export const detail = async (req: Request, res: Response) => {
-//   res.json({
-//     code: 200,
-//     message: "Thành công!",
-//     info: res.locals.user,
-//   });
-// };
+// [POST] /api/v1/users/detail
+export const detail = async (req: Request, res: Response) => {
+  res.json({
+    code: 200,
+    message: "Thành công!",
+    info: res.locals.user,
+  });
+};
 // [POST] api/v1/users/password/forgot
 export const forgotPasswordPost = async (req: Request, res: Response) => {
   const email = req.body.email;
