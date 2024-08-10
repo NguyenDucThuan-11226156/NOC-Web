@@ -1,0 +1,65 @@
+/* Info.css */
+
+.info-container {
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+    font-family: Arial, sans-serif;
+}
+
+.about-section h2,
+.mission-section h2,
+.network-section h2,
+.contact-section h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.about-section h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.about-section p,
+.mission-section p,
+.network-section p,
+.contact-section p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.network-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.network-section ul li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.contact-section a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-section ul li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
