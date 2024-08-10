@@ -1,43 +1,137 @@
+/* Css Info profile */
+
+:root {
+  --infoUser-background: rgba(230, 236, 255, 1);
+  --infoUser-profile-color: rgba(246, 246, 246, 1);
+}
+
+.info-user-card {
+  box-shadow: none !important;
+}
+
 .info-user-container {
-    padding: 24px;
+  padding: 10px;
+  position: relative;
 }
 
 .user-banner {
-    position: relative;
-    cursor: pointer;
+  height: 293px;
+  background-color: #ddd;
+  border-radius: 15px;
+  margin: 15px;
 }
 
 .user-banner img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
+}
+
+.info-user-main-header {
+  background-color: var(--infoUser-background);
+}
+
+.info-user-main-header .ant-col {
+  padding: 0;
 }
 
 .user-info-header {
-    display: flex;
-    align-items: center;
-    margin-top: 16px;
-    cursor: pointer;
+  display: flex;
+  margin-top: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: -130px;
+  left: 30px;
+  z-index: 10;
 }
 
 .user-avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    margin-right: 16px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-right: 16px;
 }
 
-.edit-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.45);
+.user-info-header h3 {
+  font-family: var(--font-apply-form);
+  font-weight: 700;
+  font-size: 36px;
+  margin-top: 100px;
 }
 
-.user-info-card {
-    margin-top: 16px;
-}
-
+.user-info-card,
 .mentor-info-card, .help-info-card {
-    margin-top: 16px;
+  margin-top: 16px;
+  border: none;
+  border-radius: 0;
+  padding: 20px 40px;
 }
+
+.user-info-card .ant-card-body, .help-info-card .ant-card-body{
+  background: var(--infoUser-profile-color);
+  display: flex;
+  padding: 50px;
+  position: relative;
+}
+
+.help-info-card .ant-card-body {
+  flex-direction: column;
+}
+
+.user-info-card h4,
+.mentor-info-item > h4 {
+  font-size: 30px;
+  color: var(--color-mentor-border);
+  font-family: var(--font-mentor-title);
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.user-info-card li {
+  font-family: var(--font-login);
+  font-size: 20px;
+}
+
+.user-info-change {
+  position: absolute;
+  right: 60px;
+  top: 50px;
+  font-size: 18px;
+  color: var(--color-active);
+}
+
+.user-info-border,
+.mentor-info-border {
+  border-left: 3px solid rgba(0, 0, 0, 1);
+  margin-left: 60px;
+}
+
+.info-user-tabs {
+  background-color: var(--infoUser-background);
+  border: none;
+}
+
+.info-user-tabs .ant-tabs-nav-wrap {
+  margin-top: 45px;
+}
+
+.info-user-tabs .ant-tabs-nav::before {
+  display: none;
+}
+
+.info-user-tabs .ant-tabs-nav-list {
+  font-family: var(--font-apply-form-italic);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Css My mentor + Saved */
+.mentor-info-item {
+  background: rgba(246, 246, 246, 1);
+  margin-bottom: 40px;
+}
+
+.mentor-info-subCard {
+  background: #fff;
+  height: 185px;
+}
+
