@@ -6,5 +6,8 @@ import * as controller from "../controllers/mentor.controller";
 const router: Router = Router();
 router.post("/list", controller.listMentors);
 router.post("/filter", controller.filterMentors);
+router.post("/create", controller.createMentor);
+router.delete("/delete/:id", controller.deleteMentor);
+router.post("/update/:id", controller.updateMentor);
 
 export const mentorRoutes: Router = router;
