@@ -1,0 +1,43 @@
+.info-user-container {
+    padding: 24px;
+}
+
+.user-banner {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-banner img {
+    width: 100%;
+    height: auto;
+}
+
+.user-info-header {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.user-info-card {
+    margin-top: 16px;
+}
+
+.mentor-info-card, .help-info-card {
+    margin-top: 16px;
+}
