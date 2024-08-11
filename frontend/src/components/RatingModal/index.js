@@ -10,6 +10,7 @@ const RatingModal = ({ visible, onClose }) => {
       onCancel={onClose}
       footer={null}
       centered
+      className="rating-modal"
     >
       <p className="rating-subtitle">NEU DAILY MENTORING</p>
       <div className="rating-content">
