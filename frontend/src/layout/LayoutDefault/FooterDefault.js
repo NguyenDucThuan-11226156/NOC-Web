@@ -45,7 +45,7 @@ function FooterDefault() {
                   <strong>Fanpage</strong>: NEU Career Center - NOC
                 </div>
                 <div className="layout-default__email">
-                  <strong>Email</strong>: /Cập nhật sau/
+                  <strong>Email</strong>: neudailymentoring.noc@gmail.com
                 </div>
                 <div className="layout-default__hotline">
                   <strong>Hotline</strong> :

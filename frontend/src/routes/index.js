@@ -36,5 +36,7 @@ export const routes = [
   {
     path: "/admin",
     element: <AppAdmin />,
+    children:[
+    ]
   },
 ];
