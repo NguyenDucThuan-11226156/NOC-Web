@@ -83,7 +83,7 @@
   border-radius: 20px;
   border: 2px solid var(--color-mentor-border);
   font-family: var(--font);
-  font-size: 27px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--color-mentor-title);
 }
@@ -93,11 +93,11 @@
 }
 
 .mentor-detail-review {
-  height: 145px;
+  height: 170px;
   margin-left: 20px;
   background: #fff;
   border: 0.5px solid var(--color-mentor-border);
-  padding: 10px;
+  padding: 10px 15px;
   position: relative;
 }
 
@@ -118,6 +118,45 @@
   font-size: 16px;
   color: var(--color-mentor-title);
 }
+
+.mentor-detail-comment {
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.user-avatar-comment {
+  width: 60px;
+  height: 60px;
+  border: 0.5px solid rgba(0, 0, 0, 1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-comment h4{
+  margin: 10px 0 0 0;
+  font-size: 10px;
+  font-family: var(--font);
+  font-weight: 400;
+}
+
+.user-comment-input {
+  height: 77px;
+  font-family: var(--font-apply-form-italic);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.user-comment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+/* Css Review */
 
 .mentor-detail-modal {
   height: 689px;
@@ -149,7 +188,7 @@
   border: 0.5px solid rgba(0, 0, 0, 1);
 }
 
-/* Css Review */
+
 .review-newComment {
   position: relative;
 }

@@ -151,7 +151,7 @@ function MentorDetailPage() {
 
       <Row className="mentor-detail-content">
         <Col span={7}>
-          <div className="mentor-detail-image">Ảnh ở đây</div>
+          <div className="mentor-detail-image"><img src="" alt="mentor-image" /></div>
           <div className="action-buttons">
             {isMentorSaved ? (
               <>
@@ -183,11 +183,21 @@ function MentorDetailPage() {
 
             <h3>Hồ sơ công tác và kinh nghiệm hoạt động</h3>
             <p>{mentor.experience}</p>
-            
           </div>
 
           <div className="mentor-detail-review">
             <h3>Review</h3>
+            <Row className="mentor-detail-comment">
+              <Col xxl={3} xl={4} className="user-comment">
+                <div className="user-avatar-comment">
+                  <img src="" alt="user-avatar" />
+                </div>
+                <h4>Nguyen Thac Hoang Nam</h4>
+              </Col>
+              <Col xxl={21} xl={20}>
+                <Input disabled className="user-comment-input"/>
+              </Col>
+            </Row>
             <Button onClick={handleToggleCommentModal} type="link">
               Full
             </Button>
@@ -224,14 +234,16 @@ function MentorDetailPage() {
         {isLoggedIn ? (
           <Row>
             <Col span={2}>
-              <div className="review-user-avatar">User</div>
+              <div className="review-user-avatar">
+                <img src="" alt="user-avatar" />
+              </div>
             </Col>
             <Col span={22} className="review-newComment">
               <Input.TextArea
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Write your review"
-                style={{overflow: 'hidden'}}
+                style={{ overflow: "hidden" }}
               />
               <button
                 className="review-submit-btn"
