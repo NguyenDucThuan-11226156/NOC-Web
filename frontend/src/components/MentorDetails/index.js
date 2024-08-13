@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { Button, Modal, Input, List, Rate, notification, Row, Col } from "antd";
+import { Button, Col, Input, List, Modal, notification, Rate, Row } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate, useParams } from "react-router-dom";
 import ApplyModal from "../ApplyModal";
 // import ReviewModal from './ReviewModal'; // not yet supported
 import RatingModal from "../RatingModal";
@@ -151,7 +151,9 @@ function MentorDetailPage() {
 
       <Row className="mentor-detail-content">
         <Col span={7}>
-          <div className="mentor-detail-image"><img src="" alt="mentor-image" /></div>
+          <div className="mentor-detail-image">
+            <img src="" alt="mentor-image" />
+          </div>
           <div className="action-buttons">
             {isMentorSaved ? (
               <>
@@ -195,7 +197,7 @@ function MentorDetailPage() {
                 <h4>Nguyen Thac Hoang Nam</h4>
               </Col>
               <Col xxl={21} xl={20}>
-                <Input disabled className="user-comment-input"/>
+                <Input disabled className="user-comment-input" />
               </Col>
             </Row>
             <Button onClick={handleToggleCommentModal} type="link">

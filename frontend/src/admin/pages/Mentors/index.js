@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Space, Table, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { postMentorList, deleteMentor, createMentor } from "../../../services/mentorsServices";
+import { Button, Modal, Space, Table, message } from "antd";
+import React, { useEffect, useState } from "react";
 import { limit } from "../../../constant";
+import {
+  createMentor,
+  deleteMentor,
+  postMentorList,
+} from "../../../services/mentorsServices";
 import MentorFormModal from "./MentorFormModal";
 
 const { confirm } = Modal;
@@ -19,16 +23,17 @@ const MentorsManagement = () => {
     };
     const fetchApi = async () => {
       const result = await postMentorList(offset);
-      setDataFinal(result.mentors.map((mentor) => ({
-        key: mentor._id,
-        name: mentor.name,
-        study: mentor.industry,
-        education: mentor.education,
-      })));
+      setDataFinal(
+        result.mentors.map((mentor) => ({
+          key: mentor._id,
+          name: mentor.name,
+          study: mentor.industry,
+          education: mentor.education,
+        }))
+      );
     };
     fetchApi();
     // console.log(currentPage);
-    
   }, [currentPage]);
 
   const handleDelete = (id) => {
@@ -66,13 +71,15 @@ const MentorsManagement = () => {
       if (response.code === 200) {
         message.success("Mentor created successfully!");
         setIsModalVisible(false);
-        setDataFinal([...dataFinal, {
-          key: response.data._id,
-          name: response.data.name,
-          study: response.data.industry,
-          education: response.data.education,
-        }]);
-        
+        setDataFinal([
+          ...dataFinal,
+          {
+            key: response.data._id,
+            name: response.data.name,
+            study: response.data.industry,
+            education: response.data.education,
+          },
+        ]);
       } else {
         message.error("Failed to create mentor. Please try again.");
       }

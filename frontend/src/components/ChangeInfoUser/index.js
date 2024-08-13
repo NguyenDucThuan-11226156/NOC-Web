@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Modal, Form, Input, Button } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import axios from "axios";
+import React from "react";
 import "./ChangeInfoUser.css";
 
 const ChangeInfoUser = ({ visible, onClose, userInfo }) => {

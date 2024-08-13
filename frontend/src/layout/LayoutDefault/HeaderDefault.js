@@ -1,33 +1,32 @@
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
-import "./LayoutDefault.css";
-import { Row, Col, Button, Avatar, Dropdown, Menu } from "antd";
+import { Avatar, Button, Col, Dropdown, Menu, Row } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { useState, useEffect } from "react";
-import SignUp from "../../components/SignUp";
-import Login from "../../components/Login";
-import ForgotPassword from "../../components/ForgotPW";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import logoNEU from "../../images/logo/Logo-Neu.svg";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import ForgotPassword from "../../components/ForgotPW";
+import Login from "../../components/Login";
+import SignUp from "../../components/SignUp";
 import logoNCC from "../../images/logo/Logo-NCC.svg";
+import logoNEU from "../../images/logo/Logo-Neu.svg";
 import logoNOC from "../../images/logo/NOC-black.svg";
 import logoNDM from "../../images/logo/NOC-white.svg";
+import "./LayoutDefault.css";
 function HeaderDefault() {
   // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+  const [cookies, removeCookie] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
   const [user, setUser] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setActiveLink(location.pathname);
-    if (cookies.token) {
+    if (cookies.token && cookies.token !== "undefined") {
       const userInfo = {
         name: cookies.name,
         avatar: cookies.avatar,
@@ -77,7 +76,7 @@ function HeaderDefault() {
     // navigate("/");
   };
 
-  const handleMyMentor = () => { };
+  const handleMyMentor = () => {};
 
   const handleSupport = () => {
     // navigate("/support");
@@ -197,7 +196,7 @@ function HeaderDefault() {
                     onClick={(e) => e.preventDefault()}
                   >
                     <Avatar src={user.avatar} />
-                    <Link to={"infoUser"}>{user.name}</Link>
+                    <Link>{user.name}</Link>
                   </div>
                 </Dropdown>
               ) : (

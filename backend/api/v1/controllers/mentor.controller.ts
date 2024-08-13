@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import md5 from "md5";
-import User from "../models/user.model";
 import { generateRandomString } from "../../../helpers/generate.helper";
-import Mentors from "../models/mentor.model";
-import Enterprise from "../models/enterprise.model";
-import Study from "../models/study.model";
 import Domain from "../models/domain.model";
+import Enterprise from "../models/enterprise.model";
+import Mentors from "../models/mentor.model";
 import Specialization from "../models/specialization.model";
+import Study from "../models/study.model";
+import User from "../models/user.model";
 // [POST] /api/v1/mentors/register
 export const register = async (req: Request, res: Response) => {
   const emailExist = await User.findOne({
@@ -172,6 +172,25 @@ export const updateMentor = async (req: Request, res: Response) => {
     res.json({
       code: 200,
       message: "Cập nhật mentor thành công !",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: error,
+    });
+  }
+};
+// [POST] /api/v1/mentors/detail/:id
+export const detailMentor = async (req: Request, res: Response) => {
+  try {
+    const idMentor = req.params.id;
+    console.log(idMentor);
+    const infoMentor = await Mentors.find({
+      _id: idMentor,
+    });
+    res.json({
+      mentor: infoMentor,
+      code: 200,
     });
   } catch (error) {
     res.json({

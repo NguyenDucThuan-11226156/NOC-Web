@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Card, Tabs, Row, Col, Typography, Button, Avatar } from "antd";
-import { useNavigate } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Col, Row, Tabs, Typography } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ChangeInfoUser from "../../components/ChangeInfoUser"; // Import the ChangeInfoUser component
 import "./InfoUser.css"; // Ensure you create this CSS file for custom styles
 
 const { TabPane } = Tabs;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const InfoUser = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -119,13 +119,14 @@ const InfoUser = () => {
                 <div className="mentor-info-border"></div>
                 {myMentors.map((mentor) => (
                   <Col key={mentor.id} span={12}>
-                    <Card className="mentor-info-subCard"
+                    <Card
+                      className="mentor-info-subCard"
                       title={mentor.name}
-                      extra=
-                      {<img src={mentor.companyLogo} alt="Company Logo" />}
+                      extra={
+                        <img src={mentor.companyLogo} alt="Company Logo" />
+                      }
                       cover={<img alt="avatar" src={mentor.avatar} />}
-                      actions=
-                      {[
+                      actions={[
                         <Button
                           onClick={() => navigate(`/mentors/${mentor.slug}`)}
                         >
@@ -139,7 +140,8 @@ const InfoUser = () => {
                           My Review
                         </Button>,
                       ]}
-                      ><p>Mentee Count: {mentor.menteeCount}</p>
+                    >
+                      <p>Mentee Count: {mentor.menteeCount}</p>
                       <p>Introduction 1: {mentor.introduction1}</p>
                       <p>Introduction 2: {mentor.introduction2}</p>
                       <p>
