@@ -1,5 +1,15 @@
 import React from "react";
-import { Modal, Form, Input, InputNumber, Button, message } from "antd";
+import {
+  Modal,
+  Form,
+  Input,
+  InputNumber,
+  Button,
+  message,
+  Row,
+  Col,
+} from "antd";
+import "./MentorPage.css";
 
 const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
   const [form] = Form.useForm();
@@ -20,24 +30,33 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
       visible={visible}
       onCancel={onCancel}
       footer={null}
+      className="mentor-add-modal"
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
-        <Form.Item
-          name="name"
-          label="Name"
-          rules={[
-            { required: true, message: "Please enter the mentor's name!" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="avatar"
-          label="Avatar URL"
-          rules={[{ required: true, message: "Please enter the avatar URL!" }]}
-        >
-          <Input type="file" accept="image/jpeg, image/png" />
-        </Form.Item>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item
+              name="name"
+              label="Name"
+              rules={[
+                { required: true, message: "Please enter the mentor's name!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="avatar"
+              label="Avatar URL"
+              rules={[
+                { required: true, message: "Please enter the avatar URL!" },
+              ]}
+            >
+              <Input type="file" accept="image/jpeg, image/png" />
+            </Form.Item>
+          </Col>
+        </Row>
         {/* <Form.Item
           name="menteeCount"
           label="Mentee Count"
@@ -47,59 +66,84 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <InputNumber min={0} style={{ width: "100%" }} />
         </Form.Item> */}
-        <Form.Item
-          name="introduction1"
-          label="Introduction 1"
-          rules={[
-            { required: true, message: "Please enter the first introduction!" },
-          ]}
-        >
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item
-          name="introduction2"
-          label="Introduction 2"
-          rules={[
-            {
-              required: true,
-              message: "Please enter the second introduction!",
-            },
-          ]}
-        >
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item
-          name="organization"
-          label="Organization"
-          rules={[
-            { required: true, message: "Please enter the organization!" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="specialization"
-          label="Specialization"
-          rules={[
-            { required: true, message: "Please enter the specialization!" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="education"
-          label="Education"
-          rules={[{ required: true, message: "Please enter the education!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="industry"
-          label="Industry"
-          rules={[{ required: true, message: "Please enter the industry!" }]}
-        >
-          <Input />
-        </Form.Item>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item
+              name="introduction1"
+              label="Introduction 1"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the first introduction!",
+                },
+              ]}
+            >
+              <Input.TextArea />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="introduction2"
+              label="Introduction 2"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the second introduction!",
+                },
+              ]}
+            >
+              <Input.TextArea />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item
+              name="organization"
+              label="Organization"
+              rules={[
+                { required: true, message: "Please enter the organization!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="specialization"
+              label="Specialization"
+              rules={[
+                { required: true, message: "Please enter the specialization!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item
+              name="education"
+              label="Education"
+              rules={[
+                { required: true, message: "Please enter the education!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="industry"
+              label="Industry"
+              rules={[
+                { required: true, message: "Please enter the industry!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
         {/* <Form.Item
           name="rate"
           label="Rate"
@@ -122,17 +166,23 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         <Form.Item name="other" label="Other">
           <Input />
         </Form.Item> */}
-        <Form.Item name="companyLogo" label="Company Logo">
-          <Input type="file" accept="image/jpeg, image/png" />
-        </Form.Item>
-        <Form.Item name="field" label="Field">
-          <Input />
-        </Form.Item>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item name="companyLogo" label="Company Logo">
+              <Input type="file" accept="image/jpeg, image/png" />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="field" label="Field">
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
         <Form.Item name="experience" label="Experience">
           <Input.TextArea />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button className="add-modal-btn" htmlType="submit">
             Add Mentor
           </Button>
         </Form.Item>

@@ -1,0 +1,97 @@
+/* Css mentor table */
+
+.mentor-table thead tr th {
+  background-color: #409174 !important;
+  color: #fff !important;
+  font-family: var(--font);
+}
+
+.mentor-table tbody tr td {
+  font-family: var(--font);
+  letter-spacing: .5px;
+}
+
+.mentor-table tbody tr td a, .mentor-table .ant-pagination-item a {
+  color: #214236 !important;
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+.mentor-table .ant-pagination-item-active {
+  border-color: #214236 !important;
+
+}
+
+.edit-btn {
+  width: 100px;
+  height: 35px;
+  border: 2px solid #D9E9E3  ;
+  color: #409174 ;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.edit-btn:hover {
+  background-color: #D9E9E3  !important;
+  border-color: #D9E9E3 !important;
+  color: #409174 !important;
+}
+
+.delete-btn {
+  width: 100px;
+  height: 35px;
+  border: 2px solid var(--color-active);
+  color: var(--color-active);
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background-color: var(--color-active) !important;
+  border-color: var(--color-active) !important;
+  color: #fff !important;
+}
+
+.add-table-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #405e91;
+  color: #fff;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.add-table-btn:hover {
+  border: 2px solid #405e91 !important;
+  color: #405e91 !important;
+}
+
+/* Css mentor add modal */
+
+.mentor-add-modal {
+  width: 900px !important;
+}
+
+.mentor-add-modal .ant-modal-title {
+  text-align: center;
+  font-size: 36px;
+  font-family: var(--font-mentor-title);
+  color: #409174;
+  margin: 10px 0 20px 10px;
+}
+
+.add-modal-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #409174;
+  color: #fff;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 25px;
+}
+
+.add-modal-btn:hover {
+  border: 2px solid #409174 !important;
+  color: #409174 !important;
+}
