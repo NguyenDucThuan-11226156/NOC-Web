@@ -73,6 +73,35 @@ export const detail = async (req: Request, res: Response) => {
     info: res.locals.user,
   });
 };
+
+
+// [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
+export const updateUser = async (req: Request, res: Response) => {
+  const { name, school, studentId, email, number } = req.body;
+  const token = req.headers.authorization.split(" ")[1];
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { token },
+      { name, school, studentId, email, number },
+      { new: true }
+    );
+
+    res.json({
+      code: 200,
+      message: "Cập nhật thông tin thành công!",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Cập nhật thông tin không thành công!",
+    });
+  }
+};
+
+
+
 // [POST] api/v1/users/password/forgot
 export const forgotPasswordPost = async (req: Request, res: Response) => {
   const email = req.body.email;

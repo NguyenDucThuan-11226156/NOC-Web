@@ -1,0 +1,48 @@
+.changeInfo {
+  height: 518px;
+  width: 897px !important;
+}
+
+.changeInfo .ant-modal-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--color-mentor-border);
+  font-family: var(--font-mentor-title);
+  margin-bottom: 30px;
+}
+
+.changeInfo-item {
+    margin-bottom: 20px;
+    border-bottom: 0.2px solid rgba(0, 0, 0, 1);
+    padding: 20px 0;
+}
+
+.changeInfo-item input {
+  border: none;
+  border-radius: 0;
+  width: 100%;
+}
+
+.changeInfo-item input:focus {
+    border-color: none;
+  box-shadow: none;
+}
+
+.changeInfo-item .ant-form-item-label > label {
+  font-size: 18px;
+  font-family: var(--font-login);
+  font-weight: 700;
+  z-index: 2;
+}
+
+.changeInfo-btn {
+    width: 110px;
+    height: 29px;
+    padding: 15px;
+    border: 2px solid var(--color-mentor-border);
+    font-size: 15px;
+    font-family: var(--font);
+    color: var(--color-mentor-title);
+    font-weight: 700;
+}

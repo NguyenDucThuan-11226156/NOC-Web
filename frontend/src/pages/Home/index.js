@@ -3,7 +3,6 @@ import Banner from "../../components/Banner";
 import SearchRow from "../../components/SearchRow";
 import Mentor from "../../components/Mentor";
 import { Layout, Pagination } from "antd";
-import mockMentors from "../../mockMentors";
 import { postMentorList } from "../../services/mentorsServices";
 import { limit } from "../../constant";
 import { post } from "../../utils/request";
@@ -56,6 +55,8 @@ function Home() {
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
+console.log(currentPage);
+console.log(currentMentors);
 
   return (
     <Layout>
@@ -68,7 +69,8 @@ function Home() {
           specialization={specialization}
           studies={studies}
         />
-        <Mentor mentors={currentMentors} />
+        {/* <Mentor mentors={currentMentors} /> */}
+        <Mentor mentors={mentors} />
         <Pagination
           current={currentPage}
           pageSize={pageSize}

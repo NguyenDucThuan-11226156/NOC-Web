@@ -8,7 +8,10 @@ import SignUp from "../../components/SignUp";
 import Login from "../../components/Login";
 import ForgotPassword from "../../components/ForgotPW";
 import { useCookies } from "react-cookie";
-
+import logoNEU from "../../images/logo/Logo-Neu.svg";
+import logoNCC from "../../images/logo/Logo-NCC.svg";
+import logoNOC from "../../images/logo/NOC-black.svg";
+import logoNDM from "../../images/logo/NOC-white.svg";
 function HeaderDefault() {
   // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
@@ -74,7 +77,7 @@ function HeaderDefault() {
     // navigate("/");
   };
 
-  const handleMyMentor = () => {};
+  const handleMyMentor = () => { };
 
   const handleSupport = () => {
     // navigate("/support");
@@ -125,9 +128,18 @@ function HeaderDefault() {
         <Header className="layout-default__header">
           <Col xl={4}>
             <div className="layout-default__logo">
-              <div className="layout-default__logo--tt">Logo TT</div>
-              <div className="layout-default__logo--noc">Logo NOC</div>
-              <div className="layout-default__logo--ndm">Logo NDM</div>
+              <div className="layout-default__logo--tt">
+                <img src={logoNEU} alt="logo NEU" />
+              </div>
+              <div className="layout-default__logo--ncc">
+                <img src={logoNCC} alt="logo NCC" />
+              </div>
+              <div className="layout-default__logo--noc">
+                <img src={logoNOC} alt="logo NOC" />
+              </div>
+              <div className="layout-default__logo--ndm">
+                <img src={logoNDM} alt="logo NDM" />
+              </div>
             </div>
           </Col>
           <Col xl={14}>

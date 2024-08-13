@@ -3,7 +3,8 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Info from "../pages/Info";
 import InfoUser from "../pages/InfoUser";
-import AppAdmin from "../admin/Layout";
+import AppAdmin from "../../src/admin/Layout";
+import MentorDetailPage from "../components/MentorDetails";
 
 export const routes = [
   {
@@ -26,10 +27,16 @@ export const routes = [
         path: "infoUser",
         element: <InfoUser />,
       },
+      {
+        path: "mentor/:id", // Dynamic route for mentor detail
+        element: <MentorDetailPage />
+      }
     ],
   },
   {
     path: "/admin",
     element: <AppAdmin />,
+    children:[
+    ]
   },
 ];
