@@ -71,7 +71,7 @@ function MentorItem({ mentor }) {
       return;
     }
     
-    navigate(`/mentor/${mentor._id}`);
+    navigate(`/mentors/detail/${mentor._id}`);
   };
   
 

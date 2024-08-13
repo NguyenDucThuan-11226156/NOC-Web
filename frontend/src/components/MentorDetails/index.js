@@ -7,7 +7,7 @@ import ApplyModal from "../ApplyModal";
 // import ReviewModal from './ReviewModal'; // not yet supported
 import RatingModal from "../RatingModal";
 import "./MentorDetailPage.css";
-
+import { API } from "../../constant";
 function MentorDetailPage() {
   const { id } = useParams(); // Get the mentor's ID from the URL
   const [mentor, setMentor] = useState({});
@@ -21,26 +21,34 @@ function MentorDetailPage() {
   const [newComment, setNewComment] = useState("");
   const [isMentorSaved, setIsMentorSaved] = useState(false);
   const navigate = useNavigate();
-
+  // console.log(id);
+  
   useEffect(() => {
     // Check if user is logged in
     setIsLoggedIn(!!cookies.token);
-
+  
     // Fetch mentor details
     axios
-      .get(`/api/v1/mentors/${id}`)
+      .post( API +`/api/v1/mentors/detail/${id}`)
       .then((response) => {
-        setMentor(response.data);
-        setComments(response.data.review || []); // Assuming `review` contains the comments
+        console.log(response);
+        
+        const { mentor, code } = response.data;
+        if (code === 200 && mentor.length > 0) {
+          setMentor(mentor[0]); // mentor is returned as an array, take the first element
+          setComments(mentor[0].review || []); // Assuming `review` contains the comments
+        } else {
+          console.error("No mentor data found");
+        }
       })
       .catch((error) => {
         console.error("Error fetching mentor details:", error);
       });
-
+  
     // Check if this mentor is already in the user's list
     if (cookies.token) {
       axios
-        .get(`/api/v1/users/mentors`)
+        .get(API + `/api/v1/users/mentors`)
         .then((response) => {
           const savedMentors = response.data || [];
           setIsMentorSaved(savedMentors.some((mentor) => mentor._id === id));
@@ -61,7 +69,7 @@ function MentorDetailPage() {
     if (!newComment) return;
 
     axios
-      .post(
+      .post(API +
         `/api/v1/mentors/${id}/comment`,
         { message: newComment },
         {
@@ -109,7 +117,7 @@ function MentorDetailPage() {
 
     if (!isMentorSaved) {
       axios
-        .post(
+        .post(API +
           `/api/v1/users/mentors/save`,
           { mentorId: id },
           {
@@ -152,7 +160,7 @@ function MentorDetailPage() {
       <Row className="mentor-detail-content">
         <Col span={7}>
           <div className="mentor-detail-image">
-            <img src="" alt="mentor-image" />
+            <img src={mentor.avatar} alt="mentor-image" />
           </div>
           <div className="action-buttons">
             {isMentorSaved ? (
@@ -181,7 +189,7 @@ function MentorDetailPage() {
             <p>{mentor.introduction1}</p>
 
             <h3>Lĩnh vực hoạt động</h3>
-            <p>{mentor.field}</p>
+            <p>{mentor.industry}</p>
 
             <h3>Hồ sơ công tác và kinh nghiệm hoạt động</h3>
             <p>{mentor.experience}</p>
@@ -192,9 +200,9 @@ function MentorDetailPage() {
             <Row className="mentor-detail-comment">
               <Col xxl={3} xl={4} className="user-comment">
                 <div className="user-avatar-comment">
-                  <img src="" alt="user-avatar" />
+                  {/* <img src={user.avatar} alt="user-avatar" /> */}
                 </div>
-                <h4>Nguyen Thac Hoang Nam</h4>
+                <h4>User Name</h4>
               </Col>
               <Col xxl={21} xl={20}>
                 <Input disabled className="user-comment-input" />
