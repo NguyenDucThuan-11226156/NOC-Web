@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as controller from "../controllers/user.controller";
-
+import * as authMiddleware from "../middlewares/auth.middleware";
 // import * as authMiddleware from "../middlewares/auth.middleware";
 
 const router: Router = Router();
@@ -10,6 +10,7 @@ router.post("/login", controller.login);
 router.post("/password/forgot", controller.forgotPasswordPost);
 router.post("/password/otp", controller.otpPasswordPost);
 router.post("/password/reset", controller.resetPasswordPost);
-// router.get("/detail", authMiddleware.requireAuth, controller.detail);
+router.get("/detail", authMiddleware.requireAuth, controller.detail);
+router.post("/update", authMiddleware.requireAuth, controller.updateUser);
 
 export const userRoutes: Router = router;

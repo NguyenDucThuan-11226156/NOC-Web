@@ -67,6 +67,7 @@ const MentorsManagement = () => {
 
   const handleAddMentor = async (values) => {
     try {
+      console.log("Values", values);
       const response = await createMentor(values);
       if (response.code === 200) {
         message.success("Mentor created successfully!");

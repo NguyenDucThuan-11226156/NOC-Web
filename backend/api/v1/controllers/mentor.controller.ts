@@ -118,6 +118,9 @@ export const createMentor = async (req: Request, res: Response) => {
       specialization: req.body.specialization,
       education: req.body.education,
       industry: req.body.industry,
+      companyLogo: req.body.companyLogo,
+      experience: req.body.experience,
+      field: req.body.field,
     });
     const data = await mentor.save();
     res.json({

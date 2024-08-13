@@ -6,9 +6,9 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
 
   const handleFinish = async (values) => {
     try {
+      console.log(values);
       await onSubmit(values);
       form.resetFields();
-      console.log(values);
     } catch (error) {
       message.error("An error occurred. Please try again.");
     }
@@ -21,7 +21,12 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
       onCancel={onCancel}
       footer={null}
     >
-      <Form form={form} layout="vertical" onFinish={handleFinish}>
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={handleFinish}
+        enctype="multipart/form-data"
+      >
         <Form.Item
           name="name"
           label="Name"
@@ -33,7 +38,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         </Form.Item>
         <Form.Item
           name="avatar"
-          label="Avatar URL"
+          label="Avatar"
           rules={[{ required: true, message: "Please enter the avatar URL!" }]}
         >
           <Input type="file" accept="image/jpeg, image/png" />

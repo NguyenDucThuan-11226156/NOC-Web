@@ -6,11 +6,8 @@ export const postMentorList = async (offset) => {
     limit: offset.limit,
     page: offset.page,
   });
-  console.log(result);
-
   return result;
 };
-
 
 export const deleteMentor = async (id) => {
   const response = await axios.delete(API + `/api/v1/mentors/delete/${id}`);
