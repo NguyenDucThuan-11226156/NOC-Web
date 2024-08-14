@@ -28,7 +28,7 @@ export const routes = [
         element: <InfoUser />,
       },
       {
-        path: "mentor/:id", // Dynamic route for mentor detail
+        path: "mentors/detail/:id", // Dynamic route for mentor detail
         element: <MentorDetailPage />
       }
     ],
