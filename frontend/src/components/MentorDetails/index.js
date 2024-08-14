@@ -13,24 +13,51 @@ function MentorDetailPage() {
   const [mentor, setMentor] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cookies] = useCookies(["token", "avatar", "name"]);
+  const [cookies] = useCookies(["token"]);
   const [commentModalVisible, setCommentModalVisible] = useState(false);
   const [applyModalVisible, setApplyModalVisible] = useState(false);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [ratingModalVisible, setRatingModalVisible] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [isMentorSaved, setIsMentorSaved] = useState(false);
-  const [userAvatar, setUserAvatar] = useState("");
-  const [userName, setUserName] = useState("");
+  const [userAvatar, setUserAvatar] = useState("default-avatar-url"); // Default avatar
+  const [userName, setUserName] = useState("User Name"); // Default name
   const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user is logged in
     setIsLoggedIn(!!cookies.token);
     
-    // Set user avatar and name from cookies
-    setUserAvatar(cookies.avatar || "default-avatar-url"); // fallback to default avatar if not available
-    setUserName(cookies.name || "User Name"); // fallback to "User Name" if not available
+    if (cookies.token) {
+      // Fetch user details
+      axios
+        .get(API + `/api/v1/users/detail`, {
+          headers: { Authorization: `Bearer ${cookies.token}` },
+        })
+        .then((response) => {
+          const userData = response.data.info;
+          console.log(userData);
+          
+          setUserAvatar(userData.avatar || "default-avatar-url"); // Fallback to default avatar
+          setUserName(userData.name || "User Name"); // Fallback to "User Name"
+        })
+        .catch((error) => {
+          console.error("Error fetching user details:", error);
+        });
+
+      // Check if this mentor is already in the user's list
+      axios
+        .get(API + `/api/v1/users/mentors`, {
+          headers: { Authorization: `Bearer ${cookies.token}` },
+        })
+        .then((response) => {
+          const savedMentors = response.data || [];
+          setIsMentorSaved(savedMentors.some((mentor) => mentor._id === id));
+        })
+        .catch((error) => {
+          console.error("Error checking saved mentors:", error);
+        });
+    }
 
     // Fetch mentor details
     axios
@@ -48,19 +75,7 @@ function MentorDetailPage() {
         console.error("Error fetching mentor details:", error);
       });
 
-    // Check if this mentor is already in the user's list
-    if (cookies.token) {
-      axios
-        .get(API + `/api/v1/users/mentors`)
-        .then((response) => {
-          const savedMentors = response.data || [];
-          setIsMentorSaved(savedMentors.some((mentor) => mentor._id === id));
-        })
-        .catch((error) => {
-          console.error("Error checking saved mentors:", error);
-        });
-    }
-  }, [id, cookies.token, cookies.avatar, cookies.name]);
+  }, [id, cookies.token]);
 
   // Toggle comment modal
   const handleToggleCommentModal = () => {
@@ -260,20 +275,20 @@ function MentorDetailPage() {
             </Col>
           </Row>
         ) : (
-          <p>Please log in to leave a review.</p>
+          <p>Please log in to post a comment</p>
         )}
       </Modal>
 
-      {/* Apply and Rating Modals */}
       <ApplyModal
         visible={applyModalVisible}
         onCancel={() => setApplyModalVisible(false)}
-        mentor={mentor}
+        mentorId={mentor._id}
       />
+
       <RatingModal
         visible={ratingModalVisible}
         onCancel={() => setRatingModalVisible(false)}
-        mentor={mentor}
+        mentorId={mentor._id}
       />
     </div>
   );
