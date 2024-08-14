@@ -34,7 +34,6 @@ const MentorsManagement = () => {
       );
     };
     fetchApi();
-    // console.log(currentPage);
   }, [currentPage]);
 
   const handleDelete = (id) => {

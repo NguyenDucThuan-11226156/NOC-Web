@@ -6,11 +6,8 @@ export const postMentorList = async (offset) => {
     limit: offset.limit,
     page: offset.page,
   });
-  console.log(result);
-
   return result;
 };
-
 
 export const deleteMentor = async (id) => {
   const response = await axios.delete(API + `/api/v1/mentors/delete/${id}`);
@@ -18,6 +15,19 @@ export const deleteMentor = async (id) => {
 };
 
 export const createMentor = async (mentorData) => {
-  const response = await axios.post(API + `/api/v1/mentors/create`, mentorData);
-  return response.data;
+  try {
+    const response = await axios.post(
+      `${API}/api/v1/mentors/create`,
+      mentorData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // Optional; axios will set it automatically
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("An error occurred while creating the mentor:", error);
+    throw error; // Optionally re-throw the error to handle it in a higher-level function
+  }
 };

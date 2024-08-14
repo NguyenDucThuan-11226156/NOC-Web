@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Modal,
@@ -11,17 +12,42 @@ import {
 } from "antd";
 import "./MentorPage.css";
 
+
 const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
   const [form] = Form.useForm();
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [companyLogoFile, setCompanyLogoFile] = useState(null);
 
   const handleFinish = async (values) => {
     try {
-      await onSubmit(values);
+      const formData = new FormData(); // Corrected capitalization
+      formData.append("name", values.name);
+      formData.append("introduction1", values.introduction1);
+      formData.append("introduction2", values.introduction2);
+      formData.append("organization", values.organization);
+      formData.append("specialization", values.specialization);
+      formData.append("education", values.education);
+      formData.append("industry", values.industry);
+      formData.append("field", values.field);
+      formData.append("experience", values.experience);
+      if (avatarFile) {
+        formData.append("avatar", avatarFile);
+      }
+      if (companyLogoFile) {
+        formData.append("companyLogo", companyLogoFile);
+      }
+      await onSubmit(formData);
       form.resetFields();
-      console.log(values);
     } catch (error) {
       message.error("An error occurred. Please try again.");
     }
+  };
+
+  const handleFileChange = (event) => {
+    setAvatarFile(event.target.files[0]);
+  };
+  const handleLogoChange = (event) => {
+    setCompanyLogoFile(event.target.files[0]);
   };
 
   return (
@@ -32,6 +58,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
       footer={null}
       className="mentor-add-modal"
     >
+
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Row gutter={[25, 25]}>
           <Col span={12}>
@@ -181,6 +208,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         <Form.Item name="experience" label="Experience">
           <Input.TextArea />
         </Form.Item>
+
         <Form.Item>
           <Button className="add-modal-btn" htmlType="submit">
             Add Mentor

@@ -9,7 +9,6 @@ export const requireAuth = async (
   try {
     if (req.headers.authorization) {
       const token: string = req.headers.authorization.split(" ")[1];
-
       const user = await User.findOne({
         token: token,
         deleted: false,
@@ -21,6 +20,7 @@ export const requireAuth = async (
         });
       } else {
         res.locals.user = user;
+        res.locals.token = token;
         next();
       }
     } else {

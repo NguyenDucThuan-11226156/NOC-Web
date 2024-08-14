@@ -111,13 +111,16 @@ export const createMentor = async (req: Request, res: Response) => {
   try {
     const mentor = new Mentors({
       name: req.body.name,
-      avatar: req.body.avatar,
+      avatar: req.body["avatar"][0],
       introduction1: req.body.introduction1,
       introduction2: req.body.introduction2,
       organization: req.body.organization,
       specialization: req.body.specialization,
       education: req.body.education,
       industry: req.body.industry,
+      companyLogo: req.body["companyLogo"][0],
+      experience: req.body.experience,
+      field: req.body.field,
     });
     const data = await mentor.save();
     res.json({

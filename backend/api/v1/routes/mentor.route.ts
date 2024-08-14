@@ -9,8 +9,14 @@ router.post("/list", controller.listMentors);
 router.post("/filter", controller.filterMentors);
 router.post(
   "/create",
-  upload.single("avatar"),
-  uploadCloud.uploadSingle,
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    {
+      name: "companyLogo",
+      maxCount: 1,
+    },
+  ]),
+  uploadCloud.uploadFields,
   controller.createMentor
 );
 router.delete("/delete/:id", controller.deleteMentor);

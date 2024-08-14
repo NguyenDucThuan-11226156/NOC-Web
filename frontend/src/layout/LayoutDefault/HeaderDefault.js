@@ -67,14 +67,26 @@ function HeaderDefault() {
   };
 
   //Logout
-  const handleLogout = () => {
-    removeCookie("token");
-    removeCookie("name");
-    removeCookie("avatar");
-    setUser(null);
-    window.location.href = "/";
-    // navigate("/");
-  };
+  // const handleLogout = () => {
+  //   removeCookie("token");
+  //   removeCookie("name");
+  //   removeCookie("avatar");
+  //   // setUser(null);
+  //   window.location.href = "/";
+  //   // navigate("/");
+  // };
+// Hàm này sẽ xóa cookie theo cách thủ công
+const deleteAllCookies = () => {
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "avatar=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+};
+
+const handleLogout = () => {
+  deleteAllCookies();
+  setUser(null);
+  window.location.href = "/";
+};
 
   const handleMyMentor = () => {};
 
