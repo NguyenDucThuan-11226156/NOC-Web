@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Input, InputNumber, Button, message } from "antd";
 
 const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
   const [form] = Form.useForm();
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [companyLogoFile, setCompanyLogoFile] = useState(null);
 
   const handleFinish = async (values) => {
     try {
-      console.log(values);
-      await onSubmit(values);
+      const formData = new FormData(); // Corrected capitalization
+      formData.append("name", values.name);
+      formData.append("introduction1", values.introduction1);
+      formData.append("introduction2", values.introduction2);
+      formData.append("organization", values.organization);
+      formData.append("specialization", values.specialization);
+      formData.append("education", values.education);
+      formData.append("industry", values.industry);
+      formData.append("field", values.field);
+      formData.append("experience", values.experience);
+
+      if (avatarFile) {
+        formData.append("avatar", avatarFile);
+      }
+
+      if (values.companyLogo && values.companyLogo.file) {
+        formData.append("companyLogo", values.companyLogo.file.originFileObj);
+      }
+
+      await onSubmit(formData);
       form.resetFields();
     } catch (error) {
       message.error("An error occurred. Please try again.");
     }
+  };
+
+  const handleFileChange = (event) => {
+    setAvatarFile(event.target.files[0]);
   };
 
   return (
@@ -25,7 +49,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         form={form}
         layout="vertical"
         onFinish={handleFinish}
-        enctype="multipart/form-data"
+        encType="multipart/form-data" // Corrected "enctype" to "encType"
       >
         <Form.Item
           name="name"
@@ -36,22 +60,19 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input />
         </Form.Item>
+
         <Form.Item
           name="avatar"
           label="Avatar"
-          rules={[{ required: true, message: "Please enter the avatar URL!" }]}
+          rules={[{ required: true, message: "Please upload an avatar!" }]}
         >
-          <Input type="file" accept="image/jpeg, image/png" />
+          <Input
+            type="file"
+            accept="image/jpeg, image/png"
+            onChange={handleFileChange}
+          />
         </Form.Item>
-        {/* <Form.Item
-          name="menteeCount"
-          label="Mentee Count"
-          rules={[
-            { required: true, message: "Please enter the mentee count!" },
-          ]}
-        >
-          <InputNumber min={0} style={{ width: "100%" }} />
-        </Form.Item> */}
+
         <Form.Item
           name="introduction1"
           label="Introduction 1"
@@ -61,6 +82,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input.TextArea />
         </Form.Item>
+
         <Form.Item
           name="introduction2"
           label="Introduction 2"
@@ -73,6 +95,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input.TextArea />
         </Form.Item>
+
         <Form.Item
           name="organization"
           label="Organization"
@@ -82,6 +105,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input />
         </Form.Item>
+
         <Form.Item
           name="specialization"
           label="Specialization"
@@ -91,6 +115,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input />
         </Form.Item>
+
         <Form.Item
           name="education"
           label="Education"
@@ -98,6 +123,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input />
         </Form.Item>
+
         <Form.Item
           name="industry"
           label="Industry"
@@ -105,37 +131,19 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         >
           <Input />
         </Form.Item>
-        {/* <Form.Item
-          name="rate"
-          label="Rate"
-          rules={[{ required: true, message: "Please enter the rate!" }]}
-        >
-          <InputNumber min={0} max={5} step={0.1} style={{ width: "100%" }} />
-        </Form.Item> */}
-        {/* <Form.Item
-          name="numberRate"
-          label="Number of Rates"
-          rules={[
-            { required: true, message: "Please enter the number of rates!" },
-          ]}
-        >
-          <InputNumber min={0} style={{ width: "100%" }} />
-        </Form.Item> */}
-        {/* <Form.Item name="keyword" label="Keyword">
-          <Input />
-        </Form.Item>
-        <Form.Item name="other" label="Other">
-          <Input />
-        </Form.Item> */}
+
         <Form.Item name="companyLogo" label="Company Logo">
           <Input type="file" accept="image/jpeg, image/png" />
         </Form.Item>
+
         <Form.Item name="field" label="Field">
           <Input />
         </Form.Item>
+
         <Form.Item name="experience" label="Experience">
           <Input.TextArea />
         </Form.Item>
+
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Add Mentor

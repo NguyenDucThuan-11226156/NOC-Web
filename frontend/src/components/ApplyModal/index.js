@@ -11,7 +11,6 @@ function ApplyModal({ open, onCancel }) {
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 
   const onFinish = (values) => {
-    console.log("Form values:", values);
     setIsSuccessModalVisible(true);
   };
 
@@ -36,7 +35,9 @@ function ApplyModal({ open, onCancel }) {
               <Form.Item
                 name="fullName"
                 label="Họ và tên"
-                rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}
+                rules={[
+                  { required: true, message: "Vui lòng nhập họ và tên!" },
+                ]}
                 className="apply-form-item"
               >
                 <Input placeholder="Họ và tên" />
@@ -46,7 +47,9 @@ function ApplyModal({ open, onCancel }) {
               <Form.Item
                 name="school"
                 label="Trường"
-                rules={[{ required: true, message: "Vui lòng nhập tên trường!" }]}
+                rules={[
+                  { required: true, message: "Vui lòng nhập tên trường!" },
+                ]}
                 className="apply-form-item"
               >
                 <Input placeholder="Trường" />
@@ -59,7 +62,10 @@ function ApplyModal({ open, onCancel }) {
                 name="major"
                 label="Lớp chuyên ngành"
                 rules={[
-                  { required: true, message: "Vui lòng nhập lớp chuyên ngành!" },
+                  {
+                    required: true,
+                    message: "Vui lòng nhập lớp chuyên ngành!",
+                  },
                 ]}
                 className="apply-form-item"
               >
@@ -151,10 +157,10 @@ function ApplyModal({ open, onCancel }) {
             </Upload>
           </Form.Item>
           <p style={{ marginTop: 16 }}>
-            Sau khi đăng ký, bạn sẽ nhận được thông báo về tình trạng đơn của bạn
-            qua email trong vòng 48 giờ để tới thời điểm đăng ký. Nếu đơn đăng ký
-            thành công, chúng tôi sẽ gửi lịch trình mentoring của Mentor để bạn có
-            thể xác nhận tham gia.
+            Sau khi đăng ký, bạn sẽ nhận được thông báo về tình trạng đơn của
+            bạn qua email trong vòng 48 giờ để tới thời điểm đăng ký. Nếu đơn
+            đăng ký thành công, chúng tôi sẽ gửi lịch trình mentoring của Mentor
+            để bạn có thể xác nhận tham gia.
           </p>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="apply-form-btn">

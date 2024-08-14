@@ -76,11 +76,20 @@ export const detail = async (req: Request, res: Response) => {
         Mentors.findOne({ _id: mentorId }).select("-id")
       )
     );
+    const saveMentorIds = infoUser.saveMentorIds.map(
+      (mentor) => mentor.mentorId
+    );
+    const saveMentorDetails = await Promise.all(
+      saveMentorIds.map((mentorId) =>
+        Mentors.findOne({ _id: mentorId }).select("-id")
+      )
+    );
     res.json({
       code: 200,
       message: "Thành công!",
       info: res.locals.user,
       infoMentors: mentorDetails,
+      saveInfoMentors: saveMentorDetails,
     });
   } catch (error) {
     console.log(error);
@@ -93,22 +102,66 @@ export const detail = async (req: Request, res: Response) => {
 
 // [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
 export const updateUser = async (req: Request, res: Response) => {
-  const { name, school, studentId, email, number, mentorId } = req.body;
+  const { name, school, studentId, email, number, mentorId, saveMentorId } =
+    req.body;
   const token = req.headers.authorization.split(" ")[1];
   console.log(token);
   try {
-    const updatedUser = await User.findOneAndUpdate(
-      { token: token },
-      {
-        name,
-        school,
-        studentId,
-        email,
-        number,
-        $push: { mentorIds: { mentorId: mentorId } },
-      },
-      { new: true }
-    );
+    if (mentorId && saveMentorId) {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          email,
+          number,
+          $push: {
+            mentorIds: { mentorId: mentorId },
+            saveMentorIds: { mentorId: saveMentorId },
+          },
+        },
+        { new: true }
+      );
+      res.json({
+        code: 200,
+        message: "Cập nhật thông tin thành công!",
+        user: updatedUser,
+      });
+      return;
+    }
+    if (saveMentorId) {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          email,
+          number,
+          $push: {
+            saveMentorIds: { mentorId: saveMentorId },
+          },
+        },
+        { new: true }
+      );
+    }
+    if (mentorId) {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          email,
+          number,
+          $push: {
+            mentorIds: { mentorId: mentorId },
+          },
+        },
+        { new: true }
+      );
+    }
 
     res.json({
       code: 200,
