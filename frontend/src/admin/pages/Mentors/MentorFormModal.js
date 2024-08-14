@@ -18,15 +18,12 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
       formData.append("industry", values.industry);
       formData.append("field", values.field);
       formData.append("experience", values.experience);
-
       if (avatarFile) {
         formData.append("avatar", avatarFile);
       }
-
-      if (values.companyLogo && values.companyLogo.file) {
-        formData.append("companyLogo", values.companyLogo.file.originFileObj);
+      if (companyLogoFile) {
+        formData.append("companyLogo", companyLogoFile);
       }
-
       await onSubmit(formData);
       form.resetFields();
     } catch (error) {
@@ -36,6 +33,9 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
 
   const handleFileChange = (event) => {
     setAvatarFile(event.target.files[0]);
+  };
+  const handleLogoChange = (event) => {
+    setCompanyLogoFile(event.target.files[0]);
   };
 
   return (
@@ -133,7 +133,11 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         </Form.Item>
 
         <Form.Item name="companyLogo" label="Company Logo">
-          <Input type="file" accept="image/jpeg, image/png" />
+          <Input
+            type="file"
+            accept="image/jpeg, image/png"
+            onChange={handleLogoChange}
+          />
         </Form.Item>
 
         <Form.Item name="field" label="Field">

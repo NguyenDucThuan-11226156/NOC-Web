@@ -56,6 +56,7 @@ export const uploadFields = async (
   next: NextFunction
 ) => {
   try {
+    console.log(req["files"]);
     for (const key in req["files"]) {
       req.body[key] = [];
 
@@ -69,6 +70,8 @@ export const uploadFields = async (
         }
       }
     }
+    console.log(req.body["avatar"]);
+    console.log(req.body["companyLogo"]);
   } catch (error) {
     console.log(error);
   }

@@ -33,14 +33,20 @@ const ChangeInfoUser = ({ visible, onClose, userInfo }) => {
           },
         })
         .then((res) => {
-          console.log(res.data.message);
+          if (res.data.code === 200) {
+            notification.success({
+              message: "Success",
+              description: "Thông tin cá nhân đã được cập nhật thành công!",
+            });
+            window.location.href = "/infouser";
+          } else {
+            notification.error({
+              message: "Error",
+              description:
+                "Cập nhật thông tin không thành công. Vui lòng thử lại.",
+            });
+          }
         });
-
-      notification.success({
-        message: "Success",
-        description: "Thông tin cá nhân đã được cập nhật thành công!",
-      });
-      window.location.href = "/infouser";
 
       onClose(); // Close the modal after saving
     } catch (error) {
