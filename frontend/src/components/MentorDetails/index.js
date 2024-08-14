@@ -4,35 +4,38 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import ApplyModal from "../ApplyModal";
-// import ReviewModal from './ReviewModal'; // not yet supported
 import RatingModal from "../RatingModal";
 import "./MentorDetailPage.css";
 import { API } from "../../constant";
+
 function MentorDetailPage() {
   const { id } = useParams(); // Get the mentor's ID from the URL
   const [mentor, setMentor] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cookies] = useCookies(["token"]);
+  const [cookies] = useCookies(["token", "avatar", "name"]);
   const [commentModalVisible, setCommentModalVisible] = useState(false);
   const [applyModalVisible, setApplyModalVisible] = useState(false);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [ratingModalVisible, setRatingModalVisible] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [isMentorSaved, setIsMentorSaved] = useState(false);
+  const [userAvatar, setUserAvatar] = useState("");
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
-  // console.log(id);
-  
+
   useEffect(() => {
     // Check if user is logged in
     setIsLoggedIn(!!cookies.token);
-  
+    
+    // Set user avatar and name from cookies
+    setUserAvatar(cookies.avatar || "default-avatar-url"); // fallback to default avatar if not available
+    setUserName(cookies.name || "User Name"); // fallback to "User Name" if not available
+
     // Fetch mentor details
     axios
-      .post( API +`/api/v1/mentors/detail/${id}`)
+      .post(API + `/api/v1/mentors/detail/${id}`)
       .then((response) => {
-        console.log(response);
-        
         const { mentor, code } = response.data;
         if (code === 200 && mentor.length > 0) {
           setMentor(mentor[0]); // mentor is returned as an array, take the first element
@@ -44,7 +47,7 @@ function MentorDetailPage() {
       .catch((error) => {
         console.error("Error fetching mentor details:", error);
       });
-  
+
     // Check if this mentor is already in the user's list
     if (cookies.token) {
       axios
@@ -57,7 +60,7 @@ function MentorDetailPage() {
           console.error("Error checking saved mentors:", error);
         });
     }
-  }, [id, cookies.token]);
+  }, [id, cookies.token, cookies.avatar, cookies.name]);
 
   // Toggle comment modal
   const handleToggleCommentModal = () => {
@@ -69,8 +72,7 @@ function MentorDetailPage() {
     if (!newComment) return;
 
     axios
-      .post(API +
-        `/api/v1/mentors/${id}/comment`,
+      .post(API + `/api/v1/mentors/${id}/comment`,
         { message: newComment },
         {
           headers: { Authorization: `Bearer ${cookies.token}` },
@@ -101,8 +103,6 @@ function MentorDetailPage() {
     } else {
       navigate("/my-mentor");
     }
-    // setApplyModalVisible(true); //for debug --- completed
-    // console.log("click apply now");
   };
 
   // Handle "Save" button click
@@ -117,8 +117,7 @@ function MentorDetailPage() {
 
     if (!isMentorSaved) {
       axios
-        .post(API +
-          `/api/v1/users/mentors/save`,
+        .post(API + `/api/v1/users/mentors/save`,
           { mentorId: id },
           {
             headers: { Authorization: `Bearer ${cookies.token}` },
@@ -200,9 +199,9 @@ function MentorDetailPage() {
             <Row className="mentor-detail-comment">
               <Col xxl={3} xl={4} className="user-comment">
                 <div className="user-avatar-comment">
-                  {/* <img src={user.avatar} alt="user-avatar" /> */}
+                  <img src={userAvatar} alt="user-avatar" />
                 </div>
-                <h4>User Name</h4>
+                <h4>{userName}</h4>
               </Col>
               <Col xxl={21} xl={20}>
                 <Input disabled className="user-comment-input" />
@@ -221,16 +220,6 @@ function MentorDetailPage() {
         onCancel={handleToggleCommentModal}
         className="mentor-detail-modal"
         footer={false}
-        // footer={[
-        //   <Button key="back" onClick={handleToggleCommentModal}>
-        //     Close
-        //   </Button>,
-        //   isLoggedIn && (
-        //     <Button key="submit" type="primary" onClick={handleSubmitComment}>
-
-        //     </Button>
-        //   ),
-        // ]}
       >
         <List
           dataSource={comments}
@@ -245,7 +234,7 @@ function MentorDetailPage() {
           <Row>
             <Col span={2}>
               <div className="review-user-avatar">
-                <img src="" alt="user-avatar" />
+                <img src={userAvatar} alt="user-avatar" />
               </div>
             </Col>
             <Col span={22} className="review-newComment">
@@ -271,21 +260,20 @@ function MentorDetailPage() {
             </Col>
           </Row>
         ) : (
-          <p>Please log in to leave a comment.</p>
+          <p>Please log in to leave a review.</p>
         )}
       </Modal>
 
+      {/* Apply and Rating Modals */}
       <ApplyModal
-        open={applyModalVisible}
+        visible={applyModalVisible}
         onCancel={() => setApplyModalVisible(false)}
+        mentor={mentor}
       />
-      {/* <ReviewModal
-        visible={reviewModalVisible}
-        onCancel={() => setReviewModalVisible(false)}
-      /> */}
       <RatingModal
         visible={ratingModalVisible}
         onCancel={() => setRatingModalVisible(false)}
+        mentor={mentor}
       />
     </div>
   );
