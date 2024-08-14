@@ -8,6 +8,7 @@ import {
   postMentorList,
 } from "../../../services/mentorsServices";
 import MentorFormModal from "./MentorFormModal";
+import './MentorPage.css'
 
 const { confirm } = Modal;
 
@@ -109,8 +110,8 @@ const MentorsManagement = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button>Edit</Button>
-          <Button onClick={() => handleDelete(record.key)} danger>
+          <Button className="edit-btn">Edit</Button>
+          <Button className="delete-btn" onClick={() => handleDelete(record.key)} danger>
             Delete
           </Button>
         </Space>
@@ -120,15 +121,15 @@ const MentorsManagement = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Add Mentor
-      </Button>
-      <Table columns={columns} dataSource={dataFinal} />
+      <Table columns={columns} dataSource={dataFinal} className="mentor-table"/>
       <MentorFormModal
         visible={isModalVisible}
         onCancel={handleCancel}
         onSubmit={handleAddMentor}
       />
+      <Button className="add-table-btn" onClick={showModal}>
+        Add Mentor
+      </Button>
     </>
   );
 };
