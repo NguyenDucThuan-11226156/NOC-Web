@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     studentId: String,
     saving: String,
     number: Number,
+    avatar: String,
     mentorIds: [
       {
         mentorId: String,

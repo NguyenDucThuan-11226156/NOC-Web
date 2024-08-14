@@ -102,10 +102,20 @@ export const detail = async (req: Request, res: Response) => {
 
 // [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
 export const updateUser = async (req: Request, res: Response) => {
-  const { name, school, studentId, email, number, mentorId, saveMentorId } =
-    req.body;
+  const {
+    name,
+    school,
+    studentId,
+    email,
+    number,
+    avatar,
+    mentorId,
+    saveMentorId,
+  } = req.body;
   const token = req.headers.authorization.split(" ")[1];
-  console.log(token);
+  console.log(req.body.name);
+  console.log(req.body.school);
+  console.log(req.body.avatar);
   try {
     if (mentorId && saveMentorId) {
       var updatedUser = await User.findOneAndUpdate(
@@ -115,6 +125,7 @@ export const updateUser = async (req: Request, res: Response) => {
           school,
           studentId,
           email,
+          avatar,
           number,
           $push: {
             mentorIds: { mentorId: mentorId },
@@ -129,8 +140,7 @@ export const updateUser = async (req: Request, res: Response) => {
         user: updatedUser,
       });
       return;
-    }
-    if (saveMentorId) {
+    } else if (saveMentorId) {
       var updatedUser = await User.findOneAndUpdate(
         { token: token },
         {
@@ -138,6 +148,7 @@ export const updateUser = async (req: Request, res: Response) => {
           school,
           studentId,
           email,
+          avatar,
           number,
           $push: {
             saveMentorIds: { mentorId: saveMentorId },
@@ -145,8 +156,7 @@ export const updateUser = async (req: Request, res: Response) => {
         },
         { new: true }
       );
-    }
-    if (mentorId) {
+    } else if (mentorId) {
       var updatedUser = await User.findOneAndUpdate(
         { token: token },
         {
@@ -154,10 +164,24 @@ export const updateUser = async (req: Request, res: Response) => {
           school,
           studentId,
           email,
+          avatar,
           number,
           $push: {
             mentorIds: { mentorId: mentorId },
           },
+        },
+        { new: true }
+      );
+    } else {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          avatar,
+          email,
+          number,
         },
         { new: true }
       );

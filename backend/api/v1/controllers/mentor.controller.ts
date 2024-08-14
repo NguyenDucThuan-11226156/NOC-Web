@@ -109,6 +109,7 @@ export const filterMentors = async (req: Request, res: Response) => {
 // [POST] /api/v1/mentors/create
 export const createMentor = async (req: Request, res: Response) => {
   try {
+    console.log(req.body.name);
     const mentor = new Mentors({
       name: req.body.name,
       avatar: req.body.avatar,

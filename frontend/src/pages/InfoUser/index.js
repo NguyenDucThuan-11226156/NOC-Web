@@ -5,35 +5,33 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChangeInfoUser from "../../components/ChangeInfoUser"; // Import the ChangeInfoUser component
 import "./InfoUser.css"; // Ensure you create this CSS file for custom styles
-
+import { API } from "../../constant";
+import { useCookies } from "react-cookie";
+import defaultAvatar from "../../images/Default/Avatar/capybaraNEU.jpg"
+import defaultBanner from "../../images/Default/Background/NYF_BG.jpg"
 const { TabPane } = Tabs;
 const { Title } = Typography;
-
 const InfoUser = () => {
   const [userInfo, setUserInfo] = useState({});
   const [myMentors, setMyMentors] = useState([]);
   const [savedMentors, setSavedMentors] = useState([]);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false); // State for modal visibility
   const navigate = useNavigate();
-
+  const [cookies] = useCookies(["token"]);
+  const token = cookies.token;
+  
   useEffect(() => {
-    // Fetch user details and mentors from the mock API
+    // Fetch user details and mentors from the API
     const fetchData = async () => {
       try {
-        const userResponse = await axios.post(
-          "http://localhost:8000/api/v1/users/detail"
-        );
-        const mentorResponse = await axios.get(
-          "http://localhost:8000/api/v1/mentors"
-        );
-
+        const userResponse = await axios.get(API + `/api/v1/users/detail`, { 
+          headers: {
+            Authorization: `Bearer ${token}`,
+          } 
+        });
+        
         if (userResponse.data.code === 200) {
           setUserInfo(userResponse.data.info);
-        }
-
-        if (mentorResponse.data.code === 200) {
-          setMyMentors(mentorResponse.data.myMentors);
-          setSavedMentors(mentorResponse.data.savedMentors);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,7 +39,7 @@ const InfoUser = () => {
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   const handleEditClick = () => {
     setIsEditModalVisible(true); // Show the modal when Edit is clicked
@@ -54,7 +52,7 @@ const InfoUser = () => {
   const handleDeleteSavedMentor = async (mentorId) => {
     try {
       // Implement the delete request logic here
-      await axios.delete(`http://localhost:8000/api/v1/mentors/${mentorId}`);
+      await axios.delete(API + `/api/v1/mentors/${mentorId}`);
       // Update the saved mentors list after deletion
       setSavedMentors(savedMentors.filter((mentor) => mentor._id !== mentorId));
     } catch (error) {
@@ -62,23 +60,29 @@ const InfoUser = () => {
     }
   };
 
+  // const defaultAvatar = "../";
+  // const defaultBanner = "/path/to/default-banner.png";
+
   return (
     <div className="info-user-container">
       <Card bordered={false} className="info-user-card">
         <Row gutter={[0, 20]} className="info-user-main-header">
           <Col span={24}>
             <div className="user-banner">
-              <img src="/path/to/banner-image.png" alt="Banner" />
+              <img 
+                src={userInfo.banner || defaultBanner} 
+                alt="Banner" 
+              />
             </div>
           </Col>
           <Col span={24}>
             <div className="user-info-header">
               <Avatar
-                src={userInfo.avatar}
+                src={userInfo.avatar || defaultAvatar}
                 size={190}
                 className="user-avatar"
               />
-              <Title level={3}>{userInfo.name}</Title>{" "}
+              <Title level={3}>{userInfo.name}</Title>
             </div>
           </Col>
         </Row>
@@ -106,7 +110,6 @@ const InfoUser = () => {
                   <br />
                 </Col>
               </Row>
-              {/* <p>Description: {userInfo.description}</p> */}
               <div className="user-info-change" onClick={handleEditClick}>
                 Chỉnh sửa
               </div>
@@ -125,7 +128,7 @@ const InfoUser = () => {
                       extra={
                         <img src={mentor.companyLogo} alt="Company Logo" />
                       }
-                      cover={<img alt="avatar" src={mentor.avatar} />}
+                      cover={<img alt="avatar" src={mentor.avatar || defaultAvatar} />}
                       actions={[
                         <Button
                           onClick={() => navigate(`/mentors/${mentor.slug}`)}
@@ -162,7 +165,7 @@ const InfoUser = () => {
                       extra={
                         <img src={mentor.companyLogo} alt="Company Logo" />
                       }
-                      cover={<img alt="avatar" src={mentor.avatar} />}
+                      cover={<img alt="avatar" src={mentor.avatar || defaultAvatar} />}
                       actions={[
                         <Button
                           onClick={() => navigate(`/mentors/${mentor.slug}`)}
