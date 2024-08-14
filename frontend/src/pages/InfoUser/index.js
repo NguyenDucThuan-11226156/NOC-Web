@@ -1,11 +1,12 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Row, Tabs, Typography } from "antd";
+import { App, Avatar, Button, Card, Col, Row, Tabs, Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChangeInfoUser from "../../components/ChangeInfoUser"; // Import the ChangeInfoUser component
 import "./InfoUser.css"; // Ensure you create this CSS file for custom styles
-
+import { API } from "../../constant";
+import { useCookies } from "react-cookie";
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -15,26 +16,32 @@ const InfoUser = () => {
   const [savedMentors, setSavedMentors] = useState([]);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false); // State for modal visibility
   const navigate = useNavigate();
-
+  const [cookies] = useCookies(["token"]);
+  const token = cookies.token;
+  console.log(token);
+  
   useEffect(() => {
     // Fetch user details and mentors from the mock API
     const fetchData = async () => {
       try {
-        const userResponse = await axios.post(
-          "http://localhost:8000/api/v1/users/detail"
-        );
-        const mentorResponse = await axios.get(
-          "http://localhost:8000/api/v1/mentors"
-        );
-
+        const userResponse = await axios.get(API + `/api/v1/users/detail`, { 
+          headers: {
+            Authorization: `Bearer ${token}`,
+          } 
+        })
+        // const mentorResponse = await axios.get(
+        //   API + `/api/v1/mentors`
+        // );
+        console.log(userResponse );
+        
         if (userResponse.data.code === 200) {
           setUserInfo(userResponse.data.info);
         }
 
-        if (mentorResponse.data.code === 200) {
-          setMyMentors(mentorResponse.data.myMentors);
-          setSavedMentors(mentorResponse.data.savedMentors);
-        }
+        // if (mentorResponse.data.code === 200) {
+        //   setMyMentors(mentorResponse.data.myMentors);
+        //   setSavedMentors(mentorResponse.data.savedMentors);
+        // }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -54,7 +61,7 @@ const InfoUser = () => {
   const handleDeleteSavedMentor = async (mentorId) => {
     try {
       // Implement the delete request logic here
-      await axios.delete(`http://localhost:8000/api/v1/mentors/${mentorId}`);
+      await axios.delete(API + `/api/v1/mentors/${mentorId}`);
       // Update the saved mentors list after deletion
       setSavedMentors(savedMentors.filter((mentor) => mentor._id !== mentorId));
     } catch (error) {
