@@ -34,14 +34,14 @@ function MentorItem({ mentor }) {
       });
       return;
     }
-
+  
     try {
       const response = await axios.post(
-        'http://localhost:8000/api/v1/mentors/save', 
-        { mentorId: mentor._id }, 
+        'http://localhost:8000/api/v1/users/update', 
+        { saveMentorId: mentor._id }, 
         { headers: { Authorization: `Bearer ${cookies.token}` } }
       );
-
+  
       if (response.data.code === 200) {
         notification.success({
           message: 'Lưu mentor thành công',
@@ -61,6 +61,7 @@ function MentorItem({ mentor }) {
       console.error('Error saving mentor:', error);
     }
   };
+  
 
   const handleViewMore = () => {
     if (!cookies.token) {
