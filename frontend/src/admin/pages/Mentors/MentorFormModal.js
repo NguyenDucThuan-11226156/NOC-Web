@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Modal,
@@ -11,8 +10,7 @@ import {
   Col,
 } from "antd";
 import "./MentorPage.css";
-
-
+import { useState } from "react";
 const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
   const [form] = Form.useForm();
   const [avatarFile, setAvatarFile] = useState(null);
@@ -58,7 +56,6 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
       footer={null}
       className="mentor-add-modal"
     >
-
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Row gutter={[25, 25]}>
           <Col span={12}>
@@ -80,7 +77,11 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
                 { required: true, message: "Please enter the avatar URL!" },
               ]}
             >
-              <Input type="file" accept="image/jpeg, image/png" />
+              <Input
+                type="file"
+                accept="image/jpeg, image/png"
+                onChange={handleFileChange}
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -196,7 +197,11 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         <Row gutter={[25, 25]}>
           <Col span={12}>
             <Form.Item name="companyLogo" label="Company Logo">
-              <Input type="file" accept="image/jpeg, image/png" />
+              <Input
+                type="file"
+                accept="image/jpeg, image/png"
+                onChange={handleLogoChange}
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
