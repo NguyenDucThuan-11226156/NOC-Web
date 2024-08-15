@@ -97,7 +97,7 @@ const InfoUser = () => {
               <Title level={4}>Thông tin</Title>
               <div className="user-info-border"></div>
               <Row>
-                <Col span={24} offset={10} className="user-info-list">
+                <Col span={24} offset={2} className="user-info-list">
                   <li>Họ và tên: {userInfo.name}</li>
                   <br />
                   <li>Lớp học phần: {userInfo.school}</li>
