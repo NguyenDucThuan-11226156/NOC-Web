@@ -286,3 +286,28 @@ export const resetPasswordPost = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+// [POST] ap1/v1/users/deleteSaveMentor/:id
+export const deleteSaveMentor = async (req: Request, res: Response) => {
+  const idMentor = req.params.id;
+  const tokenUser: string = req.headers.authorization.split(" ")[1];
+  try {
+    await User.updateOne(
+      {
+        tokenUser: tokenUser,
+      },
+      {
+        $pull: { saveMentorIds: { mentorId: idMentor } },
+      }
+    );
+    res.json({
+      code: 200,
+      message: "Đã xóa lưu mentor",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Lấy lại mật khẩu không thành công !",
+    });
+    console.log(error);
+  }
+};
