@@ -106,7 +106,7 @@ const InfoUser = () => {
                   <br />
                   <li>Email: {userInfo.email}</li>
                   <br />
-                  <li>Số điện thoại: {userInfo.number}</li>
+                  <li>Số điện thoại: +84 {userInfo.number}</li>
                   <br />
                 </Col>
               </Row>
