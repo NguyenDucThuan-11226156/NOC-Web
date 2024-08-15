@@ -27,6 +27,7 @@ function ApplyModal({ open, onCancel }) {
         footer={null}
         className="apply-form"
         centered
+        mask={false}
       >
         <h2 className="apply-form-title">Đơn đăng ký trở thành Mentee</h2>
         <Form form={form} layout="vertical" onFinish={onFinish}>
