@@ -158,6 +158,11 @@
   margin-left: 10px;
 }
 
+.dropdownItem-icon {
+  font-size: 19px !important;
+  margin-right: 19px;
+}
+
 .dropdownItem-list span {
   margin-left: 20px;
   font-family: var(--font);
