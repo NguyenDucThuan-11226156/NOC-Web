@@ -83,7 +83,6 @@ function MentorItem({ mentor }) {
           <img
             src={mentor.avatar}
             alt="Avatar"
-            style={{ width: '100%', height: '100%', objectFit: 'cover'}}
           />
         </Col>
         <Col span={13} className='mentorCard-content'>
