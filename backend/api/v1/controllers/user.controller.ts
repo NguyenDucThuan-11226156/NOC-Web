@@ -7,6 +7,7 @@ import {
 } from "../../../helpers/generate.helper";
 import ForgotPassword from "../models/forgot-password.model";
 import { sendMail } from "../../../helpers/send-mail.helper";
+import Mentors from "../models/mentor.model";
 // [POST] /api/v1/users/register
 export const register = async (req: Request, res: Response) => {
   const emailExist = await User.findOne({
@@ -65,14 +66,141 @@ export const login = async (req: Request, res: Response) => {
   });
 };
 
-// // [POST] /api/v1/users/detail
-// export const detail = async (req: Request, res: Response) => {
-//   res.json({
-//     code: 200,
-//     message: "Thành công!",
-//     info: res.locals.user,
-//   });
-// };
+// [GET] /api/v1/users/detail
+export const detail = async (req: Request, res: Response) => {
+  try {
+    const infoUser = res.locals.user;
+    const mentorIds = infoUser.mentorIds.map((mentor) => mentor.mentorId);
+    const mentorDetails = await Promise.all(
+      mentorIds.map((mentorId) =>
+        Mentors.findOne({ _id: mentorId }).select("-id")
+      )
+    );
+    const saveMentorIds = infoUser.saveMentorIds.map(
+      (mentor) => mentor.mentorId
+    );
+    const saveMentorDetails = await Promise.all(
+      saveMentorIds.map((mentorId) =>
+        Mentors.findOne({ _id: mentorId }).select("-id")
+      )
+    );
+    res.json({
+      code: 200,
+      message: "Thành công!",
+      info: res.locals.user,
+      infoMentors: mentorDetails,
+      saveInfoMentors: saveMentorDetails,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      code: 400,
+      message: "Không thành công",
+    });
+  }
+};
+
+// [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
+export const updateUser = async (req: Request, res: Response) => {
+  const {
+    name,
+    school,
+    studentId,
+    email,
+    number,
+    avatar,
+    mentorId,
+    saveMentorId,
+  } = req.body;
+  const token = req.headers.authorization.split(" ")[1];
+  console.log(req.body.name);
+  console.log(req.body.school);
+  console.log(req.body.avatar);
+  try {
+    if (mentorId && saveMentorId) {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          email,
+          avatar,
+          number,
+          $push: {
+            mentorIds: { mentorId: mentorId },
+            saveMentorIds: { mentorId: saveMentorId },
+          },
+        },
+        { new: true }
+      );
+      res.json({
+        code: 200,
+        message: "Cập nhật thông tin thành công!",
+        user: updatedUser,
+      });
+      return;
+    } else if (saveMentorId) {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          email,
+          avatar,
+          number,
+          $push: {
+            saveMentorIds: { mentorId: saveMentorId },
+          },
+        },
+        { new: true }
+      );
+    } else if (mentorId) {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          email,
+          avatar,
+          number,
+          $push: {
+            mentorIds: { mentorId: mentorId },
+          },
+        },
+        { new: true }
+      );
+    } else {
+      var updatedUser = await User.findOneAndUpdate(
+        { token: token },
+        {
+          name,
+          school,
+          studentId,
+          avatar,
+          email,
+          number,
+        },
+        { new: true }
+      );
+    }
+
+    res.json({
+      code: 200,
+      message: "Cập nhật thông tin thành công!",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      code: 400,
+      message: "Cập nhật thông tin không thành công!",
+    });
+  }
+};
+
 // [POST] api/v1/users/password/forgot
 export const forgotPasswordPost = async (req: Request, res: Response) => {
   const email = req.body.email;

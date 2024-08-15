@@ -19,7 +19,7 @@ function Banner() {
     const bannerStyle = {
         // backgroundImage: `url(${bgImage});`,
         
-        backgroundImage: 'url(https://scontent-gru1-2.xx.fbcdn.net/v/t39.30808-6/365479304_1085978075706519_4811970991520067017_n.jpg?stp=dst-jpg_s600x600&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGnBnEAPFOdwiLuDuaaPHGDsC0aF82kWE2wLRoXzaRYTRdT39CW0HbTm0ojAR13JpjG0XLqHBlFn85RS6UuHQgp&_nc_ohc=vEoknpj2TLMQ7kNvgHNYEyY&_nc_ht=scontent-gru1-2.xx&oh=00_AYAosmdBZGLpz-rFg6nHdsJOamHt9QSvEA3fnPC13jdsow&oe=66B4F428)',
+        backgroundImage: 'url(https://scontent-gru1-1.xx.fbcdn.net/v/t39.30808-6/454470876_462550420093624_2661456546069939952_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=cQxN1WBM1ioQ7kNvgHFLA--&_nc_ht=scontent-gru1-1.xx&oh=00_AYDkqEa0v-E9vBszP6yma9Tl0tPkSa9ZXhHiBlYmVJEuWA&oe=66BCE91E)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '183px',

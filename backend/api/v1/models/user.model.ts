@@ -9,8 +9,19 @@ const userSchema = new mongoose.Schema(
     domain: String,
     token: String,
     studentId: String,
+    saving: String,
     number: Number,
-    mentorId: String,
+    avatar: String,
+    mentorIds: [
+      {
+        mentorId: String,
+      },
+    ],
+    saveMentorIds: [
+      {
+        mentorId: String,
+      },
+    ],
     description: String,
     categoriesConsultId: String,
     description_proplem: String,

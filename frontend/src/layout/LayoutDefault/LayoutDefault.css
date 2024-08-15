@@ -30,16 +30,20 @@
   min-width: 300px;
 }
 
-.layout-default__logo--tt,.layout-default__logo--neu, .layout-default__logo--noc, .layout-default__logo--ndm {
-  background-color: #fff;
+.layout-default__logo--tt,.layout-default__logo--neu, .layout-default__logo--ncc, .layout-default__logo--noc, .layout-default__logo--ndm {
   width: 66px;
   height: 66px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
+  margin-right: 20px;
   font-size: 10px;
   font-weight: 400;
+}
+
+.layout-default__logo--tt img, .layout-default__logo--noc img, .layout-default__logo--ncc img, .layout-default__logo--ndm img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .layout-default__menu--active {
@@ -181,14 +185,13 @@
   margin: 25px 40px;
 }
 
-.layout-default__logoFooter--tt, .layout-default__logoFooter--noc, .layout-default__logoFooter--ndm {
-  background-color: #fff;
+.layout-default__logoFooter--tt, .layout-default__logoFooter--ncc, .layout-default__logoFooter--noc, .layout-default__logoFooter--ndm {
   width: 80px;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
+  margin-right: 25px;
   font-size: 10px;
   font-weight: 400;
 }
@@ -258,15 +261,7 @@
 }
 
 .layout-default__map {
-  background-color: #fff;
-  width: 578px;
-  height: 299px;
   margin: 25px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0.5px solid #000;
-  border-radius: 17px;
 }
 
 .layout-default__copyright {

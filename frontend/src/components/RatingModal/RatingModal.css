@@ -28,11 +28,10 @@
 
 .rating-star {
   background-color: var(--background-color);
-  width: 613px;
+  width: 429px;
   height: 74px;
-  margin: 10px 0 20px 15px;
+  margin: auto auto;
 }
-
 .rating-star li {
   padding-top: 20px;
   margin: 0 15px;

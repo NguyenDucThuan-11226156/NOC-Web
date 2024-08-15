@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Card, Rate, Button, Row, Col, notification } from 'antd';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Mentor.css';
 import ApplyModal from '../ApplyModal'; // Adjust the import path if necessary
 
 function MentorItem({ mentor }) {
   const [applyStatus, setApplyStatus] = useState(false);
   const [cookies] = useCookies(['token']);
+  const navigate = useNavigate();
 
   const handleApply = () => {
     if (!cookies.token) {
@@ -22,6 +25,55 @@ function MentorItem({ mentor }) {
   const handleCancel = () => {
     setApplyStatus(false);
   };
+
+  const handleSave = async () => {
+    if (!cookies.token) {
+      notification.error({
+        message: 'Yêu cầu đăng nhập',
+        description: 'Bạn cần đăng nhập để lưu mentor.',
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/v1/mentors/save', 
+        { mentorId: mentor._id }, 
+        { headers: { Authorization: `Bearer ${cookies.token}` } }
+      );
+
+      if (response.data.code === 200) {
+        notification.success({
+          message: 'Lưu mentor thành công',
+          description: `Mentor ${mentor.name} đã được lưu.`,
+        });
+      } else {
+        notification.error({
+          message: 'Lưu mentor thất bại',
+          description: 'Đã xảy ra lỗi khi lưu mentor. Vui lòng thử lại sau.',
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: 'Lưu mentor thất bại',
+        description: 'Đã xảy ra lỗi khi lưu mentor. Vui lòng thử lại sau.',
+      });
+      console.error('Error saving mentor:', error);
+    }
+  };
+
+  const handleViewMore = () => {
+    if (!cookies.token) {
+      notification.error({
+        message: 'Yêu cầu đăng nhập',
+        description: 'Bạn cần đăng nhập để xem chi tiết mentor.',
+      });
+      return;
+    }
+    
+    navigate(`/mentors/detail/${mentor._id}`);
+  };
+  
 
   return (
     <Card bordered className='mentorCard'>
@@ -45,8 +97,8 @@ function MentorItem({ mentor }) {
           <p className='mentorCard-content-rateCount'>({mentor.numberRate} đánh giá) ({mentor.rate}/5)</p>
           <Button className='mentorCard-content-Btn' onClick={handleApply}>Apply now</Button>
           <ApplyModal open={applyStatus} onCancel={handleCancel} />
-          <Button className='mentorCard-content-Btn'>View more</Button>
-          <Button className='mentorCard-content-Btn'>Save</Button>
+          <Button className='mentorCard-content-Btn' onClick={handleViewMore}>View more</Button>
+          <Button className='mentorCard-content-Btn' onClick={handleSave}>Save</Button>
         </Col>
       </Row>
     </Card>
