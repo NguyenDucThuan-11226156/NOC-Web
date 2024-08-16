@@ -129,7 +129,7 @@ const MentorsManagement = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button onClick={() => showEditModal(record.key)}>Edit</Button>
+          <Button className="edit-btn" onClick={() => showEditModal(record.key)}>Edit</Button>
           <Button
             className="delete-btn"
             onClick={() => handleDelete(record.key)}

@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, notification, Rate, Row, Tabs, Typography } from "antd";
+import {
+  Avatar,
+  Button,
+  Card,
+  Col,
+  notification,
+  Rate,
+  Row,
+  Tabs,
+  Typography,
+} from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -61,7 +71,7 @@ const InfoUser = () => {
   const handleViewMore = (mentor) => {
     navigate(`/mentors/detail/${mentor._id}`);
   };
-  
+
   const handleDeleteSavedMentor = async (mentorId) => {
     try {
       await axios.delete(`${API}/api/v1/users/deleteSaveMentor/${mentorId}`, {
@@ -69,7 +79,7 @@ const InfoUser = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       setSavedMentors(savedMentors.filter((mentor) => mentor._id !== mentorId));
       console.log(savedMentors);
       notification.success({
@@ -155,7 +165,6 @@ const InfoUser = () => {
                 <Col span={19}>
                   <Row gutter={[0, 20]} justify="space-between">
                     {myMentors.map((mentor) => (
-
                       <Col span={12}>
                         <Row key={mentor._id} className="mentorCard">
                           <Col span={10} className="mentorCard-image">
@@ -191,22 +200,24 @@ const InfoUser = () => {
                             <p className="mentorCard-content-rateCount">
                               ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
                             </p>
-                            <Button
-                              className="mentorCard-content-Btn-myMentor"
-                              onClick={handleApplyModal}
-                            >
-                              Apply now
-                            </Button>
-                            <ApplyModal
-                              open={isApplyModalVisible}
-                              onCancel={handleCancel}
-                            />
-                            <Button
-                              className="mentorCard-content-Btn-myMentor"
-                              onClick={() => handleViewMore(mentor)}
-                            >
-                              View more
-                            </Button>
+                            <div className="mentorCard-btnContainer">
+                              <Button
+                                className="mentorCard-content-Btn-myMentor"
+                                onClick={handleApplyModal}
+                              >
+                                Apply now
+                              </Button>
+                              <ApplyModal
+                                open={isApplyModalVisible}
+                                onCancel={handleCancel}
+                              />
+                              <Button
+                                className="mentorCard-content-Btn-myMentor"
+                                onClick={() => handleViewMore(mentor)}
+                              >
+                                View more
+                              </Button>
+                            </div>
                           </Col>
                         </Row>
                       </Col>

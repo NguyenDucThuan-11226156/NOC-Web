@@ -53,6 +53,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
       visible={visible}
       onCancel={onCancel}
       footer={null}
+      centered
       className="mentor-add-modal"
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
@@ -84,7 +85,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[25, 25]}>
+        <Row gutter={[25, 60]}>
           <Col span={12}>
             <Form.Item
               name="introduction1"
