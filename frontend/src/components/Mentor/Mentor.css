@@ -112,7 +112,7 @@
 .mentorCard-content-Btn {
   border: 2px solid var(--color-mentor-border);
   background: #fff;
-   color:var(--color-mentor-title);
+  color:var(--color-mentor-title);
   border-radius: 0;
   margin-right: 5px;
   font-family: var(--font);
