@@ -142,6 +142,13 @@ export const deleteMentor = async (req: Request, res: Response) => {
     await Mentors.deleteOne({
       _id: idMentor,
     });
+    // Remove the mentor reference from all users
+    await User.updateMany(
+      {},
+      {
+        $pull: { saveMentorIds: idMentor },
+      }
+    );
     res.json({
       code: 200,
       message: "Xóa mentor thành công !",
