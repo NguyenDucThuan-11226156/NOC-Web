@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Rate, Row, Tabs, Typography } from "antd";
+import { Avatar, Button, Card, Col, notification, Rate, Row, Tabs, Typography } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -63,15 +63,24 @@ const InfoUser = () => {
   };
   
   const handleDeleteSavedMentor = async (mentorId) => {
-    
     try {
-      await axios.post(`${API}/api/v1/users/deleteSaveMentor/${mentorId}`, {
+      await axios.delete(`${API}/api/v1/users/deleteSaveMentor/${mentorId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      
       setSavedMentors(savedMentors.filter((mentor) => mentor._id !== mentorId));
+      console.log(savedMentors);
+      notification.success({
+        message: "Thành công",
+        description: "Mentor đã được xóa khỏi danh sách đã lưu.",
+      });
     } catch (error) {
+      notification.error({
+        message: "Lỗi",
+        description: "Có lỗi xảy ra khi xóa mentor. Vui lòng thử lại.",
+      });
       console.error("Error deleting mentor:", error);
     }
   };
