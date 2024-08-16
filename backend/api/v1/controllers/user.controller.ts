@@ -261,7 +261,7 @@ export const otpPasswordPost = async (req: Request, res: Response) => {
   });
 };
 
-// [POST] ap1/v1/users/password/reset
+// [POST] api/v1/users/password/reset
 export const resetPasswordPost = async (req: Request, res: Response) => {
   const password = req.body.password;
   const tokenUser: string = req.headers.authorization.split(" ")[1];
@@ -286,7 +286,7 @@ export const resetPasswordPost = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-// [POST] ap1/v1/users/deleteSaveMentor/:id
+// [POST] api/v1/users/deleteSaveMentor/:id
 export const deleteSaveMentor = async (req: Request, res: Response) => {
   const idMentor = req.params.id;
   const tokenUser: string = req.headers.authorization.split(" ")[1];
