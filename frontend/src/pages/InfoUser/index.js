@@ -121,29 +121,6 @@ const InfoUser = () => {
                 <Title level={4}>My Mentor</Title>
                 <div className="mentor-info-border"></div>
                 {myMentors.map((mentor) => (
-                  // <Col key={mentor.id} span={12}>
-                  //   <Card
-                  //     className="mentor-info-subCard"
-                  //     title={mentor.name}
-                  //     extra={<img src={mentor.companyLogo} alt="Company Logo" />}
-                  //     cover={<img alt="avatar" src={mentor.avatar || defaultAvatar} />}
-                  //     actions={[
-                  //       <Button onClick={() => navigate(`/mentors/${mentor.slug}`)}>
-                  //         View more
-                  //       </Button>,
-                  //       <Button onClick={() => navigate(`/mentors/${mentor.slug}/review`)}>
-                  //         My Review
-                  //       </Button>,
-                  //     ]}
-                  //   >
-                  //     <p>Mentee Count: {mentor.menteeCount}</p>
-                  //     <p>Introduction 1: {mentor.introduction1}</p>
-                  //     <p>Introduction 2: {mentor.introduction2}</p>
-                  //     <p>
-                  //       Rate: {mentor.rate}/5 ({mentor.numberRate} ratings)
-                  //     </p>
-                  //   </Card>
-                  // </Col>
                   <Row>
                     <Row key={mentor._id} className="mentorCard">
                     <Col span={10} className='mentorCard-image'>
