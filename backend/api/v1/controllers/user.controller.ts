@@ -291,23 +291,30 @@ export const deleteSaveMentor = async (req: Request, res: Response) => {
   const idMentor = req.params.id;
   const tokenUser: string = req.headers.authorization.split(" ")[1];
   try {
-    await User.updateOne(
+    const result = await User.updateOne(
       {
-        tokenUser: tokenUser,
+        token: tokenUser,
       },
       {
         $pull: { saveMentorIds: { mentorId: idMentor } },
       }
     );
-    res.json({
-      code: 200,
-      message: "Đã xóa lưu mentor",
-    });
+    if (result.modifiedCount > 0) {
+      res.json({
+        code: 200,
+        message: "Đã xóa lưu mentor",
+      });
+    } else {
+      res.json({
+        code: 404,
+        message: "Mentor không tồn tại hoặc đã được xóa",
+      });
+    }
   } catch (error) {
-    res.json({
-      code: 400,
-      message: "Xóa lưu mentor không thành công !",
+    res.status(500).json({
+      code: 500,
+      message: "Xóa lưu mentor không thành công!",
     });
-    console.log(error);
+    console.error(error);
   }
 };
