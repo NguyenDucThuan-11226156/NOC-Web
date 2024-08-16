@@ -306,7 +306,7 @@ export const deleteSaveMentor = async (req: Request, res: Response) => {
   } catch (error) {
     res.json({
       code: 400,
-      message: "Lấy lại mật khẩu không thành công !",
+      message: "Xóa lưu mentor không thành công !",
     });
     console.log(error);
   }

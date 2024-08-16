@@ -14,12 +14,18 @@ import logoNOC from "../../images/logo/NOC-black.svg";
 import logoNDM from "../../images/logo/NOC-white.svg";
 import "./LayoutDefault.css";
 import { API } from "../../constant";
+import {
+  LogoutOutlined,
+  SecurityScanOutlined,
+  UserOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 function HeaderDefault() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [cookies, removeCookie] = useCookies(["cookie-name"], {
+  const [cookies] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
   const [user, setUser] = useState(null);
@@ -103,7 +109,9 @@ function HeaderDefault() {
       <Menu.Item key="0" className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">svg</div>
+            <div className="dropdownItem-logo">
+            <UserOutlined className="dropdownItem-icon"/>
+            </div>
             <span>Trang cá nhân</span>
           </div>
         </Link>
@@ -115,7 +123,7 @@ function HeaderDefault() {
       >
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">svg</div>
+            <div className="dropdownItem-logo"><EditOutlined className="dropdownItem-icon"/></div>
             <span>Mentor của tôi</span>
           </div>
         </Link>
@@ -123,14 +131,14 @@ function HeaderDefault() {
       <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">svg</div>
+            <div className="dropdownItem-logo"><SecurityScanOutlined className="dropdownItem-icon"/></div>
             <span>Trợ giúp</span>
           </div>
         </Link>
       </Menu.Item>
       <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
         <div className="dropdownItem-list">
-          <div className="dropdownItem-logo">svg</div>
+          <div className="dropdownItem-logo"><LogoutOutlined className="dropdownItem-icon"/></div>
           <span>Đăng xuất</span>
         </div>
       </Menu.Item>

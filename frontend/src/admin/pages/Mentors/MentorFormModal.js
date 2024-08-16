@@ -3,7 +3,6 @@ import {
   Modal,
   Form,
   Input,
-  InputNumber,
   Button,
   message,
   Row,
@@ -85,15 +84,6 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
             </Form.Item>
           </Col>
         </Row>
-        {/* <Form.Item
-          name="menteeCount"
-          label="Mentee Count"
-          rules={[
-            { required: true, message: "Please enter the mentee count!" },
-          ]}
-        >
-          <InputNumber min={0} style={{ width: "100%" }} />
-        </Form.Item> */}
         <Row gutter={[25, 25]}>
           <Col span={12}>
             <Form.Item
@@ -172,28 +162,6 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
             </Form.Item>
           </Col>
         </Row>
-        {/* <Form.Item
-          name="rate"
-          label="Rate"
-          rules={[{ required: true, message: "Please enter the rate!" }]}
-        >
-          <InputNumber min={0} max={5} step={0.1} style={{ width: "100%" }} />
-        </Form.Item> */}
-        {/* <Form.Item
-          name="numberRate"
-          label="Number of Rates"
-          rules={[
-            { required: true, message: "Please enter the number of rates!" },
-          ]}
-        >
-          <InputNumber min={0} style={{ width: "100%" }} />
-        </Form.Item> */}
-        {/* <Form.Item name="keyword" label="Keyword">
-          <Input />
-        </Form.Item>
-        <Form.Item name="other" label="Other">
-          <Input />
-        </Form.Item> */}
         <Row gutter={[25, 25]}>
           <Col span={12}>
             <Form.Item name="companyLogo" label="Company Logo">
