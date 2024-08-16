@@ -31,3 +31,32 @@ export const createMentor = async (mentorData) => {
     throw error; // Optionally re-throw the error to handle it in a higher-level function
   }
 };
+
+
+const BASE_URL = "http://localhost:8000/api/v1/mentors";
+
+// Fetch mentor details by ID
+export const detailMentor = async (mentorId) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/detail/${mentorId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching mentor details:", error);
+    throw error;
+  }
+};
+
+// Update mentor information by ID
+export const updateMentor = async (mentorId, updatedData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/update/${mentorId}`, updatedData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating mentor information:", error);
+    throw error;
+  }
+};

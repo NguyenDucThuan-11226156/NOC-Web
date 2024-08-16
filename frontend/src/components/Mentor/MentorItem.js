@@ -1,15 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Rate, Button, Row, Col, notification } from 'antd';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Mentor.css';
-import ApplyModal from '../ApplyModal'; // Adjust the import path if necessary
+import ApplyModal from '../ApplyModal';
+import { API } from '../../constant';
 
 function MentorItem({ mentor }) {
   const [applyStatus, setApplyStatus] = useState(false);
+  const [isMentorSaved, setIsMentorSaved] = useState(false);
+  const [isMentorApplied, setIsMentorApplied] = useState(false);
   const [cookies] = useCookies(['token']);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkMentorStatus = async () => {
+      if (cookies.token) {
+        try {
+          const response = await axios.get(API + `/api/v1/users/detail`, {
+            headers: { Authorization: `Bearer ${cookies.token}` },
+          });
+          const { infoMentors, saveInfoMentors } = response.data;
+
+          const isSaved = saveInfoMentors.some(
+            (savedMentor) => savedMentor._id === mentor._id
+          );
+          const isApplied = infoMentors.some(
+            (appliedMentor) => appliedMentor._id === mentor._id
+          );
+
+          setIsMentorSaved(isSaved);
+          setIsMentorApplied(isApplied);
+        } catch (error) {
+          console.error('Error fetching user details:', error);
+        }
+      }
+    };
+
+    checkMentorStatus();
+  }, [cookies.token, mentor._id]);
 
   const handleApply = () => {
     if (!cookies.token) {
@@ -34,19 +64,20 @@ function MentorItem({ mentor }) {
       });
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        'http://localhost:8000/api/v1/users/update', 
-        { saveMentorId: mentor._id }, 
+        API + `/api/v1/users/update`,
+        { saveMentorId: mentor._id },
         { headers: { Authorization: `Bearer ${cookies.token}` } }
       );
-  
+
       if (response.data.code === 200) {
         notification.success({
           message: 'Lưu mentor thành công',
           description: `Mentor ${mentor.name} đã được lưu.`,
         });
+        setIsMentorSaved(true);
       } else {
         notification.error({
           message: 'Lưu mentor thất bại',
@@ -61,7 +92,6 @@ function MentorItem({ mentor }) {
       console.error('Error saving mentor:', error);
     }
   };
-  
 
   const handleViewMore = () => {
     if (!cookies.token) {
@@ -71,10 +101,9 @@ function MentorItem({ mentor }) {
       });
       return;
     }
-    
+
     navigate(`/mentors/detail/${mentor._id}`);
   };
-  
 
   return (
     <Card bordered className='mentorCard'>
@@ -95,10 +124,14 @@ function MentorItem({ mentor }) {
           <p className='mentorCard-content-introduction'>Mục giới thiệu 2: {mentor.introduction2}</p>
           <Rate className='mentorCard-content-rate' disabled defaultValue={mentor.rate} />
           <p className='mentorCard-content-rateCount'>({mentor.numberRate} đánh giá) ({mentor.rate}/5)</p>
-          <Button className='mentorCard-content-Btn' onClick={handleApply}>Apply now</Button>
+          {!isMentorApplied && (
+            <Button className='mentorCard-content-Btn' onClick={handleApply}>Apply now</Button>
+          )}
           <ApplyModal open={applyStatus} onCancel={handleCancel} />
           <Button className='mentorCard-content-Btn' onClick={handleViewMore}>View more</Button>
-          <Button className='mentorCard-content-Btn' onClick={handleSave}>Save</Button>
+          {!isMentorSaved && !isMentorApplied && (
+            <Button className='mentorCard-content-Btn' onClick={handleSave}>Save</Button>
+          )}
         </Col>
       </Row>
     </Card>

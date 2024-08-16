@@ -25,7 +25,7 @@ function HeaderDefault() {
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [cookies, removeCookie] = useCookies(["cookie-name"], {
+  const [cookies] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
   const [user, setUser] = useState(null);
