@@ -286,7 +286,7 @@ export const resetPasswordPost = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-// [POST] api/v1/users/deleteSaveMentor/:id
+// [DELETE] api/v1/users/deleteSaveMentor/:id
 export const deleteSaveMentor = async (req: Request, res: Response) => {
   const idMentor = req.params.id;
   const tokenUser: string = req.headers.authorization.split(" ")[1];

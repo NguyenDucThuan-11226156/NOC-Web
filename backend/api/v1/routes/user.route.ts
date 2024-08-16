@@ -13,7 +13,7 @@ router.post("/password/forgot", controller.forgotPasswordPost);
 router.post("/password/otp", controller.otpPasswordPost);
 router.post("/password/reset", controller.resetPasswordPost);
 router.get("/detail", authMiddleware.requireAuth, controller.detail);
-router.get(
+router.delete(
   "/deleteSaveMentor/:id",
   authMiddleware.requireAuth,
   controller.deleteSaveMentor
