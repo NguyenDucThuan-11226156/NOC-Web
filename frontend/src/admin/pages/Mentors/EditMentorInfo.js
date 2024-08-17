@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Form, Input, Button } from 'antd';
-import { detailMentor, updateMentor } from '../../../services/mentorsServices';
+import React, { useEffect, useState } from "react";
+import { Modal, Form, Input, Button, Row, Col } from "antd";
+import { detailMentor, updateMentor } from "../../../services/mentorsServices";
 
 const EditMentorInfo = ({ visible, onClose, mentorId, onUpdateSuccess }) => {
   const [form] = Form.useForm();
@@ -47,42 +47,74 @@ const EditMentorInfo = ({ visible, onClose, mentorId, onUpdateSuccess }) => {
   return (
     <Modal
       visible={visible}
-      title="Edit Mentor Information"
+      title="Edit Mentor"
       onCancel={onClose}
+      className="edit-mentor-modal"
+      centered
       footer={[
-        <Button key="cancel" onClick={onClose}>
+        <Button className="cancel-btn" key="cancel" onClick={onClose}>
           Cancel
         </Button>,
-        <Button key="submit" type="primary" loading={loading} onClick={() => form.submit()}>
+        <Button
+          key="submit"
+          type="primary"
+          loading={loading}
+          onClick={() => form.submit()}
+          className="save-btn"
+        >
           Save
         </Button>,
       ]}
     >
       <Form form={form} layout="vertical" onFinish={handleUpdate}>
-        <Form.Item name="name" label="Name">
-          <Input />
-        </Form.Item>
-        <Form.Item name="avatar" label="Avatar URL">
-          <Input />
-        </Form.Item>
-        <Form.Item name="introduction1" label="Introduction 1">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item name="introduction2" label="Introduction 2">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item name="organization" label="Organization">
-          <Input />
-        </Form.Item>
-        <Form.Item name="specialization" label="Specialization">
-          <Input />
-        </Form.Item>
-        <Form.Item name="education" label="Education">
-          <Input />
-        </Form.Item>
-        <Form.Item name="industry" label="Industry">
-          <Input />
-        </Form.Item>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item name="name" label="Name" className="edit-mentor-item">
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="avatar" label="Avatar URL" className="edit-mentor-item">
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item name="introduction1" label="Introduction 1" className="edit-mentor-item">
+              <Input.TextArea />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="introduction2" label="Introduction 2" className="edit-mentor-item">
+              <Input.TextArea />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item name="organization" label="Organization" className="edit-mentor-item">
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="specialization" label="Specialization" className="edit-mentor-item">
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[25, 25]}>
+          <Col span={12}>
+            <Form.Item name="education" label="Education" className="edit-mentor-item">
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="industry" label="Industry" className="edit-mentor-item">
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </Modal>
   );

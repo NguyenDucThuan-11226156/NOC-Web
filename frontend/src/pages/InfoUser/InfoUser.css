@@ -61,14 +61,16 @@
 }
 
 .user-info-card,
-.mentor-info-card, .help-info-card {
+.mentor-info-card,
+.help-info-card {
   margin-top: 16px;
   border: none;
   border-radius: 0;
   padding: 20px 0;
 }
 
-.user-info-card .ant-card-body, .help-info-card .ant-card-body{
+.user-info-card .ant-card-body,
+.help-info-card .ant-card-body {
   background: var(--infoUser-profile-color);
   display: flex;
   padding: 50px;
@@ -141,29 +143,28 @@
   margin: 20px 0 0 20px;
 }
 
-.mentor-info-item h4:last-child {
-  /* margin-left: 20px; */
-}
-
 .mentor-info-item .mentorCard {
-  max-height: 220px;
+  min-height: 220px !important;
   width: 520px;
   display: flex;
   align-items: normal;
-
   h3 {
     margin: 3px 0;
     font-size: 16px;
   }
 
   p {
-    margin: 4px 0;
+    margin: auto 0;
   }
 }
 
+.mentor-info-item .mentorCard .mentorCard-content-menteeCount {
+  margin-top: 1px;
+}
+
 .mentor-info-item .mentorCard .mentorCard-image {
-  width: 200px;
-  height: 218.4px ;
+  width: 218.4px !important;
+  height: auto;
 }
 
 .mentor-info-item .mentorCard .mentorCard-image img {
@@ -184,21 +185,31 @@
 .mentor-info-item .mentorCard .mentorCard-content-rate {
   width: 280px;
   height: 30px;
-  margin-top: 5px;
+  margin: auto 0;
 }
 
 .mentor-info-item .mentorCard .mentorCard-content-rateCount {
   margin-top: 5px;
 }
 
+.mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn {
+  width: auto;
+  margin: 3px;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn:last-child {
+  padding: 6px;
+}
+
 .mentorCard-content-Btn-myMentor {
   border: 2px solid var(--color-mentor-border);
   background: #fff;
-  color:var(--color-mentor-title);
+  color: var(--color-mentor-title);
   border-radius: 0;
-  margin: 5px 0 0 20px;
+  margin: 5px 0 0 0px;
   font-family: var(--font);
   font-weight: 700;
+  width: 130px;
 }
 
 .mentor-item-list {
@@ -207,8 +218,7 @@
   justify-content: center;
 }
 
-.mentor-btn-container {
+.mentor-info-item .mentorCard .mentor-btn-container {
   margin-top: 8px;
   display: flex;
-  align-items: center;
 }
