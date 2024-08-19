@@ -5,6 +5,9 @@ import Info from "../pages/Info";
 import InfoUser from "../pages/InfoUser";
 import AppAdmin from "../../src/admin/Layout";
 import MentorDetailPage from "../components/MentorDetails";
+import NormalLoginForm from "../admin/pages/Login";
+import CreateCategory from "../admin/pages/CreateCategory";
+import MentorsManagement from "../admin/pages/Mentors";
 
 export const routes = [
   {
@@ -12,7 +15,7 @@ export const routes = [
     element: <LayoutDefault />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home />,
       },
       {
@@ -29,14 +32,26 @@ export const routes = [
       },
       {
         path: "mentors/detail/:id", // Dynamic route for mentor detail
-        element: <MentorDetailPage />
-      }
+        element: <MentorDetailPage />,
+      },
     ],
   },
   {
     path: "/admin",
     element: <AppAdmin />,
-    children:[
-    ]
+    children: [
+      {
+        path: "",
+        element: <MentorsManagement />,
+      },
+      {
+        path: "category", // Route for creating categories
+        element: <CreateCategory />,
+      },
+    ],
+  },
+  {
+    path: "/admin/login",
+    element: <NormalLoginForm />,
   },
 ];

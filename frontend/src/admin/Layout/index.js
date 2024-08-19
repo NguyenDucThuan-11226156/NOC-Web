@@ -9,6 +9,7 @@ import {
 import { Avatar, Button, Layout, Menu, theme, Typography } from "antd";
 import MentorsManagement from "../pages/Mentors";
 import "./LayoutAdmin.css";
+import { Outlet } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
@@ -125,7 +126,7 @@ const AppAdmin = () => {
             // borderRadius: borderRadiusLG,
           }}
         >
-          <MentorsManagement />
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
