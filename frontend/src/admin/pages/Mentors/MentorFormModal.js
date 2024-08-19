@@ -1,23 +1,44 @@
-import React from "react";
-import {
-  Modal,
-  Form,
-  Input,
-  Button,
-  message,
-  Row,
-  Col,
-} from "antd";
+import React, { useEffect, useState } from "react";
+import { Modal, Form, Input, Button, message, Row, Col, Select } from "antd";
 import "./MentorPage.css";
-import { useState } from "react";
+import { API } from "../../../constant";
+const { Option } = Select;
+
 const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
   const [form] = Form.useForm();
   const [avatarFile, setAvatarFile] = useState(null);
   const [companyLogoFile, setCompanyLogoFile] = useState(null);
+  const [enterprises, setEnterprises] = useState([]);
+  const [studies, setStudies] = useState([]);
+  const [domains, setDomains] = useState([]);
+  const [specializations, setSpecializations] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`${API}/api/v1/admin/listCategory`);
+        const data = await response.json();
+        console.log(data);
+        
+        if (data.code === 200) {
+          setEnterprises(data.enterprises);
+          setStudies(data.studies);
+          setDomains(data.domains);
+          setSpecializations(data.specialization);
+        } else {
+          message.error("Failed to load categories.");
+        }
+      } catch (error) {
+        message.error("An error occurred while fetching categories.");
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleFinish = async (values) => {
     try {
-      const formData = new FormData(); // Corrected capitalization
+      const formData = new FormData();
       formData.append("name", values.name);
       formData.append("introduction1", values.introduction1);
       formData.append("introduction2", values.introduction2);
@@ -124,7 +145,13 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
                 { required: true, message: "Please enter the organization!" },
               ]}
             >
-              <Input />
+              <Select>
+                {enterprises.map((enterprise) => (
+                  <Option key={enterprise._id} value={enterprise.description}>
+                    {enterprise.description}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -132,10 +159,16 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
               name="specialization"
               label="Specialization"
               rules={[
-                { required: true, message: "Please enter the specialization!" },
+                { required: true, message: "Please select the specialization!" },
               ]}
             >
-              <Input />
+              <Select>
+                {specializations.map((specialization) => (
+                  <Option key={specialization._id} value={specialization.description}>
+                    {specialization.description}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
         </Row>
@@ -145,10 +178,16 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
               name="education"
               label="Education"
               rules={[
-                { required: true, message: "Please enter the education!" },
+                { required: true, message: "Please select the education!" },
               ]}
             >
-              <Input />
+              <Select>
+                {studies.map((study) => (
+                  <Option key={study._id} value={study.description}>
+                    {study.description}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -156,10 +195,16 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
               name="industry"
               label="Industry"
               rules={[
-                { required: true, message: "Please enter the industry!" },
+                { required: true, message: "Please select the industry!" },
               ]}
             >
-              <Input />
+              <Select>
+                {domains.map((domain) => (
+                  <Option key={domain._id} value={domain.description}>
+                    {domain.description}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
         </Row>
