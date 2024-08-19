@@ -7,7 +7,7 @@ const upload = multer();
 const router: Router = Router();
 router.post("/register", controller.register);
 router.post("/login", controller.login);
-router.get("/login", controller.listCategory);
+router.get("/listCategory", controller.listCategory);
 router.post("/createCategory", controller.createCategory);
 
 export const adminRoutes: Router = router;
