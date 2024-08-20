@@ -179,8 +179,8 @@ function MentorDetailPage() {
     if (isMyMentor) {
       return (
         <>
-          <Button onClick={handleMyReview}>My Review</Button>
-          <Button onClick={handleRate}>Rate</Button>
+          <Button onClick={handleMyReview} className="mentor-detail-btn">My Review</Button>
+          <Button onClick={handleRate} className="mentor-detail-btn">Rate</Button>
         </>
       );
     } else if (isMentorSaved) {
