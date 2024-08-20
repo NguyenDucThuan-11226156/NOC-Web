@@ -12,6 +12,7 @@ const { Option } = Select;
 function ApplyModal({ open, onCancel, mentorId }) {
   const [form] = Form.useForm();
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // State for loading
   const [name, setName] = useState("");
   const [studentId, setStudentId] = useState("");
   const [domain, setDomain] = useState("");
@@ -45,6 +46,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
   }, []);
 
   const onFinish = (values) => {
+    setIsSubmitting(true); // Set loading state to true
     const formData = new FormData();
     formData.append("email", values.email);
     formData.append("field", values.field);
@@ -73,11 +75,16 @@ function ApplyModal({ open, onCancel, mentorId }) {
       })
       .catch((error) => {
         console.error("Error submitting form:", error);
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Set loading state to false after response
       });
   };
+
   const handleChangeCv = (info) => {
     setCv(info.fileList[0]);
   };
+
   const handleSuccessModalOk = () => {
     setIsSuccessModalVisible(false);
     onCancel();
@@ -200,20 +207,23 @@ function ApplyModal({ open, onCancel, mentorId }) {
           </Form.Item>
           <Form.Item
             name="cv"
-            label="Tải CV của bạn ở đây (nếu có)"
+            label="Tải CV của bạn ở đây"
             valuePropName="fileList"
             getValueFromEvent={(e) => e.fileList}
             className="apply-form-cv"
+            rules={[{ required: true, message: "Vui lòng tải lên file CV!" }]} // Add this rule
           >
             <Upload
               name="cv"
               listType="text"
               accept="application/pdf"
               onChange={handleChangeCv}
+              beforeUpload={() => false} // Prevent auto-upload to make form submission handle the file
             >
               <Button icon={<UploadOutlined />}>Định dạng PDF</Button>
             </Upload>
           </Form.Item>
+
           <p style={{ marginTop: 16 }}>
             Sau khi đăng ký, bạn sẽ nhận được thông báo về tình trạng đơn của
             bạn qua email trong vòng 48 giờ để tới thời điểm đăng ký. Nếu đơn
@@ -221,7 +231,12 @@ function ApplyModal({ open, onCancel, mentorId }) {
             để bạn có thể xác nhận tham gia.
           </p>
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="apply-form-btn">
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={isSubmitting} // Loading state applied here
+              className="apply-form-btn"
+            >
               Xác nhận đăng ký
             </Button>
           </Form.Item>
