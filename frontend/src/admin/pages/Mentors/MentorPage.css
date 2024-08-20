@@ -72,7 +72,7 @@
   width: 900px !important;
 }
 
-.mentor-add-modal .ant-modal-title {
+.mentor-add-modal .ant-modal-title, .edit-mentor-modal .ant-modal-title {
   text-align: center;
   font-size: 36px;
   font-family: var(--font-mentor-title);
@@ -95,3 +95,46 @@
   border: 2px solid #409174 !important;
   color: #409174 !important;
 }
+
+/* Css edit modal */
+
+.edit-mentor-modal {
+  width: 900px !important;
+}
+
+.edit-mentor-item label {
+  font-weight: 700;
+}
+
+.cancel-btn, .save-btn {
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 25px;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: var(--color-active);
+  border-color: var(--color-active);
+}
+
+.cancel-btn:hover {
+  background-color: #fff;
+  border-color: var(--color-active) !important;
+  color: var(--color-active) !important;
+}
+
+.save-btn {
+  background-color: #D9E9E3;
+  border-color: #D9E9E3;
+  color: #409174;
+}
+
+.save-btn:hover {
+  background-color: #409174 !important;
+  border-color: #409174 !important;
+}
+

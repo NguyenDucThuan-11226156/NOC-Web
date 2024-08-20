@@ -16,14 +16,16 @@
 
 .user-banner {
   height: 293px;
-  background-color: #ddd;
   border-radius: 15px;
   margin: 15px;
+  overflow: hidden;
 }
 
 .user-banner img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .info-user-main-header {
@@ -40,7 +42,7 @@
   cursor: pointer;
   position: absolute;
   top: -130px;
-  left: 30px;
+  left: 50px;
   z-index: 10;
 }
 
@@ -59,14 +61,16 @@
 }
 
 .user-info-card,
-.mentor-info-card, .help-info-card {
+.mentor-info-card,
+.help-info-card {
   margin-top: 16px;
   border: none;
   border-radius: 0;
-  padding: 20px 40px;
+  padding: 20px 0;
 }
 
-.user-info-card .ant-card-body, .help-info-card .ant-card-body{
+.user-info-card .ant-card-body,
+.help-info-card .ant-card-body {
   background: var(--infoUser-profile-color);
   display: flex;
   padding: 50px;
@@ -78,12 +82,12 @@
 }
 
 .user-info-card h4,
-.mentor-info-item > h4 {
+.mentor-info-item h4 {
   font-size: 30px;
   color: var(--color-mentor-border);
   font-family: var(--font-mentor-title);
   font-weight: 400;
-  margin: 10px 0;
+  margin: 10px 0 10px 10px;
 }
 
 .user-info-card li {
@@ -101,8 +105,9 @@
 
 .user-info-border,
 .mentor-info-border {
-  border-left: 3px solid rgba(0, 0, 0, 1);
-  margin-left: 60px;
+  max-width: 3px;
+  height: 100%;
+  background-color: #000;
 }
 
 .info-user-tabs {
@@ -125,13 +130,99 @@
 }
 
 /* Css My mentor + Saved */
+.mentor-info-card .ant-card-body {
+  padding: 10px;
+}
 .mentor-info-item {
   background: rgba(246, 246, 246, 1);
   margin-bottom: 40px;
+  padding: 30px 0;
 }
 
-.mentor-info-subCard {
+.mentor-info-item h4 {
+  margin: 20px 0 0 20px;
+}
+
+.mentor-info-item .mentorCard {
+  min-height: 220px !important;
+  width: 520px;
+  display: flex;
+  align-items: normal;
+  h3 {
+    margin: 3px 0;
+    font-size: 16px;
+  }
+
+  p {
+    margin: auto 0;
+  }
+}
+
+.mentor-info-item .mentorCard h3 {
+  width: 235px;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content-menteeCount {
+  margin-top: 1px;
+}
+
+.mentor-info-item .mentorCard .mentorCard-image {
+  width: 218.4px !important;
+  height: auto;
+}
+
+.mentor-info-item .mentorCard .mentorCard-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content-logo {
+  top: 5px;
+  right: 0;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content-introduction {
+  font-size: 12px;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content-rate {
+  width: 280px;
+  height: 30px;
+  margin: auto 0;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content-rateCount {
+  margin-top: 5px;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn {
+  width: auto;
+  margin: 3px;
+}
+
+.mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn:last-child {
+  padding: 6px;
+}
+
+.mentorCard-content-Btn-myMentor {
+  border: 2px solid var(--color-mentor-border);
   background: #fff;
-  height: 185px;
+  color: var(--color-mentor-title);
+  border-radius: 0;
+  margin: 5px 0 0 0px;
+  font-family: var(--font);
+  font-weight: 700;
+  width: 130px;
 }
 
+.mentor-item-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mentor-info-item .mentorCard .mentor-btn-container {
+  margin-top: 8px;
+  display: flex;
+}

@@ -1,37 +1,51 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Row, Tabs, Typography } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { DeleteOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  Avatar,
+  Button,
+  Card,
+  Col,
+  notification,
+  Rate,
+  Row,
+  Tabs,
+  Typography,
+} from "antd";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ChangeInfoUser from "../../components/ChangeInfoUser"; // Import the ChangeInfoUser component
-import "./InfoUser.css"; // Ensure you create this CSS file for custom styles
-import { API } from "../../constant";
 import { useCookies } from "react-cookie";
-import defaultAvatar from "../../images/Default/Avatar/capybaraNEU.jpg"
-import defaultBanner from "../../images/Default/Background/NYF_BG.jpg"
+import ChangeInfoUser from "../../components/ChangeInfoUser";
+import "./InfoUser.css";
+import { API } from "../../constant";
+import defaultAvatar from "../../images/Default/Avatar/capybaraNEU.jpg";
+import defaultBanner from "../../images/Default/Background/NYF_BG.jpg";
+import ApplyModal from "../../components/ApplyModal";
 const { TabPane } = Tabs;
 const { Title } = Typography;
+
 const InfoUser = () => {
   const [userInfo, setUserInfo] = useState({});
   const [myMentors, setMyMentors] = useState([]);
   const [savedMentors, setSavedMentors] = useState([]);
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false); // State for modal visibility
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [isApplyModalVisible, setIsApplyModalVisible] = useState(false);
   const navigate = useNavigate();
   const [cookies] = useCookies(["token"]);
   const token = cookies.token;
-  
+  const [loadingMentor, setLoadingMentor] = useState(null);
   useEffect(() => {
-    // Fetch user details and mentors from the API
     const fetchData = async () => {
       try {
-        const userResponse = await axios.get(API + `/api/v1/users/detail`, { 
+        const userResponse = await axios.get(`${API}/api/v1/users/detail`, {
           headers: {
             Authorization: `Bearer ${token}`,
-          } 
+          },
         });
-        
+
         if (userResponse.data.code === 200) {
           setUserInfo(userResponse.data.info);
+          setMyMentors(userResponse.data.infoMentors);
+          setSavedMentors(userResponse.data.saveInfoMentors);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -42,37 +56,53 @@ const InfoUser = () => {
   }, [token]);
 
   const handleEditClick = () => {
-    setIsEditModalVisible(true); // Show the modal when Edit is clicked
+    setIsEditModalVisible(true);
   };
 
   const handleModalClose = () => {
-    setIsEditModalVisible(false); // Close the modal
+    setIsEditModalVisible(false);
+  };
+  const handleApplyModal = () => {
+    setIsApplyModalVisible(!isApplyModalVisible);
+  };
+  const handleCancel = () => {
+    setIsApplyModalVisible(false);
+  };
+  const handleViewMore = (mentor) => {
+    navigate(`/mentors/detail/${mentor._id}`);
   };
 
   const handleDeleteSavedMentor = async (mentorId) => {
+    setLoadingMentor(mentorId); // Bắt đầu trạng thái loading
     try {
-      // Implement the delete request logic here
-      await axios.delete(API + `/api/v1/mentors/${mentorId}`);
-      // Update the saved mentors list after deletion
+      await axios.delete(`${API}/api/v1/users/deleteSaveMentor/${mentorId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       setSavedMentors(savedMentors.filter((mentor) => mentor._id !== mentorId));
+      notification.success({
+        message: "Thành công",
+        description: "Mentor đã được xóa khỏi danh sách đã lưu.",
+      });
     } catch (error) {
+      notification.error({
+        message: "Lỗi",
+        description: "Có lỗi xảy ra khi xóa mentor. Vui lòng thử lại.",
+      });
       console.error("Error deleting mentor:", error);
+    } finally {
+      setLoadingMentor(null); // Kết thúc trạng thái loading
     }
   };
-
-  // const defaultAvatar = "../";
-  // const defaultBanner = "/path/to/default-banner.png";
-
   return (
     <div className="info-user-container">
       <Card bordered={false} className="info-user-card">
         <Row gutter={[0, 20]} className="info-user-main-header">
           <Col span={24}>
             <div className="user-banner">
-              <img 
-                src={userInfo.banner || defaultBanner} 
-                alt="Banner" 
-              />
+              <img src={userInfo.banner || defaultBanner} alt="Banner" />
             </div>
           </Col>
           <Col span={24}>
@@ -94,22 +124,28 @@ const InfoUser = () => {
         >
           <TabPane tab="Trang cá nhân" key="1">
             <Card className="user-info-card">
-              <Title level={4}>Thông tin</Title>
-              <div className="user-info-border"></div>
-              <Row>
-                <Col span={24} offset={10} className="user-info-list">
-                  <li>Họ và tên: {userInfo.name}</li>
-                  <br />
-                  <li>Lớp học phần: {userInfo.school}</li>
-                  <br />
-                  <li>Mã sinh viên: {userInfo.studentId}</li>
-                  <br />
-                  <li>Email: {userInfo.email}</li>
-                  <br />
-                  <li>Số điện thoại: {userInfo.number}</li>
-                  <br />
-                </Col>
-              </Row>
+              <Col span={5}>
+                <Title level={4}>Thông tin</Title>
+              </Col>
+              <Col span={1}>
+                <div className="user-info-border"></div>
+              </Col>
+              <Col span={7}>
+                <Row justify="space-between">
+                  <Col span={24} offset={2} className="user-info-list">
+                    <li>Họ và tên: {userInfo.name}</li>
+                    <br />
+                    <li>Lớp học phần: {userInfo.school}</li>
+                    <br />
+                    <li>Mã sinh viên: {userInfo.studentId}</li>
+                    <br />
+                    <li>Email: {userInfo.email}</li>
+                    <br />
+                    <li>Số điện thoại: +84 {userInfo.number}</li>
+                    <br />
+                  </Col>
+                </Row>
+              </Col>
               <div className="user-info-change" onClick={handleEditClick}>
                 Chỉnh sửa
               </div>
@@ -117,76 +153,163 @@ const InfoUser = () => {
           </TabPane>
           <TabPane tab="Mentor của tôi" key="2">
             <Card className="mentor-info-card">
-              <Row gutter={[16, 16]} className="mentor-info-item">
-                <Title level={4}>My Mentor</Title>
-                <div className="mentor-info-border"></div>
-                {myMentors.map((mentor) => (
-                  <Col key={mentor.id} span={12}>
-                    <Card
-                      className="mentor-info-subCard"
-                      title={mentor.name}
-                      extra={
-                        <img src={mentor.companyLogo} alt="Company Logo" />
-                      }
-                      cover={<img alt="avatar" src={mentor.avatar || defaultAvatar} />}
-                      actions={[
-                        <Button
-                          onClick={() => navigate(`/mentors/${mentor.slug}`)}
-                        >
-                          View more
-                        </Button>,
-                        <Button
-                          onClick={() =>
-                            navigate(`/mentors/${mentor.slug}/review`)
-                          }
-                        >
-                          My Review
-                        </Button>,
-                      ]}
-                    >
-                      <p>Mentee Count: {mentor.menteeCount}</p>
-                      <p>Introduction 1: {mentor.introduction1}</p>
-                      <p>Introduction 2: {mentor.introduction2}</p>
-                      <p>
-                        Rate: {mentor.rate}/5 ({mentor.numberRate} ratings)
-                      </p>
-                    </Card>
-                  </Col>
-                ))}
+              <Row
+                gutter={[16, 16]}
+                className="mentor-info-item"
+                justify="space-evenly"
+              >
+                <Col span={4}>
+                  <Title level={4}>My Mentor ({myMentors.length})</Title>
+                </Col>
+                <Col span={1}>
+                  <div className="mentor-info-border"></div>
+                </Col>
+                <Col span={19}>
+                  <Row gutter={[0, 20]} justify="space-between">
+                    {myMentors.map((mentor) => (
+                      <Col span={12}>
+                        <Row key={mentor._id} className="mentorCard">
+                          <Col span={10} className="mentorCard-image">
+                            <img src={mentor.avatar} alt="Avatar" />
+                          </Col>
+                          <Col span={13} className="mentorCard-content">
+                            <h3>{mentor.name}</h3>
+                            <div className="mentorCard-content-logo">
+                              <img
+                                src={mentor.companyLogo}
+                                alt="Company logo"
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </div>
+                            <p className="mentorCard-content-menteeCount">
+                              Mentee: {mentor.menteeCount}
+                            </p>
+                            <p className="mentorCard-content-introduction">
+                              Mục giới thiệu 1: {mentor.introduction1}
+                            </p>
+                            <p className="mentorCard-content-introduction">
+                              Mục giới thiệu 2: {mentor.introduction2}
+                            </p>
+                            <Rate
+                              className="mentorCard-content-rate"
+                              disabled
+                              defaultValue={mentor.rate}
+                            />
+                            <p className="mentorCard-content-rateCount">
+                              ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
+                            </p>
+                            <div className="mentorCard-btnContainer">
+                              {/* <Button
+                                className="mentorCard-content-Btn-myMentor"
+                                onClick={handleApplyModal}
+                              >
+                                Apply now
+                              </Button>
+                              <ApplyModal
+                                open={isApplyModalVisible}
+                                onCancel={handleCancel}
+                              /> */}
+                              <Button
+                                className="mentorCard-content-Btn-myMentor"
+                                onClick={() => handleViewMore(mentor)}
+                              >
+                                View more
+                              </Button>
+                            </div>
+                          </Col>
+                        </Row>
+                      </Col>
+                    ))}
+                  </Row>
+                </Col>
               </Row>
-              <Row gutter={[16, 16]} className="mentor-info-item">
-                <Title level={4}>Đã lưu</Title>
-                <div className="mentor-info-border"></div>
-
-                {savedMentors.map((mentor) => (
-                  <Col key={mentor._id} span={12}>
-                    <Card
-                      title={mentor.name}
-                      extra={
-                        <img src={mentor.companyLogo} alt="Company Logo" />
-                      }
-                      cover={<img alt="avatar" src={mentor.avatar || defaultAvatar} />}
-                      actions={[
-                        <Button
-                          onClick={() => navigate(`/mentors/${mentor.slug}`)}
-                        >
-                          View more
-                        </Button>,
-                        <Button
-                          onClick={() => handleDeleteSavedMentor(mentor._id)}
-                          icon={<DeleteOutlined />}
-                        />,
-                      ]}
-                    >
-                      <p>Mentee Count: {mentor.menteeCount}</p>
-                      <p>Introduction 1: {mentor.introduction1}</p>
-                      <p>Introduction 2: {mentor.introduction2}</p>
-                      <p>
-                        Rate: {mentor.rate}/5 ({mentor.numberRate} ratings)
-                      </p>
-                    </Card>
-                  </Col>
-                ))}
+              <Row
+                gutter={[16, 16]}
+                className="mentor-info-item"
+                justify="center"
+              >
+                <Col span={4}>
+                  <Title level={4}>Đã lưu ({savedMentors.length})</Title>
+                </Col>
+                <Col span={1}>
+                  <div className="mentor-info-border"></div>
+                </Col>
+                <Col span={19}>
+                  <Row gutter={[0, 20]} justify="space-between">
+                    {savedMentors.map((mentor) => (
+                      <Col span={12}>
+                        <Row key={mentor._id} className="mentorCard">
+                          <Col span={10} className="mentorCard-image">
+                            <img src={mentor.avatar} alt="Avatar" />
+                          </Col>
+                          <Col
+                            key={mentor._id}
+                            span={13}
+                            className="mentorCard-content"
+                          >
+                            <h3>{mentor.name}</h3>
+                            <div className="mentorCard-content-logo">
+                              <img
+                                src={mentor.companyLogo}
+                                alt="Company logo"
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </div>
+                            <p className="mentorCard-content-menteeCount">
+                              Mentee: {mentor.menteeCount}
+                            </p>
+                            <p className="mentorCard-content-introduction">
+                              Mục giới thiệu 1: {mentor.introduction1}
+                            </p>
+                            <p className="mentorCard-content-introduction">
+                              Mục giới thiệu 2: {mentor.introduction2}
+                            </p>
+                            <Rate
+                              className="mentorCard-content-rate"
+                              disabled
+                              defaultValue={mentor.rate}
+                            />
+                            <p className="mentorCard-content-rateCount">
+                              ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
+                            </p>
+                            <div className="mentor-btn-container">
+                              <Button
+                                className="mentorCard-content-Btn"
+                                onClick={handleApplyModal}
+                              >
+                                Apply now
+                              </Button>
+                              <ApplyModal
+                                open={isApplyModalVisible}
+                                onCancel={handleCancel}
+                              />
+                              <Button
+                                className="mentorCard-content-Btn"
+                                onClick={() => handleViewMore(mentor)}
+                              >
+                                View more
+                              </Button>
+                              <Button
+                                className="mentorCard-content-Btn"
+                                onClick={() => handleDeleteSavedMentor(mentor._id)}
+                                icon={loadingMentor === mentor._id ? <LoadingOutlined /> : <DeleteOutlined />}
+                                disabled={loadingMentor === mentor._id}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                      </Col>
+                    ))}
+                  </Row>
+                </Col>
               </Row>
             </Card>
           </TabPane>

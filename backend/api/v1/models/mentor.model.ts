@@ -18,6 +18,24 @@ const mentorSchema = new mongoose.Schema(
     companyLogo: String,
     field: String,
     experience: String,
+    mentees: [
+      {
+        userId: String,
+        name: String,
+        school: String,
+        domain: String,
+        studentId: String,
+        number: Number,
+        email: String,
+        introduction: String,
+        field: String,
+        issueDescription: String,
+        cv: {
+          url: String,
+          originalFilename: String,
+        },
+      },
+    ],
     review: [
       {
         userId: String,

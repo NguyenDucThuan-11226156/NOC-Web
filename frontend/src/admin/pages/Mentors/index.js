@@ -8,7 +8,8 @@ import {
   postMentorList,
 } from "../../../services/mentorsServices";
 import MentorFormModal from "./MentorFormModal";
-import './MentorPage.css'
+import EditMentorInfo from "./EditMentorInfo";
+import "./MentorPage.css";
 
 const { confirm } = Modal;
 
@@ -16,25 +17,28 @@ const MentorsManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [dataFinal, setDataFinal] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [selectedMentorId, setSelectedMentorId] = useState(null);
 
   useEffect(() => {
+    fetchMentors();
+  }, [currentPage]);
+
+  const fetchMentors = async () => {
     const offset = {
       limit: limit,
       page: currentPage,
     };
-    const fetchApi = async () => {
-      const result = await postMentorList(offset);
-      setDataFinal(
-        result.mentors.map((mentor) => ({
-          key: mentor._id,
-          name: mentor.name,
-          study: mentor.industry,
-          education: mentor.education,
-        }))
-      );
-    };
-    fetchApi();
-  }, [currentPage]);
+    const result = await postMentorList(offset);
+    setDataFinal(
+      result.mentors.map((mentor) => ({
+        key: mentor._id,
+        name: mentor.name,
+        study: mentor.industry,
+        education: mentor.education,
+      }))
+    );
+  };
 
   const handleDelete = (id) => {
     confirm({
@@ -57,11 +61,11 @@ const MentorsManagement = () => {
     });
   };
 
-  const showModal = () => {
+  const showAddModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleCancel = () => {
+  const handleCancelAddModal = () => {
     setIsModalVisible(false);
   };
 
@@ -88,6 +92,21 @@ const MentorsManagement = () => {
     }
   };
 
+  const showEditModal = (mentorId) => {
+    setSelectedMentorId(mentorId);
+    setIsEditModalVisible(true);
+  };
+
+  const handleCancelEditModal = () => {
+    setIsEditModalVisible(false);
+    setSelectedMentorId(null);
+  };
+
+  const handleEditSuccess = () => {
+    fetchMentors();
+    handleCancelEditModal();
+  };
+
   const columns = [
     {
       title: "Name",
@@ -96,12 +115,12 @@ const MentorsManagement = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Giáo dục",
+      title: "Education",
       dataIndex: "education",
       key: "education",
     },
     {
-      title: "Học vấn",
+      title: "Industry",
       dataIndex: "study",
       key: "study",
     },
@@ -110,8 +129,12 @@ const MentorsManagement = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button className="edit-btn">Edit</Button>
-          <Button className="delete-btn" onClick={() => handleDelete(record.key)} danger>
+          <Button className="edit-btn" onClick={() => showEditModal(record.key)}>Edit</Button>
+          <Button
+            className="delete-btn"
+            onClick={() => handleDelete(record.key)}
+            danger
+          >
             Delete
           </Button>
         </Space>
@@ -121,13 +144,21 @@ const MentorsManagement = () => {
 
   return (
     <>
-      <Table columns={columns} dataSource={dataFinal} className="mentor-table"/>
+      <Table columns={columns} dataSource={dataFinal} className="mentor-table" />
       <MentorFormModal
         visible={isModalVisible}
-        onCancel={handleCancel}
+        onCancel={handleCancelAddModal}
         onSubmit={handleAddMentor}
       />
-      <Button className="add-table-btn" onClick={showModal}>
+      {selectedMentorId && (
+        <EditMentorInfo
+          visible={isEditModalVisible}
+          onClose={handleCancelEditModal}
+          mentorId={selectedMentorId}
+          onUpdateSuccess={handleEditSuccess}
+        />
+      )}
+      <Button className="add-table-btn" onClick={showAddModal}>
         Add Mentor
       </Button>
     </>

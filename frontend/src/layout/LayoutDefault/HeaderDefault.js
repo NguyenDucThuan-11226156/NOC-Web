@@ -7,18 +7,25 @@ import { HashLink } from "react-router-hash-link";
 import ForgotPassword from "../../components/ForgotPW";
 import Login from "../../components/Login";
 import SignUp from "../../components/SignUp";
+import axios from "axios"; // Import axios để gọi API
 import logoNCC from "../../images/logo/Logo-NCC.svg";
 import logoNEU from "../../images/logo/Logo-Neu.svg";
 import logoNOC from "../../images/logo/NOC-black.svg";
 import logoNDM from "../../images/logo/NOC-white.svg";
 import "./LayoutDefault.css";
+import { API } from "../../constant";
+import {
+  LogoutOutlined,
+  SecurityScanOutlined,
+  UserOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 function HeaderDefault() {
-  // handle pop up between modals
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [cookies, removeCookie] = useCookies(["cookie-name"], {
+  const [cookies] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
   const [user, setUser] = useState(null);
@@ -27,11 +34,26 @@ function HeaderDefault() {
   useEffect(() => {
     setActiveLink(location.pathname);
     if (cookies.token && cookies.token !== "undefined") {
-      const userInfo = {
-        name: cookies.name,
-        avatar: cookies.avatar,
-      };
-      setUser(userInfo);
+      // Gọi API để lấy thông tin user
+      axios
+        .get(API + `/api/v1/users/detail`, {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`, // Sử dụng token từ cookie
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          const userInfo = {
+            name: response.data.info.name,
+            avatar: response.data.info.avatar,
+          };
+          console.log(userInfo);
+          
+          setUser(userInfo);
+        })
+        .catch((error) => {
+          console.error("Error fetching user info:", error);
+        });
     }
   }, [location, cookies]);
 
@@ -66,40 +88,30 @@ function HeaderDefault() {
     return activeLink === path ? "layout-default__menu--active" : "";
   };
 
-  //Logout
-  // const handleLogout = () => {
-  //   removeCookie("token");
-  //   removeCookie("name");
-  //   removeCookie("avatar");
-  //   // setUser(null);
-  //   window.location.href = "/";
-  //   // navigate("/");
-  // };
-// Hàm này sẽ xóa cookie theo cách thủ công
-const deleteAllCookies = () => {
-  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  document.cookie = "avatar=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-};
+  const deleteAllCookies = () => {
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "avatar=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  };
 
-const handleLogout = () => {
-  deleteAllCookies();
-  setUser(null);
-  window.location.href = "/";
-};
+  const handleLogout = () => {
+    deleteAllCookies();
+    setUser(null);
+    window.location.href = "/";
+  };
 
   const handleMyMentor = () => {};
 
-  const handleSupport = () => {
-    // navigate("/support");
-  };
+  const handleSupport = () => {};
 
   const menu = (
     <Menu className="user-dropdown">
       <Menu.Item key="0" className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">svg</div>
+            <div className="dropdownItem-logo">
+            <UserOutlined className="dropdownItem-icon"/>
+            </div>
             <span>Trang cá nhân</span>
           </div>
         </Link>
@@ -111,7 +123,7 @@ const handleLogout = () => {
       >
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">svg</div>
+            <div className="dropdownItem-logo"><EditOutlined className="dropdownItem-icon"/></div>
             <span>Mentor của tôi</span>
           </div>
         </Link>
@@ -119,14 +131,14 @@ const handleLogout = () => {
       <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">svg</div>
+            <div className="dropdownItem-logo"><SecurityScanOutlined className="dropdownItem-icon"/></div>
             <span>Trợ giúp</span>
           </div>
         </Link>
       </Menu.Item>
       <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
         <div className="dropdownItem-list">
-          <div className="dropdownItem-logo">svg</div>
+          <div className="dropdownItem-logo"><LogoutOutlined className="dropdownItem-icon"/></div>
           <span>Đăng xuất</span>
         </div>
       </Menu.Item>
