@@ -1,0 +1,92 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url(https://img.freepik.com/premium-vector/green-square-chalk-board-texture-vector-background_522680-29.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.login-title {
+  font-size: 48px;
+  color:#fff ;
+  font-family: var(--font-mentor--introduction);
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.login-form {
+  width: 500px;
+  height: 500px;
+  padding: 10px 30px;
+  border-radius: 30px;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, .5);
+}
+
+.login-input, .login-input:hover, .login-input:focus, .login-input:focus-within {
+  margin-bottom: 20px !important;
+  border-radius: 20px;
+  border-color: #409174 ;
+}
+
+.login-form-button {
+  width: 150px;
+  border-radius: 30px;
+  background-color: #69C4A2;
+  font-size: 16px;
+  font-family: var(--font-mentor--introduction);
+  font-weight: 700;
+}
+
+.login-form-button:hover {
+  background-color: #409174 !important;
+}
+
+
+.login-btn-container .ant-form-item-control-input-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form-forgot {
+  margin-left: 210px;
+  color: var(--color-active);
+}
+
+.login-form-forgot:hover {
+  color: var(--color-active);
+}
+
+.remember-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -20px;
+  margin-bottom: 40px;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  color: #fff;
+}
+
+.register-link {
+  margin-top: 10px;
+  color: #69C4A2;
+  font-weight: 600;
+}
+
+.register-link:hover {
+  color: #409174;
+}
