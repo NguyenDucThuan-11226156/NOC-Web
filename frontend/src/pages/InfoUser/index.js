@@ -215,6 +215,7 @@ const InfoUser = () => {
                               /> */}
                               <Button
                                 className="mentorCard-content-Btn-myMentor"
+                                style={{width: '100%'}}
                                 onClick={() => handleViewMore(mentor)}
                               >
                                 View more

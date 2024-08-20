@@ -152,7 +152,7 @@ function MentorItem({ mentor, mentorId }) {
             <Button
               className={
                 "mentorCard-content-Btn " +
-                (isMentorApplied && isMentorSaved && "btn-viewmore-full")
+                (!isMentorApplied && !isMentorSaved && "btn-viewmore-full")
               }
               onClick={handleViewMore}
             >
@@ -160,7 +160,9 @@ function MentorItem({ mentor, mentorId }) {
             </Button>
             {!isMentorSaved && !isMentorApplied && (
               <Button
-                className="mentorCard-content-Btn"
+                className={`mentorCard-content-Btn ${
+                  !isMentorApplied ? "btn-viewmore-full" : ""
+                }`}
                 onClick={handleSave}
                 loading={loading} // Set loading state on the button
               >
