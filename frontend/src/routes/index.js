@@ -8,6 +8,7 @@ import MentorDetailPage from "../components/MentorDetails";
 import NormalLoginForm from "../admin/pages/Login";
 import CreateCategory from "../admin/pages/CreateCategory";
 import MentorsManagement from "../admin/pages/Mentors";
+import SettingGeneral from "../admin/pages/SettingsGeneral";
 
 export const routes = [
   {
@@ -47,6 +48,10 @@ export const routes = [
       {
         path: "category", // Route for creating categories
         element: <CreateCategory />,
+      },
+      {
+        path: "setting",
+        element: <SettingGeneral />,
       },
     ],
   },

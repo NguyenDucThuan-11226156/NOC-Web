@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,15 +11,24 @@ import { Avatar, Button, Layout, Menu, theme, Typography } from "antd";
 import MentorsManagement from "../pages/Mentors";
 import "./LayoutAdmin.css";
 import { Outlet } from "react-router-dom";
-
+import { useCookies } from "react-cookie";
 const { Header, Sider, Content } = Layout;
 
 const AppAdmin = () => {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
+  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+    doNotParse: true,
+  });
+  useEffect(() => {
+    const token = cookies.tokenAdmin;
+    if (!token) {
+      window.location.href = "/admin/login";
+    }
+  });
   return (
     <Layout className="layout-admin">
       <Sider
@@ -74,16 +84,19 @@ const AppAdmin = () => {
               key: "1",
               icon: <UserOutlined />,
               label: "nav 1",
+              onClick: () => navigate("/admin"),
             },
             {
               key: "2",
               icon: <VideoCameraOutlined />,
               label: "nav 2",
+              onClick: () => navigate("/admin/category"),
             },
             {
               key: "3",
               icon: <UploadOutlined />,
               label: "nav 3",
+              onClick: () => navigate("/admin/setting"),
             },
           ]}
         />

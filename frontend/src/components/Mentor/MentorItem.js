@@ -121,7 +121,7 @@ function MentorItem({ mentor, mentorId }) {
             />
           </div>
           <p className="mentorCard-content-menteeCount">
-            Mentee: {mentor.menteeCount}
+            Mentee: {mentor.menteeCount || 0}
           </p>
           <p className="mentorCard-content-introduction">
             Mục giới thiệu 1: {mentor.introduction1}
@@ -129,13 +129,9 @@ function MentorItem({ mentor, mentorId }) {
           <p className="mentorCard-content-introduction">
             Mục giới thiệu 2: {mentor.introduction2}
           </p>
-          <Rate
-            className="mentorCard-content-rate"
-            disabled
-            defaultValue={mentor.rate}
-          />
+          <Rate className="mentorCard-content-rate" disabled />
           <p className="mentorCard-content-rateCount">
-            ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
+            ({mentor.numberRate} đánh giá) ({mentor.rate || 0}/5)
           </p>
           <div className="mentorCard-btnContainer">
             {!isMentorApplied && (
