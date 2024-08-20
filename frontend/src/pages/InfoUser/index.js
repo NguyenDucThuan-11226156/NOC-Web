@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, LoadingOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Button,
@@ -32,7 +32,7 @@ const InfoUser = () => {
   const navigate = useNavigate();
   const [cookies] = useCookies(["token"]);
   const token = cookies.token;
-
+  const [loadingMentor, setLoadingMentor] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,6 +73,7 @@ const InfoUser = () => {
   };
 
   const handleDeleteSavedMentor = async (mentorId) => {
+    setLoadingMentor(mentorId); // Bắt đầu trạng thái loading
     try {
       await axios.delete(`${API}/api/v1/users/deleteSaveMentor/${mentorId}`, {
         headers: {
@@ -81,7 +82,6 @@ const InfoUser = () => {
       });
 
       setSavedMentors(savedMentors.filter((mentor) => mentor._id !== mentorId));
-      console.log(savedMentors);
       notification.success({
         message: "Thành công",
         description: "Mentor đã được xóa khỏi danh sách đã lưu.",
@@ -92,6 +92,8 @@ const InfoUser = () => {
         description: "Có lỗi xảy ra khi xóa mentor. Vui lòng thử lại.",
       });
       console.error("Error deleting mentor:", error);
+    } finally {
+      setLoadingMentor(null); // Kết thúc trạng thái loading
     }
   };
   return (
@@ -157,7 +159,7 @@ const InfoUser = () => {
                 justify="space-evenly"
               >
                 <Col span={4}>
-                  <Title level={4}>My Mentor</Title>
+                  <Title level={4}>My Mentor ({myMentors.length})</Title>
                 </Col>
                 <Col span={1}>
                   <div className="mentor-info-border"></div>
@@ -201,7 +203,7 @@ const InfoUser = () => {
                               ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
                             </p>
                             <div className="mentorCard-btnContainer">
-                              <Button
+                              {/* <Button
                                 className="mentorCard-content-Btn-myMentor"
                                 onClick={handleApplyModal}
                               >
@@ -210,7 +212,7 @@ const InfoUser = () => {
                               <ApplyModal
                                 open={isApplyModalVisible}
                                 onCancel={handleCancel}
-                              />
+                              /> */}
                               <Button
                                 className="mentorCard-content-Btn-myMentor"
                                 onClick={() => handleViewMore(mentor)}
@@ -231,7 +233,7 @@ const InfoUser = () => {
                 justify="center"
               >
                 <Col span={4}>
-                  <Title level={4}>Đã lưu</Title>
+                  <Title level={4}>Đã lưu ({savedMentors.length})</Title>
                 </Col>
                 <Col span={1}>
                   <div className="mentor-info-border"></div>
@@ -297,10 +299,9 @@ const InfoUser = () => {
                               </Button>
                               <Button
                                 className="mentorCard-content-Btn"
-                                onClick={() =>
-                                  handleDeleteSavedMentor(mentor._id)
-                                }
-                                icon={<DeleteOutlined />}
+                                onClick={() => handleDeleteSavedMentor(mentor._id)}
+                                icon={loadingMentor === mentor._id ? <LoadingOutlined /> : <DeleteOutlined />}
+                                disabled={loadingMentor === mentor._id}
                               />
                             </div>
                           </Col>

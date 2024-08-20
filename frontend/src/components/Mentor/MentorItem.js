@@ -11,6 +11,7 @@ function MentorItem({ mentor, mentorId }) {
   const [applyStatus, setApplyStatus] = useState(false);
   const [isMentorSaved, setIsMentorSaved] = useState(false);
   const [isMentorApplied, setIsMentorApplied] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state for the Save button
   const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
 
@@ -65,6 +66,8 @@ function MentorItem({ mentor, mentorId }) {
       return;
     }
 
+    setLoading(true); // Set loading to true when the button is clicked
+
     try {
       const response = await axios.post(
         API + `/api/v1/users/updateSave`,
@@ -90,6 +93,8 @@ function MentorItem({ mentor, mentorId }) {
         description: "Đã xảy ra lỗi khi lưu mentor. Vui lòng thử lại sau.",
       });
       console.error("Error saving mentor:", error);
+    } finally {
+      setLoading(false); // Reset loading to false after the request is complete
     }
   };
 
@@ -154,7 +159,11 @@ function MentorItem({ mentor, mentorId }) {
               View more
             </Button>
             {!isMentorSaved && !isMentorApplied && (
-              <Button className="mentorCard-content-Btn" onClick={handleSave}>
+              <Button
+                className="mentorCard-content-Btn"
+                onClick={handleSave}
+                loading={loading} // Set loading state on the button
+              >
                 Save
               </Button>
             )}
