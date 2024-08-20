@@ -20,14 +20,16 @@ function MentorDetailPage() {
   const [ratingModalVisible, setRatingModalVisible] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [isMentorSaved, setIsMentorSaved] = useState(false);
+  const [isMyMentor, setIsMyMentor] = useState(false);
   const [userAvatar, setUserAvatar] = useState("default-avatar-url"); // Default avatar
   const [userName, setUserName] = useState("User Name"); // Default name
+  const [loading, setLoading] = useState(false); //loading btn
   const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user is logged in
     setIsLoggedIn(!!cookies.token);
-    
+
     if (cookies.token) {
       // Fetch user details
       axios
@@ -36,26 +38,24 @@ function MentorDetailPage() {
         })
         .then((response) => {
           const userData = response.data.info;
-          console.log(userData);
-          
+          // console.log(userData);
+
           setUserAvatar(userData.avatar || "default-avatar-url"); // Fallback to default avatar
           setUserName(userData.name || "User Name"); // Fallback to "User Name"
+
+          const savedMentors = response.data.info.saveMentorIds || [];
+          setIsMentorSaved(savedMentors.some((mentor) => mentor.mentorId === id));
+          console.log(savedMentors);
+          
+          const MyMentor = response.data.info.mentorIds || [];
+          setIsMyMentor(MyMentor.some((mentor) => mentor.mentorId === id));
+          console.log(MyMentor);
+
+          
+          
         })
         .catch((error) => {
           console.error("Error fetching user details:", error);
-        });
-
-      // Check if this mentor is already in the user's list
-      axios
-        .get(API + `/api/v1/users/mentors`, {
-          headers: { Authorization: `Bearer ${cookies.token}` },
-        })
-        .then((response) => {
-          const savedMentors = response.data || [];
-          setIsMentorSaved(savedMentors.some((mentor) => mentor._id === id));
-        })
-        .catch((error) => {
-          console.error("Error checking saved mentors:", error);
         });
     }
 
@@ -112,8 +112,9 @@ function MentorDetailPage() {
       });
       return;
     }
-
-    if (!isMentorSaved) {
+    console.log(isMentorSaved);
+    
+    if (isMentorSaved) {
       setApplyModalVisible(true);
     } else {
       navigate("/my-mentor");
@@ -121,35 +122,45 @@ function MentorDetailPage() {
   };
 
   // Handle "Save" button click
-  const handleSaveMentor = () => {
-    if (!isLoggedIn) {
-      notification.warning({
-        message: "You need to log in",
-        description: "Please log in to save this mentor.",
+  
+  const handleSave = async () => {
+    if (!cookies.token) {
+      notification.error({
+        message: "Yêu cầu đăng nhập",
+        description: "Bạn cần đăng nhập để lưu mentor.",
       });
       return;
     }
 
-    if (!isMentorSaved) {
-      axios
-        .post(API + `/api/v1/users/mentors/save`,
-          { mentorId: id },
-          {
-            headers: { Authorization: `Bearer ${cookies.token}` },
-          }
-        )
-        .then((response) => {
-          notification.success({
-            message: "Mentor Saved",
-            description: "The mentor has been saved to your list.",
-          });
-          setIsMentorSaved(true);
-        })
-        .catch((error) => {
-          console.error("Error saving mentor:", error);
+    setLoading(true); // Set loading to true when the button is clicked
+
+    try {
+      const response = await axios.post(
+        API + `/api/v1/users/updateSave`,
+        { saveMentorId: mentor._id },
+        { headers: { Authorization: `Bearer ${cookies.token}` } }
+      );
+
+      if (response.data.code === 200) {
+        notification.success({
+          message: "Lưu mentor thành công",
+          description: `Mentor ${mentor.name} đã được lưu.`,
         });
-    } else {
-      navigate("/my-mentor");
+        setIsMentorSaved(true);
+      } else {
+        notification.error({
+          message: "Lưu mentor thất bại",
+          description: "Đã xảy ra lỗi khi lưu mentor. Vui lòng thử lại sau.",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Lưu mentor thất bại",
+        description: "Đã xảy ra lỗi khi lưu mentor. Vui lòng thử lại sau.",
+      });
+      console.error("Error saving mentor:", error);
+    } finally {
+      setLoading(false); // Reset loading to false after the request is complete
     }
   };
 
@@ -162,6 +173,37 @@ function MentorDetailPage() {
   const handleRate = () => {
     setRatingModalVisible(true);
   };
+
+
+  const buttonCheck = () => {
+    if (isMyMentor) {
+      return (
+        <>
+          <Button onClick={handleMyReview}>My Review</Button>
+          <Button onClick={handleRate}>Rate</Button>
+        </>
+      );
+    } else if (isMentorSaved) {
+      return (
+        <Button onClick={handleApplyNow} className="mentor-detail-btn">
+          Apply Now
+        </Button>
+      );
+    } else {
+      return (
+        <>
+          <Button onClick={handleApplyNow} className="mentor-detail-btn">
+            Apply Now
+          </Button>
+          <Button onClick={handleSave} className="mentor-detail-btn" loading={loading}>
+            Save
+          </Button>
+        </>
+      );
+    }
+  };
+
+
 
   return (
     <div className="mentor-detail-container">
@@ -177,24 +219,9 @@ function MentorDetailPage() {
             <img src={mentor.avatar} alt="mentor-image" />
           </div>
           <div className="action-buttons">
-            {isMentorSaved ? (
-              <>
-                <Button onClick={handleMyReview}>My Review</Button>
-                <Button onClick={handleRate}>Rate</Button>
-              </>
-            ) : (
-              <>
-                <Button onClick={handleApplyNow} className="mentor-detail-btn">
-                  Apply Now
-                </Button>
-                <Button
-                  onClick={handleSaveMentor}
-                  className="mentor-detail-btn"
-                >
-                  Save
-                </Button>
-              </>
-            )}
+
+            {buttonCheck()}
+
           </div>
         </Col>
         <Col span={17}>
@@ -280,7 +307,7 @@ function MentorDetailPage() {
       </Modal>
 
       <ApplyModal
-        visible={applyModalVisible}
+        open={applyModalVisible}
         onCancel={() => setApplyModalVisible(false)}
         mentorId={mentor._id}
       />
