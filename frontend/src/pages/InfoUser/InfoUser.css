@@ -158,6 +158,10 @@
   }
 }
 
+.mentor-info-item .mentorCard h3 {
+  width: 235px;
+}
+
 .mentor-info-item .mentorCard .mentorCard-content-menteeCount {
   margin-top: 1px;
 }
