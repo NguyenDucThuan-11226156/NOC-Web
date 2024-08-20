@@ -410,6 +410,15 @@ export const applyNow = async (req: Request, res: Response) => {
           { menteeCount: newMenteeCount }
         );
 
+        var updatedUser = await User.findOneAndUpdate(
+          { _id: _id },
+          {
+            $push: {
+              mentorIds: { mentorId: mentorId },
+            },
+          },
+          { new: true }
+        );
         res.json({
           code: 200,
           message: "Apply thành công !",

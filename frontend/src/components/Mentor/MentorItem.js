@@ -136,7 +136,7 @@ function MentorItem({ mentor, mentorId }) {
           </p>
           <Rate className="mentorCard-content-rate" disabled />
           <p className="mentorCard-content-rateCount">
-            ({mentor.numberRate} đánh giá) ({mentor.rate || 0}/5)
+            ({mentor.numberRate || 0} đánh giá) ({mentor.rate || 0}/5)
           </p>
           <div className="mentorCard-btnContainer">
             {!isMentorApplied && (

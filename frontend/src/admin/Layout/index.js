@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  FilterOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Menu, theme, Typography } from "antd";
 import MentorsManagement from "../pages/Mentors";
@@ -83,19 +83,19 @@ const AppAdmin = () => {
             {
               key: "1",
               icon: <UserOutlined />,
-              label: "nav 1",
+              label: "Mentors",
               onClick: () => navigate("/admin"),
             },
             {
               key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
+              icon: <FilterOutlined />,
+              label: "Catagories",
               onClick: () => navigate("/admin/category"),
             },
             {
               key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3",
+              icon: <SettingOutlined />,
+              label: "Settings General",
               onClick: () => navigate("/admin/setting"),
             },
           ]}
