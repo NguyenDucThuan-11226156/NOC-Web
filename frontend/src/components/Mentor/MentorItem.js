@@ -7,7 +7,7 @@ import "./Mentor.css";
 import ApplyModal from "../ApplyModal";
 import { API } from "../../constant";
 
-function MentorItem({ mentor }) {
+function MentorItem({ mentor, mentorId }) {
   const [applyStatus, setApplyStatus] = useState(false);
   const [isMentorSaved, setIsMentorSaved] = useState(false);
   const [isMentorApplied, setIsMentorApplied] = useState(false);
@@ -67,7 +67,7 @@ function MentorItem({ mentor }) {
 
     try {
       const response = await axios.post(
-        API + `/api/v1/users/update`,
+        API + `/api/v1/users/updateSave`,
         { saveMentorId: mentor._id },
         { headers: { Authorization: `Bearer ${cookies.token}` } }
       );
@@ -143,9 +143,16 @@ function MentorItem({ mentor }) {
                 Apply now
               </Button>
             )}
-            <ApplyModal open={applyStatus} onCancel={handleCancel} />
+            <ApplyModal
+              open={applyStatus}
+              onCancel={handleCancel}
+              mentorId={mentor._id}
+            />
             <Button
-              className={"mentorCard-content-Btn " + (isMentorApplied && isMentorSaved && "btn-viewmore-full")}
+              className={
+                "mentorCard-content-Btn " +
+                (isMentorApplied && isMentorSaved && "btn-viewmore-full")
+              }
               onClick={handleViewMore}
             >
               View more

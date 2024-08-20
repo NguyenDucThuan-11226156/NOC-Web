@@ -113,7 +113,22 @@ export const detail = async (req: Request, res: Response) => {
     });
   }
 };
-
+// [GET] /api/v1/users/detailPure
+export const detailPure = async (req: Request, res: Response) => {
+  try {
+    res.json({
+      code: 200,
+      message: "Thành công!",
+      info: res.locals.user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      code: 400,
+      message: "Không thành công",
+    });
+  }
+};
 // [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
 export const updateUser = async (req: Request, res: Response) => {
   const {
@@ -340,5 +355,83 @@ export const deleteSaveMentor = async (req: Request, res: Response) => {
       message: "Xóa lưu mentor không thành công!",
     });
     console.error(error);
+  }
+};
+// [POST] api/v1/users/applyNow/:mentorId
+export const applyNow = async (req: Request, res: Response) => {
+  try {
+    const {
+      _id,
+      email,
+      field,
+      fullName,
+      introduction,
+      issueDescription,
+      domain,
+      phone,
+      school,
+      studentID,
+      cv,
+    } = req.body;
+    const newMentee = {
+      userId: _id, // Placeholder for actual user ID
+      name: fullName,
+      school,
+      domain,
+      studentId: studentID,
+      number: phone,
+      email,
+      introduction,
+      field,
+      issueDescription,
+      cv: {
+        url: cv.url,
+        originalFilename: cv.originalFilename,
+      },
+    };
+
+    const mentorId = req.params.mentorId;
+    // Add the new mentee
+    const updateResult = await Mentors.updateOne(
+      { _id: mentorId },
+      { $push: { mentees: newMentee } }
+    );
+
+    if (updateResult.modifiedCount > 0) {
+      // Calculate the new mentee count
+      const mentor = await Mentors.findOne({ _id: mentorId }).select("mentees");
+
+      if (mentor) {
+        const newMenteeCount = mentor.mentees.length;
+
+        // Update mentee count
+        await Mentors.updateOne(
+          { _id: mentorId },
+          { menteeCount: newMenteeCount }
+        );
+
+        res.json({
+          code: 200,
+          message: "Apply thành công !",
+          data: updateResult,
+        });
+      } else {
+        res.json({
+          code: 404,
+          message: "Mentor not found!",
+        });
+      }
+    } else {
+      res.json({
+        code: 400,
+        message: "Apply thất bại !",
+      });
+    }
+  } catch (error) {
+    console.error("Error applying now:", error);
+    res.status(500).json({
+      code: 500,
+      message: "An error occurred while applying.",
+    });
   }
 };
