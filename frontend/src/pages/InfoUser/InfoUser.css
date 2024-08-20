@@ -144,12 +144,12 @@
 }
 
 .mentor-info-item .mentorCard {
-  min-height: 220px !important;
+  height: 240px;
   width: 520px;
   display: flex;
   align-items: normal;
   h3 {
-    margin: 3px 0;
+    margin: 3px 0 0 0;
     font-size: 16px;
   }
 
@@ -158,17 +158,25 @@
   }
 }
 
+.mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-logo {
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+}
+
 .mentor-info-item .mentorCard h3 {
   width: 235px;
 }
 
 .mentor-info-item .mentorCard .mentorCard-content-menteeCount {
-  margin-top: 1px;
+  margin-top: 0;
 }
 
 .mentor-info-item .mentorCard .mentorCard-image {
-  width: 218.4px !important;
-  height: auto;
+  width: 218px !important;
+  height: 238px;
+  overflow: hidden;
 }
 
 .mentor-info-item .mentorCard .mentorCard-image img {
@@ -186,6 +194,17 @@
   font-size: 12px;
 }
 
+.mentor-info-item .mentorCard .mentorCard-content-introduction {
+  width: 300px; /* Đặt chiều rộng cho phần tử */
+  height: 3em; /* Chiều cao tối đa cho 2 dòng văn bản, mỗi dòng khoảng 1.5em */
+  line-height: 1.5em; /* Khoảng cách giữa các dòng */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Hiển thị tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* Thêm dấu ... nếu nội dung bị cắt */
+}
+
 .mentor-info-item .mentorCard .mentorCard-content-rate {
   width: 280px;
   height: 30px;
@@ -201,7 +220,10 @@
   margin: 3px;
 }
 
-.mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn:last-child {
+.mentor-info-item
+  .mentorCard
+  .mentorCard-content
+  .mentorCard-content-Btn:last-child {
   padding: 6px;
 }
 
