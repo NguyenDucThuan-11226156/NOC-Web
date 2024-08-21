@@ -129,7 +129,7 @@ export const detailPure = async (req: Request, res: Response) => {
     });
   }
 };
-// [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
+// [POST] /api/v1/users/update
 export const updateUser = async (req: Request, res: Response) => {
   const {
     name,

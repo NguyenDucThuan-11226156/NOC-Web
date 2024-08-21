@@ -8,7 +8,6 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Menu, theme, Typography } from "antd";
-import MentorsManagement from "../pages/Mentors";
 import "./LayoutAdmin.css";
 import { Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
