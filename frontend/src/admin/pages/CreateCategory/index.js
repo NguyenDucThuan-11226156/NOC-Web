@@ -25,7 +25,6 @@ const CreateCategory = () => {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
     const fetchAPI = async () => {
       const res = await axios.get(API + "/api/v1/admin/listCategory");
       setDomains(res.data.domains);
@@ -34,9 +33,6 @@ const CreateCategory = () => {
       setStudies(res.data.studies);
     };
     fetchAPI();
-=======
-    fetchCategories();
->>>>>>> 9db00c20e1e635d067648fdd7148eaa40202b5d4
   }, []);
 
   const openModal = (type) => {
@@ -52,11 +48,15 @@ const CreateCategory = () => {
           <TableDomain domains={domains} />
         </div>
         <div>
-          <Button onClick={() => openModal("enterprise")}>Create Enterprise</Button>
+          <Button onClick={() => openModal("enterprise")}>
+            Create Enterprise
+          </Button>
           <TableEnterprise enterprises={enterprises} />
         </div>
         <div>
-          <Button onClick={() => openModal("specialization")}>Create Specialization</Button>
+          <Button onClick={() => openModal("specialization")}>
+            Create Specialization
+          </Button>
           <TableSpecialization specializations={specializations} />
         </div>
         <div>
