@@ -29,11 +29,12 @@ const CategoryModal = ({ visible, onClose, categoryType, fetchCategories }) => {
       visible={visible}
       title={`Create ${categoryType.charAt(0).toUpperCase() + categoryType.slice(1)}`}
       onCancel={onClose}
+      className="categories-modal"
       footer={[
-        <Button key="cancel" onClick={onClose}>
+        <Button className="categories-cancel-btn" key="cancel" onClick={onClose}>
           Cancel
         </Button>,
-        <Button key="submit" type="primary" loading={loading} onClick={() => form.submit()}>
+        <Button className="categories-modal-create-btn" key="submit" type="primary" loading={loading} onClick={() => form.submit()}>
           Create
         </Button>,
       ]}
@@ -43,7 +44,7 @@ const CategoryModal = ({ visible, onClose, categoryType, fetchCategories }) => {
           name="description"
           rules={[{ required: true, message: `Please input the ${categoryType} description!` }]}
         >
-          <Input placeholder={`Enter ${categoryType} description`} />
+          <Input className="categories-modal-input" placeholder={`Enter ${categoryType} description`} />
         </Form.Item>
       </Form>
     </Modal>

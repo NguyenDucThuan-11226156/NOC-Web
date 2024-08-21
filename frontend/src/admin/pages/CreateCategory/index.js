@@ -7,6 +7,7 @@ import axios from "axios";
 import { API } from "../../../constant";
 import { Button } from "antd";
 import CategoryModal from "./CategoryModal";
+import './Categories.css'
 
 const CreateCategory = () => {
   const [domains, setDomains] = useState([]);
@@ -36,20 +37,28 @@ const CreateCategory = () => {
   return (
     <>
       <div>
-        <div>
-          <Button onClick={() => openModal("domain")}>Create Domain</Button>
+        <div className="categories-item">
+          <h2 className="categories-title">Domain</h2>
+          <Button onClick={() => openModal("domain")} className="categories-create-btn">Create Domain</Button>
           <TableDomain domains={domains} />
         </div>
-        <div>
-          <Button onClick={() => openModal("enterprise")}>Create Enterprise</Button>
+        <div className="categories-item">
+          <h2 className="categories-title">Enterprise</h2>
+          <Button onClick={() => openModal("enterprise")} className="categories-create-btn">
+            Create Enterprise
+          </Button>
           <TableEnterprise enterprises={enterprises} />
         </div>
-        <div>
-          <Button onClick={() => openModal("specialization")}>Create Specialization</Button>
+        <div className="categories-item">
+          <h2 className="categories-title">Specialization</h2>
+          <Button onClick={() => openModal("specialization")} className="categories-create-btn">
+            Create Specialization
+          </Button>
           <TableSpecialization specializations={specializations} />
         </div>
-        <div>
-          <Button onClick={() => openModal("study")}>Create Study</Button>
+        <div className="categories-item">
+          <h2 className="categories-title">Studies</h2>
+          <Button onClick={() => openModal("study")} className="categories-create-btn">Create Study</Button>
           <TableStudy studies={studies} />
         </div>
       </div>

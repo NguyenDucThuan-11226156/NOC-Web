@@ -1,5 +1,6 @@
 import React from "react";
-import { Space, Table, Tag } from "antd";
+import { Button, Space, Table, Tag } from "antd";
+import'../../pages/CreateCategory/Categories.css'
 const columns = [
   {
     title: "Số thứ tự",
@@ -20,13 +21,13 @@ const columns = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <a>Edit </a>
-        <a>Delete</a>
+        <Button className="edit-categories-btn">Edit</Button>
+        <Button className="delete-categories-btn">Delete</Button>
       </Space>
     ),
   },
 ];
 const TableDomain = ({ specializations }) => {
-  return <Table columns={columns} dataSource={specializations} />;
+  return <Table className="categories-table" columns={columns} dataSource={specializations} />;
 };
 export default TableDomain;
