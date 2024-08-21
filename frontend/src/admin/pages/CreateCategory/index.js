@@ -7,7 +7,7 @@ import axios from "axios";
 import { API } from "../../../constant";
 import { Button } from "antd";
 import CategoryModal from "./CategoryModal";
-import './Categories.css'
+import "./Categories.css";
 
 const CreateCategory = () => {
   const [domains, setDomains] = useState([]);
@@ -46,25 +46,37 @@ const CreateCategory = () => {
       <div>
         <div className="categories-item">
           <h2 className="categories-title">Domain</h2>
-          <Button onClick={() => openModal("domain")} className="categories-create-btn">Create Domain</Button>
           <TableDomain domains={domains} />
+          <Button
+            onClick={() => openModal("domain")}
+            className="categories-create-btn"
+          >
+            Create Domain
+          </Button>
         </div>
-        <div>
-          <Button onClick={() => openModal("enterprise")}>
+        <div className="categories-item">
+          <h2 className="categories-title">Enterprise</h2>
+          <TableEnterprise enterprises={enterprises} />
+          <Button onClick={() => openModal("enterprise")} className="categories-create-btn">
             Create Enterprise
           </Button>
-          <TableEnterprise enterprises={enterprises} />
         </div>
-        <div>
-          <Button onClick={() => openModal("specialization")}>
+        <div className="categories-item">
+          <h2 className="categories-title">Specialization</h2>
+          <TableSpecialization specializations={specializations} />
+          <Button onClick={() => openModal("specialization")} className="categories-create-btn">
             Create Specialization
           </Button>
-          <TableSpecialization specializations={specializations} />
         </div>
         <div className="categories-item">
           <h2 className="categories-title">Studies</h2>
-          <Button onClick={() => openModal("study")} className="categories-create-btn">Create Study</Button>
           <TableStudy studies={studies} />
+          <Button
+            onClick={() => openModal("study")}
+            className="categories-create-btn"
+          >
+            Create Study
+          </Button>
         </div>
       </div>
       <CategoryModal

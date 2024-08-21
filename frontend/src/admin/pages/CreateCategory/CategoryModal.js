@@ -53,6 +53,7 @@ const CategoryModal = ({ visible, onClose, categoryType, fetchCategories }) => {
           type="primary"
           loading={loading}
           onClick={() => form.submit()}
+          className="categories-modal-create-btn"
         >
           Create
         </Button>,
