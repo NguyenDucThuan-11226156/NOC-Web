@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Space, Table, message } from "antd";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -7,14 +7,18 @@ import { API } from "../../../constant";
 
 const TableDomain = ({ domains, fetchCategories }) => {
   const [cookies] = useCookies(['tokenAdmin']);
+  const [loadingId, setLoadingId] = useState(null);
 
   const handleDelete = async (id) => {
+    setLoadingId(id);
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteDomain/${id}`, {
         headers: {
           Authorization: `Bearer ${cookies.tokenAdmin}`,
         },
       });
+
       if (response.data.code === 200) {
         message.success("Domain deleted successfully");
         fetchCategories();
@@ -23,6 +27,8 @@ const TableDomain = ({ domains, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the domain");
+    } finally {
+      setLoadingId(null);
     }
   };
 
@@ -50,6 +56,7 @@ const TableDomain = ({ domains, fetchCategories }) => {
           <Button
             className="delete-categories-btn"
             onClick={() => handleDelete(record._id)}
+            loading={loadingId === record._id} // Set loading state
           >
             Delete
           </Button>

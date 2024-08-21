@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Space, Table, message } from "antd";
 import axios from "axios";
-import { useCookies } from "react-cookie"; // Import useCookies
+import { useCookies } from "react-cookie";
 import '../../pages/CreateCategory/Categories.css';
 import { API } from "../../../constant";
 
 const TableSpecialization = ({ specializations, fetchCategories }) => {
-  const [cookies] = useCookies(['tokenAdmin']); // Access the tokenAdmin cookie
+  const [cookies] = useCookies(['tokenAdmin']);
+  const [loadingId, setLoadingId] = useState(null); // State to track loading button
 
   const handleDelete = async (id) => {
+    setLoadingId(id); // Set the loading state for the clicked button
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteSpecialization/${id}`, {
         headers: {
-          Authorization: `Bearer ${cookies.tokenAdmin}`, // Include the token in the headers
+          Authorization: `Bearer ${cookies.tokenAdmin}`,
         },
       });
+
       if (response.data.code === 200) {
         message.success("Specialization deleted successfully");
         fetchCategories(); // Refresh the category list after deletion
@@ -23,6 +27,8 @@ const TableSpecialization = ({ specializations, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the specialization");
+    } finally {
+      setLoadingId(null); // Reset the loading state
     }
   };
 
@@ -50,6 +56,7 @@ const TableSpecialization = ({ specializations, fetchCategories }) => {
           <Button
             className="delete-categories-btn"
             onClick={() => handleDelete(record._id)}
+            loading={loadingId === record._id} // Set loading state
           >
             Delete
           </Button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Space, Table, message } from "antd";
 import axios from "axios";
 import { useCookies } from "react-cookie"; // Import useCookies
@@ -7,15 +7,19 @@ import { API } from "../../../constant";
 
 const TableStudy = ({ studies, fetchCategories }) => {
   const [cookies] = useCookies(['tokenAdmin']); // Access the tokenAdmin cookie
+  const [loadingId, setLoadingId] = useState(null); // State to track loading button
 
   // Function to handle delete action
   const handleDelete = async (id) => {
+    setLoadingId(id); // Set the loading state for the clicked button
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteStudy/${id}`, {
         headers: {
           Authorization: `Bearer ${cookies.tokenAdmin}`, // Include the token in the headers
         },
       });
+
       if (response.data.code === 200) {
         message.success("Study deleted successfully");
         fetchCategories(); // Refresh the category list after deletion
@@ -24,6 +28,8 @@ const TableStudy = ({ studies, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the study");
+    } finally {
+      setLoadingId(null); // Reset the loading state
     }
   };
 
@@ -51,6 +57,7 @@ const TableStudy = ({ studies, fetchCategories }) => {
           <Button
             className="delete-categories-btn"
             onClick={() => handleDelete(record._id)}
+            loading={loadingId === record._id} // Set loading state
           >
             Delete
           </Button>
