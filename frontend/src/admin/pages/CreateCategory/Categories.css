@@ -11,6 +11,7 @@
   font-size: 36px;
   font-family: var(--font-mentor-title);
   color: #409174;
+  margin-bottom: 30px;
 }
 
 .categories-create-btn {

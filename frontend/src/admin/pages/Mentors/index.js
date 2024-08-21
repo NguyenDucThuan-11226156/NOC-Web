@@ -1,5 +1,5 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Button, Modal, Space, Table, message } from "antd";
+import { Button, Card, Modal, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { limit } from "../../../constant";
 import {
@@ -144,6 +144,8 @@ const MentorsManagement = () => {
 
   return (
     <>
+      <Card style={{borderRadius: '30px'}}>
+      <h2 className="mentor-title">Mentor</h2>
       <Table columns={columns} dataSource={dataFinal} className="mentor-table" />
       <MentorFormModal
         visible={isModalVisible}
@@ -161,6 +163,7 @@ const MentorsManagement = () => {
       <Button className="add-table-btn" onClick={showAddModal}>
         Add Mentor
       </Button>
+      </Card>
     </>
   );
 };

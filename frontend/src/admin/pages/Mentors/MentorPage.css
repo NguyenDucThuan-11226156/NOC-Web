@@ -1,5 +1,19 @@
 /* Css mentor table */
 
+.mentor-title {
+  font-family: var(--font-mentor-title);
+  color:#409174 ;  
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.mentor-table table {
+  border: 0.5px solid #ddd;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 .mentor-table thead tr th {
   background-color: #409174 !important;
   color: #fff !important;
@@ -59,6 +73,7 @@
   color: #fff;
   border-radius: 15px;
   font-weight: 600;
+  margin-bottom: 15px;
 }
 
 .add-table-btn:hover {
