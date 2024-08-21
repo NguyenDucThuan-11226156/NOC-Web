@@ -21,6 +21,10 @@ import { Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./LayoutAdmin.css";
 import { useLocation } from "react-router-dom";
+import logoNCC from "../../images/logo/Logo-NCC.svg";
+import logoNEU from "../../images/logo/Logo-Neu.svg";
+import logoNOC from "../../images/logo/NOC-black.svg";
+import logoNDM from "../../images/logo/NOC-white.svg";
 
 const { Header, Sider, Content } = Layout;
 
@@ -87,21 +91,21 @@ const AppAdmin = () => {
               <>
                 <div className="logo-item">
                   <img
-                    src="https://i.pinimg.com/736x/4e/5b/1e/4e5b1e974d475aaa999dec762ab3c913.jpg"
+                    src={logoNCC}
                     alt="logo-admin-page"
                     aria-label="logo"
                   />
                 </div>
                 <div className="logo-item">
                   <img
-                    src="https://i.ytimg.com/vi/_mPDAQm58i8/maxresdefault.jpg"
+                    src={logoNOC}
                     alt="logo-admin-page"
                     aria-label="logo"
                   />
                 </div>
                 <div className="logo-item">
                   <img
-                    src="https://i.pinimg.com/564x/3e/c2/55/3ec255dd1ec666b68c524ccf66494c95.jpg"
+                    src={logoNDM}
                     alt="logo-admin-page"
                     aria-label="logo"
                   />
@@ -110,7 +114,7 @@ const AppAdmin = () => {
             ) : (
               <div className="logo-item">
                 <img
-                  src="https://inkythuatso.com/uploads/images/2021/11/logo-neu-inkythuatso-01-09-09-40-17.jpg"
+                  src={logoNEU}
                   alt="logo-admin-page"
                   aria-label="collapsed logo"
                 />
@@ -162,9 +166,6 @@ const AppAdmin = () => {
             <Typography.Title level={1} className="header-main-title">
               NDM Dashboard
             </Typography.Title>
-            {/* <Typography.Text className="header-sub-title">
-              Welcome Back!
-            </Typography.Text> */}
           </div>
           <Dropdown overlay={menu} trigger={["click"]}>
             <Avatar
