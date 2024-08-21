@@ -6,11 +6,21 @@ import {
   UserOutlined,
   FilterOutlined,
   SettingOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Layout, Menu, theme, Typography } from "antd";
-import "./LayoutAdmin.css";
+import {
+  Avatar,
+  Button,
+  Layout,
+  Menu,
+  Dropdown,
+  Typography,
+  theme,
+} from "antd";
 import { Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import "./LayoutAdmin.css";
+
 const { Header, Sider, Content } = Layout;
 
 const AppAdmin = () => {
@@ -22,12 +32,33 @@ const AppAdmin = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
+
   useEffect(() => {
     const token = cookies.tokenAdmin;
     if (!token) {
       window.location.href = "/admin/login";
     }
-  });
+  }, [cookies]);
+  const deleteAllCookies = () => {
+    // document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // document.cookie = "avatar=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "tokenAdmin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/admin;";
+  };
+  const handleLogout = () => {
+    deleteAllCookies();
+    navigate("/admin/login");
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item key="1" icon={<LogoutOutlined />} onClick={handleLogout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <Layout className="layout-admin">
       <Sider
@@ -88,7 +119,7 @@ const AppAdmin = () => {
             {
               key: "2",
               icon: <FilterOutlined />,
-              label: "Catagories",
+              label: "Categories",
               onClick: () => navigate("/admin/category"),
             },
             {
@@ -111,14 +142,7 @@ const AppAdmin = () => {
         />
       </Sider>
       <Layout>
-        <Header
-          // style={{
-          //   padding: '10px 0 0 0',
-          //   background: colorBgContainer,
-          //   position: 'fixed',
-          // }}
-          className="header-admin"
-        >
+        <Header className="header-admin">
           <div className="header-title">
             <Typography level={1} className="header-main-title">
               NDM Dashboard
@@ -127,15 +151,15 @@ const AppAdmin = () => {
               Welcome Back!
             </Typography>
           </div>
-          <Avatar className="admin-avatar" size={60}></Avatar>
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <Avatar className="admin-avatar" size={60} />
+          </Dropdown>
         </Header>
         <Content
           style={{
-            // margin: "24px 16px",
             padding: 24,
             minHeight: 280,
             background: "#EFF3F4",
-            // borderRadius: borderRadiusLG,
           }}
         >
           <Outlet />
