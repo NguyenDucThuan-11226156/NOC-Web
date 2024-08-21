@@ -1,9 +1,10 @@
 import React from "react";
-import { Card, Upload, Divider, message } from "antd";
+import { Card, Upload, Divider, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { API } from "../../../constant"; // Adjust the import path
 import { useCookies } from "react-cookie";
+import "./Settings.css";
 
 const SettingGeneral = () => {
   const [cookies] = useCookies(["token"]); // Adjust cookie name if necessary
@@ -35,30 +36,39 @@ const SettingGeneral = () => {
 
   return (
     <>
-      <Card>
-        <div>Avatar Default</div>
+      <Card className="setting-item">
+        <div className="setting-title">Avatar Default</div>
+        <div className="setting-ava-default">
+          <img src="" alt="avatar-default" />
+        </div>
         <Upload {...uploadProps("/api/v1/admin/editAvatarDefault")}>
-          <div style={{ cursor: "pointer" }}>
+          <Button className="upload-btn">
             <UploadOutlined /> Click to Upload
-          </div>
+          </Button>
         </Upload>
       </Card>
       <Divider />
-      <Card>
-        <div>Home Banner</div>
+      <Card className="setting-item">
+        <div className="setting-title">Home Banner</div>
+        <div className="setting-homebanner">
+        <img src="" alt="home-banner" />
+        </div>
         <Upload {...uploadProps("/api/v1/admin/editHomeBanner")}>
-          <div style={{ cursor: "pointer" }}>
+          <Button className="upload-btn">
             <UploadOutlined /> Click to Upload
-          </div>
+          </Button>
         </Upload>
       </Card>
       <Divider />
-      <Card>
-        <div>User Banner</div>
+      <Card className="setting-item">
+        <div className="setting-title">User Banner</div>
+        <div className="setting-userbanner">
+        <img src="" alt="user-banner" />
+        </div>
         <Upload {...uploadProps("/api/v1/admin/editUserBanner")}>
-          <div style={{ cursor: "pointer" }}>
+          <Button className="upload-btn">
             <UploadOutlined /> Click to Upload
-          </div>
+          </Button>
         </Upload>
       </Card>
     </>
