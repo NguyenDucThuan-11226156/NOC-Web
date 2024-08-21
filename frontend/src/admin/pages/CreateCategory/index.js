@@ -42,16 +42,14 @@ const CreateCategory = () => {
           <Button onClick={() => openModal("domain")} className="categories-create-btn">Create Domain</Button>
           <TableDomain domains={domains} />
         </div>
-        <div className="categories-item">
-          <h2 className="categories-title">Enterprise</h2>
-          <Button onClick={() => openModal("enterprise")} className="categories-create-btn">
+        <div>
+          <Button onClick={() => openModal("enterprise")}>
             Create Enterprise
           </Button>
           <TableEnterprise enterprises={enterprises} />
         </div>
-        <div className="categories-item">
-          <h2 className="categories-title">Specialization</h2>
-          <Button onClick={() => openModal("specialization")} className="categories-create-btn">
+        <div>
+          <Button onClick={() => openModal("specialization")}>
             Create Specialization
           </Button>
           <TableSpecialization specializations={specializations} />
