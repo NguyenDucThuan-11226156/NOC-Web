@@ -141,7 +141,7 @@ const InfoUser = () => {
                     <br />
                     <li>Email: {userInfo.email}</li>
                     <br />
-                    <li>Số điện thoại: +84 {userInfo.number}</li>
+                    <li>Số điện thoại: (+84) {userInfo.number}</li>
                     <br />
                   </Col>
                 </Row>
@@ -216,7 +216,7 @@ const InfoUser = () => {
                               /> */}
                               <Button
                                 className="mentorCard-content-Btn-myMentor"
-                                style={{width: '100%'}}
+                                style={{ width: "100%" }}
                                 onClick={() => handleViewMore(mentor)}
                               >
                                 View more

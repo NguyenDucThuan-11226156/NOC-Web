@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import md5 from "md5";
 import { generateRandomString } from "../../../helpers/generate.helper";
-import Admin from "../models/admin.route";
+import Admin from "../models/admin.model";
 import Enterprise from "../models/enterprise.model";
 import Study from "../models/study.model";
 import Domain from "../models/domain.model";

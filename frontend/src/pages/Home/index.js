@@ -16,7 +16,7 @@ function Home() {
   const [specialization, setSpecialization] = useState([]);
   const [studies, setStudies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(20);
+  const [pageSize] = useState(limit);
   useEffect(() => {
     const offset = {
       limit: limit,
@@ -33,7 +33,6 @@ function Home() {
     };
     fetchApi();
   }, [currentPage]);
-
   const handleSearch = (filters) => {
     post("/api/v1/mentors/filter", {
       keyword: filters.keyword,
@@ -46,18 +45,13 @@ function Home() {
       setTotal(res.mentors.length);
     });
   };
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
   const currentMentors = mentors.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
-console.log(currentPage);
-console.log(currentMentors);
-
   return (
     <Layout>
       <Content>

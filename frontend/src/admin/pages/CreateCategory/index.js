@@ -15,7 +15,6 @@ const CreateCategory = () => {
   useEffect(() => {
     const fetchAPI = async () => {
       const res = await axios.get(API + "/api/v1/admin/listCategory");
-      console.log(res.data);
       setDomains(res.data.domains);
       setEnterprises(res.data.enterprises);
       setSpecializations(res.data.specialization);

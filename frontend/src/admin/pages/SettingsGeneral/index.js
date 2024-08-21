@@ -6,7 +6,22 @@ import TableSpecialization from "../../components/TableSpecialization";
 
 const SettingGeneral = () => {
   // Cần thêm sửa xóa của mỗi bảng + Css thêm
-  return <>Màn hình setting banner, avatar default sẽ ở đây</>;
+  return (
+    <>
+      <div>
+        <div>Avatar Default</div>
+        <button>Edit</button>
+      </div>
+      <div>
+        <div>Home Banner </div>
+        <button>Edit</button>
+      </div>
+      <div>
+        <div>User Banner </div>
+        <button>Edit</button>
+      </div>
+    </>
+  );
 };
 
 export default SettingGeneral;

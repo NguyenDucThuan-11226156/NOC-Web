@@ -163,7 +163,7 @@ const AppAdmin = () => {
               NDM Dashboard
             </Typography.Title>
             <Typography.Text className="header-sub-title">
-              Welcome Back!
+              {/* Welcome Back! */}
             </Typography.Text>
           </div>
           <Dropdown overlay={menu} trigger={["click"]}>
