@@ -141,7 +141,7 @@ const InfoUser = () => {
                     <br />
                     <li>Email: {userInfo.email}</li>
                     <br />
-                    <li>Số điện thoại: +84 {userInfo.number}</li>
+                    <li>Số điện thoại: (+84) {userInfo.number}</li>
                     <br />
                   </Col>
                 </Row>
@@ -186,7 +186,7 @@ const InfoUser = () => {
                               />
                             </div>
                             <p className="mentorCard-content-menteeCount">
-                              Mentee: {mentor.menteeCount}
+                              Mentee: {mentor.menteeCount || 0}
                             </p>
                             <p className="mentorCard-content-introduction">
                               Mục giới thiệu 1: {mentor.introduction1}
@@ -200,7 +200,8 @@ const InfoUser = () => {
                               defaultValue={mentor.rate}
                             />
                             <p className="mentorCard-content-rateCount">
-                              ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
+                              ({mentor.numberRate || 0} đánh giá) (
+                              {mentor.rate || 0}/5)
                             </p>
                             <div className="mentorCard-btnContainer">
                               {/* <Button
@@ -215,6 +216,7 @@ const InfoUser = () => {
                               /> */}
                               <Button
                                 className="mentorCard-content-Btn-myMentor"
+                                style={{ width: "100%" }}
                                 onClick={() => handleViewMore(mentor)}
                               >
                                 View more
@@ -264,7 +266,7 @@ const InfoUser = () => {
                               />
                             </div>
                             <p className="mentorCard-content-menteeCount">
-                              Mentee: {mentor.menteeCount}
+                              Mentee: {mentor.menteeCount || 0}
                             </p>
                             <p className="mentorCard-content-introduction">
                               Mục giới thiệu 1: {mentor.introduction1}
@@ -278,7 +280,8 @@ const InfoUser = () => {
                               defaultValue={mentor.rate}
                             />
                             <p className="mentorCard-content-rateCount">
-                              ({mentor.numberRate} đánh giá) ({mentor.rate}/5)
+                              ({mentor.numberRate || 0} đánh giá) (
+                              {mentor.rate || 0}/5)
                             </p>
                             <div className="mentor-btn-container">
                               <Button
@@ -299,8 +302,16 @@ const InfoUser = () => {
                               </Button>
                               <Button
                                 className="mentorCard-content-Btn"
-                                onClick={() => handleDeleteSavedMentor(mentor._id)}
-                                icon={loadingMentor === mentor._id ? <LoadingOutlined /> : <DeleteOutlined />}
+                                onClick={() =>
+                                  handleDeleteSavedMentor(mentor._id)
+                                }
+                                icon={
+                                  loadingMentor === mentor._id ? (
+                                    <LoadingOutlined />
+                                  ) : (
+                                    <DeleteOutlined />
+                                  )
+                                }
                                 disabled={loadingMentor === mentor._id}
                               />
                             </div>

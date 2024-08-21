@@ -129,7 +129,7 @@ export const detailPure = async (req: Request, res: Response) => {
     });
   }
 };
-// [POST] /api/v1/users/update // thuan check lai cho t cai nay nhe, t đi copy code thử thôi
+// [POST] /api/v1/users/update
 export const updateUser = async (req: Request, res: Response) => {
   const {
     name,
@@ -410,6 +410,15 @@ export const applyNow = async (req: Request, res: Response) => {
           { menteeCount: newMenteeCount }
         );
 
+        var updatedUser = await User.findOneAndUpdate(
+          { _id: _id },
+          {
+            $push: {
+              mentorIds: { mentorId: mentorId },
+            },
+          },
+          { new: true }
+        );
         res.json({
           code: 200,
           message: "Apply thành công !",
