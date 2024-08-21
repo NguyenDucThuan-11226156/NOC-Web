@@ -159,3 +159,4 @@ export const createCategory = async (req: Request, res: Response) => {
     });
   }
 };
+// [POST] /api/v1/admin/createCategory

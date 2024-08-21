@@ -162,9 +162,9 @@ const AppAdmin = () => {
             <Typography.Title level={1} className="header-main-title">
               NDM Dashboard
             </Typography.Title>
-            <Typography.Text className="header-sub-title">
-              {/* Welcome Back! */}
-            </Typography.Text>
+            {/* <Typography.Text className="header-sub-title">
+              Welcome Back!
+            </Typography.Text> */}
           </div>
           <Dropdown overlay={menu} trigger={["click"]}>
             <Avatar
