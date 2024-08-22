@@ -8,6 +8,7 @@ const EditCategoryModal = ({ isVisible, onCancel, onOk, form, categoryName }) =>
       open={isVisible}
       onOk={onOk}
       onCancel={onCancel}
+      className="edit-modal"
     >
       <Form form={form} layout="vertical">
         <Form.Item

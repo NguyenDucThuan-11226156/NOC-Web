@@ -88,8 +88,8 @@
   color: #fff !important;
 }
 
-/* Css Categories Modal */
-.categories-modal .ant-modal-title {
+/* Css Categories Modal Create */
+.categories-modal .ant-modal-title, .edit-modal .ant-modal-title {
   text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
@@ -100,11 +100,12 @@
 .categories-modal-input,
 .categories-modal-input:hover,
 .categories-modal-input:focus,
-.categories-modal-input:focus-within {
+.categories-modal-input:focus-within, 
+.edit-modal-input, .edit-modal-input:hover, .edit-modal-input:focus, .edit-modal-input:focus-within {
   border: 1px solid #409174;
 }
 
-.categories-cancel-btn , .categories-modal-create-btn{
+.categories-cancel-btn , .categories-modal-create-btn, .edit-modal .ant-modal-footer .ant-btn-default, .edit-modal .ant-modal-footer .ant-btn-primary {
   width: 100px;
   height: 40px;
   border-radius: 15px;
@@ -112,27 +113,27 @@
   font-size: 16px;
 }
 
-.categories-cancel-btn {
+.categories-cancel-btn, .edit-modal .ant-modal-footer .ant-btn-default {
   background-color: var(--color-active);
   border-color: var(--color-active);
   color: #fff;
 }
 
-.categories-cancel-btn:hover {
+.categories-cancel-btn:hover, .edit-modal .ant-modal-footer .ant-btn-default:hover {
   background-color: #fff;
   border-color: var(--color-active) !important;
   color: var(--color-active) !important;
 }
 
-.categories-modal-create-btn {
+.categories-modal-create-btn, .edit-modal .ant-modal-footer .ant-btn-primary {
   background-color: #409174;
   border-color: #409174;
+  color: #fff;
 }
 
 
-.categories-modal-create-btn:hover {
+.categories-modal-create-btn:hover, .edit-modal .ant-modal-footer .ant-btn-primary:hover {
   background-color: #214236 !important;
   border-color: #214236 !important;
+  color: #fff !important;
 }
-
-
