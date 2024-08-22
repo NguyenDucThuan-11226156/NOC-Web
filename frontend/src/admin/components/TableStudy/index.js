@@ -1,42 +1,69 @@
 import React, { useState } from "react";
-import { Button, Space, Table, message } from "antd";
+import { Button, Space, Table, message, Form } from "antd";
 import axios from "axios";
-import { useCookies } from "react-cookie"; // Import useCookies
+import { useCookies } from "react-cookie";
 import '../../pages/CreateCategory/Categories.css';
 import { API } from "../../../constant";
+import EditCategoryModal from "../../pages/CreateCategory/EditCategoryModal"; // Import component
 
 const TableStudy = ({ studies, fetchCategories }) => {
-  const [cookies] = useCookies(['tokenAdmin']); // Access the tokenAdmin cookie
-  const [loadingId, setLoadingId] = useState(null); // State to track loading button
+  const [cookies] = useCookies(['tokenAdmin']);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedStudy, setSelectedStudy] = useState(null);
 
-  // Function to handle delete action
+  const [form] = Form.useForm();
+
   const handleDelete = async (id) => {
-    setLoadingId(id); // Set the loading state for the clicked button
-
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteStudy/${id}`, {
         headers: {
-          Authorization: `Bearer ${cookies.tokenAdmin}`, // Include the token in the headers
+          Authorization: `Bearer ${cookies.tokenAdmin}`,
         },
       });
-
       if (response.data.code === 200) {
         message.success("Study deleted successfully");
-        fetchCategories(); // Refresh the category list after deletion
+        fetchCategories();
       } else {
         message.error("Failed to delete study");
       }
     } catch (error) {
       message.error("An error occurred while deleting the study");
-    } finally {
-      setLoadingId(null); // Reset the loading state
+    }
+  };
+
+  const showEditModal = (study) => {
+    setSelectedStudy(study);
+    form.setFieldsValue({ study: study.description });
+    setIsModalVisible(true);
+  };
+
+  const handleEdit = async () => {
+    try {
+      const values = await form.validateFields();
+      const response = await axios.post(`${API}/api/v1/admin/editStudy/${selectedStudy._id}`, {
+        study: values.study,
+      }, {
+        headers: {
+          Authorization: `Bearer ${cookies.tokenAdmin}`,
+        },
+      });
+
+      if (response.data.code === 200) {
+        message.success("Study updated successfully");
+        await fetchCategories();
+        setIsModalVisible(false);
+      } else {
+        message.error("Failed to update study");
+      }
+    } catch (error) {
+      message.error("An error occurred while updating the study");
     }
   };
 
   const columns = [
     {
       title: "Số thứ tự",
-      render: (text, record, index) => <a>{index + 1}</a>, // Incrementing the index
+      render: (text, record, index) => <a>{index + 1}</a>,
     },
     {
       title: "id",
@@ -44,7 +71,7 @@ const TableStudy = ({ studies, fetchCategories }) => {
       key: "_id",
     },
     {
-      title: "Chuyên ngành",
+      title: "Học vấn",
       dataIndex: "description",
       key: "description",
     },
@@ -53,11 +80,15 @@ const TableStudy = ({ studies, fetchCategories }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button className="edit-categories-btn">Edit</Button>
+          <Button
+            className="edit-categories-btn"
+            onClick={() => showEditModal(record)}
+          >
+            Edit
+          </Button>
           <Button
             className="delete-categories-btn"
             onClick={() => handleDelete(record._id)}
-            loading={loadingId === record._id} // Set loading state
           >
             Delete
           </Button>
@@ -66,7 +97,18 @@ const TableStudy = ({ studies, fetchCategories }) => {
     },
   ];
 
-  return <Table className="categories-table" columns={columns} dataSource={studies} />;
+  return (
+    <>
+      <Table className="categories-table" columns={columns} dataSource={studies} />
+      <EditCategoryModal
+        isVisible={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
+        onOk={handleEdit}
+        form={form}
+        categoryName="Study"
+      />
+    </>
+  );
 };
 
 export default TableStudy;

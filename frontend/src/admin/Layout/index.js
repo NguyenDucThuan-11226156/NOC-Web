@@ -25,6 +25,7 @@ import logoNCC from "../../images/logo/Logo-NCC.svg";
 import logoNEU from "../../images/logo/Logo-Neu.svg";
 import logoNOC from "../../images/logo/NOC-black.svg";
 import logoNDM from "../../images/logo/NOC-white.svg";
+import AvatarContext from "antd/es/avatar/AvatarContext";
 
 const { Header, Sider, Content } = Layout;
 
@@ -172,7 +173,7 @@ const AppAdmin = () => {
               className="admin-avatar"
               size={60}
               aria-label="admin avatar"
-            />
+            ><img src={logoNEU} alt="logo neu"/></Avatar>
           </Dropdown>
         </Header>
         <Content

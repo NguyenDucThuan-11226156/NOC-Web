@@ -44,7 +44,7 @@ const CreateCategory = () => {
         </div>
         <div className="categories-item">
           <h2 className="categories-title">Enterprise</h2>
-          <TableEnterprise enterprises={enterprises} />
+          {/* <TableEnterprise enterprises={enterprises} /> */}
           <Button onClick={() => openModal("enterprise")} className="categories-create-btn">
             Create Enterprise
           </Button>
@@ -52,7 +52,7 @@ const CreateCategory = () => {
         </div>
         <div className="categories-item">
           <h2 className="categories-title">Specialization</h2>
-          <TableSpecialization specializations={specializations} />
+          {/* <TableSpecialization specializations={specializations} /> */}
           <Button onClick={() => openModal("specialization")} className="categories-create-btn">
             Create Specialization
           </Button>
