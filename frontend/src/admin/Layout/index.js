@@ -173,7 +173,8 @@ const AppAdmin = () => {
               className="admin-avatar"
               size={60}
               aria-label="admin avatar"
-            ><img src={logoNEU} alt="logo neu"/></Avatar>
+              src={logoNEU}
+            />
           </Dropdown>
         </Header>
         <Content

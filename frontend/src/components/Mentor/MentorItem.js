@@ -152,7 +152,7 @@ function MentorItem({ mentor, mentorId }) {
             <Button
               className={
                 "mentorCard-content-Btn " +
-                (!isMentorApplied && !isMentorSaved && "btn-viewmore-full")
+                (isMentorApplied && "btn-viewmore-full")
               }
               onClick={handleViewMore}
             >
