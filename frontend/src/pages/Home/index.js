@@ -39,7 +39,7 @@ function Home() {
       organization: filters.organization,
       specialization: filters.specialization,
       education: filters.education,
-      domain: filters.industry,
+      industry: filters.industry,
     }).then((res) => {
       setMentors(res.mentors);
       setTotal(res.mentors.length);

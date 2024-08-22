@@ -42,13 +42,11 @@ function HeaderDefault() {
           },
         })
         .then((response) => {
-          console.log(response.data);
           const userInfo = {
             name: response.data.info.name,
             avatar: response.data.info.avatar,
           };
-          console.log(userInfo);
-          
+
           setUser(userInfo);
         })
         .catch((error) => {
@@ -110,7 +108,7 @@ function HeaderDefault() {
         <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">
-            <UserOutlined className="dropdownItem-icon"/>
+              <UserOutlined className="dropdownItem-icon" />
             </div>
             <span>Trang cá nhân</span>
           </div>
@@ -123,7 +121,9 @@ function HeaderDefault() {
       >
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo"><EditOutlined className="dropdownItem-icon"/></div>
+            <div className="dropdownItem-logo">
+              <EditOutlined className="dropdownItem-icon" />
+            </div>
             <span>Mentor của tôi</span>
           </div>
         </Link>
@@ -131,14 +131,18 @@ function HeaderDefault() {
       <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo"><SecurityScanOutlined className="dropdownItem-icon"/></div>
+            <div className="dropdownItem-logo">
+              <SecurityScanOutlined className="dropdownItem-icon" />
+            </div>
             <span>Trợ giúp</span>
           </div>
         </Link>
       </Menu.Item>
       <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
         <div className="dropdownItem-list">
-          <div className="dropdownItem-logo"><LogoutOutlined className="dropdownItem-icon"/></div>
+          <div className="dropdownItem-logo">
+            <LogoutOutlined className="dropdownItem-icon" />
+          </div>
           <span>Đăng xuất</span>
         </div>
       </Menu.Item>
