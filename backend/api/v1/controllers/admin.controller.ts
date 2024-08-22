@@ -502,3 +502,29 @@ export const editUserBanner = async (req: Request, res: Response) => {
     });
   }
 };
+// [GET] /api/v1/admin/getSettings
+export const getSettings = async (req: Request, res: Response) => {
+  try {
+    // Update the UserBanner field in the SettingGeneral collection
+    const data = await SettingGeneral.find();
+    // Check if the update was successful
+    if (data) {
+      res.json({
+        code: 200,
+        data: data,
+      });
+    } else {
+      res.status(404).json({
+        code: 404,
+        message: "No changes made",
+      });
+    }
+  } catch (error) {
+    // Handle potential errors
+    res.status(500).json({
+      code: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
