@@ -73,4 +73,5 @@ router.post(
   uploadCloud.uploadSingle,
   controller.editHomeBanner
 );
+router.get("/getSettings",  controller.getSettings);
 export const adminRoutes: Router = router;
