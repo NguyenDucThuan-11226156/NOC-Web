@@ -1,4 +1,5 @@
-const API_DOMAIN = "http://localhost:8000";
+import { API } from "../constant";
+const API_DOMAIN = `${API}`;
 
 export const get = async (path) => {
   const respone = await fetch(API_DOMAIN + path);

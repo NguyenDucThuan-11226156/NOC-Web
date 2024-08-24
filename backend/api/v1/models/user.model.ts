@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema(
     saving: String,
     number: Number,
     avatar: String,
+    rateForMentors: [
+      {
+        idMentor: String,
+        rateNumber: Number,
+      },
+    ],
     mentorIds: [
       {
         mentorId: String,

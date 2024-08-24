@@ -15,5 +15,4 @@ const mainV1Routes = (app: Express): void => {
   app.use(version + "/mentors", mentorRoutes);
   app.use(version + "/admin", adminRoutes);
 };
-// localhost:8000/api/v1/users
 export default mainV1Routes;

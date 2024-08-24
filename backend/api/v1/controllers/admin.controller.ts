@@ -470,7 +470,8 @@ export const editHomeBanner = async (req: Request, res: Response) => {
       error: error.message,
     });
   }
-}; // [POST] /api/v1/admin/editUserBanner
+};
+// [POST] /api/v1/admin/editUserBanner
 export const editUserBanner = async (req: Request, res: Response) => {
   try {
     const newUserBanner = req.body.file;

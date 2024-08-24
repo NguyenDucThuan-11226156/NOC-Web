@@ -8,6 +8,7 @@ import {
 import ForgotPassword from "../models/forgot-password.model";
 import { sendMail } from "../../../helpers/send-mail.helper";
 import Mentors from "../models/mentor.model";
+import Users from "../models/user.model";
 // [POST] /api/v1/users/register
 export const register = async (req: Request, res: Response) => {
   try {
@@ -442,5 +443,75 @@ export const applyNow = async (req: Request, res: Response) => {
       code: 500,
       message: "An error occurred while applying.",
     });
+  }
+};
+// [POST] /api/v1/users/rateMentor/:id
+export const rateMentor = async (req, res) => {
+  try {
+    const idMentor = req.params.id;
+    const tokenUser = req.body.token;
+    const numberRate = req.body.rate;
+
+    // Find the user by their token
+    const user = await Users.findOne({ token: tokenUser });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if the user has already rated the mentor
+    const existingRate = user.rateForMentors.find(
+      (rate) => rate.idMentor === idMentor
+    );
+
+    if (existingRate) {
+      // If the mentor has already been rated, update the rating
+      existingRate.rateNumber = numberRate;
+    } else {
+      // If the mentor hasn't been rated, add a new rating
+      user.rateForMentors.push({ idMentor, rateNumber: numberRate });
+    }
+
+    // Save the updated user document
+    await user.save();
+
+    // Now update the Mentor document
+    const mentor = await Mentors.findById(idMentor);
+
+    if (!mentor) {
+      return res.status(404).json({ message: "Mentor not found" });
+    }
+
+    // Check if the user has already rated this mentor
+    const existingMentorRate = mentor.rateOfMentees.find(
+      (rate) => rate.idMentee === user._id.toString()
+    );
+
+    if (existingMentorRate) {
+      // If the mentor has already been rated by this mentee, update the rating
+      existingMentorRate.rateNumber = numberRate;
+    } else {
+      // Add new rating to mentor's rateOfMentees array
+      mentor.rateOfMentees.push({
+        idMentee: user._id.toString(),
+        rateNumber: numberRate,
+      });
+    }
+
+    // Recalculate the mentor's average rating
+    const totalRates = mentor.rateOfMentees.reduce(
+      (sum, rate) => sum + rate.rateNumber,
+      0
+    );
+    mentor.numberRate = mentor.rateOfMentees.length;
+    mentor.rate = totalRates / mentor.numberRate;
+
+    // Save the updated mentor document
+    await mentor.save();
+
+    return res.status(200).json({ message: "Mentor rated successfully" });
+  } catch (error) {
+    console.error("Error rating mentor:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };

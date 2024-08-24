@@ -8,6 +8,12 @@ const mentorSchema = new mongoose.Schema(
     introduction1: String,
     introduction2: String,
     rate: Number,
+    rateOfMentees: [
+      {
+        idMentee: String,
+        rateNumber: Number,
+      },
+    ],
     numberRate: Number,
     keyword: String,
     organization: String,

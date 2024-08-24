@@ -4,6 +4,7 @@ import axios from "axios";
 import ResetPW from "../ResetPW"; // Import ResetPW component
 import "./ForgotPW.css";
 import { useCookies } from "react-cookie";
+import { API } from "../../constant";
 function ForgotPassword({ open, onCancel }) {
   const [isOtpModalVisible, setIsOtpModalVisible] = useState(false);
   const [isResetPasswordModalVisible, setIsResetPasswordModalVisible] =
@@ -16,7 +17,7 @@ function ForgotPassword({ open, onCancel }) {
   });
   const handleForgotPassword = async (values) => {
     try {
-      await axios.post("http://localhost:8000/api/v1/users/password/forgot", {
+      await axios.post(`${API}/api/v1/users/password/forgot`, {
         email: values.email,
       });
       notification.success({
@@ -37,14 +38,10 @@ function ForgotPassword({ open, onCancel }) {
 
   const handleVerifyOtp = async (values) => {
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/users/password/otp",
-        {
-          email: email,
-          otp: values.otp,
-        }
-      );
-      // setToken(res.data.token);
+      const res = await axios.post(`${API}/api/v1/users/password/otp`, {
+        email: email,
+        otp: values.otp,
+      });
       setCookie("token", res.data.token);
       setIsOtpModalVisible(false);
       setIsResetPasswordModalVisible(true);
@@ -131,7 +128,7 @@ function ForgotPassword({ open, onCancel }) {
             name="otp"
             rules={[{ required: true, message: "Please input your OTP!" }]}
           >
-            <Input placeholder="Nhập mã OTP" className="otp-input"/>
+            <Input placeholder="Nhập mã OTP" className="otp-input" />
           </Form.Item>
 
           <Form.Item>
