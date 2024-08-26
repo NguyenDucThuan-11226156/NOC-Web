@@ -35,4 +35,10 @@ router.post(
   uploadCloudPdf.uploadSingle,
   controller.applyNow
 );
+router.post(
+  "/rateMentor/:id",
+  authMiddleware.requireAuth,
+  controller.rateMentor
+);
+
 export const userRoutes: Router = router;

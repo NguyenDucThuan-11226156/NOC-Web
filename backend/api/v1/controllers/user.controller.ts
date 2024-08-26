@@ -454,7 +454,6 @@ export const rateMentor = async (req, res) => {
 
     // Find the user by their token
     const user = await Users.findOne({ token: tokenUser });
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -463,7 +462,6 @@ export const rateMentor = async (req, res) => {
     const existingRate = user.rateForMentors.find(
       (rate) => rate.idMentor === idMentor
     );
-
     if (existingRate) {
       // If the mentor has already been rated, update the rating
       existingRate.rateNumber = numberRate;
@@ -477,7 +475,6 @@ export const rateMentor = async (req, res) => {
 
     // Now update the Mentor document
     const mentor = await Mentors.findById(idMentor);
-
     if (!mentor) {
       return res.status(404).json({ message: "Mentor not found" });
     }
@@ -486,7 +483,6 @@ export const rateMentor = async (req, res) => {
     const existingMentorRate = mentor.rateOfMentees.find(
       (rate) => rate.idMentee === user._id.toString()
     );
-
     if (existingMentorRate) {
       // If the mentor has already been rated by this mentee, update the rating
       existingMentorRate.rateNumber = numberRate;
