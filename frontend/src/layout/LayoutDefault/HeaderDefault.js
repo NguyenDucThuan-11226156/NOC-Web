@@ -20,9 +20,11 @@ import {
   UserOutlined,
   EditOutlined,
 } from "@ant-design/icons";
+import SuccessModal from "../../components/SuccessModal";
 function HeaderDefault() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+  const [sucessModalOpen, setSuccessModalOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
   const [cookies] = useCookies(["cookie-name"], {
@@ -59,18 +61,27 @@ function HeaderDefault() {
     setLoginOpen(!loginOpen);
     if (signUpOpen) setSignUpOpen(false);
     if (forgotPasswordOpen) setForgotPasswordOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
   };
 
   const toggleSignUpModal = () => {
     setSignUpOpen(!signUpOpen);
     if (loginOpen) setLoginOpen(false);
     if (forgotPasswordOpen) setForgotPasswordOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
   };
 
   const toggleForgotPasswordModal = () => {
     setForgotPasswordOpen(!forgotPasswordOpen);
     if (loginOpen) setLoginOpen(false);
     if (signUpOpen) setSignUpOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
+  };
+  const toggleSuccessModal = () => {
+    setSuccessModalOpen(!sucessModalOpen);
+    if (loginOpen) setLoginOpen(false);
+    if (signUpOpen) setSignUpOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
   };
 
   const handleLoginSuccess = (userInfo) => {
@@ -241,6 +252,7 @@ function HeaderDefault() {
               <SignUp
                 open={signUpOpen}
                 toggleLoginModal={toggleLoginModal}
+                toggleSuccessModal={toggleSuccessModal}
                 onCancel={toggleSignUpModal}
               />
               <Login
@@ -253,6 +265,11 @@ function HeaderDefault() {
               <ForgotPassword
                 open={forgotPasswordOpen}
                 onCancel={toggleForgotPasswordModal}
+              />
+              <SuccessModal 
+                open={sucessModalOpen}
+                onCancel={toggleSuccessModal}
+                toggleLoginModal={toggleLoginModal}
               />
             </div>
           </Col>

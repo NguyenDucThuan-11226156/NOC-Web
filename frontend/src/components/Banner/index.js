@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "../../constant"; // Adjust the import path
 import './Banner.css'
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 
 function Banner() {
   const [bgImage, setBgImage] = useState('');

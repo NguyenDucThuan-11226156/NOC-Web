@@ -1,24 +1,36 @@
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, message } from "antd";
+import { useState } from "react";
 import { post } from "../../utils/request";
-import './SignUp.css'
+import './SignUp.css';
+import SuccessModal from "../SuccessModal"; // Import the SuccessModal component
 
-function SignUp({ open, toggleLoginModal, onCancel }) {
+function SignUp({ open, toggleLoginModal, onCancel, toggleSuccessModal }) {
+  const [loading, setLoading] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+
   const onFinish = async (values) => {
-    console.log("Success:", values);
-    await post("/api/v1/users/register", {
-      email: values.email,
-      password: values.password,
-    }).then((response) => {
-      // receive message then display to the screen
-      // save token into the cookies
-      const token = response.token;
-      // setcookie with expire 1d
-      // after that, all apis need token to HTTP.
-    });
+    setLoading(true); // Set loading state to true when the form is submitted
+    try {
+      const response = await post("/api/v1/users/register", {
+        email: values.email,
+        password: values.password,
+      });
+
+      if (response) {
+        // Assuming the response means a successful registration
+        setLoading(false); // Stop loading when the request is finished
+        toggleSuccessModal() // Show success modal
+      }
+    } catch (error) {
+      setLoading(false);
+      message.error("Đăng kí thất bại. Vui lòng thử lại!"); // Display error message if registration fails
+    }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   const validatePassword = (_, value) => {
     if (!value) {
       return Promise.reject(new Error("Please input your password!"));
@@ -50,6 +62,7 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
     }
     return Promise.resolve();
   };
+
   const validateConfirmPassword = ({ getFieldValue }) => ({
     validator(_, value) {
       if (!value || getFieldValue("password") === value) {
@@ -60,6 +73,11 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
       );
     },
   });
+
+  // const handleLoginClick = () => {
+  //   toggleLoginModal(); // Show login modal when the button in success modal is clicked
+  //   setIsSuccessModalVisible(false);
+  // };
 
   return (
     <Modal
@@ -152,7 +170,12 @@ function SignUp({ open, toggleLoginModal, onCancel }) {
             span: 17,
           }}
         >
-          <Button type="primary" htmlType="submit" className="form-signUp-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={loading} // Set the loading state for the button
+            className="form-signUp-button"
+          >
             Đăng kí
           </Button>
         </Form.Item>
