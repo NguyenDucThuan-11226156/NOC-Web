@@ -281,11 +281,12 @@ function MentorDetailPage() {
         footer={false}
       >
         <List
+          className="review-list"
           dataSource={comments}
           renderItem={(item) => (
-            <List.Item>
+            <List.Item className="review-list-item">
               <List.Item.Meta description={item.message} />
-              <div>{new Date(item.createAt).toLocaleDateString()}</div>
+              <div className="review-date">{new Date(item.createAt).toLocaleDateString()}</div>
             </List.Item>
           )}
         />
