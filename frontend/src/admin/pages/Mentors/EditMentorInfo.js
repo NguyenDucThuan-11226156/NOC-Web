@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Form, Input, Button, Row, Col } from "antd";
 import { detailMentor, updateMentor } from "../../../services/mentorsServices";
-
 const EditMentorInfo = ({ visible, onClose, mentorId, onUpdateSuccess }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -68,49 +67,73 @@ const EditMentorInfo = ({ visible, onClose, mentorId, onUpdateSuccess }) => {
     >
       <Form form={form} layout="vertical" onFinish={handleUpdate}>
         <Row gutter={[25, 25]}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item name="name" label="Name" className="edit-mentor-item">
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          {/* <Col span={12}>
             <Form.Item name="avatar" label="Avatar URL" className="edit-mentor-item">
               <Input />
             </Form.Item>
-          </Col>
+          </Col> */}
         </Row>
         <Row gutter={[25, 25]}>
           <Col span={12}>
-            <Form.Item name="introduction1" label="Introduction 1" className="edit-mentor-item">
+            <Form.Item
+              name="introduction1"
+              label="Introduction 1"
+              className="edit-mentor-item"
+            >
               <Input.TextArea />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="introduction2" label="Introduction 2" className="edit-mentor-item">
+            <Form.Item
+              name="introduction2"
+              label="Introduction 2"
+              className="edit-mentor-item"
+            >
               <Input.TextArea />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[25, 25]}>
           <Col span={12}>
-            <Form.Item name="organization" label="Organization" className="edit-mentor-item">
+            <Form.Item
+              name="organization"
+              label="Organization"
+              className="edit-mentor-item"
+            >
               <Input />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="specialization" label="Specialization" className="edit-mentor-item">
+            <Form.Item
+              name="specialization"
+              label="Specialization"
+              className="edit-mentor-item"
+            >
               <Input />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[25, 25]}>
           <Col span={12}>
-            <Form.Item name="education" label="Education" className="edit-mentor-item">
+            <Form.Item
+              name="education"
+              label="Education"
+              className="edit-mentor-item"
+            >
               <Input />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="industry" label="Industry" className="edit-mentor-item">
+            <Form.Item
+              name="industry"
+              label="Industry"
+              className="edit-mentor-item"
+            >
               <Input />
             </Form.Item>
           </Col>
