@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.19.4",
     "axios": "^1.7.3",
+    "frontend": "file:",
     "nodemailer": "^6.9.14",
     "react": "^18.3.1",
     "react-cookie": "^7.2.0",

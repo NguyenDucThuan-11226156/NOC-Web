@@ -12,7 +12,7 @@
 
 .login-title {
   font-size: 48px;
-  color:#fff ;
+  color: #fff;
   font-family: var(--font-mentor--introduction);
   text-align: center;
   margin-bottom: 45px;
@@ -24,20 +24,23 @@
   padding: 10px 30px;
   border-radius: 30px;
   background-color: transparent;
-  backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, .5);
+  /* backdrop-filter: blur(15px); */
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.login-input, .login-input:hover, .login-input:focus, .login-input:focus-within {
+.login-input,
+.login-input:hover,
+.login-input:focus,
+.login-input:focus-within {
   margin-bottom: 20px !important;
   border-radius: 20px;
-  border-color: #409174 ;
+  border-color: #409174;
 }
 
 .login-form-button {
   width: 150px;
   border-radius: 30px;
-  background-color: #69C4A2;
+  background-color: #69c4a2;
   font-size: 16px;
   font-family: var(--font-mentor--introduction);
   font-weight: 700;
@@ -46,7 +49,6 @@
 .login-form-button:hover {
   background-color: #409174 !important;
 }
-
 
 .login-btn-container .ant-form-item-control-input-content {
   display: flex;
@@ -83,7 +85,7 @@
 
 .register-link {
   margin-top: 10px;
-  color: #69C4A2;
+  color: #69c4a2;
   font-weight: 600;
 }
 
