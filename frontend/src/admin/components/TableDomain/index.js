@@ -10,10 +10,13 @@ const TableDomain = ({ domains, fetchCategories }) => {
   const [cookies] = useCookies(['tokenAdmin']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState(null);
+  const [loadingDelete, setLoadingDelete] = useState({}); // Track loading state for each row
 
   const [form] = Form.useForm();
 
   const handleDelete = async (id) => {
+    setLoadingDelete((prevState) => ({ ...prevState, [id]: true })); // Set loading state to true for the specific row
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteDomain/${id}`, {
         headers: {
@@ -28,6 +31,8 @@ const TableDomain = ({ domains, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the domain");
+    } finally {
+      setLoadingDelete((prevState) => ({ ...prevState, [id]: false })); // Set loading state to false after the process completes
     }
   };
 
@@ -88,7 +93,9 @@ const TableDomain = ({ domains, fetchCategories }) => {
           </Button>
           <Button
             className="delete-categories-btn"
+            loading={loadingDelete[record._id]} // Set loading state
             onClick={() => handleDelete(record._id)}
+            disabled={loadingDelete[record._id]} // Disable button while loading
           >
             Delete
           </Button>

@@ -4,16 +4,19 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import '../../pages/CreateCategory/Categories.css';
 import { API } from "../../../constant";
-import EditCategoryModal from "../../pages/CreateCategory/EditCategoryModal";  // Import component mới
+import EditCategoryModal from "../../pages/CreateCategory/EditCategoryModal";  // Import component
 
 const TableSpecialization = ({ specializations, fetchCategories }) => {
   const [cookies] = useCookies(['tokenAdmin']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedSpecialization, setSelectedSpecialization] = useState(null);
+  const [loadingDelete, setLoadingDelete] = useState({}); // Track loading state for each row
 
   const [form] = Form.useForm();
 
   const handleDelete = async (id) => {
+    setLoadingDelete((prevState) => ({ ...prevState, [id]: true })); // Set loading state to true for the specific row
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteSpecialization/${id}`, {
         headers: {
@@ -28,6 +31,8 @@ const TableSpecialization = ({ specializations, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the specialization");
+    } finally {
+      setLoadingDelete((prevState) => ({ ...prevState, [id]: false })); // Set loading state to false after the process completes
     }
   };
 
@@ -88,7 +93,9 @@ const TableSpecialization = ({ specializations, fetchCategories }) => {
           </Button>
           <Button
             className="delete-categories-btn"
+            loading={loadingDelete[record._id]} // Set loading state
             onClick={() => handleDelete(record._id)}
+            disabled={loadingDelete[record._id]}
           >
             Delete
           </Button>
