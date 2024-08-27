@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema(
         mentorId: String,
       },
     ],
+    myReviews: [
+      {
+        message: String,
+        mentorId: String,
+      },
+    ],
     description: String,
     categoriesConsultId: String,
     description_proplem: String,

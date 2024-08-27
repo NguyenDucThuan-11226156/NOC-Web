@@ -449,7 +449,7 @@ export const applyNow = async (req: Request, res: Response) => {
 export const rateMentor = async (req, res) => {
   try {
     const idMentor = req.params.id;
-    const tokenUser = req.body.token;
+    const tokenUser = res.locals.token;
     const numberRate = req.body.rate;
 
     // Find the user by their token
@@ -509,5 +509,55 @@ export const rateMentor = async (req, res) => {
   } catch (error) {
     console.error("Error rating mentor:", error);
     return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+// [POST] /api/v1/users/reviewMentor/:id
+export const reviewMentor = async (req, res) => {
+  try {
+    const idMentor = req.params.id;
+    const tokenUser = res.locals.token;
+    const reviewMessage = req.body.review;
+
+    // Find the user by their token
+    const user = await Users.findOne({ token: tokenUser });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find the mentor by their ID
+    const mentor = await Mentors.findById(idMentor);
+    if (!mentor) {
+      return res.status(404).json({ message: "Mentor not found" });
+    }
+
+    // Create a new review object for the mentor
+    const newReview = {
+      userId: user._id,
+      message: reviewMessage,
+      createAt: new Date(),
+    };
+
+    // Add the new review to the mentor's review array
+    mentor.review.push(newReview);
+
+    // Save the updated mentor document
+    await mentor.save();
+
+    // Update the user's myReviews array
+    const userReview = {
+      message: reviewMessage,
+      mentorId: mentor._id,
+    };
+
+    user.myReviews.push(userReview);
+
+    // Save the updated user document
+    await user.save();
+
+    return res
+      .status(200)
+      .json({ message: "Review added successfully", mentor, user });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred", error });
   }
 };

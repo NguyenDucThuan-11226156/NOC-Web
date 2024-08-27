@@ -40,5 +40,9 @@ router.post(
   authMiddleware.requireAuth,
   controller.rateMentor
 );
-
+router.post(
+  "/reviewMentor/:id",
+  authMiddleware.requireAuth,
+  controller.reviewMentor
+);
 export const userRoutes: Router = router;

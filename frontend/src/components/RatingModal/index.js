@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Modal, Rate } from "antd";
 import "./RatingModal.css";
-
-const RatingModal = ({ visible, onClose }) => {
+const RatingModal = ({ visible, onClose, handleSubmitRating }) => {
+  const [rating, setRating] = useState(5); // Default rating value
+  // Handle rating change
+  const onRateChange = (value) => {
+    setRating(value);
+  };
   return (
     <Modal
       title="RATE"
@@ -13,9 +18,18 @@ const RatingModal = ({ visible, onClose }) => {
     >
       <p className="rating-subtitle">NEU DAILY MENTORING</p>
       <div className="rating-content">
-        <Rate allowHalf defaultValue={5} className="rating-star" />
-        <div className="rating-score">(5/5)</div>
-        <button className="rating-submit-btn" onClick={onClose}>
+        <Rate
+          allowHalf
+          defaultValue={rating}
+          onChange={onRateChange} // Capture rating value
+          className="rating-star"
+        />
+        <div className="rating-score">({rating}/5)</div>{" "}
+        {/* Display selected rating */}
+        <button
+          className="rating-submit-btn"
+          onClick={() => handleSubmitRating(rating)} // Pass the rating value on submit
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

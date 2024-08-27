@@ -409,9 +409,7 @@ export const deleteStudy = async (req: Request, res: Response) => {
 // [POST] /api/v1/admin/editAvatarDefault
 export const editAvatarDefault = async (req: Request, res: Response) => {
   try {
-    console.log("hello");
     const newAvatarDefault = req.body.file;
-    console.log(newAvatarDefault);
     // Update the avatarDefault field in the SettingGeneral collection
     const result = await SettingGeneral.updateOne(
       {},

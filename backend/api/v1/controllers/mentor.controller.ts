@@ -93,7 +93,6 @@ export const filterMentors = async (req: Request, res: Response) => {
     if (domain) {
       find["industry"] = new RegExp(domain, "i");
     }
-    console.log(find);
     const limitNumber = req.body.limit;
     const skipNumber = (req.body.page - 1) * limitNumber;
     const listMentor = await Mentors.find(find)
@@ -107,7 +106,6 @@ export const filterMentors = async (req: Request, res: Response) => {
       total: total,
     });
   } catch (error) {
-    console.log(error);
     res.json({
       code: 400,
       message: error,
@@ -202,7 +200,6 @@ export const updateMentor = async (req: Request, res: Response) => {
 export const detailMentor = async (req: Request, res: Response) => {
   try {
     const idMentor = req.params.id;
-    console.log(idMentor);
     const infoMentor = await Mentors.find({
       _id: idMentor,
     });
