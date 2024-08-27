@@ -38,7 +38,7 @@ export const register = async (req: Request, res: Response) => {
     });
   }
 };
-// [POST] /api/v1/mentors
+// [POST] /api/v1/mentors/list
 export const listMentors = async (req: Request, res: Response) => {
   try {
     const limitNumber = req.body.limit;
