@@ -33,6 +33,8 @@ const InfoUser = () => {
   const [cookies] = useCookies(["token"]);
   const token = cookies.token;
   const [loadingMentor, setLoadingMentor] = useState(null);
+  const [banner, setBanner] = useState('');
+  const [avatar, setAvatar] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,6 +49,21 @@ const InfoUser = () => {
           setMyMentors(userResponse.data.infoMentors);
           setSavedMentors(userResponse.data.saveInfoMentors);
         }
+
+        const settingsResponse = await axios.get(`${API}/api/v1/admin/getSettings`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (settingsResponse.data.code === 200) {
+          const data = settingsResponse.data.data[0]; 
+          // console.log(data);
+          
+          setBanner(data.userBanner || data.homeBanner || defaultBanner); 
+          setAvatar(data.avatarDefault || defaultAvatar); 
+        }
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -102,13 +119,13 @@ const InfoUser = () => {
         <Row gutter={[0, 20]} className="info-user-main-header">
           <Col span={24}>
             <div className="user-banner">
-              <img src={userInfo.banner || defaultBanner} alt="Banner" />
+              <img src={banner || defaultBanner} alt="Banner" />
             </div>
           </Col>
           <Col span={24}>
             <div className="user-info-header">
               <Avatar
-                src={userInfo.avatar || defaultAvatar}
+                src={userInfo.avatar || avatar || defaultAvatar}
                 size={190}
                 className="user-avatar"
               />
@@ -204,16 +221,6 @@ const InfoUser = () => {
                               {mentor.rate || 0}/5)
                             </p>
                             <div className="mentorCard-btnContainer">
-                              {/* <Button
-                                className="mentorCard-content-Btn-myMentor"
-                                onClick={handleApplyModal}
-                              >
-                                Apply now
-                              </Button>
-                              <ApplyModal
-                                open={isApplyModalVisible}
-                                onCancel={handleCancel}
-                              /> */}
                               <Button
                                 className="mentorCard-content-Btn-myMentor"
                                 style={{ width: "100%" }}
