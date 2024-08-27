@@ -1,4 +1,4 @@
-import { Avatar, Button, Col, Dropdown, Menu, Row } from "antd";
+import { Avatar, Button, Col, Dropdown, Menu, Row, Drawer } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -31,6 +31,7 @@ function HeaderDefault() {
     doNotParse: true,
   });
   const [user, setUser] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -160,6 +161,10 @@ function HeaderDefault() {
     </Menu>
   );
 
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
+
   return (
     <>
       <Row>
@@ -275,6 +280,63 @@ function HeaderDefault() {
           </Col>
         </Header>
       </Row>
+      <Drawer
+        title="Menu"
+        placement="left"
+        onClose={toggleSidebar}
+        visible={sidebarVisible}
+      >
+        <ul>
+          <li>
+            <NavLink
+              to="/"
+              className={navLinkActive("/")}
+              onClick={() => {
+                handleLinkClick("/");
+                toggleSidebar();
+              }}
+            >
+              Trang chủ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className={navLinkActive("/about")}
+              onClick={() => {
+                handleLinkClick("/about");
+                toggleSidebar();
+              }}
+            >
+              Giới thiệu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/info"
+              className={navLinkActive("/info")}
+              onClick={() => {
+                handleLinkClick("/info");
+                toggleSidebar();
+              }}
+            >
+              Thông tin
+            </NavLink>
+          </li>
+          <li>
+            <HashLink
+              to="/#footer"
+              className={navLinkActive("/#footer")}
+              onClick={() => {
+                handleLinkClick("/");
+                toggleSidebar();
+              }}
+            >
+              Liên hệ
+            </HashLink>
+          </li>
+        </ul>
+      </Drawer>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { Col, Input, Row, Select } from "antd";
+import { SearchOutlined } from '@ant-design/icons';
 import React, { useState } from "react";
 import "./Search.css";
 
@@ -45,10 +46,10 @@ function SearchRow({
     <Row
       className="searchRow"
       gutter={[16, 16]}
-      justify="space-between"
+      justify='space-between'
       align="center"
     >
-      <Col span={24}>
+      <Col xs={24} xl={24}>
         <Search
           className="searchBar"
           placeholder="Nhập từ khóa..."
@@ -58,7 +59,7 @@ function SearchRow({
           onChange={(e) => handleChange("keyword", e.target.value)}
         />
       </Col>
-      <Col span={6}>
+      <Col xs={24} xl={6}>
         <Select
           className="searchBar-select"
           placeholder="Doanh nghiệp/Tổ chức"
@@ -73,7 +74,7 @@ function SearchRow({
           ))}
         </Select>
       </Col>
-      <Col span={6}>
+      <Col xs={24} xl={6}>
         <Select
           className="searchBar-select"
           placeholder="Chuyên môn"
@@ -86,7 +87,7 @@ function SearchRow({
           ))}
         </Select>
       </Col>
-      <Col span={6}>
+      <Col xs={24} xl={6}>
         <Select
           className="searchBar-select"
           placeholder="Học vấn"
@@ -99,7 +100,7 @@ function SearchRow({
           ))}
         </Select>
       </Col>
-      <Col span={6}>
+      <Col xs={24} xl={6}>
         <Select
           className="searchBar-select"
           placeholder="Ngành học"

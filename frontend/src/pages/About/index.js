@@ -9,12 +9,12 @@ function About() {
         <section className="about-section">
           <h2 className="about-title">Giới thiệu</h2>
           <Row align="center" justify='center' gutter={[20, 20]}>
-            <Col span={12}>
+            <Col xl={12} xs={24}>
                 <div className="about-pic-container">
                 <img src="" alt="about-pic" /> {/* Có thể thêm ảnh nếu muốn */}
                 </div>
             </Col>
-            <Col span={12}>
+            <Col xl={12} xs={24}>
               <p className="about-description">
                 NEU Daily Mentoring là dự án thường nhật được tổ chức bởi Trung
                 tâm Tư vấn Hướng nghiệp và Việc làm Trường Đại học Kinh tế Quốc

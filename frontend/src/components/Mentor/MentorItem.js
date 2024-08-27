@@ -113,10 +113,10 @@ function MentorItem({ mentor, mentorId }) {
   return (
     <Card bordered className="mentorCard">
       <Row>
-        <Col span={10} className="mentorCard-image">
+        <Col xl={10} xs={24} className="mentorCard-image">
           <img src={mentor.avatar} alt="Avatar" />
         </Col>
-        <Col span={13} className="mentorCard-content">
+        <Col xl={13} xs={24} className="mentorCard-content">
           <h3>{mentor.name}</h3>
           <div className="mentorCard-content-logo">
             <img
@@ -161,7 +161,7 @@ function MentorItem({ mentor, mentorId }) {
             {!isMentorSaved && !isMentorApplied && (
               <Button
                 className={`mentorCard-content-Btn ${
-                  !isMentorApplied ? "btn-viewmore-full" : ""
+                  !isMentorApplied && !isMentorSaved ?"btn-viewmore-full" : ""
                 }`}
                 onClick={handleSave}
                 loading={loading} // Set loading state on the button

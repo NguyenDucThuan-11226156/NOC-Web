@@ -141,15 +141,15 @@ const InfoUser = () => {
         >
           <TabPane tab="Trang cá nhân" key="1">
             <Card className="user-info-card">
-              <Col span={5}>
+              <Col xl={5} xs={24}>
                 <Title level={4}>Thông tin</Title>
               </Col>
-              <Col span={1}>
+              <Col xl={1} xs={24}>
                 <div className="user-info-border"></div>
               </Col>
-              <Col span={7}>
+              <Col xl={17} xs={24}>
                 <Row justify="space-between">
-                  <Col span={24} offset={2} className="user-info-list">
+                  <Col span={24} className="user-info-list">
                     <li>Họ và tên: {userInfo.name}</li>
                     <br />
                     <li>Lớp học phần: {userInfo.school}</li>
@@ -175,21 +175,21 @@ const InfoUser = () => {
                 className="mentor-info-item"
                 justify="space-evenly"
               >
-                <Col span={4}>
+                <Col xl={4} xs={24}>
                   <Title level={4}>My Mentor ({myMentors.length})</Title>
                 </Col>
-                <Col span={1}>
+                <Col xl={1} xs={0}>
                   <div className="mentor-info-border"></div>
                 </Col>
-                <Col span={19}>
+                <Col xl={19} xs={24}>
                   <Row gutter={[0, 20]} justify="space-between">
                     {myMentors.map((mentor) => (
-                      <Col span={12}>
+                      <Col xl={12} xs={24}>
                         <Row key={mentor._id} className="mentorCard">
-                          <Col span={10} className="mentorCard-image">
+                          <Col xl={10} xs={24} className="mentorCard-image">
                             <img src={mentor.avatar} alt="Avatar" />
                           </Col>
-                          <Col span={13} className="mentorCard-content">
+                          <Col xl={13} xs={24} className="mentorCard-content">
                             <h3>{mentor.name}</h3>
                             <div className="mentorCard-content-logo">
                               <img
@@ -241,23 +241,24 @@ const InfoUser = () => {
                 className="mentor-info-item"
                 justify="center"
               >
-                <Col span={4}>
+                <Col xl={4} xs={24}>
                   <Title level={4}>Đã lưu ({savedMentors.length})</Title>
                 </Col>
-                <Col span={1}>
+                <Col xl={1} xs={0}>
                   <div className="mentor-info-border"></div>
                 </Col>
-                <Col span={19}>
+                <Col xl={19} xs={24}>
                   <Row gutter={[0, 20]} justify="space-between">
                     {savedMentors.map((mentor) => (
-                      <Col span={12}>
+                      <Col xl={12} xs={24}>
                         <Row key={mentor._id} className="mentorCard">
-                          <Col span={10} className="mentorCard-image">
+                          <Col xl={10} xs={24} className="mentorCard-image">
                             <img src={mentor.avatar} alt="Avatar" />
                           </Col>
                           <Col
                             key={mentor._id}
-                            span={13}
+                            xl={13}
+                            xs={24}
                             className="mentorCard-content"
                           >
                             <h3>{mentor.name}</h3>

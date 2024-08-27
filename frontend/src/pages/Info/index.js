@@ -11,12 +11,12 @@ function Info() {
         <section style={{ marginBottom: "100px" }} className="info-section">
           <h2 className="info-title">Sứ mệnh</h2>
           <Row align="center" justify="center" gutter={[20, 20]}>
-            <Col span={12}>
+            <Col xl={12} xs={24}>
               <div className="info-pic-container">
                 <img src="" alt="info-pic" /> {/* Có thể thêm ảnh nếu muốn */}
               </div>
             </Col>
-            <Col span={12}>
+            <Col xl={12} xs={24}>
               <p className="info-description">
                 Với sứ mệnh cốt lõi của Trung tâm Tư vấn Hướng nghiệp và Việc
                 làm là hỗ trợ sinh viên định hướng nghề nghiệp, phát triển các
@@ -41,7 +41,7 @@ function Info() {
         <section className="network-section">
           <h2 className="info-title">Mạng lưới</h2>
           <Row align="center" justify="center" gutter={[20, 20]}>
-            <Col span={12}>
+            <Col xl={12} xs={24}>
               <p className="info-description">
                 Dự án NEU Daily Mentoring kết nối Mentee - những sinh viên có
                 mong muốn học hỏi, trau dồi với đội ngũ Mentor bao gồm các cựu
@@ -51,10 +51,10 @@ function Info() {
                 việc.
               </p>
             </Col>
-            <Col span={12}>
+            <Col xl={12} xs={24}>
               <div className="info-pic-container">
                 <img src="" alt="info-pic" /> {/* Có thể thêm ảnh nếu muốn */}
-              </div>
+              </div> 
             </Col>
           </Row>
         </section>
