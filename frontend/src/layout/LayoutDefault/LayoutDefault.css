@@ -22,6 +22,7 @@
   width: 99%;
   z-index: 999;
   position: sticky;
+  top: 0;
 }
 
 .layout-default__logo {
@@ -106,8 +107,8 @@
 
 
 .layout-default__loginMenu .user-info span {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   margin: 10px;
   background-color: #fff;
   max-width: 100%; 
@@ -123,7 +124,7 @@
 
 .layout-default__loginMenu .user-info a {
   font-family: var(--font);
-  font-size: clamp(12px, 1.5vw, 18px); 
+  font-size: clamp(12px, 1.5vw, 15px); 
   font-weight: 700;
   color: #000;
   text-wrap: nowrap;
@@ -283,4 +284,39 @@
 .layout-default__copyright {
   font-size: 10px;
   padding: 10px 40px;
+}
+
+
+/* Resposive */
+/* Max-width: 480px */
+/* Header */
+@media (max-width: 480px) {
+  .layout-default__header {
+    overflow: hidden;
+  }
+
+  .layout-default__logo {
+    min-width: 100px;
+  }
+
+  .layout-default__logo--tt,.layout-default__logo--neu, .layout-default__logo--ncc, .layout-default__logo--noc, .layout-default__logo--ndm {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Footer */
+@media screen and (max-width: 480px) {
+  .layout-default__logoFooter {
+    margin-left: 0;
+  }
+
+  .layout-default__center {
+    margin-left: 5px !important;
+  }
+
+  .layout-default__title {
+    font-size: 15px;
+    width: 99%;
+  }
 }

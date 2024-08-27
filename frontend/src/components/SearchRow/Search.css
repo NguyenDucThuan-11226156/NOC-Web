@@ -31,3 +31,35 @@
   font-size: 14px;
   font-family: var(--font);
 }
+
+/* Responsive */
+/* Max-width: 480px */
+@media screen and (max-width: 480px) {
+  .searchRow {
+    flex-direction: column;
+    align-items: stretch; /* Ensures the items take full width */
+    margin: 40px 15px !important;
+  }
+
+  .searchBar {
+    width: 100%;
+    margin-bottom: 10px; /* Adds space between the search bar and the button */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .searchBar input {
+    width: 100%;
+  }
+
+  .searchBar button {
+    width: 60px;
+    font-size: 10px;
+  }
+
+  .searchBar-select {
+    width: 100%;
+    margin-bottom: 10px; /* Adds space between selects */
+  }
+}
+

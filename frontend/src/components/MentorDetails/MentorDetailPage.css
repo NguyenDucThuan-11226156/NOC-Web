@@ -231,6 +231,12 @@
   border-radius: 50%;
 }
 
+.review-list {
+  height: 300px;
+  overflow-y: scroll;
+  margin-bottom: 30px;
+}
+
 .review-list-item {
   background-color: var(--mentorDetail-header-color);
   margin-bottom: 20px;
@@ -253,4 +259,51 @@
   font-size: 15px;
   font-weight: 400;
   font-family: var(--font);
+}
+
+
+/* Responsive */
+/* Max-width: 480px */
+@media screen and (max-width:480px) {
+  .action-buttons {
+    justify-content: space-between;
+  }
+  .mentor-detail-profile {
+    height: auto;
+  }
+
+  .mentor-detail-header h1 {
+    font-size: 26px;
+  }
+
+  .mentor-detail-header p {
+    font-size: 14px;
+  }
+
+  .mentor-detail-image {
+    max-height: 350px;
+  }
+
+  .mentor-detail-btn {
+    margin-bottom: 30px;
+  }
+
+  .mentor-detail-profile, .mentor-detail-review {
+    margin-left: 0;
+  }
+
+  .user-avatar-comment {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .user-comment h4 {
+    display: none;
+  }
+
+  .review-user-avatar {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+  }
 }
