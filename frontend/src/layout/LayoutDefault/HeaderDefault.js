@@ -266,7 +266,7 @@ function HeaderDefault() {
                 open={forgotPasswordOpen}
                 onCancel={toggleForgotPasswordModal}
               />
-              <SuccessModal 
+              <SuccessModal
                 open={sucessModalOpen}
                 onCancel={toggleSuccessModal}
                 toggleLoginModal={toggleLoginModal}

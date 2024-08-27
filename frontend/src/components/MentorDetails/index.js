@@ -115,7 +115,7 @@ function MentorDetailPage() {
     if (isMentorSaved) {
       setApplyModalVisible(true);
     } else {
-      navigate("/my-mentor");
+      setApplyModalVisible(true);
     }
   };
 
@@ -231,7 +231,7 @@ function MentorDetailPage() {
       <div className="mentor-detail-header">
         <h1>{mentor.name}</h1>
         <Rate disabled value={mentor.rate} />
-        <p>({mentor.numberRate} đánh giá)</p>
+        <p>({mentor.numberRate || 0} đánh giá)</p>
       </div>
 
       <Row className="mentor-detail-content">

@@ -11,15 +11,15 @@ function LayoutDefault() {
   const [isRatingModalVisible, setRatingModalVisible] = useState(false);
   const [cookies] = useCookies(["token"]);
 
-  useEffect(() => {
-    if (cookies.token) { // Check if user is logged in
-      const timer = setTimeout(() => {
-        setRatingModalVisible(true);
-      }, 60000); // 1 minute delay
+  // useEffect(() => {
+  //   if (cookies.token) { // Check if user is logged in
+  //     const timer = setTimeout(() => {
+  //       setRatingModalVisible(true);
+  //     }, 60000); // 1 minute delay
 
-      return () => clearTimeout(timer); // Clean up the timer on component unmount
-    }
-  }, [cookies.token]);
+  //     return () => clearTimeout(timer); // Clean up the timer on component unmount
+  //   }
+  // }, [cookies.token]);
 
   const handleRatingModalClose = () => {
     setRatingModalVisible(false);
@@ -34,7 +34,10 @@ function LayoutDefault() {
         </Content>
         <FooterDefault />
         {cookies.token && ( // Conditionally render the RatingModal
-          <RatingModal visible={isRatingModalVisible} onClose={handleRatingModalClose} />
+          <RatingModal
+            visible={isRatingModalVisible}
+            onClose={handleRatingModalClose}
+          />
         )}
       </Layout>
     </>
