@@ -5,17 +5,17 @@ import { API } from "../../constant";
 import { UploadOutlined } from "@ant-design/icons";
 import "./ChangeInfoUser.css";
 import { useCookies } from "react-cookie";
+
 const ChangeInfoUser = ({ visible, onClose, userInfo }) => {
   const [form] = Form.useForm();
   const [avatar, setAvatar] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
-    doNotParse: true,
-  });
+  const [cookies] = useCookies(["cookie-name"]);
+  const [loading, setLoading] = useState(false); // Add loading state
+
   const handleSave = async () => {
     try {
       const values = await form.validateFields();
       const formData = new FormData();
-      console.log(values);
       formData.append("name", values.name);
       formData.append("school", values.school);
       formData.append("studentId", values.studentId);
@@ -24,9 +24,11 @@ const ChangeInfoUser = ({ visible, onClose, userInfo }) => {
       if (avatar) {
         formData.append("avatar", avatar);
       }
-      // Send POST request to backend
+
+      setLoading(true); // Start loading
+
       await axios
-        .post(API + `/api/v1/users/update`, formData, {
+        .post(`${API}/api/v1/users/update`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${cookies.token}`,
@@ -55,8 +57,11 @@ const ChangeInfoUser = ({ visible, onClose, userInfo }) => {
         message: "Error",
         description: "Cập nhật thông tin không thành công. Vui lòng thử lại.",
       });
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+
   const handleFileChange = (event) => {
     setAvatar(event.target.files[0]);
   };
@@ -71,7 +76,12 @@ const ChangeInfoUser = ({ visible, onClose, userInfo }) => {
         <Button key="cancel" onClick={onClose} className="changeInfo-btn">
           Cancel
         </Button>,
-        <Button key="save" onClick={handleSave} className="changeInfo-btn">
+        <Button
+          key="save"
+          onClick={handleSave}
+          className="changeInfo-btn"
+          loading={loading} // Add loading prop to button
+        >
           Save
         </Button>,
       ]}
