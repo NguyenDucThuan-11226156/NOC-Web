@@ -1,11 +1,10 @@
-const API_DOMAIN = "http://localhost:8000";
-
+import { API } from "../constant";
+const API_DOMAIN = `${API}`;
 export const get = async (path) => {
   const respone = await fetch(API_DOMAIN + path);
   const result = await respone.json();
   return result;
 };
-
 export const post = async (path, options = {}) => {
   const respone = await fetch(API_DOMAIN + path, {
     method: "POST",
@@ -18,7 +17,6 @@ export const post = async (path, options = {}) => {
   const result = await respone.json();
   return result;
 };
-
 export const del = async (path) => {
   const response = await fetch(API_DOMAIN + path, {
     method: "DELETE",
@@ -36,8 +34,6 @@ export const patch = async (path, options) => {
     },
     body: JSON.stringify(options),
   });
-
   const result = await response.json();
-
   return result;
 };

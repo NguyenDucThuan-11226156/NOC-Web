@@ -20,9 +20,11 @@ import {
   UserOutlined,
   EditOutlined,
 } from "@ant-design/icons";
+import SuccessModal from "../../components/SuccessModal";
 function HeaderDefault() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+  const [sucessModalOpen, setSuccessModalOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
   const [cookies] = useCookies(["cookie-name"], {
@@ -42,13 +44,11 @@ function HeaderDefault() {
           },
         })
         .then((response) => {
-          console.log(response.data);
           const userInfo = {
             name: response.data.info.name,
             avatar: response.data.info.avatar,
           };
-          console.log(userInfo);
-          
+
           setUser(userInfo);
         })
         .catch((error) => {
@@ -61,18 +61,27 @@ function HeaderDefault() {
     setLoginOpen(!loginOpen);
     if (signUpOpen) setSignUpOpen(false);
     if (forgotPasswordOpen) setForgotPasswordOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
   };
 
   const toggleSignUpModal = () => {
     setSignUpOpen(!signUpOpen);
     if (loginOpen) setLoginOpen(false);
     if (forgotPasswordOpen) setForgotPasswordOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
   };
 
   const toggleForgotPasswordModal = () => {
     setForgotPasswordOpen(!forgotPasswordOpen);
     if (loginOpen) setLoginOpen(false);
     if (signUpOpen) setSignUpOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
+  };
+  const toggleSuccessModal = () => {
+    setSuccessModalOpen(!sucessModalOpen);
+    if (loginOpen) setLoginOpen(false);
+    if (signUpOpen) setSignUpOpen(false);
+    if (sucessModalOpen) setSuccessModalOpen(false);
   };
 
   const handleLoginSuccess = (userInfo) => {
@@ -110,7 +119,7 @@ function HeaderDefault() {
         <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">
-            <UserOutlined className="dropdownItem-icon"/>
+              <UserOutlined className="dropdownItem-icon" />
             </div>
             <span>Trang cá nhân</span>
           </div>
@@ -123,7 +132,9 @@ function HeaderDefault() {
       >
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo"><EditOutlined className="dropdownItem-icon"/></div>
+            <div className="dropdownItem-logo">
+              <EditOutlined className="dropdownItem-icon" />
+            </div>
             <span>Mentor của tôi</span>
           </div>
         </Link>
@@ -131,14 +142,18 @@ function HeaderDefault() {
       <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
-            <div className="dropdownItem-logo"><SecurityScanOutlined className="dropdownItem-icon"/></div>
+            <div className="dropdownItem-logo">
+              <SecurityScanOutlined className="dropdownItem-icon" />
+            </div>
             <span>Trợ giúp</span>
           </div>
         </Link>
       </Menu.Item>
       <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
         <div className="dropdownItem-list">
-          <div className="dropdownItem-logo"><LogoutOutlined className="dropdownItem-icon"/></div>
+          <div className="dropdownItem-logo">
+            <LogoutOutlined className="dropdownItem-icon" />
+          </div>
           <span>Đăng xuất</span>
         </div>
       </Menu.Item>
@@ -237,6 +252,7 @@ function HeaderDefault() {
               <SignUp
                 open={signUpOpen}
                 toggleLoginModal={toggleLoginModal}
+                toggleSuccessModal={toggleSuccessModal}
                 onCancel={toggleSignUpModal}
               />
               <Login
@@ -249,6 +265,11 @@ function HeaderDefault() {
               <ForgotPassword
                 open={forgotPasswordOpen}
                 onCancel={toggleForgotPasswordModal}
+              />
+              <SuccessModal 
+                open={sucessModalOpen}
+                onCancel={toggleSuccessModal}
+                toggleLoginModal={toggleLoginModal}
               />
             </div>
           </Col>

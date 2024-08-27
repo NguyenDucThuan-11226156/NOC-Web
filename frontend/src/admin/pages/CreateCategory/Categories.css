@@ -1,0 +1,139 @@
+/* Css layout categories */
+.categories-item {
+  margin-bottom: 40px;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.categories-title {
+  text-align: center;
+  font-size: 36px;
+  font-family: var(--font-mentor-title);
+  color: #409174;
+  margin-bottom: 30px;
+}
+
+.categories-create-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #405e91;
+  color: #fff;
+  border-radius: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  /* float: right; */
+}
+
+.categories-create-btn:hover {
+  border: 2px solid #405e91 !important;
+  color: #405e91 !important;
+}
+
+.categories-table table {
+  border: 0.5px solid #ddd;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.categories-table thead tr th {
+  background-color: #409174 !important;
+  color: #fff !important;
+  font-family: var(--font);
+}
+
+.categories-table tbody tr td {
+  font-family: var(--font);
+  letter-spacing: 0.5px;
+}
+
+.categories-table tbody tr td a,
+.categories-table .ant-pagination-item a {
+  color: #214236 !important;
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+.categories-table .ant-pagination-item-active {
+  border-color: #214236 !important;
+}
+
+.edit-categories-btn {
+  width: 100px;
+  height: 35px;
+  border: 2px solid #d9e9e3;
+  color: #409174;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.edit-categories-btn:hover {
+  background-color: #d9e9e3 !important;
+  border-color: #d9e9e3 !important;
+  color: #409174 !important;
+}
+
+.delete-categories-btn {
+  width: 100px;
+  height: 35px;
+  border: 2px solid var(--color-active);
+  color: var(--color-active);
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.delete-categories-btn:hover {
+  background-color: var(--color-active) !important;
+  border-color: var(--color-active) !important;
+  color: #fff !important;
+}
+
+/* Css Categories Modal Create */
+.categories-modal .ant-modal-title, .edit-modal .ant-modal-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-family: var(--font-mentor-title);
+  color: #409174;
+}
+
+.categories-modal-input,
+.categories-modal-input:hover,
+.categories-modal-input:focus,
+.categories-modal-input:focus-within, 
+.edit-modal-input, .edit-modal-input:hover, .edit-modal-input:focus, .edit-modal-input:focus-within {
+  border: 1px solid #409174;
+}
+
+.categories-cancel-btn , .categories-modal-create-btn, .edit-modal .ant-modal-footer .ant-btn-default, .edit-modal .ant-modal-footer .ant-btn-primary {
+  width: 100px;
+  height: 40px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.categories-cancel-btn, .edit-modal .ant-modal-footer .ant-btn-default {
+  background-color: var(--color-active);
+  border-color: var(--color-active);
+  color: #fff;
+}
+
+.categories-cancel-btn:hover, .edit-modal .ant-modal-footer .ant-btn-default:hover {
+  background-color: #fff;
+  border-color: var(--color-active) !important;
+  color: var(--color-active) !important;
+}
+
+.categories-modal-create-btn, .edit-modal .ant-modal-footer .ant-btn-primary {
+  background-color: #409174;
+  border-color: #409174;
+  color: #fff;
+}
+
+
+.categories-modal-create-btn:hover, .edit-modal .ant-modal-footer .ant-btn-primary:hover {
+  background-color: #214236 !important;
+  border-color: #214236 !important;
+  color: #fff !important;
+}

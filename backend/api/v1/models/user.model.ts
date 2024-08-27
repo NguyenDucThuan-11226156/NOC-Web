@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema(
     saving: String,
     number: Number,
     avatar: String,
+    rateForMentors: [
+      {
+        idMentor: String,
+        rateNumber: Number,
+      },
+    ],
     mentorIds: [
       {
         mentorId: String,
@@ -19,6 +25,12 @@ const userSchema = new mongoose.Schema(
     ],
     saveMentorIds: [
       {
+        mentorId: String,
+      },
+    ],
+    myReviews: [
+      {
+        message: String,
         mentorId: String,
       },
     ],

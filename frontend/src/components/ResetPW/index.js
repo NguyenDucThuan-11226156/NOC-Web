@@ -1,12 +1,12 @@
 import { Button, Form, Input, Modal, notification } from "antd";
 import axios from "axios";
 import "./ResetPW.css";
-
+import { API } from "../../constant";
 function ResetPW({ isVisible, onCancel, token, onSuccess }) {
   const handleResetPassword = async (values) => {
     try {
       await axios.post(
-        "http://localhost:8000/api/v1/users/password/reset",
+        `${API}/api/v1/users/password/reset`,
         {
           password: values.password,
         },
@@ -95,9 +95,7 @@ function ResetPW({ isVisible, onCancel, token, onSuccess }) {
         <Form.Item
           label="Tạo mật khẩu mới"
           name="password"
-          rules={[
-            { required: true, validator: validatePassword },
-          ]}
+          rules={[{ required: true, validator: validatePassword }]}
           className="resetPW-password"
         >
           <Input.Password

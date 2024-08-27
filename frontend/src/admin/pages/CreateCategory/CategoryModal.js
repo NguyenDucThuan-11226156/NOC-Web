@@ -39,8 +39,13 @@ const CategoryModal = ({ visible, onClose, categoryType, fetchCategories }) => {
         categoryType.charAt(0).toUpperCase() + categoryType.slice(1)
       }`}
       onCancel={onClose}
+      className="categories-modal"
       footer={[
-        <Button key="cancel" onClick={onClose}>
+        <Button
+          className="categories-cancel-btn"
+          key="cancel"
+          onClick={onClose}
+        >
           Cancel
         </Button>,
         <Button
@@ -48,6 +53,7 @@ const CategoryModal = ({ visible, onClose, categoryType, fetchCategories }) => {
           type="primary"
           loading={loading}
           onClick={() => form.submit()}
+          className="categories-modal-create-btn"
         >
           Create
         </Button>,
@@ -63,7 +69,10 @@ const CategoryModal = ({ visible, onClose, categoryType, fetchCategories }) => {
             },
           ]}
         >
-          <Input placeholder={`Enter ${categoryType} description`} />
+          <Input
+            className="categories-modal-input"
+            placeholder={`Enter ${categoryType} description`}
+          />
         </Form.Item>
       </Form>
     </Modal>

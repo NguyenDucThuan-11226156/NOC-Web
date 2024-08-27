@@ -19,7 +19,7 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
         const response = await fetch(`${API}/api/v1/admin/listCategory`);
         const data = await response.json();
         console.log(data);
-        
+
         if (data.code === 200) {
           setEnterprises(data.enterprises);
           setStudies(data.studies);
@@ -159,12 +159,18 @@ const MentorFormModal = ({ visible, onCancel, onSubmit }) => {
               name="specialization"
               label="Specialization"
               rules={[
-                { required: true, message: "Please select the specialization!" },
+                {
+                  required: true,
+                  message: "Please select the specialization!",
+                },
               ]}
             >
               <Select>
                 {specializations.map((specialization) => (
-                  <Option key={specialization._id} value={specialization.description}>
+                  <Option
+                    key={specialization._id}
+                    value={specialization.description}
+                  >
                     {specialization.description}
                   </Option>
                 ))}

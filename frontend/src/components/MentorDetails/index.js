@@ -44,15 +44,11 @@ function MentorDetailPage() {
           setUserName(userData.name || "User Name"); // Fallback to "User Name"
 
           const savedMentors = response.data.info.saveMentorIds || [];
-          setIsMentorSaved(savedMentors.some((mentor) => mentor.mentorId === id));
-          console.log(savedMentors);
-          
+          setIsMentorSaved(
+            savedMentors.some((mentor) => mentor.mentorId === id)
+          );
           const MyMentor = response.data.info.mentorIds || [];
           setIsMyMentor(MyMentor.some((mentor) => mentor.mentorId === id));
-          console.log(MyMentor);
-
-          
-          
         })
         .catch((error) => {
           console.error("Error fetching user details:", error);
@@ -64,6 +60,7 @@ function MentorDetailPage() {
       .post(API + `/api/v1/mentors/detail/${id}`)
       .then((response) => {
         const { mentor, code } = response.data;
+        console.log(mentor);
         if (code === 200 && mentor.length > 0) {
           setMentor(mentor[0]); // mentor is returned as an array, take the first element
           setComments(mentor[0].review || []); // Assuming `review` contains the comments
@@ -74,7 +71,6 @@ function MentorDetailPage() {
       .catch((error) => {
         console.error("Error fetching mentor details:", error);
       });
-
   }, [id, cookies.token]);
 
   // Toggle comment modal
@@ -83,24 +79,26 @@ function MentorDetailPage() {
   };
 
   // Handle comment submission
-  const handleSubmitComment = () => {
+  const handleSubmitComment = async () => {
+    // Check if newComment is empty or undefined before proceeding
     if (!newComment) return;
-
-    axios
-      .post(API + `/api/v1/mentors/${id}/comment`,
-        { message: newComment },
+    try {
+      // Use await with axios.post to handle the asynchronous operation
+      const response = await axios.post(
+        `${API}/api/v1/users/reviewMentor/${id}`, // Ensuring that API and id are defined correctly
+        { review: newComment },
         {
-          headers: { Authorization: `Bearer ${cookies.token}` },
+          headers: { Authorization: `Bearer ${cookies.token}` }, // Make sure cookies.token is correctly set
         }
-      )
-      .then((response) => {
-        setComments((prev) => [...prev, response.data]);
-        setNewComment("");
-        setCommentModalVisible(false);
-      })
-      .catch((error) => {
-        console.error("Error submitting comment:", error);
-      });
+      );
+      // Update the comments state with the new comment
+      setComments(response.data.mentor.review);
+      setNewComment(""); // Clear the input field
+      setCommentModalVisible(false); // Hide the modal
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error("Error submitting comment:", error);
+    }
   };
 
   // Handle "Apply Now" button click
@@ -113,7 +111,7 @@ function MentorDetailPage() {
       return;
     }
     console.log(isMentorSaved);
-    
+
     if (isMentorSaved) {
       setApplyModalVisible(true);
     } else {
@@ -122,7 +120,7 @@ function MentorDetailPage() {
   };
 
   // Handle "Save" button click
-  
+
   const handleSave = async () => {
     if (!cookies.token) {
       notification.error({
@@ -174,13 +172,16 @@ function MentorDetailPage() {
     setRatingModalVisible(true);
   };
 
-
   const buttonCheck = () => {
     if (isMyMentor) {
       return (
         <>
-          <Button onClick={handleMyReview} className="mentor-detail-btn">My Review</Button>
-          <Button onClick={handleRate} className="mentor-detail-btn">Rate</Button>
+          {/* <Button onClick={handleMyReview} className="mentor-detail-btn">
+            My Review
+          </Button> */}
+          <Button onClick={handleRate} className="mentor-detail-btn">
+            Rate
+          </Button>
         </>
       );
     } else if (isMentorSaved) {
@@ -195,15 +196,35 @@ function MentorDetailPage() {
           <Button onClick={handleApplyNow} className="mentor-detail-btn">
             Apply Now
           </Button>
-          <Button onClick={handleSave} className="mentor-detail-btn" loading={loading}>
+          <Button
+            onClick={handleSave}
+            className="mentor-detail-btn"
+            loading={loading}
+          >
             Save
           </Button>
         </>
       );
     }
   };
-
-
+  const handleSubmitRating = async (numberRating) => {
+    try {
+      const response = await axios.post(
+        API + `/api/v1/users/rateMentor/${id}`,
+        { rate: numberRating },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`, // Include the Bearer token in the header
+          },
+        }
+      );
+      // Handle success (e.g., show a success message or update UI)
+      window.location.href = `/mentors/detail/${id}`;
+    } catch (error) {
+      // Handle error (e.g., show an error message)
+      console.error("Error submitting rating:", error);
+    }
+  };
 
   return (
     <div className="mentor-detail-container">
@@ -218,11 +239,7 @@ function MentorDetailPage() {
           <div className="mentor-detail-image">
             <img src={mentor.avatar} alt="mentor-image" />
           </div>
-          <div className="action-buttons">
-
-            {buttonCheck()}
-
-          </div>
+          <div className="action-buttons">{buttonCheck()}</div>
         </Col>
         <Col span={17}>
           <div className="mentor-detail-profile">
@@ -314,8 +331,11 @@ function MentorDetailPage() {
 
       <RatingModal
         visible={ratingModalVisible}
-        onCancel={() => setRatingModalVisible(false)}
+        onClose={() => {
+          setRatingModalVisible(false);
+        }}
         mentorId={mentor._id}
+        handleSubmitRating={handleSubmitRating}
       />
     </div>
   );

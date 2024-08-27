@@ -82,16 +82,16 @@ export const filterMentors = async (req: Request, res: Response) => {
       find["name"] = regex;
     }
     if (enterprise) {
-      find["organization"] = enterprise;
+      find["organization"] = new RegExp(enterprise, "i");
     }
     if (specialization) {
-      find["specialization"] = specialization;
+      find["specialization"] = new RegExp(specialization, "i");
     }
     if (study) {
-      find["education"] = study;
+      find["education"] = new RegExp(study, "i");
     }
     if (domain) {
-      find["field"] = domain;
+      find["industry"] = new RegExp(domain, "i");
     }
     const limitNumber = req.body.limit;
     const skipNumber = (req.body.page - 1) * limitNumber;
@@ -106,7 +106,6 @@ export const filterMentors = async (req: Request, res: Response) => {
       total: total,
     });
   } catch (error) {
-    console.log(error);
     res.json({
       code: 400,
       message: error,
@@ -201,7 +200,6 @@ export const updateMentor = async (req: Request, res: Response) => {
 export const detailMentor = async (req: Request, res: Response) => {
   try {
     const idMentor = req.params.id;
-    console.log(idMentor);
     const infoMentor = await Mentors.find({
       _id: idMentor,
     });

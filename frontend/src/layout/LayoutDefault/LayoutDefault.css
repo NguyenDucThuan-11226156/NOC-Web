@@ -11,7 +11,7 @@
 
 .layout-default__header {
   background-color: var(--background-color);
-  padding: 40px 10px;
+  padding: 40px 20px;
   margin: 6px 10px;
   display: flex;
   align-items: center;
@@ -106,15 +106,24 @@
 
 
 .layout-default__loginMenu .user-info span {
-  width: 60px;
-  height: 60px;
-  margin: 20px;
+  width: 70px;
+  height: 70px;
+  margin: 10px;
   background-color: #fff;
+  max-width: 100%; 
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.layout-default__loginMenu .user-info span img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .layout-default__loginMenu .user-info a {
   font-family: var(--font);
-  font-size: 20px;
+  font-size: clamp(12px, 1.5vw, 18px); 
   font-weight: 700;
   color: #000;
   text-wrap: nowrap;
@@ -127,10 +136,11 @@
   background-color: var(--dropdown-color) !important;
   padding: 10px !important;
   height: 239px;
+  width: 205px;
 }
 
 .user-dropdown-item {
-  width: auto;
+  width: 200px;
   height: 47px;
   background-color: #fff;
   padding: 3px !important;
@@ -146,6 +156,7 @@
 .dropdownItem-list {
   display: flex;
   align-items: center;
+  padding: 0 10px;
 } 
 
 .dropdownItem-logo {
@@ -156,16 +167,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
 }
 
 .dropdownItem-icon {
   font-size: 19px !important;
-  margin-right: 19px;
+  margin-right: 9px;
 }
 
 .dropdownItem-list span {
-  margin-left: 20px;
+  margin-left: 10px;
   font-family: var(--font);
   font-weight: 700;
   font-size: 15px;

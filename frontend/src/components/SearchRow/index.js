@@ -18,7 +18,7 @@ function SearchRow({
     specialization: "",
     education: "",
     industry: "",
-    other: "",
+    // other: "",
   });
 
   const handleSearch = () => {
@@ -27,7 +27,7 @@ function SearchRow({
 
   const handleChange = (field, value) => {
     setFilters({ ...filters, [field]: value });
-    console.log(filters);
+    // console.log(filters);
   };
 
   // const specializationMenu = (
@@ -58,7 +58,7 @@ function SearchRow({
           onChange={(e) => handleChange("keyword", e.target.value)}
         />
       </Col>
-      <Col span={4}>
+      <Col span={6}>
         <Select
           className="searchBar-select"
           placeholder="Doanh nghiệp/Tổ chức"
@@ -67,23 +67,26 @@ function SearchRow({
           onChange={(value) => handleChange("organization", value)}
         >
           {enterprises.map((enterprise) => (
-            <Option value={enterprise._id}>{enterprise.description}</Option>
+            <Option value={enterprise.description}>
+              {enterprise.description}
+            </Option>
           ))}
         </Select>
       </Col>
-      <Col span={4}>
+      <Col span={6}>
         <Select
           className="searchBar-select"
           placeholder="Chuyên môn"
           size="large"
+          onChange={(value) => handleChange("specialization", value)}
           style={{ width: "100%" }}
         >
           {specialization.map((spe) => (
-            <Option value={spe._id}>{spe.description}</Option>
+            <Option value={spe.description}>{spe.description}</Option>
           ))}
         </Select>
       </Col>
-      <Col span={4}>
+      <Col span={6}>
         <Select
           className="searchBar-select"
           placeholder="Học vấn"
@@ -92,11 +95,11 @@ function SearchRow({
           onChange={(value) => handleChange("education", value)}
         >
           {studies.map((study) => (
-            <Option value={study._id}>{study.description}</Option>
+            <Option value={study.description}>{study.description}</Option>
           ))}
         </Select>
       </Col>
-      <Col span={4}>
+      <Col span={6}>
         <Select
           className="searchBar-select"
           placeholder="Ngành học"
@@ -105,11 +108,11 @@ function SearchRow({
           onChange={(value) => handleChange("industry", value)}
         >
           {domains.map((domain) => (
-            <Option value={domain._id}>{domain.description}</Option>
+            <Option value={domain.description}>{domain.description}</Option>
           ))}
         </Select>
       </Col>
-      <Col span={4}>
+      {/* <Col span={4}>
         <Select
           className="searchBar-select"
           placeholder="Khác"
@@ -120,7 +123,7 @@ function SearchRow({
           <Option value="other1">Other1</Option>
           <Option value="other2">Other2</Option>
         </Select>
-      </Col>
+      </Col> */}
     </Row>
   );
 }

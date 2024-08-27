@@ -1,47 +1,52 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { API } from "../../constant"; // Adjust the import path
 import './Banner.css'
+// import { useCookies } from "react-cookie";
 
 function Banner() {
+  const [bgImage, setBgImage] = useState('');
+//   const [cookies] = useCookies(["token"]);
+  useEffect(() => {
+    const fetchBannerImage = async () => {
+      try {
+        const response = await axios.get(`${API}/api/v1/admin/getSettings`);
 
-
-
-    // Waiting for background image from BE ----------------
-
-    // const [bgImage, setBgImage] = useState('')
-
-    useEffect(() => {
-        fetch('')
-            .then(res => res.json())
-            .then(data => {
-                // setBgImage(data.image);
-            })
-    }, [])
-    const bannerStyle = {
-        // backgroundImage: `url(${bgImage});`,
-        
-        backgroundImage: 'url(https://scontent-gru1-1.xx.fbcdn.net/v/t39.30808-6/454470876_462550420093624_2661456546069939952_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=cQxN1WBM1ioQ7kNvgHFLA--&_nc_ht=scontent-gru1-1.xx&oh=00_AYDkqEa0v-E9vBszP6yma9Tl0tPkSa9ZXhHiBlYmVJEuWA&oe=66BCE91E)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '183px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        color: 'white',
-        margin: '40px 33px',
-        textAlign: 'center',
-        boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
+        if (response.data.code === 200) {
+          const data = response.data.data[0]; // Assuming your data is in the first object
+          setBgImage(data.homeBanner); // Adjust this field based on your actual data structure
+        } else {
+          console.error("Failed to fetch settings data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch settings", error);
+      }
     };
 
-    return (
+    fetchBannerImage();
+  }, []);
 
-        <>
+  const bannerStyle = {
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '183px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    color: 'white',
+    margin: '40px 33px',
+    textAlign: 'center',
+    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
+  };
 
-            <div style={bannerStyle}>
-                <h1 className="bannerStyle-title">NEU DAILY MENTORING</h1>
-                <p className="bannerStyle-desc">Thông tin của dự án (Có thể là một châm ngôn giống VINFAST: Việt Nam - Phong cách - An toàn - Thông minh)</p>
-            </div>
-        </>
-    )
+  return (
+    <div style={bannerStyle}>
+      <h1 className="bannerStyle-title">NEU DAILY MENTORING</h1>
+      <p className="bannerStyle-desc">Thông tin của dự án (Có thể là một châm ngôn giống VINFAST: Việt Nam - Phong cách - An toàn - Thông minh)</p>
+    </div>
+  );
 }
+
 export default Banner;

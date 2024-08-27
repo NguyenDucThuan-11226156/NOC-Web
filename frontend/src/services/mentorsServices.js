@@ -32,8 +32,7 @@ export const createMentor = async (mentorData) => {
   }
 };
 
-
-const BASE_URL = "http://localhost:8000/api/v1/mentors";
+const BASE_URL = `${API}/api/v1/mentors`;
 
 // Fetch mentor details by ID
 export const detailMentor = async (mentorId) => {
@@ -49,11 +48,15 @@ export const detailMentor = async (mentorId) => {
 // Update mentor information by ID
 export const updateMentor = async (mentorId, updatedData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/update/${mentorId}`, updatedData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios.post(
+      `${BASE_URL}/update/${mentorId}`,
+      updatedData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error updating mentor information:", error);
