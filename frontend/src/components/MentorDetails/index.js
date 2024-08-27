@@ -115,7 +115,7 @@ function MentorDetailPage() {
     if (isMentorSaved) {
       setApplyModalVisible(true);
     } else {
-      navigate("/my-mentor");
+      setApplyModalVisible(true);
     }
   };
 
