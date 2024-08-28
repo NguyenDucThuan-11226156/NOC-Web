@@ -49,7 +49,7 @@ function SearchRow({
       justify='space-between'
       align="center"
     >
-      <Col xs={24} xl={24}>
+      <Col xs={24} xl={24} lg={24}>
         <Search
           className="searchBar"
           placeholder="Nhập từ khóa..."
@@ -59,7 +59,7 @@ function SearchRow({
           onChange={(e) => handleChange("keyword", e.target.value)}
         />
       </Col>
-      <Col xs={24} xl={6}>
+      <Col xs={24} xl={6} lg={12} md={12}>
         <Select
           className="searchBar-select"
           placeholder="Doanh nghiệp/Tổ chức"
@@ -74,7 +74,7 @@ function SearchRow({
           ))}
         </Select>
       </Col>
-      <Col xs={24} xl={6}>
+      <Col xs={24} xl={6} lg={12} md={12}>
         <Select
           className="searchBar-select"
           placeholder="Chuyên môn"
@@ -87,7 +87,7 @@ function SearchRow({
           ))}
         </Select>
       </Col>
-      <Col xs={24} xl={6}>
+      <Col xs={24} xl={6} lg={12} md={12}>
         <Select
           className="searchBar-select"
           placeholder="Học vấn"
@@ -100,7 +100,7 @@ function SearchRow({
           ))}
         </Select>
       </Col>
-      <Col xs={24} xl={6}>
+      <Col xs={24} xl={6} lg={12} md={12}>
         <Select
           className="searchBar-select"
           placeholder="Ngành học"

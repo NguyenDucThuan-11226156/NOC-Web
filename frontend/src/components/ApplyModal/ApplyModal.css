@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 306px;
+  margin: 20px auto;
   border-radius: 10px;
   font-family: var(--font-apply-form);
   font-size: 24px;
@@ -92,6 +92,7 @@
   background-color: var(--background-color);
   color: #000;
   margin-right: 20px;
+  margin-top: 20px;
 }
 
 .applyModal-success {
