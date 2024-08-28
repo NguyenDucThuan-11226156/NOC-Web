@@ -1,10 +1,4 @@
 /* Css Info profile */
-
-:root {
-  --infoUser-background: rgba(230, 236, 255, 1);
-  --infoUser-profile-color: rgba(246, 246, 246, 1);
-}
-
 .info-user-card {
   box-shadow: none !important;
 }

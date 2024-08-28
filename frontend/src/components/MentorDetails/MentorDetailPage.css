@@ -1,7 +1,3 @@
-:root {
-  --mentorDetail-header-color: rgba(249, 253, 255, 1);
-}
-
 /* Css Mentor Detail */
 .mentor-detail-container {
   padding: 24px;
@@ -261,7 +257,6 @@
   font-family: var(--font);
 }
 
-
 /* Responsive */
 /* Max-width: 480px */
 @media screen and (max-width:480px) {
@@ -273,7 +268,8 @@
   }
 
   .mentor-detail-header h1 {
-    font-size: 26px;
+    font-size: 20px;
+    padding: 0 15px;
   }
 
   .mentor-detail-header p {

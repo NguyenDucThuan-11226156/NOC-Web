@@ -1,3 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Quicksand:wght@300..700&display=swap");
+
+:root {
+  --background-color: rgba(205, 225, 255, 1);
+  --color-text: #000000;
+  --color-active: rgba(219, 40, 40, 1);
+  --font: "Montserrat", sans-serif;
+  --dropdown-color: rgba(143, 184, 244, 1);
+  --font-apply-form: "Nunito Sans", sans-serif;
+  --font-apply-form-italic: "Mulish", sans-serif;
+  --color-title: rgba(68, 122, 204, 1);
+  --font-login: "Inter", sans-serif;
+  --font-mentor-title: "Bevan", serif;
+  --font-mentor--introduction: "Quicksand", sans-serif;
+  --color-mentor-title: rgba(54, 103, 172, 1);
+  --color-mentor-border: rgba(58, 96, 171, 1);
+  --mentorDetail-header-color: rgba(249, 253, 255, 1);
+  --infoUser-background: rgba(230, 236, 255, 1);
+  --infoUser-profile-color: rgba(246, 246, 246, 1);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe  UI', 'Roboto', 'Oxygen',

@@ -1,14 +1,4 @@
 /* Css Header */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-:root {
-  --background-color: rgba(205, 225, 255, 1);
-  --color-text: #000000;
-  --color-active: rgba(219, 40, 40, 1);
-  --font: "Montserrat", sans-serif;
-  --dropdown-color: rgba(143, 184, 244, 1);
-}
-
 .layout-default__header {
   background-color: var(--background-color);
   padding: 40px 20px;
@@ -95,6 +85,10 @@
   font-weight: 700;
   box-shadow: none;
   font-family: var(--font);
+}
+
+.layout-default__map {
+  margin-right: 20px;
 }
 
 /* css user info */
@@ -199,7 +193,7 @@
 
 .layout-default__logoFooter {
   display: flex;
-  margin: 25px 40px;
+  margin: 25px 0;
 }
 
 .layout-default__logoFooter--tt, .layout-default__logoFooter--ncc, .layout-default__logoFooter--noc, .layout-default__logoFooter--ndm {
@@ -216,10 +210,11 @@
 .layout-default__footerContainer {
   border-bottom: 1px solid #000;
   border-top: 1px solid #000;
+  padding: 0 20px;
 }
 
 .layout-default__center {
-  margin-left: 40px;
+  margin: 0;
 }
 
 .layout-default__title {
@@ -286,13 +281,71 @@
   padding: 10px 40px;
 }
 
+/* Side bar */
+.drawer-user-info {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+.drawer-user-info .ant-avatar {
+  margin-right: 16px;
+}
+
+.drawer-user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.drawer-menu {
+  padding: 0;
+}
+
+.drawer-menu .dropdownItem-list {
+  display: flex;
+  align-items: center;
+}
+
+.drawer-menu .dropdownItem-icon {
+  margin-right: 8px;
+}
+
+.hamburger-button {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-top: 0;
+}
+
+.drawer .ant-menu-submenu-title {
+  height: 100px !important;
+}
+
+.button-sidebar-item .ant-menu-light .ant-menu-item-selected{
+  background-color: #fff !important;
+}
+
+.button-sidebar-item button {
+  padding: 0 ;
+}
 
 /* Resposive */
 /* Max-width: 480px */
 /* Header */
 @media (max-width: 480px) {
-  .layout-default__header {
-    overflow: hidden;
+  .layout-default__menu {
+    display: none !important;
+  }
+
+  .hamburger-button {
+    display: block;
+    font-size: 24px;
+  }
+
+  .user-info {
+    display: none !important;
   }
 
   .layout-default__logo {
@@ -302,6 +355,21 @@
   .layout-default__logo--tt,.layout-default__logo--neu, .layout-default__logo--ncc, .layout-default__logo--noc, .layout-default__logo--ndm {
     width: 30px;
     height: 30px;
+  }
+
+  .layout-default__loginMenu button, .layout-default__loginMenu span {
+    display: none !important;
+  }
+
+  .layout-default__map {
+    border-radius: 15px;
+    overflow: hidden;
+    border: none !important;
+  }
+
+  .button-sidebar-item span {
+    color: var(--color-mentor-title);
+    text-transform: uppercase !important;
   }
 }
 
