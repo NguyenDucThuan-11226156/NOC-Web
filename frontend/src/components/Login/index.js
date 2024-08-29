@@ -11,10 +11,11 @@ function Login({
   onCancel,
   onLoginSuccess,
 }) {
-  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+  const [cookies, setCookie] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Thêm state isLoading
 
   useEffect(() => {
     if (cookies.token) {
@@ -23,6 +24,7 @@ function Login({
   }, [cookies, onLoginSuccess]);
 
   const onFinish = async (values) => {
+    setIsLoading(true); // Bắt đầu loading khi bấm nút đăng nhập
     let userInfo = {};
     try {
       const res = await post("/api/v1/users/login", {
@@ -55,6 +57,8 @@ function Login({
           error.response?.data?.message ||
           "Đã xảy ra lỗi. Vui lòng thử lại sau.",
       });
+    } finally {
+      setIsLoading(false); // Kết thúc loading sau khi nhận được phản hồi
     }
   };
 
@@ -153,7 +157,12 @@ function Login({
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" className="form-loginButton">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="form-loginButton"
+            loading={isLoading} // Áp dụng trạng thái loading
+          >
             Đăng nhập
           </Button>
         </Form.Item>
