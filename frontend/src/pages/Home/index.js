@@ -17,6 +17,8 @@ function Home() {
   const [studies, setStudies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(limit);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const offset = {
       limit: limit,
@@ -33,25 +35,35 @@ function Home() {
     };
     fetchApi();
   }, [currentPage]);
-  const handleSearch = (filters) => {
-    post("/api/v1/mentors/filter", {
-      keyword: filters.keyword,
-      organization: filters.organization,
-      specialization: filters.specialization,
-      education: filters.education,
-      industry: filters.industry,
-    }).then((res) => {
+
+  const handleSearch = async (filters) => {
+    setLoading(true);
+    try {
+      const res = await post("/api/v1/mentors/filter", {
+        keyword: filters.keyword,
+        organization: filters.organization,
+        specialization: filters.specialization,
+        education: filters.education,
+        industry: filters.industry,
+      });
       setMentors(res.mentors);
       setTotal(res.mentors.length);
-    });
+    } catch (error) {
+      console.error("Error during search:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
   const currentMentors = mentors.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
+
   return (
     <Layout>
       <Content>
@@ -62,8 +74,8 @@ function Home() {
           enterprises={enterprises}
           specialization={specialization}
           studies={studies}
+          loading={loading} // Pass loading state to SearchRow
         />
-        {/* <Mentor mentors={currentMentors} /> */}
         <Mentor mentors={mentors} />
         <Pagination
           current={currentPage}
