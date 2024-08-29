@@ -10,10 +10,13 @@ const TableEnterprise = ({ enterprises, fetchCategories }) => {
   const [cookies] = useCookies(['tokenAdmin']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEnterprise, setSelectedEnterprise] = useState(null);
+  const [loadingDelete, setLoadingDelete] = useState({}); // Track loading state for each row
 
   const [form] = Form.useForm();
 
   const handleDelete = async (id) => {
+    setLoadingDelete((prevState) => ({ ...prevState, [id]: true })); // Set loading state to true for the specific row
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteEnterprise/${id}`, {
         headers: {
@@ -28,6 +31,8 @@ const TableEnterprise = ({ enterprises, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the enterprise");
+    } finally {
+      setLoadingDelete((prevState) => ({ ...prevState, [id]: false })); // Set loading state to false after the process completes
     }
   };
 
@@ -44,7 +49,7 @@ const TableEnterprise = ({ enterprises, fetchCategories }) => {
         enterprise: values.enterprise,
       }, {
         headers: {
-          Authorization: `Bearer ${cookies.tokenAdmin}`,
+        Authorization: `Bearer ${cookies.tokenAdmin}`,
         },
       });
 
@@ -88,8 +93,10 @@ const TableEnterprise = ({ enterprises, fetchCategories }) => {
           </Button>
           <Button
             className="delete-categories-btn"
+            loading={loadingDelete[record._id]} // Set loading state
             onClick={() => handleDelete(record._id)}
-          >
+            disabled={loadingDelete[record._id]}
+            >
             Delete
           </Button>
         </Space>

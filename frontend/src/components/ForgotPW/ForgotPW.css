@@ -89,3 +89,70 @@
   font-weight: 700;
   padding: 10px 20px;
 }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .modal-forgotPW {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .modal-forgotPW .ant-modal-content {
+    border-radius: 10px;
+  }
+
+  .modal-forgotPW .ant-modal-title {
+    font-size: 24px;
+    margin: 15px 0;
+  }
+
+  .modal-forgotPW p {
+    font-size: 12px;
+  }
+
+  .form-forgotPW {
+    padding: 0 20px;
+    margin-left: 0;
+  }
+
+  .form-forgotPW .ant-input {
+    min-height: 25px;
+  }
+
+  .form-forgotPW-btn {
+    /* width: 100%; */
+    height: 40px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-right: 80px;
+  }
+
+  .form-forgotPW-check {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .form-forgotPW-checkBtn {
+    font-size: 14px;
+  }
+
+  .otp-modal .ant-modal-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .otp-input {
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 1);
+  }
+
+  .otp-btn {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    padding: 10px;
+  }
+}

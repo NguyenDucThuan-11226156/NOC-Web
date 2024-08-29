@@ -1,10 +1,4 @@
 /* Css Info profile */
-
-:root {
-  --infoUser-background: rgba(230, 236, 255, 1);
-  --infoUser-profile-color: rgba(246, 246, 246, 1);
-}
-
 .info-user-card {
   box-shadow: none !important;
 }
@@ -247,4 +241,92 @@
 .mentor-info-item .mentorCard .mentor-btn-container {
   margin-top: 8px;
   display: flex;
+}
+
+/* Resposive */
+/* max-width: 480px */
+@media screen and (max-width: 480px) {
+  .info-user-container .ant-card-body {
+    padding: 10px;
+  }
+
+  .user-info-card .ant-card-body {
+    flex-direction: column;
+  }
+
+  .user-info-card h4 {
+    margin-bottom: 30px;
+  }
+
+  .user-info-change {
+    top: 28px;
+    right: 20px;
+  }
+
+  .user-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .user-info-header {
+    top: -90px;
+    left: 10px;
+  }
+
+  .user-info-header h3 {
+    font-size: 16px;
+    margin-top: 50px;
+  }
+
+  .user-info-list {
+    margin-left: 10px;
+  }
+
+  .user-info-list li {
+    font-size: 16px;
+  }
+
+  .info-user-tabs .ant-tabs-tab-btn {
+    font-size: 14px;
+  }
+
+  .mentor-info-item h4 {
+    margin-left: 10px;
+  }
+
+  .mentor-info-item .mentorCard  {
+    max-width: 330px;
+    height: auto;
+    margin: auto 0;
+  }
+
+  .mentor-info-item .mentorCard .mentorCard-content-logo {
+    right: 10px !important;
+  }
+
+  .mentor-info-item .mentorCard h3 {
+    font-size: 16px;
+  }
+
+  .mentor-info-item .mentorCard .mentorCard-content {
+    margin: 5px;
+  }
+
+  .mentor-info-item .mentorCard .mentorCard-content-rate {
+    width: 97%;
+  }
+
+  .mentor-info-item .mentorCard .mentorCard-image img {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 8px;
+  }
+  
+  .mentor-info-item .mentorCard .mentorCard-content-Btn-myMentor {
+    width: 97% !important;
+  }
+
+  .mentor-btn-container {
+    width: 97%;
+    justify-content: space-between;
+  }
 }

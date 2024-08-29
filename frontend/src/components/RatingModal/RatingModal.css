@@ -53,6 +53,10 @@
   border: none;
   cursor: pointer;
   margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .rating-submit-btn .send-icon {
@@ -61,4 +65,40 @@
   color: var(--color-text);
   transform: rotate(-45deg);
   margin-left: 0px;
+}
+
+/* Responsive */
+/* Max-width: 480px */
+@media screen and (max-width: 480px) {
+  .rating-modal .ant-modal-title {
+    font-size: 16px;
+    height: 25px;
+  }
+
+  .rating-subtitle {
+    font-size: 12px;
+  }
+
+  .rating-star {
+    width: 300px;
+    height: 40px;
+  }
+
+  .rating-star li {
+    padding: 10px 8px;
+    margin: 0;
+  }
+
+  .rating-star li span {
+    font-size: 25px;
+  }
+
+  .rating-score {
+    font-size: 10px;
+  }
+
+  .rating-submit-btn .send-icon {
+    width: 25px;
+    height: 25px;
+  }
 }

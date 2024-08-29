@@ -1,4 +1,4 @@
-import { Avatar, Button, Col, Dropdown, Menu, Row } from "antd";
+import { Avatar, Button, Col, Dropdown, Menu, Row, Drawer } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -7,7 +7,7 @@ import { HashLink } from "react-router-hash-link";
 import ForgotPassword from "../../components/ForgotPW";
 import Login from "../../components/Login";
 import SignUp from "../../components/SignUp";
-import axios from "axios"; // Import axios để gọi API
+import axios from "axios";
 import logoNCC from "../../images/logo/Logo-NCC.svg";
 import logoNEU from "../../images/logo/Logo-Neu.svg";
 import logoNOC from "../../images/logo/NOC-black.svg";
@@ -21,6 +21,7 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 import SuccessModal from "../../components/SuccessModal";
+
 function HeaderDefault() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
@@ -31,16 +32,16 @@ function HeaderDefault() {
     doNotParse: true,
   });
   const [user, setUser] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setActiveLink(location.pathname);
     if (cookies.token && cookies.token !== "undefined") {
-      // Gọi API để lấy thông tin user
       axios
         .get(API + `/api/v1/users/detail`, {
           headers: {
-            Authorization: `Bearer ${cookies.token}`, // Sử dụng token từ cookie
+            Authorization: `Bearer ${cookies.token}`,
           },
         })
         .then((response) => {
@@ -77,6 +78,7 @@ function HeaderDefault() {
     if (signUpOpen) setSignUpOpen(false);
     if (sucessModalOpen) setSuccessModalOpen(false);
   };
+
   const toggleSuccessModal = () => {
     setSuccessModalOpen(!sucessModalOpen);
     if (loginOpen) setLoginOpen(false);
@@ -109,10 +111,6 @@ function HeaderDefault() {
     window.location.href = "/";
   };
 
-  const handleMyMentor = () => {};
-
-  const handleSupport = () => {};
-
   const menu = (
     <Menu className="user-dropdown">
       <Menu.Item key="0" className="user-dropdown-item">
@@ -125,11 +123,7 @@ function HeaderDefault() {
           </div>
         </Link>
       </Menu.Item>
-      <Menu.Item
-        key="1"
-        onClick={handleMyMentor}
-        className="user-dropdown-item"
-      >
+      <Menu.Item key="1" onClick={() => {}} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">
@@ -139,7 +133,7 @@ function HeaderDefault() {
           </div>
         </Link>
       </Menu.Item>
-      <Menu.Item key="2" onClick={handleSupport} className="user-dropdown-item">
+      <Menu.Item key="2" onClick={() => {}} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">
@@ -159,6 +153,10 @@ function HeaderDefault() {
       </Menu.Item>
     </Menu>
   );
+
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
 
   return (
     <>
@@ -180,7 +178,7 @@ function HeaderDefault() {
               </div>
             </div>
           </Col>
-          <Col xl={14}>
+          <Col xl={14} className="layout-default__menu-container">
             <div className="layout-default__menu">
               <ul>
                 <li>
@@ -224,6 +222,9 @@ function HeaderDefault() {
           </Col>
           <Col xl={5}>
             <div className="layout-default__loginMenu">
+              <div className="hamburger-button" onClick={toggleSidebar}>
+                &#9776; {/* Biểu tượng hamburger */}
+              </div>
               {user ? (
                 <Dropdown
                   overlay={menu}
@@ -275,6 +276,129 @@ function HeaderDefault() {
           </Col>
         </Header>
       </Row>
+      <Drawer
+        title="Menu"
+        placement="left"
+        onClose={toggleSidebar}
+        visible={sidebarVisible}
+        className="drawer"
+      >
+        <Menu className="drawer-menu" mode="inline">
+          <Menu.Item key="0">
+            <NavLink
+              to="/"
+              className={navLinkActive("/")}
+              onClick={() => {
+                handleLinkClick("/");
+                toggleSidebar();
+              }}
+            >
+              Trang chủ
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="1">
+            <NavLink
+              to="/about"
+              className={navLinkActive("/about")}
+              onClick={() => {
+                handleLinkClick("/about");
+                toggleSidebar();
+              }}
+            >
+              Giới thiệu
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <NavLink
+              to="/info"
+              className={navLinkActive("/info")}
+              onClick={() => {
+                handleLinkClick("/info");
+                toggleSidebar();
+              }}
+            >
+              Thông tin
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <HashLink
+              to="/#footer"
+              className={navLinkActive("/#footer")}
+              onClick={() => {
+                handleLinkClick("/");
+                toggleSidebar();
+              }}
+            >
+              Liên hệ
+            </HashLink>
+          </Menu.Item>
+          {user ? (
+            <Menu.SubMenu
+              key="user-menu"
+              title={
+                <div className="drawer-user-info">
+                  <Avatar src={user.avatar} size={64} />
+                  <div className="drawer-user-details">
+                    <h3 style={{ fontSize: "12px", color: "#000" }}>
+                      {user.name}
+                    </h3>
+                  </div>
+                </div>
+              }
+            >
+              <Menu.Item key="4">
+                <NavLink
+                  to="/infouser"
+                  onClick={() => {
+                    handleLinkClick("/info");
+                    toggleSidebar();
+                  }}
+                >
+                  <div className="dropdownItem-list">
+                    <UserOutlined className="dropdownItem-icon" />
+                    Trang cá nhân
+                  </div>
+                </NavLink>
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Link to="/infouser">
+                  <div className="dropdownItem-list">
+                    <EditOutlined className="dropdownItem-icon" />
+                    Mentor của tôi
+                  </div>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="6">
+                <Link to="/infouser">
+                  <div className="dropdownItem-list">
+                    <SecurityScanOutlined className="dropdownItem-icon" />
+                    Trợ giúp
+                  </div>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="7" onClick={handleLogout}>
+                <div className="dropdownItem-list">
+                  <LogoutOutlined className="dropdownItem-icon" />
+                  Đăng xuất
+                </div>
+              </Menu.Item>
+            </Menu.SubMenu>
+          ) : (
+            <>
+              <Menu.Item className="button-sidebar-item" onClick={toggleSignUpModal} ghost={true} key="4">
+                <Button type="text">
+                  Đăng kí
+                </Button>
+              </Menu.Item>
+              <Menu.Item className="button-sidebar-item" onClick={toggleLoginModal} ghost={true} key="5">
+                <Button type="text" >
+                  Đăng nhập
+                </Button>
+              </Menu.Item>
+            </>
+          )}
+        </Menu>
+      </Drawer>
     </>
   );
 }

@@ -13,3 +13,19 @@
   font-weight: 700;
   font-family: var(--font-login);
 }   
+
+/* Responsive */
+/* Max-width: 480px */
+@media screen and (max-width: 480px) {
+  .bannerStyle-title {
+    font-size: 25px;
+  }
+
+  .banner-container {
+    margin: 20px 15px !important;
+  }
+
+  .bannerStyle-desc {
+    font-size: 10px;
+  }
+}

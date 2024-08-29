@@ -94,7 +94,8 @@ function SignUp({ open, toggleLoginModal, onCancel, toggleSuccessModal }) {
           span: 8,
         }}
         wrapperCol={{
-          span: 24,
+          xl: 24,
+          xs: 24
         }}
         initialValues={{
           remember: true,

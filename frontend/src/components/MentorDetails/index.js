@@ -235,13 +235,13 @@ function MentorDetailPage() {
       </div>
 
       <Row className="mentor-detail-content">
-        <Col span={7}>
+        <Col xl={7} xs={24}>
           <div className="mentor-detail-image">
             <img src={mentor.avatar} alt="mentor-image" />
           </div>
           <div className="action-buttons">{buttonCheck()}</div>
         </Col>
-        <Col span={17}>
+        <Col xl={17} xs={24}>
           <div className="mentor-detail-profile">
             <h3>Giới thiệu</h3>
             <p>{mentor.introduction1}</p>
@@ -255,14 +255,15 @@ function MentorDetailPage() {
 
           <div className="mentor-detail-review">
             <h3>Review</h3>
-            <Row className="mentor-detail-comment">
-              <Col xxl={3} xl={4} className="user-comment">
+            <Row gutter={[20, 20]}
+            className="mentor-detail-comment">
+              <Col xxl={3} xl={5} xs={4} className="user-comment">
                 <div className="user-avatar-comment">
                   <img src={userAvatar} alt="user-avatar" />
                 </div>
                 <h4>{userName}</h4>
               </Col>
-              <Col xxl={21} xl={20}>
+              <Col xxl={21} xl={19} xs={20}>
                 <Input disabled className="user-comment-input" />
               </Col>
             </Row>
@@ -281,22 +282,23 @@ function MentorDetailPage() {
         footer={false}
       >
         <List
+          className="review-list"
           dataSource={comments}
           renderItem={(item) => (
-            <List.Item>
+            <List.Item className="review-list-item">
               <List.Item.Meta description={item.message} />
-              <div>{new Date(item.createAt).toLocaleDateString()}</div>
+              <div className="review-date">{new Date(item.createAt).toLocaleDateString()}</div>
             </List.Item>
           )}
         />
         {isLoggedIn ? (
           <Row>
-            <Col span={2}>
+            <Col xl={2} xs={4}>
               <div className="review-user-avatar">
                 <img src={userAvatar} alt="user-avatar" />
               </div>
             </Col>
-            <Col span={22} className="review-newComment">
+            <Col xl={22} xs={19} className="review-newComment">
               <Input.TextArea
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}

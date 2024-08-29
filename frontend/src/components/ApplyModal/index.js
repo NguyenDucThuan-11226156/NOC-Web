@@ -114,7 +114,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
           }}
         >
           <Row gutter={[25, 10]} justify={"space-around"}>
-            <Col>
+            <Col xs={24} xl={12}>
               <Form.Item
                 name="fullName"
                 label="Họ và tên"
@@ -123,7 +123,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
                 <Input placeholder="Họ và tên" disabled />
               </Form.Item>
             </Col>
-            <Col>
+            <Col xs={24} xl={12}>
               <Form.Item
                 name="school"
                 label="Trường"
@@ -137,7 +137,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
             </Col>
           </Row>
           <Row gutter={[20, 10]} justify={"space-around"}>
-            <Col>
+            <Col xs={24} xl={12}>
               <Form.Item
                 name="domain"
                 label="Lớp chuyên ngành"
@@ -146,7 +146,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
                 <Input placeholder="Lớp chuyên ngành" disabled />
               </Form.Item>
             </Col>
-            <Col>
+            <Col xs={24} xl={12}>
               <Form.Item
                 name="studentID"
                 label="Mã sinh viên"
@@ -157,7 +157,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
             </Col>
           </Row>
           <Row gutter={[20, 10]} justify={"space-around"}>
-            <Col>
+            <Col xs={24} xl={12}>
               <Form.Item
                 name="phone"
                 label="Số điện thoại"
@@ -166,7 +166,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
                 <Input placeholder="Số điện thoại" disabled />
               </Form.Item>
             </Col>
-            <Col>
+            <Col xs={24} xl={12}>
               <Form.Item name="email" label="Email" className="apply-form-item">
                 <Input placeholder="Email" disabled />
               </Form.Item>
@@ -220,7 +220,7 @@ function ApplyModal({ open, onCancel, mentorId }) {
               onChange={handleChangeCv}
               beforeUpload={() => false} // Prevent auto-upload to make form submission handle the file
             >
-              <Button icon={<UploadOutlined />}>Định dạng PDF</Button>
+              <Button className="apply-btn" icon={<UploadOutlined />}>Định dạng PDF</Button>
             </Upload>
           </Form.Item>
 

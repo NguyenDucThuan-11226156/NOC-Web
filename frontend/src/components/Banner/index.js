@@ -42,9 +42,9 @@ function Banner() {
   };
 
   return (
-    <div style={bannerStyle}>
+    <div className="banner-container" style={bannerStyle}>
       <h1 className="bannerStyle-title">NEU DAILY MENTORING</h1>
-      <p className="bannerStyle-desc">Thông tin của dự án (Có thể là một châm ngôn giống VINFAST: Việt Nam - Phong cách - An toàn - Thông minh)</p>
+      <p className="bannerStyle-desc">Kickstart Your Future: The NEU Mentoring Journey Begins</p>
     </div>
   );
 }

@@ -10,10 +10,13 @@ const TableStudy = ({ studies, fetchCategories }) => {
   const [cookies] = useCookies(['tokenAdmin']);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedStudy, setSelectedStudy] = useState(null);
+  const [loadingDelete, setLoadingDelete] = useState({}); // Track loading state for each row
 
   const [form] = Form.useForm();
 
   const handleDelete = async (id) => {
+    setLoadingDelete((prevState) => ({ ...prevState, [id]: true })); // Set loading state to true for the specific row
+
     try {
       const response = await axios.delete(`${API}/api/v1/admin/deleteStudy/${id}`, {
         headers: {
@@ -28,6 +31,8 @@ const TableStudy = ({ studies, fetchCategories }) => {
       }
     } catch (error) {
       message.error("An error occurred while deleting the study");
+    } finally {
+      setLoadingDelete((prevState) => ({ ...prevState, [id]: false })); // Set loading state to false after the process completes
     }
   };
 
@@ -71,7 +76,7 @@ const TableStudy = ({ studies, fetchCategories }) => {
       key: "_id",
     },
     {
-      title: "Học vấn",
+      title: "Ngành học",
       dataIndex: "description",
       key: "description",
     },
@@ -88,7 +93,9 @@ const TableStudy = ({ studies, fetchCategories }) => {
           </Button>
           <Button
             className="delete-categories-btn"
+            loading={loadingDelete[record._id]} // Set loading state for the specific button
             onClick={() => handleDelete(record._id)}
+            disabled={loadingDelete[record._id]} // Disable button while loading
           >
             Delete
           </Button>
