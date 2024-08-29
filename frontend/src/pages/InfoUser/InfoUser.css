@@ -139,7 +139,7 @@
 
 .mentor-info-item .mentorCard {
   height: 240px;
-  width: 520px;
+  width: auto;
   display: flex;
   align-items: normal;
   h3 {
@@ -150,6 +150,10 @@
   p {
     margin: auto 0;
   }
+}
+
+.mentor-info-item .mentorCard .mentorCard-content {
+  margin: 5px;
 }
 
 .mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-logo {
@@ -165,6 +169,7 @@
 
 .mentor-info-item .mentorCard .mentorCard-content-menteeCount {
   margin-top: 0;
+  width: 100%;
 }
 
 .mentor-info-item .mentorCard .mentorCard-image {
@@ -189,7 +194,7 @@
 }
 
 .mentor-info-item .mentorCard .mentorCard-content-introduction {
-  width: 300px; /* Đặt chiều rộng cho phần tử */
+  width: auto; /* Đặt chiều rộng cho phần tử */
   height: 3em; /* Chiều cao tối đa cho 2 dòng văn bản, mỗi dòng khoảng 1.5em */
   line-height: 1.5em; /* Khoảng cách giữa các dòng */
   overflow: hidden;
@@ -200,7 +205,7 @@
 }
 
 .mentor-info-item .mentorCard .mentorCard-content-rate {
-  width: 280px;
+  width: auto;
   height: 30px;
   margin: auto 0;
 }
@@ -209,9 +214,16 @@
   margin-top: 5px;
 }
 
+.mentor-info-item .mentorCard .mentorCard-content .mentor-btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+}
+
 .mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn {
   width: auto;
   margin: 3px;
+  padding: 10px;
 }
 
 .mentor-info-item
@@ -244,6 +256,26 @@
 }
 
 /* Resposive */
+
+@media screen and (max-width: 1200px) { 
+  .user-info-header {
+    left: 20px;
+  }
+  
+  .user-info-header h3 {
+    margin-top: 90px;
+    font-size: 30px;
+  }
+
+  .mentor-info-item .mentorCard .mentorCard-image img {
+    object-position: top center;
+  }
+
+  .mentor-info-item .mentorCard .mentorCard-content .mentorCard-content-Btn {
+    padding: 10px 20px;
+  }
+}
+
 /* max-width: 480px */
 @media screen and (max-width: 480px) {
   .info-user-container .ant-card-body {
@@ -291,13 +323,13 @@
   }
 
   .mentor-info-item h4 {
-    margin-left: 10px;
+    margin : auto;
   }
 
   .mentor-info-item .mentorCard  {
     max-width: 330px;
     height: auto;
-    margin: auto 0;
+    margin: auto;
   }
 
   .mentor-info-item .mentorCard .mentorCard-content-logo {
@@ -326,7 +358,7 @@
   }
 
   .mentor-btn-container {
-    width: 97%;
+    width: 97% !important;
     justify-content: space-between;
   }
 }

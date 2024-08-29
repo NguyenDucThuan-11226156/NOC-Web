@@ -126,7 +126,7 @@ const InfoUser = () => {
             <div className="user-info-header">
               <Avatar
                 src={userInfo.avatar || avatar || defaultAvatar}
-                size={190}
+                size={160}
                 className="user-avatar"
               />
               <Title level={3}>{userInfo.name}</Title>
@@ -141,13 +141,13 @@ const InfoUser = () => {
         >
           <TabPane tab="Trang cá nhân" key="1">
             <Card className="user-info-card">
-              <Col xl={5} xs={24}>
+              <Col xl={5} lg={6} md={8} sm={8} xs={24}>
                 <Title level={4}>Thông tin</Title>
               </Col>
-              <Col xl={1} xs={24}>
+              <Col xl={1} lg={1} md={1} sm={1} xs={24}>
                 <div className="user-info-border"></div>
               </Col>
-              <Col xl={17} xs={24}>
+              <Col xl={17} lg={17} md={15} sm={15} xs={24}>
                 <Row justify="space-between">
                   <Col span={24} className="user-info-list">
                     <li>Họ và tên: {userInfo.name}</li>
@@ -175,21 +175,21 @@ const InfoUser = () => {
                 className="mentor-info-item"
                 justify="space-evenly"
               >
-                <Col xl={4} xs={24}>
+                <Col xl={4} lg={7} md={8} xs={24}>
                   <Title level={4}>My Mentor ({myMentors.length})</Title>
                 </Col>
-                <Col xl={1} xs={0}>
+                <Col xl={1} lg={1} md={1} xs={0}>
                   <div className="mentor-info-border"></div>
                 </Col>
-                <Col xl={19} xs={24}>
+                <Col xl={19} lg={15} md={15} xs={24}>
                   <Row gutter={[0, 20]} justify="space-between">
                     {myMentors.map((mentor) => (
-                      <Col xl={12} xs={24}>
+                      <Col xl={12} lg={24} md={24} xs={24}>
                         <Row key={mentor._id} className="mentorCard">
-                          <Col xl={10} xs={24} className="mentorCard-image">
+                          <Col xl={10} lg={10} md={10} xs={24} className="mentorCard-image">
                             <img src={mentor.avatar} alt="Avatar" />
                           </Col>
-                          <Col xl={13} xs={24} className="mentorCard-content">
+                          <Col xl={13} lg={13} md={13} xs={24} className="mentorCard-content">
                             <h3>{mentor.name}</h3>
                             <div className="mentorCard-content-logo">
                               <img
@@ -241,24 +241,26 @@ const InfoUser = () => {
                 className="mentor-info-item"
                 justify="center"
               >
-                <Col xl={4} xs={24}>
+                <Col xl={4} lg={7} md={8} xs={24}>
                   <Title level={4}>Đã lưu ({savedMentors.length})</Title>
                 </Col>
-                <Col xl={1} xs={0}>
+                <Col xl={1} lg={1} md={1} xs={0}>
                   <div className="mentor-info-border"></div>
                 </Col>
-                <Col xl={19} xs={24}>
+                <Col xl={19} lg={15} md={15} xs={24}>
                   <Row gutter={[0, 20]} justify="space-between">
                     {savedMentors.map((mentor) => (
-                      <Col xl={12} xs={24}>
+                      <Col xl={12} lg={24} md={24} xs={24}>
                         <Row key={mentor._id} className="mentorCard">
-                          <Col xl={10} xs={24} className="mentorCard-image">
+                          <Col xl={10} lg={10} md={10} xs={24} className="mentorCard-image">
                             <img src={mentor.avatar} alt="Avatar" />
                           </Col>
                           <Col
                             key={mentor._id}
                             xl={13}
                             xs={24}
+                            lg={13}
+                            md={13}
                             className="mentorCard-content"
                           >
                             <h3>{mentor.name}</h3>

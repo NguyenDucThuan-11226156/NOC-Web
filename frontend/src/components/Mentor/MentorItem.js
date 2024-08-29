@@ -113,10 +113,10 @@ function MentorItem({ mentor, mentorId }) {
   return (
     <Card bordered className="mentorCard">
       <Row>
-        <Col xl={10} xs={24} className="mentorCard-image">
+        <Col xxl={10} xl={10} lg={10} md={10} xs={24} className="mentorCard-image">
           <img src={mentor.avatar} alt="Avatar" />
         </Col>
-        <Col xl={13} xs={24} className="mentorCard-content">
+        <Col xxl={13} xl={13} lg={13} md={13} xs={24} className="mentorCard-content">
           <h3>{mentor.name}</h3>
           <div className="mentorCard-content-logo">
             <img
