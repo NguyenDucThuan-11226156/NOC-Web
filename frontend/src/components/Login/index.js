@@ -1,9 +1,9 @@
 import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
+import axios from "axios";
 import "./Login.css";
-import { post } from "../../utils/request";
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
-
+import { API } from "../../constant";
 function Login({
   open,
   toggleSignUpModal,
@@ -11,10 +11,11 @@ function Login({
   onCancel,
   onLoginSuccess,
 }) {
-  const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"], {
+  const [cookies, setCookie] = useCookies(["cookie-name"], {
     doNotParse: true,
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (cookies.token) {
@@ -22,30 +23,42 @@ function Login({
     }
   }, [cookies, onLoginSuccess]);
 
+  const fetchAvatarDefault = async () => {
+    try {
+      const response = await axios.get(`${API}/api/v1/admin/getSettings`);
+      const avatarDefault = response.data.data[0].avatarDefault;
+      return avatarDefault;
+    } catch (error) {
+      console.error("Failed to fetch avatarDefault:", error);
+      return null;
+    }
+  };
+
   const onFinish = async (values) => {
+    setIsLoading(true);
     let userInfo = {};
     try {
-      const res = await post("/api/v1/users/login", {
+      const res = await axios.post(`${API}/api/v1/users/login`, {
         email: values.username,
         password: values.password,
       });
-      setCookie("token", res.token);
-      setCookie("name", res.user.name);
-      setCookie(
-        "avatar",
-        "https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/394293600_1122885558682437_641231820292856308_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEYt56-h2imKpVOkMMGEQ7PBzVn1Z34OIEHNWfVnfg4gRj3xIt8QEwhRE3zwVCTbR_qT7kzVnjBDdKFRUqD8HB0&_nc_ohc=gbA-Xu774aUQ7kNvgHTQPgh&_nc_ht=scontent-hkg4-1.xx&oh=00_AYCtKpHSRqtP4ZRE5gorltREd5jp1uEcSfUCjPV9Q6yL4Q&oe=66B275C3"
-      );
+
+      const avatarDefault = await fetchAvatarDefault();
+
+      setCookie("token", res.data.token);
+      setCookie("name", res.data.user.name);
+      setCookie("avatar", avatarDefault || "default_avatar_url_here");
+
       userInfo = {
-        name: res.user.name,
-        avatar:
-          "https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/394293600_1122885558682437_641231820292856308_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEYt56-h2imKpVOkMMGEQ7PBzVn1Z34OIEHNWfVnfg4gRj3xIt8QEwhRE3zwVCTbR_qT7kzVnjBDdKFRUqD8HB0&_nc_ohc=gbA-Xu774aUQ7kNvgHTQPgh&_nc_ht=scontent-hkg4-1.xx&oh=00_AYCtKpHSRqtP4ZRE5gorltREd5jp1uEcSfUCjPV9Q6yL4Q&oe=66B275C3",
+        name: res.data.user.name,
+        avatar: avatarDefault || "default_avatar_url_here",
       };
 
       setIsAuthenticated(true);
       onLoginSuccess(userInfo);
 
       notification.success({
-        message: res.message,
+        message: res.data.message,
         description: "",
       });
     } catch (error) {
@@ -55,6 +68,8 @@ function Login({
           error.response?.data?.message ||
           "Đã xảy ra lỗi. Vui lòng thử lại sau.",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -153,7 +168,12 @@ function Login({
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" className="form-loginButton">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="form-loginButton"
+            loading={isLoading}
+          >
             Đăng nhập
           </Button>
         </Form.Item>
