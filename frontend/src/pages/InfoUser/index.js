@@ -217,8 +217,7 @@ const InfoUser = () => {
                               defaultValue={mentor.rate}
                             />
                             <p className="mentorCard-content-rateCount">
-                              ({mentor.numberRate || 0} đánh giá) (
-                              {mentor.rate || 0}/5)
+                            ({mentor.numberRate || 0} đánh giá) ({mentor.rate?.toFixed(2) || 0}/5)
                             </p>
                             <div className="mentorCard-btnContainer">
                               <Button
@@ -290,8 +289,7 @@ const InfoUser = () => {
                               defaultValue={mentor.rate}
                             />
                             <p className="mentorCard-content-rateCount">
-                              ({mentor.numberRate || 0} đánh giá) (
-                              {mentor.rate || 0}/5)
+                            ({mentor.numberRate || 0} đánh giá) ({mentor.rate?.toFixed(2) || 0}/5)
                             </p>
                             <div className="mentor-btn-container">
                               <Button
