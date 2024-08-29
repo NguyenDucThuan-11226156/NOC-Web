@@ -1,4 +1,5 @@
 import { Modal, Button } from "antd";
+import './SuccessModal.css'
 
 function SuccessModal({ open, onCancel, toggleLoginModal }) {
   return (
@@ -6,8 +7,9 @@ function SuccessModal({ open, onCancel, toggleLoginModal }) {
       title="Đăng kí thành công"
       open={open}
       onCancel={onCancel} 
+      className="successModal"
       footer={[
-        <Button key="login" type="primary" onClick={toggleLoginModal}>
+        <Button className="successModal-btn" key="login" type="primary" onClick={toggleLoginModal}>
           Đăng nhập
         </Button>,
       ]}
