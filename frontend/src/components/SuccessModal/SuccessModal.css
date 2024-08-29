@@ -1,0 +1,25 @@
+.successModal .ant-modal-title {
+  font-size: 20px;
+  font-family: var(--font-mentor-title);
+  text-align: center;
+  color: var(--color-mentor-title);
+  margin-bottom: 20px;
+}
+
+.successModal p {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.successModal-btn {
+  width: 120px;
+  height: 40px;
+  background-color: #405e91;
+  color: #fff;
+  border-radius: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+

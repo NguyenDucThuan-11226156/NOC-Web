@@ -123,7 +123,7 @@ function HeaderDefault() {
           </div>
         </Link>
       </Menu.Item>
-      <Menu.Item key="1" onClick={() => {}} className="user-dropdown-item">
+      {/* <Menu.Item key="1" onClick={() => {}} className="user-dropdown-item">
         <Link to="/infouser">
           <div className="dropdownItem-list">
             <div className="dropdownItem-logo">
@@ -142,7 +142,7 @@ function HeaderDefault() {
             <span>Trợ giúp</span>
           </div>
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
         <div className="dropdownItem-list">
           <div className="dropdownItem-logo">
@@ -360,7 +360,7 @@ function HeaderDefault() {
                   </div>
                 </NavLink>
               </Menu.Item>
-              <Menu.Item key="5">
+              {/* <Menu.Item key="5">
                 <Link to="/infouser">
                   <div className="dropdownItem-list">
                     <EditOutlined className="dropdownItem-icon" />
@@ -375,7 +375,7 @@ function HeaderDefault() {
                     Trợ giúp
                   </div>
                 </Link>
-              </Menu.Item>
+              </Menu.Item> */}
               <Menu.Item key="7" onClick={handleLogout}>
                 <div className="dropdownItem-list">
                   <LogoutOutlined className="dropdownItem-icon" />
