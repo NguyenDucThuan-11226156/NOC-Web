@@ -28,9 +28,7 @@ function HeaderDefault() {
   const [sucessModalOpen, setSuccessModalOpen] = useState(false);
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [cookies] = useCookies(["cookie-name"], {
-    doNotParse: true,
-  });
+  const [cookies, setCookie] = useCookies(["token", "avatar", "name"]);
   const [user, setUser] = useState(null);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const location = useLocation();
@@ -51,12 +49,15 @@ function HeaderDefault() {
           };
 
           setUser(userInfo);
+          // Set avatar in cookies
+          setCookie("avatar", response.data.info.avatar, { path: "/" });
+          setCookie("name", response.data.info.name, { path: "/" });
         })
         .catch((error) => {
           console.error("Error fetching user info:", error);
         });
     }
-  }, [location, cookies]);
+  }, [location, cookies, setCookie]);
 
   const toggleLoginModal = () => {
     setLoginOpen(!loginOpen);
@@ -123,26 +124,6 @@ function HeaderDefault() {
           </div>
         </Link>
       </Menu.Item>
-      {/* <Menu.Item key="1" onClick={() => {}} className="user-dropdown-item">
-        <Link to="/infouser">
-          <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">
-              <EditOutlined className="dropdownItem-icon" />
-            </div>
-            <span>Mentor của tôi</span>
-          </div>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="2" onClick={() => {}} className="user-dropdown-item">
-        <Link to="/infouser">
-          <div className="dropdownItem-list">
-            <div className="dropdownItem-logo">
-              <SecurityScanOutlined className="dropdownItem-icon" />
-            </div>
-            <span>Trợ giúp</span>
-          </div>
-        </Link>
-      </Menu.Item> */}
       <Menu.Item key="3" onClick={handleLogout} className="user-dropdown-item">
         <div className="dropdownItem-list">
           <div className="dropdownItem-logo">
@@ -284,119 +265,26 @@ function HeaderDefault() {
         className="drawer"
       >
         <Menu className="drawer-menu" mode="inline">
-          <Menu.Item key="0">
-            <NavLink
-              to="/"
-              className={navLinkActive("/")}
-              onClick={() => {
-                handleLinkClick("/");
-                toggleSidebar();
-              }}
-            >
+          <Menu.Item key="1">
+            <NavLink to="/" onClick={toggleSidebar}>
               Trang chủ
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="1">
-            <NavLink
-              to="/about"
-              className={navLinkActive("/about")}
-              onClick={() => {
-                handleLinkClick("/about");
-                toggleSidebar();
-              }}
-            >
+          <Menu.Item key="2">
+            <NavLink to="/about" onClick={toggleSidebar}>
               Giới thiệu
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="2">
-            <NavLink
-              to="/info"
-              className={navLinkActive("/info")}
-              onClick={() => {
-                handleLinkClick("/info");
-                toggleSidebar();
-              }}
-            >
+          <Menu.Item key="3">
+            <NavLink to="/info" onClick={toggleSidebar}>
               Thông tin
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="3">
-            <HashLink
-              to="/#footer"
-              className={navLinkActive("/#footer")}
-              onClick={() => {
-                handleLinkClick("/");
-                toggleSidebar();
-              }}
-            >
+          <Menu.Item key="4">
+            <HashLink to="/#footer" onClick={toggleSidebar}>
               Liên hệ
             </HashLink>
           </Menu.Item>
-          {user ? (
-            <Menu.SubMenu
-              key="user-menu"
-              title={
-                <div className="drawer-user-info">
-                  <Avatar src={user.avatar} size={64} />
-                  <div className="drawer-user-details">
-                    <h3 style={{ fontSize: "12px", color: "#000" }}>
-                      {user.name}
-                    </h3>
-                  </div>
-                </div>
-              }
-            >
-              <Menu.Item key="4">
-                <NavLink
-                  to="/infouser"
-                  onClick={() => {
-                    handleLinkClick("/info");
-                    toggleSidebar();
-                  }}
-                >
-                  <div className="dropdownItem-list">
-                    <UserOutlined className="dropdownItem-icon" />
-                    Trang cá nhân
-                  </div>
-                </NavLink>
-              </Menu.Item>
-              {/* <Menu.Item key="5">
-                <Link to="/infouser">
-                  <div className="dropdownItem-list">
-                    <EditOutlined className="dropdownItem-icon" />
-                    Mentor của tôi
-                  </div>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Link to="/infouser">
-                  <div className="dropdownItem-list">
-                    <SecurityScanOutlined className="dropdownItem-icon" />
-                    Trợ giúp
-                  </div>
-                </Link>
-              </Menu.Item> */}
-              <Menu.Item key="7" onClick={handleLogout}>
-                <div className="dropdownItem-list">
-                  <LogoutOutlined className="dropdownItem-icon" />
-                  Đăng xuất
-                </div>
-              </Menu.Item>
-            </Menu.SubMenu>
-          ) : (
-            <>
-              <Menu.Item className="button-sidebar-item" onClick={toggleSignUpModal} ghost={true} key="4">
-                <Button type="text">
-                  Đăng kí
-                </Button>
-              </Menu.Item>
-              <Menu.Item className="button-sidebar-item" onClick={toggleLoginModal} ghost={true} key="5">
-                <Button type="text" >
-                  Đăng nhập
-                </Button>
-              </Menu.Item>
-            </>
-          )}
         </Menu>
       </Drawer>
     </>
