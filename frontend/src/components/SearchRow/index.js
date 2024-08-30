@@ -12,6 +12,7 @@ function SearchRow({
   enterprises,
   specialization,
   studies,
+  loading, // Receive loading state as a prop
 }) {
   const [filters, setFilters] = useState({
     keyword: "",
@@ -19,7 +20,6 @@ function SearchRow({
     specialization: "",
     education: "",
     industry: "",
-    // other: "",
   });
 
   const handleSearch = () => {
@@ -28,19 +28,7 @@ function SearchRow({
 
   const handleChange = (field, value) => {
     setFilters({ ...filters, [field]: value });
-    // console.log(filters);
   };
-
-  // const specializationMenu = (
-  //   <Menu onClick={({ key }) => handleChange("specialization", key)}>
-  //     <Menu.SubMenu key="spec1" title="Hướng nghiệp">
-  //       <Menu.Item key="spec1-sub1">Option 1</Menu.Item>
-  //       <Menu.Item key="spec1-sub2">Option 2</Menu.Item>
-  //     </Menu.SubMenu>
-  //     <Menu.Item key="spec2">Kĩ năng mềm</Menu.Item>
-  //     <Menu.Item key="spec3">Công tác Đoàn Hội/CLB</Menu.Item>
-  //   </Menu>
-  // );
 
   return (
     <Row
@@ -53,10 +41,11 @@ function SearchRow({
         <Search
           className="searchBar"
           placeholder="Nhập từ khóa..."
-          enterButton="Tìm kiếm"
+          enterButton={loading ? <SearchOutlined  /> : "Tìm kiếm"}
           size="large"
           onSearch={handleSearch}
           onChange={(e) => handleChange("keyword", e.target.value)}
+          loading={loading} // Loading state for the search button
         />
       </Col>
       <Col xs={24} xl={6} lg={12} md={12}>
@@ -68,7 +57,7 @@ function SearchRow({
           onChange={(value) => handleChange("organization", value)}
         >
           {enterprises.map((enterprise) => (
-            <Option value={enterprise.description}>
+            <Option key={enterprise.id} value={enterprise.description}>
               {enterprise.description}
             </Option>
           ))}
@@ -83,7 +72,9 @@ function SearchRow({
           style={{ width: "100%" }}
         >
           {specialization.map((spe) => (
-            <Option value={spe.description}>{spe.description}</Option>
+            <Option key={spe.id} value={spe.description}>
+              {spe.description}
+            </Option>
           ))}
         </Select>
       </Col>
@@ -96,7 +87,9 @@ function SearchRow({
           onChange={(value) => handleChange("education", value)}
         >
           {studies.map((study) => (
-            <Option value={study.description}>{study.description}</Option>
+            <Option key={study.id} value={study.description}>
+              {study.description}
+            </Option>
           ))}
         </Select>
       </Col>
@@ -109,22 +102,12 @@ function SearchRow({
           onChange={(value) => handleChange("industry", value)}
         >
           {domains.map((domain) => (
-            <Option value={domain.description}>{domain.description}</Option>
+            <Option key={domain.id} value={domain.description}>
+              {domain.description}
+            </Option>
           ))}
         </Select>
       </Col>
-      {/* <Col span={4}>
-        <Select
-          className="searchBar-select"
-          placeholder="Khác"
-          size="large"
-          style={{ width: "100%" }}
-          onChange={(value) => handleChange("other", value)}
-        >
-          <Option value="other1">Other1</Option>
-          <Option value="other2">Other2</Option>
-        </Select>
-      </Col> */}
     </Row>
   );
 }
