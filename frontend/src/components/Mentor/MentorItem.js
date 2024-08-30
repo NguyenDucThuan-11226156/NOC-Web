@@ -134,10 +134,15 @@ function MentorItem({ mentor, mentorId }) {
           <p className="mentorCard-content-introduction">
             Mục giới thiệu 2: {mentor.introduction2}
           </p>
-          <Rate className="mentorCard-content-rate" disabled />
+          <Rate
+  className="mentorCard-content-rate"
+  disabled
+  allowHalf
+  value={mentor.rate || 0} 
+/>
           <p className="mentorCard-content-rateCount">
-            ({mentor.numberRate || 0} đánh giá) ({mentor.rate || 0}/5)
-          </p>
+  ({mentor.numberRate || 0} đánh giá) ({mentor.rate?.toFixed(2) || 0}/5)
+</p>
           <div className="mentorCard-btnContainer">
             {!isMentorApplied && (
               <Button className="mentorCard-content-Btn" onClick={handleApply}>
