@@ -7,6 +7,7 @@ import Study from "../models/study.model";
 import Domain from "../models/domain.model";
 import Specialization from "../models/specialization.model";
 import SettingGeneral from "../models/settingGeneral.model";
+import Users from "../models/user.model";
 // [POST] /api/v1/admin/register
 export const register = async (req: Request, res: Response) => {
   try {
@@ -520,6 +521,24 @@ export const getSettings = async (req: Request, res: Response) => {
     }
   } catch (error) {
     // Handle potential errors
+    res.status(500).json({
+      code: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+// [GET] /api/v1/admin/excel
+export const excelExport = async (req: Request, res: Response) => {
+  try {
+    const response = await Users.find().select(
+      "-_id studentId name email school domain createAt number description description_problem categoriesConsultId"
+    );
+    res.json({
+      code: 200,
+      data: response,
+    });
+  } catch (error) {
     res.status(500).json({
       code: 500,
       message: "Internal server error",
