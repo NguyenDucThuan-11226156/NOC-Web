@@ -56,8 +56,8 @@ export const listMentors = async (req: Request, res: Response) => {
     res.json({
       code: 200,
       mentors: listMentor,
-      pinnedMentor: pinnedMentor,
       total: total,
+      pinnedMentor: pinnedMentor,
       enterprises: listAllEnterprise,
       studies: listAllStudy,
       domains: listAllDomain,

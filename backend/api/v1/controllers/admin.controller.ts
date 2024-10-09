@@ -529,3 +529,53 @@ export const getSettings = async (req: Request, res: Response) => {
     });
   }
 };
+// [GET] /api/v1/admin/excel
+export const excelExport = async (req: Request, res: Response) => {
+  try {
+    const response = await Users.find().select(
+      "-_id studentId name email school domain createAt number description description_problem categoriesConsultId"
+    );
+    res.json({
+      code: 200,
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+// [POST] /api/v1/admin/editPinnedMentor/:id
+export const editPinnedMentor = async (req: Request, res: Response) => {
+  try {
+    const idMentor = req.params.id;
+    const pinnedMentor = JSON.parse(req.body.pinned);
+    const result = await Mentors.updateOne(
+      {
+        _id: idMentor,
+      },
+      { pinned: pinnedMentor }
+    );
+    // Check if the update was successful
+    if (result.modifiedCount > 0) {
+      res.json({
+        code: 200,
+        message: "Pinned mentor updated successfully",
+      });
+    } else {
+      res.status(404).json({
+        code: 404,
+        message: "No changes made",
+      });
+    }
+  } catch (error) {
+    // Handle potential errors
+    res.status(500).json({
+      code: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
