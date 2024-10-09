@@ -185,7 +185,7 @@ function MentorItem({ mentor, mentorId }) {
               <Button
                 className={
                   "mentorCard-content-Btn " +
-                  (!isMentorApplied && !isMentorSaved ? "btn-viewmore-full" : "")
+                  (!isMentorApplied && !isMentorSaved ? "btn-viewmore-full" : "") + (!isMentorSaved ? "" : "btn-flex-grow")
                 }
                 onClick={handleSave}
                 loading={buttonLoading} // Set loading state on the button

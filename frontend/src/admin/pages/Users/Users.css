@@ -1,0 +1,50 @@
+.user-title {
+  font-family: var(--font-mentor-title);
+  color:#409174 ;  
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.users-table table {
+  border: 0.5px solid #ddd;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.users-table thead tr th {
+  background-color: #409174 !important;
+  color: #fff !important;
+  font-family: var(--font);
+}
+
+.users-table tbody tr td {
+  font-family: var(--font);
+  letter-spacing: .5px;
+}
+
+.users-table tbody tr td a, .users-table .ant-pagination-item a {
+  color: #214236 !important;
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+.users-table .ant-pagination-item-active {
+  border-color: #214236 !important;
+}
+
+.export-btn {
+  width: auto;
+  height: 35px;
+  border: 2px solid #D9E9E3  ;
+  color: #409174 ;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: #fff;
+}
+
+.export-btn:hover {
+  background-color: #D9E9E3  !important;
+  border-color: #D9E9E3 !important;
+  color: #409174 !important;
+}
