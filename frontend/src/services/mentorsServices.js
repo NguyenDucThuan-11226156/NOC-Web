@@ -63,3 +63,23 @@ export const updateMentor = async (mentorId, updatedData) => {
     throw error;
   }
 };
+
+export const editPinnedMentor = async (mentorId, pinnedStatus) => {
+  try {
+    const response = await axios.post(
+      `${API}/api/v1/admin/editPinnedMentor/${mentorId}`,
+      {
+        pinned: pinnedStatus,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating mentor pin status:", error);
+    throw error;
+  }
+};

@@ -1,9 +1,8 @@
-import { Avatar, Button, Col, Dropdown, Menu, Row, Drawer } from "antd";
+import { Avatar, Button, Col, Dropdown, Menu, Row, Drawer, Skeleton } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import ForgotPassword from "../../components/ForgotPW";
 import Login from "../../components/Login";
 import SignUp from "../../components/SignUp";
@@ -16,9 +15,7 @@ import "./LayoutDefault.css";
 import { API } from "../../constant";
 import {
   LogoutOutlined,
-  SecurityScanOutlined,
-  UserOutlined,
-  EditOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import SuccessModal from "../../components/SuccessModal";
 
@@ -30,6 +27,7 @@ function HeaderDefault() {
   const [activeLink, setActiveLink] = useState("/");
   const [cookies, setCookie] = useCookies(["token", "avatar", "name"]);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const location = useLocation();
 
@@ -49,13 +47,17 @@ function HeaderDefault() {
           };
 
           setUser(userInfo);
-          // Set avatar in cookies
           setCookie("avatar", response.data.info.avatar, { path: "/" });
           setCookie("name", response.data.info.name, { path: "/" });
         })
         .catch((error) => {
           console.error("Error fetching user info:", error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, [location, cookies, setCookie]);
 
@@ -139,6 +141,13 @@ function HeaderDefault() {
     setSidebarVisible(!sidebarVisible);
   };
 
+  const scrollToFooter = () => {
+    const footerElement = document.getElementById("footer");
+    if (footerElement) {
+      footerElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <>
       <Row>
@@ -190,13 +199,17 @@ function HeaderDefault() {
                   </NavLink>
                 </li>
                 <li>
-                  <HashLink
-                    to="/#footer"
+                  <a
+                    href="#footer"
                     className={navLinkActive("/#footer")}
-                    onClick={() => handleLinkClick("/")}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLinkClick("/#footer");
+                      scrollToFooter();
+                    }}
                   >
                     Liên hệ
-                  </HashLink>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -206,7 +219,12 @@ function HeaderDefault() {
               <div className="hamburger-button" onClick={toggleSidebar}>
                 &#9776; {/* Biểu tượng hamburger */}
               </div>
-              {user ? (
+              {loading ? (
+                <div className="user-info">
+                  <Skeleton.Avatar active size="large" />
+                  <Skeleton.Input active style={{ width: 100 }} />
+                </div>
+              ) : user ? (
                 <Dropdown
                   overlay={menu}
                   placement="bottomLeft"
@@ -281,9 +299,13 @@ function HeaderDefault() {
             </NavLink>
           </Menu.Item>
           <Menu.Item key="4">
-            <HashLink to="/#footer" onClick={toggleSidebar}>
+            <a href="#footer" onClick={(e) => {
+              e.preventDefault();
+              toggleSidebar();
+              scrollToFooter();
+            }}>
               Liên hệ
-            </HashLink>
+            </a>
           </Menu.Item>
         </Menu>
       </Drawer>

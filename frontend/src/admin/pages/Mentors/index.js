@@ -6,6 +6,7 @@ import {
   createMentor,
   deleteMentor,
   postMentorList,
+  editPinnedMentor,
 } from "../../../services/mentorsServices";
 import MentorFormModal from "./MentorFormModal";
 import EditMentorInfo from "./EditMentorInfo";
@@ -21,6 +22,7 @@ const MentorsManagement = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedMentorId, setSelectedMentorId] = useState(null);
+  const [loadingMentorId, setLoadingMentorId] = useState(null);
 
   useEffect(() => {
     fetchMentors();
@@ -38,6 +40,7 @@ const MentorsManagement = () => {
         name: mentor.name,
         study: mentor.industry,
         education: mentor.education,
+        pinned: mentor.pinned,
       }))
     );
   };
@@ -63,6 +66,27 @@ const MentorsManagement = () => {
     });
   };
 
+  const handlePinToggle = async (id, currentPinned) => {
+    setLoadingMentorId(id);
+    try {
+      const response = await editPinnedMentor(id, !currentPinned, () => setLoadingMentorId(null));
+      if (response.code === 200) {
+        message.success("Mentor pin status updated successfully!");
+        setDataFinal((prev) =>
+          prev.map((mentor) =>
+            mentor.key === id ? { ...mentor, pinned: !currentPinned } : mentor
+          )
+        );
+      } else {
+        message.error("Failed to update pin status. Please try again.");
+      }
+    } catch (error) {
+      message.error("An error occurred. Please try again.");
+    } finally {
+      setLoadingMentorId(null);
+    }
+  };
+
   const showAddModal = () => {
     setIsModalVisible(true);
   };
@@ -84,6 +108,7 @@ const MentorsManagement = () => {
             name: response.data.name,
             study: response.data.industry,
             education: response.data.education,
+            pinned: response.data.pinned,
           },
         ]);
       } else {
@@ -143,6 +168,13 @@ const MentorsManagement = () => {
             danger
           >
             Delete
+          </Button>
+          <Button
+            className="pin-btn"
+            onClick={() => handlePinToggle(record.key, record.pinned)}
+            loading={loadingMentorId === record.key}
+          >
+            {record.pinned ? "Bỏ Ghim" : "Ghim"}
           </Button>
         </Space>
       ),

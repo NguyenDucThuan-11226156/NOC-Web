@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Rate, Button, Row, Col, notification } from "antd";
+import { Card, Rate, Button, Row, Col, notification, Skeleton } from "antd";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,7 +11,8 @@ function MentorItem({ mentor, mentorId }) {
   const [applyStatus, setApplyStatus] = useState(false);
   const [isMentorSaved, setIsMentorSaved] = useState(false);
   const [isMentorApplied, setIsMentorApplied] = useState(false);
-  const [loading, setLoading] = useState(false); // Loading state for the Save button
+  const [loading, setLoading] = useState(true); // Loading state for the entire component
+  const [buttonLoading, setButtonLoading] = useState(false); // Loading state for the Save button
   const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ function MentorItem({ mentor, mentorId }) {
     const checkMentorStatus = async () => {
       if (cookies.token) {
         try {
-          const response = await axios.get(API + `/api/v1/users/detail`, {
+          const response = await axios.get(`${API}/api/v1/users/detail`, {
             headers: { Authorization: `Bearer ${cookies.token}` },
           });
           const { infoMentors, saveInfoMentors } = response.data;
@@ -35,7 +36,11 @@ function MentorItem({ mentor, mentorId }) {
           setIsMentorApplied(isApplied);
         } catch (error) {
           console.error("Error fetching user details:", error);
+        } finally {
+          setLoading(false); // Set loading to false after data is fetched
         }
+      } else {
+        setLoading(false); // Set loading to false if no token is available
       }
     };
 
@@ -66,11 +71,11 @@ function MentorItem({ mentor, mentorId }) {
       return;
     }
 
-    setLoading(true); // Set loading to true when the button is clicked
+    setButtonLoading(true); // Set loading to true when the button is clicked
 
     try {
       const response = await axios.post(
-        API + `/api/v1/users/updateSave`,
+        `${API}/api/v1/users/updateSave`,
         { saveMentorId: mentor._id },
         { headers: { Authorization: `Bearer ${cookies.token}` } }
       );
@@ -94,7 +99,7 @@ function MentorItem({ mentor, mentorId }) {
       });
       console.error("Error saving mentor:", error);
     } finally {
-      setLoading(false); // Reset loading to false after the request is complete
+      setButtonLoading(false); // Reset loading to false after the request is complete
     }
   };
 
@@ -109,6 +114,19 @@ function MentorItem({ mentor, mentorId }) {
 
     navigate(`/mentors/detail/${mentor._id}`);
   };
+
+  if (loading) {
+    return (
+      <Card bordered className="mentorCard">
+        <Skeleton
+          active
+          avatar={{ shape: "square", size: 282 }} // Thêm shape: "square" và size bằng với kích thước của avatar mentor
+          paragraph={{ rows: 4 }}
+        />
+      </Card>
+    );
+  }
+  
 
   return (
     <Card bordered className="mentorCard">
@@ -135,14 +153,14 @@ function MentorItem({ mentor, mentorId }) {
             Mục giới thiệu 2: {mentor.introduction2}
           </p>
           <Rate
-  className="mentorCard-content-rate"
-  disabled
-  allowHalf
-  value={mentor.rate || 0} 
-/>
+            className="mentorCard-content-rate"
+            disabled
+            allowHalf
+            value={mentor.rate || 0}
+          />
           <p className="mentorCard-content-rateCount">
-  ({mentor.numberRate || 0} đánh giá) ({mentor.rate?.toFixed(2) || 0}/5)
-</p>
+            ({mentor.numberRate || 0} đánh giá) ({mentor.rate?.toFixed(2) || 0}/5)
+          </p>
           <div className="mentorCard-btnContainer">
             {!isMentorApplied && (
               <Button className="mentorCard-content-Btn" onClick={handleApply}>
@@ -165,11 +183,12 @@ function MentorItem({ mentor, mentorId }) {
             </Button>
             {!isMentorSaved && !isMentorApplied && (
               <Button
-                className={`mentorCard-content-Btn ${
-                  !isMentorApplied && !isMentorSaved ?"btn-viewmore-full" : ""
-                }`}
+                className={
+                  "mentorCard-content-Btn " +
+                  (!isMentorApplied && !isMentorSaved ? "btn-viewmore-full" : "")
+                }
                 onClick={handleSave}
-                loading={loading} // Set loading state on the button
+                loading={buttonLoading} // Set loading state on the button
               >
                 Save
               </Button>
