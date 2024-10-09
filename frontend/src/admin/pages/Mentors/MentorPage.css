@@ -81,6 +81,21 @@
   color: #405e91 !important;
 }
 
+.pin-btn {
+  width: 100px;
+  height: 35px;
+  border: 2px solid #ffd500  ;
+  color: #fdc500 ;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.pin-btn:hover {
+  background-color: #fdc500 !important;
+  border-color: #ffd500 !important;
+  color: #fff!important;
+}
+
 /* Css mentor add modal */
 
 .mentor-add-modal {

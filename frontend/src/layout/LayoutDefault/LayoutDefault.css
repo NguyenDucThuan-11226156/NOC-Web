@@ -207,6 +207,11 @@
   font-weight: 400;
 }
 
+.layout-default__logoFooter--tt img, .layout-default__logoFooter--ncc img, .layout-default__logoFooter--noc img, .layout-default__logoFooter--ndm img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .layout-default__footerContainer {
   border-bottom: 1px solid #000;
   border-top: 1px solid #000;
@@ -340,6 +345,10 @@
 /* Resposive */
 /* Max-width: 1200px */
 @media (max-width: 1200px) {
+  .layout-default__header {
+    margin: auto;
+  }
+
   .hamburger-button {
     display: block;
     font-size: 24px;
@@ -372,21 +381,27 @@
   .layout-default__about {
     margin-left: 80px;
   }
-  
 }
 
 /* Max-width: 768px */
 
 @media screen and (max-width: 768px) {
+  .layout-default__header {
+    margin: auto;
+  }
+
   .layout-default__about {
     margin-left: 0;
   }
-  
 }
 
 /* Max-width: 480px */
 /* Header */
 @media (max-width: 480px) {
+  .layout-default__header {
+    margin: auto;
+  }
+
   .layout-default__menu {
     display: none !important;
   }
