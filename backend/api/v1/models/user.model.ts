@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema(
     domain: String,
     token: String,
     studentId: String,
-    saving: String,
     number: Number,
     avatar: String,
     rateForMentors: [

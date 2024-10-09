@@ -24,6 +24,10 @@ const mentorSchema = new mongoose.Schema(
     companyLogo: String,
     field: String,
     experience: String,
+    pinned: {
+      type: Boolean,
+      default: false,
+    },
     mentees: [
       {
         userId: String,

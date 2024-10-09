@@ -73,5 +73,7 @@ router.post(
   uploadCloud.uploadSingle,
   controller.editHomeBanner
 );
-router.get("/getSettings",  controller.getSettings);
+router.get("/getSettings", controller.getSettings);
+
+router.post("/editPinnedMentor/:id", controller.editPinnedMentor);
 export const adminRoutes: Router = router;

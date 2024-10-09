@@ -44,6 +44,9 @@ export const listMentors = async (req: Request, res: Response) => {
     const limitNumber = req.body.limit;
     const skipNumber = (req.body.page - 1) * limitNumber;
     const listMentor = await Mentors.find().limit(limitNumber).skip(skipNumber);
+    const pinnedMentor = await Mentors.find({
+      pinned: true,
+    });
     const listAllMentors = await Mentors.find();
     const listAllEnterprise = await Enterprise.find();
     const listAllStudy = await Study.find();
@@ -53,6 +56,7 @@ export const listMentors = async (req: Request, res: Response) => {
     res.json({
       code: 200,
       mentors: listMentor,
+      pinnedMentor: pinnedMentor,
       total: total,
       enterprises: listAllEnterprise,
       studies: listAllStudy,
