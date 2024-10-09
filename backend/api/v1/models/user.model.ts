@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
     ],
     description: String,
     categoriesConsultId: String,
-    description_proplem: String,
+    description_problem: String,
     linkCv: String,
     slug: String,
     deleted: {

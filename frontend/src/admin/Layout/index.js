@@ -50,7 +50,8 @@ const AppAdmin = () => {
     const pathMap = {
       "/admin": ["1"],
       "/admin/category": ["2"],
-      "/admin/setting": ["3"],
+      "/admin/users": ["3"],
+      "/admin/setting": ["4"],
     };
 
     setPath(pathMap[location.pathname] || ["1"]);
@@ -91,25 +92,13 @@ const AppAdmin = () => {
             {!collapsed ? (
               <>
                 <div className="logo-item">
-                  <img
-                    src={logoNCC}
-                    alt="logo-admin-page"
-                    aria-label="logo"
-                  />
+                  <img src={logoNCC} alt="logo-admin-page" aria-label="logo" />
                 </div>
                 <div className="logo-item">
-                  <img
-                    src={logoNOC}
-                    alt="logo-admin-page"
-                    aria-label="logo"
-                  />
+                  <img src={logoNOC} alt="logo-admin-page" aria-label="logo" />
                 </div>
                 <div className="logo-item">
-                  <img
-                    src={logoNDM}
-                    alt="logo-admin-page"
-                    aria-label="logo"
-                  />
+                  <img src={logoNDM} alt="logo-admin-page" aria-label="logo" />
                 </div>
               </>
             ) : (
@@ -143,6 +132,12 @@ const AppAdmin = () => {
             },
             {
               key: "3",
+              icon: <UserOutlined />,
+              label: "User",
+              onClick: () => navigate("/admin/users"),
+            },
+            {
+              key: "4",
               icon: <SettingOutlined />,
               label: "Settings General",
               onClick: () => navigate("/admin/setting"),

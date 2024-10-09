@@ -9,6 +9,7 @@ import NormalLoginForm from "../admin/pages/Login";
 import CreateCategory from "../admin/pages/CreateCategory";
 import MentorsManagement from "../admin/pages/Mentors";
 import SettingGeneral from "../admin/pages/SettingsGeneral";
+import Users from "../admin/pages/Users";
 
 export const routes = [
   {
@@ -48,6 +49,10 @@ export const routes = [
       {
         path: "category", // Route for creating categories
         element: <CreateCategory />,
+      },
+      {
+        path: "users", // Route for creating categories
+        element: <Users />,
       },
       {
         path: "setting",

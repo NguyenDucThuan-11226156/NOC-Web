@@ -1,7 +1,7 @@
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { DownloadOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button, Card, Modal, Space, Table, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { limit } from "../../../constant";
+import { API, limit } from "../../../constant";
 import {
   createMentor,
   deleteMentor,
@@ -10,6 +10,8 @@ import {
 import MentorFormModal from "./MentorFormModal";
 import EditMentorInfo from "./EditMentorInfo";
 import "./MentorPage.css";
+import axios from "axios";
+import CommonUtils from "../../../utils/CommonUtils";
 
 const { confirm } = Modal;
 
@@ -129,7 +131,12 @@ const MentorsManagement = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button className="edit-btn" onClick={() => showEditModal(record.key)}>Edit</Button>
+          <Button
+            className="edit-btn"
+            onClick={() => showEditModal(record.key)}
+          >
+            Edit
+          </Button>
           <Button
             className="delete-btn"
             onClick={() => handleDelete(record.key)}
@@ -144,25 +151,30 @@ const MentorsManagement = () => {
 
   return (
     <>
-      <Card style={{borderRadius: '30px'}}>
-      <h2 className="mentor-title">Mentor</h2>
-      <Table columns={columns} dataSource={dataFinal} className="mentor-table" />
-      <MentorFormModal
-        visible={isModalVisible}
-        onCancel={handleCancelAddModal}
-        onSubmit={handleAddMentor}
-      />
-      {selectedMentorId && (
-        <EditMentorInfo
-          visible={isEditModalVisible}
-          onClose={handleCancelEditModal}
-          mentorId={selectedMentorId}
-          onUpdateSuccess={handleEditSuccess}
+      <Card style={{ borderRadius: "30px" }}>
+        <h2 className="mentor-title">Mentor</h2>
+
+        <Table
+          columns={columns}
+          dataSource={dataFinal}
+          className="mentor-table"
         />
-      )}
-      <Button className="add-table-btn" onClick={showAddModal}>
-        Add Mentor
-      </Button>
+        <MentorFormModal
+          visible={isModalVisible}
+          onCancel={handleCancelAddModal}
+          onSubmit={handleAddMentor}
+        />
+        {selectedMentorId && (
+          <EditMentorInfo
+            visible={isEditModalVisible}
+            onClose={handleCancelEditModal}
+            mentorId={selectedMentorId}
+            onUpdateSuccess={handleEditSuccess}
+          />
+        )}
+        <Button className="add-table-btn" onClick={showAddModal}>
+          Add Mentor
+        </Button>
       </Card>
     </>
   );

@@ -76,4 +76,6 @@ router.post(
 router.get("/getSettings", controller.getSettings);
 
 router.post("/editPinnedMentor/:id", controller.editPinnedMentor);
+router.get("/getSettings", controller.getSettings);
+router.get("/excel", controller.excelExport);
 export const adminRoutes: Router = router;
