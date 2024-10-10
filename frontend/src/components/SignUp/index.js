@@ -16,14 +16,22 @@ function SignUp({ open, toggleLoginModal, onCancel, toggleSuccessModal }) {
         password: values.password,
       });
 
-      if (response) {
-        // Assuming the response means a successful registration
+      if (response && response.code === 200) {
+        // Successful registration
         setLoading(false); // Stop loading when the request is finished
-        toggleSuccessModal() // Show success modal
+        toggleSuccessModal(); // Show success modal
+      } else if (response && response.code === 400 && response.message === "Email đã tồn tại!") {
+        // Email already exists
+        setLoading(false);
+        message.error("Email đã tồn tại. Đăng ký không thành công!"); // Display error message if email exists
+      } else {
+        // Other errors
+        setLoading(false);
+        message.error("Đăng ký thất bại. Vui lòng thử lại!"); // Display generic error message if registration fails
       }
     } catch (error) {
       setLoading(false);
-      message.error("Đăng kí thất bại. Vui lòng thử lại!"); // Display error message if registration fails
+      message.error("Đăng ký thất bại. Vui lòng thử lại!"); // Display error message if registration fails
     }
   };
 
@@ -73,11 +81,6 @@ function SignUp({ open, toggleLoginModal, onCancel, toggleSuccessModal }) {
       );
     },
   });
-
-  // const handleLoginClick = () => {
-  //   toggleLoginModal(); // Show login modal when the button in success modal is clicked
-  //   setIsSuccessModalVisible(false);
-  // };
 
   return (
     <Modal
