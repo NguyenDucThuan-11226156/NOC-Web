@@ -4,6 +4,7 @@ import axios from "axios";
 import { DownloadOutlined, FileExcelOutlined } from "@ant-design/icons";
 import CommonUtils from "../../../utils/CommonUtils";
 import { API } from "../../../constant";
+import './Users.css'
 
 function Users() {
   const [userData, setUserData] = useState([]);
@@ -74,10 +75,11 @@ function Users() {
         type="primary"
         icon={<FileExcelOutlined />}
         style={{ marginBottom: 16 }}
+        className="export-btn"
       >
         Export to Excel
       </Button>
-      <Table columns={columns} dataSource={userData} loading={loading} rowKey="studentId" />
+      <Table columns={columns} dataSource={userData} loading={loading} rowKey="studentId" className="users-table" />
     </Card>
   );
 }

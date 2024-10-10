@@ -15,7 +15,12 @@ import "./LayoutDefault.css";
 import { API } from "../../constant";
 import {
   LogoutOutlined,
-  UserOutlined
+  UserOutlined,
+  HomeOutlined,
+  InfoCircleOutlined,
+  PhoneOutlined,
+  FormOutlined,
+  LoginOutlined
 } from "@ant-design/icons";
 import SuccessModal from "../../components/SuccessModal";
 
@@ -283,22 +288,22 @@ function HeaderDefault() {
         className="drawer"
       >
         <Menu className="drawer-menu" mode="inline">
-          <Menu.Item key="1">
+          <Menu.Item key="1" icon={<HomeOutlined />}>
             <NavLink to="/" onClick={toggleSidebar}>
               Trang chủ
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="2">
+          <Menu.Item key="2" icon={<InfoCircleOutlined />}>
             <NavLink to="/about" onClick={toggleSidebar}>
               Giới thiệu
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="3" icon={<InfoCircleOutlined />}>
             <NavLink to="/info" onClick={toggleSidebar}>
               Thông tin
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="4">
+          <Menu.Item key="4" icon={<PhoneOutlined />}>
             <a href="#footer" onClick={(e) => {
               e.preventDefault();
               toggleSidebar();
@@ -307,6 +312,29 @@ function HeaderDefault() {
               Liên hệ
             </a>
           </Menu.Item>
+          {!user && !loading && (
+            <>
+              <Menu.Item key="5" icon={<FormOutlined />} onClick={toggleSignUpModal}>
+                Đăng ký
+              </Menu.Item>
+              <Menu.Item key="6" icon={<LoginOutlined />} onClick={toggleLoginModal}>
+                Đăng nhập
+              </Menu.Item>
+            </>
+          )}
+          {user && (
+            <>
+              <Menu.Item key="7">
+                <div className="drawer-user-info">
+                  <Avatar src={user.avatar} />
+                  <span>{user.name}</span>
+                </div>
+              </Menu.Item>
+              <Menu.Item key="8" icon={<LogoutOutlined />} onClick={handleLogout}>
+                Đăng xuất
+              </Menu.Item>
+            </>
+          )}
         </Menu>
       </Drawer>
     </>

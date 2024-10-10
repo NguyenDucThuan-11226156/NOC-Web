@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Card, Carousel, notification } from "antd";
-import { useCookies } from "react-cookie";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import MentorItem from "../Mentor/MentorItem";
 import { postMentorList } from "../../services/mentorsServices";
@@ -9,18 +8,24 @@ import "./PinnedMentor.css";
 const PinnedMentor = () => {
   const [pinnedMentors, setPinnedMentors] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [cookies] = useCookies(["token"]);
+  const [slidesToShow, setSlidesToShow] = useState(2);
   const carouselRef = useRef(null);
 
   useEffect(() => {
     fetchPinnedMentors();
+
+    const handleResize = () => {
+      setSlidesToShow(window.innerWidth < 1200 ? 1 : 2);
+    };
+    handleResize(); // Initial call to set slides based on current width
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchPinnedMentors = async () => {
     setLoading(true);
     try {
       const result = await postMentorList({ limit: 10, page: 1 });
-      console.log(result);
       setPinnedMentors(result.pinnedMentor);
     } catch (error) {
       notification.error({
@@ -58,7 +63,7 @@ const PinnedMentor = () => {
           autoplay
           className="pinned-mentor-carousel"
           ref={carouselRef}
-          slidesToShow={2}
+          slidesToShow={slidesToShow}
         >
           {pinnedMentors.map((mentor, index) => (
             <div key={index} className="carousel-item">

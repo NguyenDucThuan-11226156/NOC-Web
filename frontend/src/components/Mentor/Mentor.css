@@ -22,6 +22,7 @@
 
 .mentorCard .ant-card-body {
   padding: 0;
+  width: 100%;
 }
 
 .mentorCard:hover {
@@ -132,6 +133,7 @@
   margin-top: 8px;
   width: auto;
   margin: 5px;
+  flex-grow: 1;
 }
 
 .mentorCard-content-Btn:first-child {
@@ -229,6 +231,33 @@
   }
 }
 
+/* max-width: 768px */
+@media screen and (max-width: 768px) {
+  .mentorCard {
+    height: auto;
+  }
+
+  .mentorCard-image {
+    height: 282px;
+    border-bottom: 1px solid #000;
+  }
+
+  .mentorCard-image img {
+    border-bottom-left-radius: 0;
+    object-position: top center;
+  }
+
+  .mentorCard-content {
+    margin: auto;
+    margin-top: 10px;
+    padding: 0 5px;
+  }
+
+  .mentorCard-content-introduction {
+    width: 100%;
+  }
+}
+
 /* max-width: 480px */
 @media screen and (max-width: 480px) {
   .mentorCard {
@@ -288,7 +317,7 @@
     width: 90px;
     padding: 15px;
   }
-  /* 
+/*   
   .btn-viewmore-full {
     width: 100%;
   } */

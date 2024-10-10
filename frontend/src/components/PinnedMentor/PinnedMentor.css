@@ -1,0 +1,90 @@
+/* PinnedMentor.css */
+
+.pinned-mentor-card,
+.pinned-mentor-card .ant-card-head {
+  border: none !important;
+}
+
+.pinned-mentor-card .ant-card-head-title {
+  text-align: center;
+  font-size: 2.75rem;
+  font-family: var(--font-mentor-title);
+  color: var(--color-mentor-title);
+}
+
+.pinned-mentor-card .ant-card-body {
+  width: 100%;
+}
+
+.pinned-mentor-card .left-arrow,
+.pinned-mentor-card .right-arrow {
+  font-size: 2rem;
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--color-mentor-title);
+}
+
+.pinned-mentor-card .left-arrow {
+  left: 10px;
+}
+
+.pinned-mentor-card .right-arrow {
+  right: 10px;
+}
+
+.pinned-mentor-card .carousel-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Hide dots for a cleaner look */
+.pinned-mentor-carousel .slick-dots-bottom {
+  display: none !important;
+}
+
+/* Mentor card hover effect */
+.pinned-mentor-card .carousel-item .mentorCard:hover {
+  transform: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .pinned-mentor-card .ant-card-head-title {
+    font-size: 2.25rem;
+  }
+  
+  .pinned-mentor-card .left-arrow,
+  .pinned-mentor-card .right-arrow {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pinned-mentor-card .ant-card-head-title {
+    font-size: 1.75rem;
+  }
+  
+  .pinned-mentor-card .left-arrow,
+  .pinned-mentor-card .right-arrow {
+    font-size: 1.5rem;
+  }
+  
+  .pinned-mentor-card .carousel-item {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .pinned-mentor-card .ant-card-head-title {
+    font-size: 1.5rem;
+  }
+  
+  .pinned-mentor-card .left-arrow,
+  .pinned-mentor-card .right-arrow {
+    font-size: 1.25rem;
+  }
+}
