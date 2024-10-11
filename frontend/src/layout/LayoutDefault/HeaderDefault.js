@@ -239,8 +239,10 @@ function HeaderDefault() {
                     className="user-info"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <Avatar src={user.avatar} />
-                    <Link>{user.name}</Link>
+                    <Link to="/infouser">
+                      <Avatar src={user.avatar} />
+                      <span>{user.name}</span>
+                    </Link>
                   </div>
                 </Dropdown>
               ) : (
@@ -326,8 +328,10 @@ function HeaderDefault() {
             <>
               <Menu.Item key="7">
                 <div className="drawer-user-info">
-                  <Avatar src={user.avatar} />
-                  <span>{user.name}</span>
+                  <Link to="/infouser">
+                    <Avatar src={user.avatar} />
+                    <span>{user.name}</span>
+                  </Link>
                 </div>
               </Menu.Item>
               <Menu.Item key="8" icon={<LogoutOutlined />} onClick={handleLogout}>
