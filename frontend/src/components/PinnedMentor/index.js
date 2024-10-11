@@ -50,7 +50,7 @@ const PinnedMentor = () => {
 
   return (
     <Card
-      title="Pinned Mentors"
+      title="Mentor nổi bật"
       loading={loading}
       className="pinned-mentor-card"
     >
