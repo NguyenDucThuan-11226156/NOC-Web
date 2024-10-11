@@ -47,6 +47,7 @@ export const listMentors = async (req: Request, res: Response) => {
     const pinnedMentor = await Mentors.find({
       pinned: true,
     });
+    console.log(pinnedMentor);
     const listAllMentors = await Mentors.find();
     const listAllEnterprise = await Enterprise.find();
     const listAllStudy = await Study.find();
@@ -62,6 +63,7 @@ export const listMentors = async (req: Request, res: Response) => {
       studies: listAllStudy,
       domains: listAllDomain,
       specialization: listAllSpecialization,
+      ok: "Thanh cong",
     });
   } catch (error) {
     res.json({
