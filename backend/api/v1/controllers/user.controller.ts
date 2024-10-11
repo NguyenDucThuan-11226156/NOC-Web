@@ -9,6 +9,7 @@ import ForgotPassword from "../models/forgot-password.model";
 import { sendMail } from "../../../helpers/send-mail.helper";
 import Mentors from "../models/mentor.model";
 import Users from "../models/user.model";
+import { domain as domainDefault } from "../../../config/constant";
 // [POST] /api/v1/users/register
 export const register = async (req: Request, res: Response) => {
   try {
@@ -143,6 +144,9 @@ export const updateUser = async (req: Request, res: Response) => {
     saveMentorId,
   } = req.body;
   const token = req.headers.authorization.split(" ")[1];
+  const sufFilePath = req["filePath"];
+  const filePath = `${domainDefault}${sufFilePath}`;
+  console.log(filePath);
   try {
     if (mentorId && saveMentorId) {
       var updatedUser = await User.findOneAndUpdate(
@@ -152,7 +156,7 @@ export const updateUser = async (req: Request, res: Response) => {
           school,
           studentId,
           email,
-          avatar,
+          avatar: filePath,
           number,
           $push: {
             mentorIds: { mentorId: mentorId },
@@ -175,7 +179,7 @@ export const updateUser = async (req: Request, res: Response) => {
           school,
           studentId,
           email,
-          avatar,
+          avatar: filePath,
           number,
           $push: {
             saveMentorIds: { mentorId: saveMentorId },
@@ -191,7 +195,7 @@ export const updateUser = async (req: Request, res: Response) => {
           school,
           studentId,
           email,
-          avatar,
+          avatar: filePath,
           number,
           $push: {
             mentorIds: { mentorId: mentorId },
@@ -206,7 +210,7 @@ export const updateUser = async (req: Request, res: Response) => {
           name,
           school,
           studentId,
-          avatar,
+          avatar: filePath,
           email,
           number,
         },
@@ -372,8 +376,9 @@ export const applyNow = async (req: Request, res: Response) => {
       phone,
       school,
       studentID,
-      cv,
     } = req.body;
+    const sufFilePath = req["filePath"];
+    const filePath = `${domainDefault}${sufFilePath}`;
     const newMentee = {
       userId: _id, // Placeholder for actual user ID
       name: fullName,
@@ -386,8 +391,8 @@ export const applyNow = async (req: Request, res: Response) => {
       field,
       issueDescription,
       cv: {
-        url: cv.url,
-        originalFilename: cv.originalFilename,
+        url: filePath,
+        originalFilename: filePath,
       },
     };
 

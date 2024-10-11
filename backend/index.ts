@@ -5,6 +5,7 @@ import cors from "cors";
 import { connect as connectDatabase } from "./config/database";
 
 import mainV1Routes from "./api/v1/routes/index.route";
+import path from "path";
 
 dotenv.config();
 connectDatabase();
@@ -16,6 +17,7 @@ const port: string | number = process.env.PORT || 3000;
 app.use(bodyParser.json());
 // parse form
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 // API Routes
