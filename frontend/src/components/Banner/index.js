@@ -15,7 +15,7 @@ function Banner() {
 
         if (response.data.code === 200) {
           const data = response.data.data[0];
-          const imageUrl = `${data.homeBanner}`; // Construct the full URL
+          const imageUrl = `${data.homeBanner}`;
           setBgImage(imageUrl);
           setLoading(false);
         } else {

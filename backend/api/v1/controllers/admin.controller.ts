@@ -535,12 +535,33 @@ export const getSettings = async (req: Request, res: Response) => {
 // [GET] /api/v1/admin/excel
 export const excelExport = async (req: Request, res: Response) => {
   try {
-    const response = await Users.find().select(
-      "-_id studentId name email school domain createAt number description description_problem categoriesConsultId"
+    const users = await Users.find().select(
+      "-_id studentId name email school domain createAt number description description_problem categoriesConsultId mentorIds"
     );
+
+    // Transform the data to split mentors
+    const transformedData = [];
+    users.forEach((user) => {
+      user.mentorIds.forEach((mentorId) => {
+        transformedData.push({
+          studentId: user.studentId,
+          name: user.name,
+          email: user.email,
+          school: user.school,
+          domain: user.domain,
+          createAt: user.createdAt,
+          number: user.number,
+          description: user.description,
+          description_problem: user.description_problem,
+          categoriesConsultId: user.categoriesConsultId,
+          mentorName: mentorId.name,
+          CV: mentorId.cv,
+        });
+      });
+    });
     res.json({
       code: 200,
-      data: response,
+      data: transformedData,
     });
   } catch (error) {
     res.status(500).json({

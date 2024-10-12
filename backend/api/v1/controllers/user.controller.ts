@@ -405,7 +405,9 @@ export const applyNow = async (req: Request, res: Response) => {
 
     if (updateResult.modifiedCount > 0) {
       // Calculate the new mentee count
-      const mentor = await Mentors.findOne({ _id: mentorId }).select("mentees");
+      const mentor = await Mentors.findOne({ _id: mentorId }).select(
+        "mentees name"
+      );
 
       if (mentor) {
         const newMenteeCount = mentor.mentees.length;
@@ -420,7 +422,11 @@ export const applyNow = async (req: Request, res: Response) => {
           { _id: _id },
           {
             $push: {
-              mentorIds: { mentorId: mentorId },
+              mentorIds: {
+                mentorId: mentorId,
+                cv: filePath,
+                name: mentor.name,
+              },
             },
           },
           { new: true }
