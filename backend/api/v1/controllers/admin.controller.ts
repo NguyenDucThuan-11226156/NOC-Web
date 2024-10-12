@@ -538,8 +538,6 @@ export const excelExport = async (req: Request, res: Response) => {
     const users = await Users.find().select(
       "-_id studentId name email school domain createAt number description description_problem categoriesConsultId mentorIds"
     );
-
-    // Transform the data to split mentors
     const transformedData = [];
     users.forEach((user) => {
       user.mentorIds.forEach((mentorId) => {
