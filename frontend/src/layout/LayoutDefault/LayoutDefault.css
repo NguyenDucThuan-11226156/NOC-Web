@@ -289,10 +289,14 @@
 .drawer-user-info {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: absolute;
   top: 0;
-  right: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #000 !important;
 }
+
 
 .drawer-user-info .ant-avatar {
   margin-right: 16px;
@@ -312,7 +316,13 @@
 .drawer-menu li {
   padding: 0 105px !important;
   width: 100%;
+  font-family: var(--font);
+  font-weight: 600;
 }
+
+.drawer-menu li:nth-child(5), .drawer-menu li:nth-child(6) {
+  color: var(--color-active);
+} 
 
 .drawer-menu .dropdownItem-list {
   display: flex;
@@ -398,7 +408,8 @@
   }
 
   .layout-default__about {
-    margin-left: 0;
+    margin-left: 150px;
+    margin-top: 80px;
   }
 }
 
