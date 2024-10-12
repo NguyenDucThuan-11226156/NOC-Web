@@ -6,7 +6,7 @@ import "./Banner.css";
 
 function Banner() {
   const [bgImage, setBgImage] = useState("");
-  const [loading, setLoading] = useState(true); // New state for loading
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBannerImage = async () => {
@@ -14,10 +14,10 @@ function Banner() {
         const response = await axios.get(`${API}/api/v1/admin/getSettings`);
 
         if (response.data.code === 200) {
-          const data = response.data.data[0]; // Assuming your data is in the first object
-          console.log("banner", data.homeBanner);
-          setBgImage(data.homeBanner); // Adjust this field based on your actual data structure
-          setLoading(false); // Set loading to false after data is fetched
+          const data = response.data.data[0];
+          const imageUrl = `${data.homeBanner}`; // Construct the full URL
+          setBgImage(imageUrl);
+          setLoading(false);
         } else {
           console.error("Failed to fetch settings data");
           setLoading(false);
@@ -32,7 +32,7 @@ function Banner() {
   }, []);
 
   const bannerStyle = {
-    backgroundImage: `url(${bgImage})`,
+    backgroundImage: `url("${bgImage}")`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     height: "183px",
