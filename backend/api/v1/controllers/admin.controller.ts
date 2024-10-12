@@ -9,6 +9,7 @@ import Specialization from "../models/specialization.model";
 import SettingGeneral from "../models/settingGeneral.model";
 import Users from "../models/user.model";
 import Mentors from "../models/mentor.model";
+import { domain } from "../../../config/constant";
 // [POST] /api/v1/admin/register
 export const register = async (req: Request, res: Response) => {
   try {
@@ -411,11 +412,12 @@ export const deleteStudy = async (req: Request, res: Response) => {
 // [POST] /api/v1/admin/editAvatarDefault
 export const editAvatarDefault = async (req: Request, res: Response) => {
   try {
-    const newAvatarDefault = req.body.file;
+    const sufFilePath = req["filePath"];
+    const filePath = `${domain}${sufFilePath}`;
     // Update the avatarDefault field in the SettingGeneral collection
     const result = await SettingGeneral.updateOne(
       {},
-      { $set: { avatarDefault: newAvatarDefault } }
+      { $set: { avatarDefault: filePath } }
     );
 
     // Check if the update was successful
@@ -442,12 +444,12 @@ export const editAvatarDefault = async (req: Request, res: Response) => {
 // [POST] /api/v1/admin/editHomeBanner
 export const editHomeBanner = async (req: Request, res: Response) => {
   try {
-    const newHomeBanner = req.body.file;
-
+    const sufFilePath = req["filePath"];
+    const filePath = `${domain}${sufFilePath}`;
     // Update the HomeBanner field in the SettingGeneral collection
     const result = await SettingGeneral.updateOne(
       {},
-      { $set: { homeBanner: newHomeBanner } }
+      { $set: { homeBanner: filePath } }
     );
 
     // Check if the update was successful
@@ -474,12 +476,13 @@ export const editHomeBanner = async (req: Request, res: Response) => {
 // [POST] /api/v1/admin/editUserBanner
 export const editUserBanner = async (req: Request, res: Response) => {
   try {
-    const newUserBanner = req.body.file;
+    const sufFilePath = req["filePath"];
+    const filePath = `${domain}${sufFilePath}`;
 
     // Update the UserBanner field in the SettingGeneral collection
     const result = await SettingGeneral.updateOne(
       {},
-      { $set: { userBanner: newUserBanner } }
+      { $set: { userBanner: filePath } }
     );
 
     // Check if the update was successful
@@ -532,12 +535,31 @@ export const getSettings = async (req: Request, res: Response) => {
 // [GET] /api/v1/admin/excel
 export const excelExport = async (req: Request, res: Response) => {
   try {
-    const response = await Users.find().select(
-      "-_id studentId name email school domain createAt number description description_problem categoriesConsultId"
+    const users = await Users.find().select(
+      "-_id studentId name email school domain createAt number description description_problem categoriesConsultId mentorIds"
     );
+    const transformedData = [];
+    users.forEach((user) => {
+      user.mentorIds.forEach((mentorId) => {
+        transformedData.push({
+          studentId: user.studentId,
+          name: user.name,
+          email: user.email,
+          school: user.school,
+          domain: user.domain,
+          createAt: user.createdAt,
+          number: user.number,
+          description: user.description,
+          description_problem: user.description_problem,
+          categoriesConsultId: user.categoriesConsultId,
+          mentorName: mentorId.name,
+          CV: mentorId.cv,
+        });
+      });
+    });
     res.json({
       code: 200,
-      data: response,
+      data: transformedData,
     });
   } catch (error) {
     res.status(500).json({

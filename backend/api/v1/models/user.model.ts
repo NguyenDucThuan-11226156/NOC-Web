@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema(
     mentorIds: [
       {
         mentorId: String,
+        name: String,
+        cv: String,
       },
     ],
     saveMentorIds: [

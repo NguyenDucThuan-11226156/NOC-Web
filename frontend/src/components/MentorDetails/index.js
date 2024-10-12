@@ -38,10 +38,8 @@ function MentorDetailPage() {
         })
         .then((response) => {
           const userData = response.data.info;
-          // console.log(userData);
-
-          setUserAvatar(userData.avatar || "default-avatar-url"); // Fallback to default avatar
-          setUserName(userData.name || "User Name"); // Fallback to "User Name"
+          setUserAvatar(userData.avatar || "default-avatar-url");
+          setUserName(userData.name || "User Name");
 
           const savedMentors = response.data.info.saveMentorIds || [];
           setIsMentorSaved(
@@ -255,8 +253,7 @@ function MentorDetailPage() {
 
           <div className="mentor-detail-review">
             <h3>Review</h3>
-            <Row gutter={[20, 20]}
-            className="mentor-detail-comment">
+            <Row gutter={[20, 20]} className="mentor-detail-comment">
               <Col xxl={3} xl={5} xs={4} className="user-comment">
                 <div className="user-avatar-comment">
                   <img src={userAvatar} alt="user-avatar" />
@@ -287,7 +284,9 @@ function MentorDetailPage() {
           renderItem={(item) => (
             <List.Item className="review-list-item">
               <List.Item.Meta description={item.message} />
-              <div className="review-date">{new Date(item.createAt).toLocaleDateString()}</div>
+              <div className="review-date">
+                {new Date(item.createAt).toLocaleDateString()}
+              </div>
             </List.Item>
           )}
         />

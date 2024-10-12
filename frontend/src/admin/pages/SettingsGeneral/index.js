@@ -13,7 +13,7 @@ const SettingGeneral = () => {
     homeBanner: "",
     userBanner: "",
   });
-  
+
   const [loading, setLoading] = useState({
     avatarDefault: false,
     homeBanner: false,
@@ -66,10 +66,10 @@ const SettingGeneral = () => {
         message.success(response.data.message);
         fetchSettings(); // Re-fetch settings to update the images
       } else {
-        message.error("Failed to upload file");
+        message.error("Failed to upload file1");
       }
     } catch (error) {
-      message.error("Failed to upload file");
+      message.error("Failed to upload file1");
     } finally {
       setLoading((prevLoading) => ({ ...prevLoading, [key]: false }));
     }
@@ -88,7 +88,9 @@ const SettingGeneral = () => {
         <div className="setting-ava-default">
           <img src={settings.avatarDefault} alt="avatar-default" />
         </div>
-        <Upload {...uploadProps("/api/v1/admin/editAvatarDefault", "avatarDefault")}>
+        <Upload
+          {...uploadProps("/api/v1/admin/editAvatarDefault", "avatarDefault")}
+        >
           <Button className="upload-btn" loading={loading.avatarDefault}>
             <UploadOutlined /> Click to Upload
           </Button>

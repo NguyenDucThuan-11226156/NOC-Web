@@ -1,10 +1,11 @@
 import { Router } from "express";
 import * as controller from "../controllers/admin.controller";
 import multer from "multer";
+import { configureStorage } from "../../../helpers/storage-multer.helper";
 import * as authMiddleware from "../middlewares/authAdmin.middleware";
 import * as uploadCloud from "../middlewares/uploadCloud.middleware";
 // import * as authMiddleware from "../middlewares/auth.middleware";
-const upload = multer();
+const upload = multer({ storage: configureStorage() });
 const router: Router = Router();
 router.post("/register", controller.register);
 router.post("/login", controller.login);
@@ -55,22 +56,21 @@ router.post(
   "/editUserBanner",
   authMiddleware.requireAuth,
   upload.single("file"),
-  uploadCloud.uploadSingle,
-
+  // uploadCloud.uploadSingle,
   controller.editUserBanner
 );
 router.post(
   "/editAvatarDefault",
   authMiddleware.requireAuth,
   upload.single("file"),
-  uploadCloud.uploadSingle,
+  // uploadCloud.uploadSingle,
   controller.editAvatarDefault
 );
 router.post(
   "/editHomeBanner",
   authMiddleware.requireAuth,
   upload.single("file"),
-  uploadCloud.uploadSingle,
+  // uploadCloud.uploadSingle,
   controller.editHomeBanner
 );
 router.get("/getSettings", controller.getSettings);
